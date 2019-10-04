@@ -16,11 +16,13 @@ from math import *
 # Our input value.
 x = float(1)
 # Our current value for x.
-newX = 0
+newX = float(0)
 
 # Our integer-cum-bool for while looping indefinitely.
 looping = 1
 
+# Note that function definition has to appear before it is called in python.
+# Does this have something to do with not having 'hoisting' like javascript?
 def func(_x):
     return float(float(_x) * float(_x))
 
@@ -52,8 +54,12 @@ while looping != 0:
                 x = float(1)
             else:
                 print("Sorry: invalid input, buddy.")
-                # To stop while loop.
-                break
+                # Assign x the value zero, so as to unaffect progress.
+                x = float(0)
+                # Old method below: break.
+                # Now stop while loop with break.
+                # break
+                
 
     # Have we looped through at least once?
     if looping == 2:
