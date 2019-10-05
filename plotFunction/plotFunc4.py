@@ -40,7 +40,10 @@ cir.draw(win)
 # Note that function definition has to appear before it is called in python.
 # Does this have something to do with not having 'hoisting' like javascript?
 def func(_x):
-    return float((_x * _x) + newX * newX)
+    a = -0.11
+    b = 0.4
+    c = 2.5
+    return float(a*(_x*_x) + (b*_x )+ c)
 
 # Loop continues indefinitely.
 while looping != 0:
@@ -55,8 +58,8 @@ while looping != 0:
                 tX = float(x)
             except:
                 if x == "":
-                    x = float(-350)
-                    print("\nx set to default: -350")
+                    x = float(-50)
+                    print("\nx set to default: -50")
                     # If no input value entered, just Enter key,
                     # then assume default value.
                 else:
@@ -92,12 +95,12 @@ while looping != 0:
                     # If no input value entered, just Enter key,
                     # then assume increment value is 1.
                     # I.e, if  looped through more than once.
-                    iX = float(1)
-                    print ("\nDefault value for increment set: 1.0")
+                    iX = float(0.7)
+                    print ("\nDefault value for increment set: 0.7")
                 elif xi != "":
-                    print("Sorry: invalid input, buddy. Default value set for increment: 1.0")
+                    print("Sorry: invalid input, buddy. Default value set for increment: 0.7")
                     # Assign x the value zero, so as to unaffect progress.
-                    iX = float(1)
+                    iX = float(0.7)
 
     # Have we looped through at least once?
     if looping == 2:
@@ -111,8 +114,14 @@ while looping != 0:
     # Print output Y to screen; function is called in print's string concatenation.
     #print("Thanks. When x = " + str(float(newX)) + " y = " + \
     #     str(func(float(newX))) + " ")
-    print("x: " + str(float(newX)) + " y: " + str(func(float(newX))))
-    pxy = Point(350+float(newX), 350-(func(float(newX))/350))
+    prevY = func(float(newX - float(iX)))
+    y = func(float(newX))
+    print("x: " + str(float(newX)) + " y: " + str(y))
+    scalar = 4
+    pxy = Point(350+float(newX)*scalar, 350-(func(float(newX))*scalar))
+    
+    if (prevY < 0 and y > 0) or (prevY > 0 and y < 0): print(newX)
+    
     pCir = Circle(pxy, 1.5)
     pCir.setOutline("white")
     pCir.setFill("white")
@@ -123,6 +132,8 @@ while looping != 0:
        win.checkKey() == "Q":
         win.close()
         break
+
+    if newX > 42: break
 
 # If we are here, then while loop has terminated, so exit.
 print("You have exited :) Thanks for your maths etc.")
