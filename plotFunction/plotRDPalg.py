@@ -1,7 +1,7 @@
 
 
 # So, the aim here is to
-# define a mathematical function
+# define the RDP algorithm
 # and then, to begin with, output
 # return values as each new input
 # is given by the user.
@@ -40,10 +40,12 @@ cir.draw(win)
 # Note that function definition has to appear before it is called in python.
 # Does this have something to do with not having 'hoisting' like javascript?
 def func(_x):
-    a = -0.11
-    b = 0.4
-    c = 2.5
-    return float(a*(_x*_x) + (b*_x )+ c)
+
+    e = exp(-_x)
+    
+    result = e * cos(2 * pi * _x)
+    
+    return float(result)
 
 # Loop continues indefinitely.
 while looping != 0:
@@ -117,7 +119,7 @@ while looping != 0:
     prevY = func(float(newX - float(iX)))
     y = func(float(newX))
     print("x: " + str(float(newX)) + " y: " + str(y))
-    scalar = 4
+    scalar = 64
     pxy = Point(350+float(newX)*scalar, 350-(func(float(newX))*scalar))
     
     if (prevY < 0 and y > 0) or (prevY > 0 and y < 0): print(newX)
