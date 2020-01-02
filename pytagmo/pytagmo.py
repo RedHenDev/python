@@ -9,7 +9,9 @@ from random import *
 
 nouns = ["man", "goose", "banana", "plant", "egg", "dinosaur", "apple",
          "horse", "history", "opinion", "ant", "elephant", "elf", "onion",
-         "otter", "insect", "igloo", "irritant", "island", "sentence", "Dot"]
+         "otter", "insect", "igloo", "irritant", "island", "sentence", "Dot",
+         "weekend", "bus", "time", "idea", "phrase", "clause", "day",
+         "house", "England", "Brian"]
 
 verbs = ["sees", "finds", "likes", "chases", "eats", "talks with",
          "understands", "brings", "watches", "denies", "delivers",
@@ -20,6 +22,23 @@ verbs = ["sees", "finds", "likes", "chases", "eats", "talks with",
 
 determiners = ["my", "your", "his", "her", "our",
                "the", "a", "that", "this", "their", "Dot's", "the"]
+
+# This is a tuple. My first :)
+prepositions = (
+    "in",
+    "over",
+    "next to",
+    "within",
+    "after",
+    "inside",
+    "around",
+    "between",
+    "from",
+    "with",
+    "by",
+    "to",
+    "in"
+    )
 
 
 adjectives = [
@@ -38,18 +57,7 @@ adjectives = [
 
 message = ""
 
-def newMessage():
-    """ generate a new random sentence and print it """
 
-    dR = choice(determiners) + " "
-    d2R = choice(determiners) + " "
-    nR = choice(nouns) + " "
-    oR = choice(nouns) + "."
-    vR = choice(verbs) + " "
-
-    message =   dR + nR + vR + d2R + oR
-    
-    print(capitalizeLetter(0,message))
 
 def capitalizeLetter(n, string):
     """ capitalize letter at n in string, return new string with this change """
@@ -61,26 +69,18 @@ def capitalizeLetter(n, string):
     return newString
 
 def anCheck(det, noun):
-    """ If det is 'a' and noun begins with vowel, return 'an' """
+    """ If det is 'a' and noun begins with vowel, return 'an'.
+         Else, just return the passed in determiner (det). """
 
     # Assume det is 'a'.
     returnValue = True
 
-# Why doesn't the below work?
-##    if str(det) != str("a"):
-##        returnValue = False
-
-   # print("det =" + det + " ASCII = " + str(ord(det[0])))
-
     # Is determiner only 1 letter long and start with 'a'?
     if len(det) > 1 or ord(det[0]) != 97:
         returnValue = False
-
-   # print(len(det)-1, ord(det[0]), returnValue)
     
     # First, makes sure string is lowercase. 
     lcNoun = noun
-    #lcNoun.strip()
     lcNoun = lcNoun.lower()
     an = "an"
 
@@ -101,48 +101,14 @@ def anCheck(det, noun):
 
 def randomSentence():
     """ Generate and return new random sentence """
-    """
-    # Randomly choose words from lists.
-    dR = choice(determiners) + " "
-    d2R = choice(determiners) + " "
-    a2R = choice(adjectives) + " "
-    nR = choice(nouns) + " "
-    oR = choice(nouns) + "."
-    vR = choice(verbs) + " "
-
-    # Randomize whether to apply adjective.
-    # The aim should be to use this twice etc.
-    useAdjective = False    # Game is to turn this true.
-    if random() > 0.5:
-        useAdjective = True
-
-    # Concatenate our strings.
-    if useAdjective:
-        # Check whether determiners need to change from 'a' to 'an'.
-        if anCheck(d2R, a2R) == True:
-            d2R = "an" + " "
-        if anCheck(dR, nR) == True:
-            dR = "an" + " "
-        message = dR + nR + vR + d2R + a2R + oR
-    else:
-        # Check whether determiners need to change from 'a' to 'an'.
-        if anCheck(d2R, oR) == True:
-            d2R = "an" + " "
-        if anCheck(dR, nR) == True:
-            dR = "an" + " "
-        message = dR + nR + vR + d2R + oR
-    """
-
-    # Ugly, but the first pass through.
-    # We need, I think, something like a
-    # 'phrase builder'. E.g. NounPhrase, which could be
-    # used for both the subject and object elements.
     
-    message = nounPhrase() + " " \
+    message = nounPhrase(0.3) + " " \
               + verbPhrase() + " " \
-              + nounPhrase() + "."
+              + nounPhrase(0.7) + " " \
+              + adverbialPhrase() + "."
 
     # NB python's own capitalize function. Nice.
+    # Actually -- not nice! It lowers() the rest of the string!
     # message.capitalize()
     return (capitalizeLetter(0, message))
 
@@ -151,16 +117,27 @@ def verbPhrase():
 
     return choice(verbs)
 
-def nounPhrase():
+def adverbialPhrase():
+    """ concatenate a preposition and noun phrase """
+
+    return choice(prepositions) + " " + nounPhrase(0.8)
+
+def nounPhrase(adjBias):
     """ concatenate a determiner, optional adjective, and noun """
 
+    # First, grab a random determiner from list.
     returnMessage = choice(determiners)
 
-    if random() > 0.3: useAdj = True
+    # Second, decide whether to use adjective.
+    # adjBias (0-1) is likelihood to use adjective.  
+    if random() < adjBias: useAdj = True
     else: useAdj = False
 
+    # Third, grab a random noun from list.
     newNoun = choice(nouns)
 
+    # Concatenate elements, with or without adjective, and
+    # check whether indefinite article 'an' must replace 'a'.
     if useAdj:
         newAdj = choice(adjectives)
         returnMessage = anCheck(returnMessage, newAdj) + \
@@ -169,6 +146,25 @@ def nounPhrase():
         returnMessage = anCheck(returnMessage, newNoun) + \
                         " " + newNoun
 
+    # Finally, return finished string.
     return returnMessage
+
+##############################################
+##############################################
+##############################################
+# Deprecated -->
+
+def newMessage():
+    """ generate a new random sentence and print it """
+
+    dR = choice(determiners) + " "
+    d2R = choice(determiners) + " "
+    nR = choice(nouns) + " "
+    oR = choice(nouns) + "."
+    vR = choice(verbs) + " "
+
+    message =   dR + nR + vR + d2R + oR
+    
+    print(capitalizeLetter(0,message))
 
 
