@@ -6,7 +6,7 @@
 # return values as each new input
 # is given by the user.
 
-""" plotFunc 4.0 """
+""" plotFunc 4.1 """
 
 """ Here, we aim to try different function equations. """
 
@@ -20,11 +20,17 @@ x = float(1)
 # Our current value for x.
 newX = float(0)
 # Our current increment value.
-iX = float(1)
+iX = float(2)
+# Rendering scalar.
+scalar = 1
+
+# Set previous point location to centre left of draw window.
+prevPXY = Point(-350,350)
 
 # Our integer-cum-bool for while looping indefinitely.
 looping = 1
 
+# Create our graphics window. Thanks graphics.py :)
 win = GraphWin("",700,700)
 win.setBackground(color_rgb(0,101,101))
 yLine = Line(Point(350,0), Point(350,700))
@@ -37,11 +43,17 @@ cir = Circle(Point(350,350), 42)
 cir.setOutline("black")
 cir.draw(win)
 
-# Note that function definition has to appear before it is called in python.
-# Does this have something to do with not having 'hoisting' like javascript?
 def func(_x):
-    if _x==0: return 0
-    return float(1/_x)
+    if _x==0: return float(0)
+    #return float(1/_x)
+    #return float(_x**2)
+    return float(_x * sin(_x/70 + _x/10))
+def checkInput():
+    whatKey = win.checkKey()
+    if whatKey.lower() == "q" or whatKey.lower() == "x":
+        win.close()
+        return True
+    else: return False
 
 # Loop continues indefinitely.
 while looping != 0:
@@ -51,18 +63,6 @@ while looping != 0:
 
         newX = float(x)
         # OK, we have now taken initial X value.
-        xi = 0.1
-        # If nothing entered, default to 1 for inc value.
-          
-
-    # Check if user wishes to exit.
-    if x == "exit" or x == "Exit" or x == "EXIT" or x == "x" or \
-       x == "X":
-            break
-    # Check if user wishes to exit.
-    if xi == "exit" or xi == "Exit" or xi == "EXIT" or xi == "x" or \
-       xi == "X":
-            break
 
     # Have we looped through at least once?
     if looping == 2:
@@ -79,21 +79,26 @@ while looping != 0:
     prevY = func(float(newX - float(iX)))
     y = func(float(newX))
     print("x: " + str(float(newX)) + " y: " + str(y))
-    scalar = 350
+    
     pxy = Point(350+float(newX), 350-(func(float(newX))*scalar))
+
+    # Draw line from previous to new points. For smoothness.
+    newLine = Line(pxy, prevPXY)
+    newLine.setOutline("white")
+    newLine.draw(win)
+    # Record previous point.
+    prevPXY = pxy
     
     if (prevY < 0 and y > 0) or (prevY > 0 and y < 0): print(newX)
     
-    pCir = Circle(pxy, 1.5)
-    pCir.setOutline("white")
-    pCir.setFill("white")
-    pCir.draw(win)
+    #pCir = Circle(pxy, 0.5)
+    #pCir.setOutline("white")
+    #pCir.setFill("white")
+    #pCir.draw(win)
     # Now how to pause a short time?
-    time.sleep(0.001)
-    if win.checkKey() == "x" or win.checkKey() == "X" or win.checkKey() == "q" or \
-    win.checkKey() == "Q":
-        win.close()
-        break
+    # time.sleep(0.001)
+    if checkInput(): break
+   
 
     if newX > abs(startX): break
 
