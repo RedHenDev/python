@@ -56,7 +56,7 @@ def assembleQuestion(question, ans1, ans2):
         if ua == ans1: return ans1
         elif ua == ans2: return ans2
         elif ua == "s": return "s"
-        elif ua == "x": return "x"
+        elif ua == "x" or ua == "q" or ua == "exit": return "x"
         else:
                 print("\n" + "Pardon? Choose either " + ans1 + " or " + ans2 + ". Thank you.\n" )
                 return 3
@@ -114,7 +114,7 @@ while alive:
         if a != "x" and a != 3 and a!= "s":
                 print("You chose to", a)
                 print("")
-        if a == "x": alive = False
+        if a == "x" or a == "q" or a == "exit": alive = False
         elif a == "s":
                 printStatus()
         # Determine new level based on answer.
