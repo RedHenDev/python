@@ -3,6 +3,8 @@ Example of a position tracker.
 This can be thought of as
 moving left, right, up, and down
 on a grid of squares.
+
+Thursday 13th February 2020
 """
 
 
@@ -133,4 +135,7 @@ while alive == True:
   printDis()
   printPos()
 
+# If we are here, user must
+# have exited, since we
+# are outside WHILE loop.
 print("You have ended the game. Thank you.")
