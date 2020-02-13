@@ -4,6 +4,12 @@ This can be thought of as
 moving left, right, up, and down
 on a grid of squares.
 
+This version, a development of
+'simpleGrid', features a
+grid rendered in print text,
+as well as distance and
+territory bounds.
+
 Thursday 13th February 2020
 """
 
