@@ -20,11 +20,15 @@ class Snake:
     """Snake(pygame.surface, position, step, length, autonomous=True)"""
     def __init__(this, surface ,vPos, fStep, iLength=2,bAuto=True):
         this.surface = surface
-        this.vPos = vPos  # Am I copying the vector in the correct way here?
+        # Am I copying the vector in the correct way here?
+        this.vPos = pygame.math.Vector2(vPos.x, vPos.y)
         this.fStep = fStep
         this.iLength = iLength
         this.bAuto = bAuto
 
+        this.fTimeStamp = pygame.time.get_ticks()
+        this.fSpeed = 512
+        
         # Up, Down, Left, and Right.
         this.iDirection = random.randint(0,3)
         # List of useful pygame vectors for UP, DOWN, LEFT, AND RIGHT.
@@ -36,11 +40,11 @@ class Snake:
 
         # The head segment occupies [0] in this list of 2D vectors.
         # Position head according to position vector passed in.
-        this.lSegments = [vPos]
+        this.lSegments = [this.vPos]
 
         def appendSegment(this):
             # Create temporary vector from last segment's position, minus step on y-axis.
-            newPositionVector = pygame.math.Vector2(this.lSegments[-1].x, this.lSegments[-1].y - fStep)
+            newPositionVector = pygame.math.Vector2(this.lSegments[-1].x, this.lSegments[-1].y - this.fStep)
             this.lSegments.append(newPositionVector) # Append new vector to list of segments.
 
         def generateSnake(this):
@@ -57,7 +61,8 @@ class Snake:
         # of its square, rather than the default top left corner.
         i = 0
         while i < len(this.lSegments):
-            tempRect = (this.lSegments[i].x - this.fStep * 0.5, this.lSegments[i].y - this.fStep * 0.5, this.fStep, this.fStep)
+            tempRect = (this.lSegments[i].x - this.fStep * 0.5,
+                        this.lSegments[i].y - this.fStep * 0.5, this.fStep, this.fStep)
             pygame.draw.rect(this.surface, (255,255,255), (tempRect))
             pygame.draw.rect(this.surface, (0,0,0), (tempRect), 1)
             i += 1
@@ -73,14 +78,18 @@ class Snake:
                 this.lSegments[i].x = 0
             if tempSeg.y < 0 - this.fStep:
                 this.lSegments[i].y = _tWH[1]
-            if tempSeg.x > _tWH[1] + this.fStep:
+            if tempSeg.y > _tWH[1] + this.fStep:
                 this.lSegments[i].y = 0
             i += 1
 
-    def move(this):
+    def move(this, _timed=True):
         """Move head in iDirection (0-3), then iterate over other segments, reverse order."""
-        this.lSegments[0].x += this.lDirections[this.iDirection].x * this.fStep
-        this.lSegments[0].y += this.lDirections[this.iDirection].y * this.fStep
+
+        # First, check whether time to move (if snek is timed).
+        timeNow = pygame.time.get_ticks()
+        if _timed and timeNow - this.fTimeStamp >= this.fSpeed:
+            this.fTimeStamp = pygame.time.get_ticks()
+        elif _timed: return
         
         i = len(this.lSegments) -1
         # Greater than 0 since we move the head independently.
@@ -88,6 +97,9 @@ class Snake:
             this.lSegments[i].x = this.lSegments[int(i-1)].x
             this.lSegments[i].y = this.lSegments[int(i-1)].y
             i -= 1
+
+        this.lSegments[0].x += this.lDirections[this.iDirection].x * this.fStep
+        this.lSegments[0].y += this.lDirections[this.iDirection].y * this.fStep
 
     def changeDirection(this):
         """Randomly pick new iDirection (0-3)."""
@@ -99,11 +111,11 @@ class Snake:
         whichKeys = pygame.key.get_pressed()
         if whichKeys[pygame.K_w] or whichKeys[pygame.K_UP]:
             this.iDirection = 0
-        elif whichKeys[pygame.K_w] or whichKeys[pygame.K_DOWN]:
+        elif whichKeys[pygame.K_s] or whichKeys[pygame.K_DOWN]:
             this.iDirection = 1
-        elif whichKeys[pygame.K_w] or whichKeys[pygame.K_LEFT]:
+        elif whichKeys[pygame.K_a] or whichKeys[pygame.K_LEFT]:
             this.iDirection = 2
-        elif whichKeys[pygame.K_w] or whichKeys[pygame.K_RIGHT]:
+        elif whichKeys[pygame.K_d] or whichKeys[pygame.K_RIGHT]:
             this.iDirection = 3
 
 

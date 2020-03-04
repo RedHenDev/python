@@ -34,14 +34,15 @@ def snakeExplosion(numberOfSneks, _vPosition):
 def checkInput():
     sMbutton = p.mouse.get_pressed()
     if sMbutton[0]:
-        snakeExplosion(10, p.math.Vector2(p.mouse.get_pos()))
+        snakeExplosion(10,
+                       p.math.Vector2(p.mouse.get_pos()[0], p.mouse.get_pos()[1]))
 
 # Begin with 10 sneks at centre of display.
-snakeExplosion(10, p.math.Vector2(W/2, H/2))
+# snakeExplosion(10, p.math.Vector2(W/2, H/2))
 
 # Have user control over these two sneks.
 lSnakes[0].bAuto = False
-lSnakes[9].bAuto = False
+#lSnakes[9].bAuto = False
 
 
 # Update loop.
@@ -59,9 +60,10 @@ while running:
 
     # Update our snakes.
     for s in lSnakes:
-        s.move()
         if random.randint(1,100) > 80 and s.bAuto: s.changeDirection()
-        elif s.bAuto: s.directMe()
+        elif s.bAuto==False: s.directMe()
+        
+        s.move()
         s.overflow((W,H))
         s.render()
         
