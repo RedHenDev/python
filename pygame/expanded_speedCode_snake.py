@@ -19,7 +19,7 @@ p.init()
 
 # Just grab user's default font.
 # I.e. instead of failing to grab one they don't have.
-font = p.font.Font(None, 20)
+font = p.font.Font(None, 42)
 
 # Pi digits. Store as a string. In base 2.
 pidB = "11.001001000011111101101010100010001000010110100011000010001101001100010011000110011000101000101110000000110111000001110011010001001010010000001"
@@ -39,7 +39,7 @@ bob.fill(fillCol)
 direction = 1
 
 snake = [W/2,H/2]
-step = 20
+step = 42
 
 
 def appendSnake():
