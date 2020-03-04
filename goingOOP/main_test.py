@@ -37,12 +37,12 @@ def checkInput():
         snakeExplosion(10,
                        p.math.Vector2(p.mouse.get_pos()[0], p.mouse.get_pos()[1]))
 
-# Begin with 10 sneks at centre of display.
-# snakeExplosion(10, p.math.Vector2(W/2, H/2))
+# Begin with 100 sneks at centre of display.
+snakeExplosion(100, p.math.Vector2(W/2, H/2))
 
 # Have user control over these two sneks.
 lSnakes[0].bAuto = False
-#lSnakes[9].bAuto = False
+lSnakes[9].bAuto = False
 
 
 # Update loop.

@@ -27,7 +27,7 @@ class Snake:
         this.bAuto = bAuto
 
         this.fTimeStamp = pygame.time.get_ticks()
-        this.fSpeed = 512
+        this.fSpeed = random.randint(12, 512)
         
         # Up, Down, Left, and Right.
         this.iDirection = random.randint(0,3)
