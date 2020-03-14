@@ -2,7 +2,7 @@
 March 4th 2020
 """
 
-import random # For randomizing self-directing snake movment.
+import random # For randomizing self-directing snake movement.
 import pygame # For use of 2D position vectors and rendering snake.
 import pygame.math # Needed by pygame for vectors. Apparently. Doubt it.
 
@@ -26,6 +26,11 @@ class Snake:
         this.iLength = iLength
         this.bAuto = bAuto
 
+        # Which segment to display as green.
+        # Start at index 1, so as to miss out head (for aesthetics).
+        this.iGreenID = 1
+
+        # Time fields, for controlling speed of snake movement.
         this.fTimeStamp = pygame.time.get_ticks()
         this.fSpeed = random.randint(12, 512)
         
@@ -36,7 +41,8 @@ class Snake:
                             pygame.Vector2(0,-1),
                             pygame.Vector2(0,1),
                             pygame.Vector2(-1,0),
-                            pygame.Vector2(1,0)]
+                            pygame.Vector2(1,0)
+                            ]
 
         # The head segment occupies [0] in this list of 2D vectors.
         # Position head according to position vector passed in.
@@ -61,11 +67,18 @@ class Snake:
         # of its square, rather than the default top left corner.
         i = 0
         while i < len(this.lSegments):
+            if this.iGreenID >= i and this.iGreenID < i+1:
+                tempCol = (0,220,0)
+            else: tempCol = (255,255,255)
             tempRect = (this.lSegments[i].x - this.fStep * 0.5,
                         this.lSegments[i].y - this.fStep * 0.5, this.fStep, this.fStep)
-            pygame.draw.rect(this.surface, (255,255,255), (tempRect))
-            pygame.draw.rect(this.surface, (0,0,0), (tempRect), 1)
+            pygame.draw.rect(this.surface, tempCol, tempRect)
+
+            # Black outline.
+            pygame.draw.rect(this.surface, (0,0,0), tempRect, 2)
             i += 1
+
+        
 
     def overflow(this, _tWH):
         """Overflow segment from one side of display to other. tWH tuple Width&Height"""
@@ -101,13 +114,18 @@ class Snake:
         this.lSegments[0].x += this.lDirections[this.iDirection].x * this.fStep
         this.lSegments[0].y += this.lDirections[this.iDirection].y * this.fStep
 
+        # Advance green segment.
+        this.iGreenID += 1
+        if this.iGreenID > len(this.lSegments):
+            this.iGreenID = 1
+
     def changeDirection(this):
         """Randomly pick new iDirection (0-3)."""
         this.iDirection = random.randint(0,3)
 
     def directMe(this):
         """Use WSAD or Arrows to control snake direction"""
-        """Pygame key.get_pressed() used to collect input"""
+        """Pygame key.get_pressed() used to collect input (a list)"""
         whichKeys = pygame.key.get_pressed()
         if whichKeys[pygame.K_w] or whichKeys[pygame.K_UP]:
             this.iDirection = 0

@@ -8,6 +8,7 @@ Snake class.
 import pygame as p
 import random
 from snakeClass import *
+from eulerClass import *
 
 p.init()
 
@@ -18,8 +19,16 @@ H = 600
 # Our pygame surface.
 canvas = p.display.set_mode((W,H))
 
-lSnakes = [Snake(canvas, p.math.Vector2(W/2,H/2), 20, 3)]
+lSnakes = [Snake(canvas, p.math.Vector2(W/2,H/2), 20, 7)]
 
+# Iterate over while loop to append new Euler particles to list.
+lParticles = [Euler(canvas, p.Vector2(W/2,H/2), 22, "CIRCLE")]
+i = 0
+while i < 100:
+    newParticle = Euler(canvas, p.Vector2(random.randint(0,W),random.randint(0,H)), 22, "CIRCLE")
+    lParticles.append(newParticle)
+    i+=1
+    
 
 def snakeExplosion(numberOfSneks, _vPosition):
     """Makes a number of random snakes explode from position passed in"""
@@ -33,16 +42,20 @@ def snakeExplosion(numberOfSneks, _vPosition):
 
 def checkInput():
     sMbutton = p.mouse.get_pressed()
-    if sMbutton[0]:
+    if sMbutton[1]:
         snakeExplosion(10,
                        p.math.Vector2(p.mouse.get_pos()[0], p.mouse.get_pos()[1]))
+    if sMbutton[0]:
+        for pp in lParticles:
+            pp.vAcc.y += random.uniform(-0.1, 0.1)
+        
 
 # Begin with 100 sneks at centre of display.
-snakeExplosion(100, p.math.Vector2(W/2, H/2))
+snakeExplosion(2, p.math.Vector2(W/2, H/2))
 
 # Have user control over these two sneks.
 lSnakes[0].bAuto = False
-lSnakes[9].bAuto = False
+#lSnakes[9].bAuto = False
 
 
 # Update loop.
@@ -58,14 +71,22 @@ while running:
     # Repaint background of our pygame surface (canvas).
     canvas.fill((120,0,120))
 
+    # Update our particles.
+    for pp in lParticles:
+        pp.update()
+        pp.overflow((W,H))
+        pp.render()
+
     # Update our snakes.
     for s in lSnakes:
-        if random.randint(1,100) > 80 and s.bAuto: s.changeDirection()
+        if random.randint(1,100) > 98 and s.bAuto: s.changeDirection()
         elif s.bAuto==False: s.directMe()
         
         s.move()
         s.overflow((W,H))
         s.render()
+
+    
         
     # Render things to surface.
     p.display.flip()
