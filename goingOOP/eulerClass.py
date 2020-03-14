@@ -31,7 +31,15 @@ class Euler:
     def checkCollision(_ob1, _ob2):
         """Check whether objects are overlapping"""
         if _ob1.vPos.distance_to(_ob2.vPos) < _ob1.iRad + _ob2.iRad:
-           return True
+            # First, let's make sure the two objects aren't overlapping any more!
+            # To do so, 
+            tempV = _ob2.vPos - _ob1.vPos
+            # Make sure length of vector is not 0, so can normalize.
+            if tempV.length() == 0:
+                _ob1.vPos.xy = _ob1_vPos.x + 0.1, _ob1_vPos.y + 0.1
+                tempV = _ob2.vPos - _ob1.vPos
+            _ob1.vPos = _ob2.vPos - (tempV.normalize() * (_ob1.iRad + _ob2.iRad))
+            return True
         else: return False
 
     @staticmethod
@@ -40,6 +48,9 @@ class Euler:
         tempVel = p.Vector2(_ob1.vVel.x, _ob1.vVel.y)
         _ob1.vVel = _ob2.vVel
         _ob2.vVel = tempVel
+        # Change colour of both to red. Infected!
+        _ob1.tCol = (200,0,0)
+        _ob2.tCol = (200,0,0)
 
     def render(this):
         if this.sType == "CIRCLE":

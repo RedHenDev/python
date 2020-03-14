@@ -22,10 +22,11 @@ canvas = p.display.set_mode((W,H))
 lSnakes = [Snake(canvas, p.math.Vector2(W/2,H/2), 20, 7)]
 
 # Iterate over while loop to append new Euler particles to list.
-lParticles = [Euler(canvas, p.Vector2(W/2,H/2), 22, "CIRCLE")]
+lParticles = [Euler(canvas, p.Vector2(W/2,H/2), 20, "CIRCLE")]
 i = 0
-while i < 100:
-    newParticle = Euler(canvas, p.Vector2(random.randint(0,W),random.randint(0,H)), 22, "CIRCLE")
+while i < 20:
+    newParticle = Euler(canvas, p.Vector2(random.randint(0,W),random.randint(0,H)),10, "CIRCLE")
+    #newParticle.tCol = (255,255,255)
     lParticles.append(newParticle)
     i+=1
     
@@ -82,6 +83,10 @@ while running:
             if qq == pp: break
             elif Euler.checkCollision(pp, qq): Euler.swapVel(pp, qq)
         pp.render()
+        p.draw.circle(canvas, (255,255,255),
+                      (int(pp.vPos.x - pp.halfRad),
+                       int(pp.vPos.y - pp.halfRad)),
+                      pp.iRad, 1)
 
     # Update our snakes.
     for s in lSnakes:
