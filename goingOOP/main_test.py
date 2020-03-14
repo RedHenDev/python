@@ -48,6 +48,7 @@ def checkInput():
     if sMbutton[0]:
         for pp in lParticles:
             pp.vAcc.y += random.uniform(-0.1, 0.1)
+            pp.vAcc.x += random.uniform(-0.1, 0.1)
         
 
 # Begin with 100 sneks at centre of display.
@@ -75,6 +76,11 @@ while running:
     for pp in lParticles:
         pp.update()
         pp.overflow((W,H))
+        # Collision with other particle?
+        # If so, swap their velocities.
+        for qq in lParticles:
+            if qq == pp: break
+            elif Euler.checkCollision(pp, qq): Euler.swapVel(pp, qq)
         pp.render()
 
     # Update our snakes.

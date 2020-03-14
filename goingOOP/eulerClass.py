@@ -14,6 +14,7 @@ class Euler:
         
         this.vPos = p.math.Vector2(_vPos.x, _vPos.y)
         this.iRad = int(_fRad)
+        this.halfRad = this.iRad * 0.5  # Calculate half radius now: efficiency.
         this.sType = _sType
 
         this.tCol = (0,0,200 + random.randint(0,55))
@@ -23,15 +24,34 @@ class Euler:
         this.vVel = p.math.Vector2(0,0)
         this.vAcc = p.math.Vector2(0,0)
 
+    # Static functions?
+    # Ah, we must use a decorator, whatever that means, and which
+    # takes no self-object argument.
+    @staticmethod
+    def checkCollision(_ob1, _ob2):
+        """Check whether objects are overlapping"""
+        if _ob1.vPos.distance_to(_ob2.vPos) < _ob1.iRad + _ob2.iRad:
+           return True
+        else: return False
+
+    @staticmethod
+    def swapVel(_ob1, _ob2):
+        """Swap velocities of these two objects"""
+        tempVel = p.Vector2(_ob1.vVel.x, _ob1.vVel.y)
+        _ob1.vVel = _ob2.vVel
+        _ob2.vVel = tempVel
+
     def render(this):
         if this.sType == "CIRCLE":
             # First, we have to convert any vectors into tuples.
-            tempPos = (int(this.vPos.x), int(this.vPos.y))
+            # Position is offset by half radius, so that position is centred.
+            tempPos = (int(this.vPos.x - this.halfRad), int(this.vPos.y - this.halfRad))
             p.draw.circle(this.surface, this.tCol, tempPos, this.iRad)
         elif this.sType == "SQUARE":
             # First, we have to convert any vectors into tuples, and
             # construct pygame Rectangle object.
-            tempRect = (this.vPos.x, this.vPos.y, this.fRad, this.fRad)
+            # Position is offset by half radius, so that position is centred.
+            tempRect = (this.vPos.x - this.halfRad, this.vPos.y - this.halfRad, this.fRad, this.fRad)
             p.draw.rect(this.surface, this.tCol, tempRect)
 
     def update(this):
@@ -53,6 +73,7 @@ class Euler:
             this.vPos.y = _tWH[1]
         elif this.vPos.y > _tWH[1]:
             this.vPos.y = 0
-            
+
+    
 
             
