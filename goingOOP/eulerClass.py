@@ -15,14 +15,18 @@ class Euler:
         this.vPos = p.math.Vector2(_vPos.x, _vPos.y)
         this.iRad = int(_fRad)
         this.halfRad = this.iRad * 0.5  # Calculate half radius now: efficiency.
+        this.twiceRad = this.iRad * 2  # Ditto.
         this.sType = _sType
 
-        this.tCol = (0,0,200 + random.randint(0,55))
+        tempC = 200 + random.randint(0,55)
+        this.tCol = (tempC,tempC,tempC)
 
         # Fields pertaining to Euler integration physics.
         # NB vPos above also part of this system.
         this.vVel = p.math.Vector2(0,0)
         this.vAcc = p.math.Vector2(0,0)
+        
+        this.speedLimit = random.randint(1,9)
 
     # Static functions?
     # Ah, we must use a decorator, whatever that means, and which
@@ -36,7 +40,7 @@ class Euler:
             tempV = _ob2.vPos - _ob1.vPos
             # Make sure length of vector is not 0, so can normalize.
             if tempV.length() == 0:
-                _ob1.vPos.xy = _ob1_vPos.x + 0.1, _ob1_vPos.y + 0.1
+                _ob1.vPos.xy = _ob1.vPos.x + 0.1, _ob1.vPos.y + 0.1
                 tempV = _ob2.vPos - _ob1.vPos
             _ob1.vPos = _ob2.vPos - (tempV.normalize() * (_ob1.iRad + _ob2.iRad))
             return True
@@ -48,27 +52,31 @@ class Euler:
         tempVel = p.Vector2(_ob1.vVel.x, _ob1.vVel.y)
         _ob1.vVel = _ob2.vVel
         _ob2.vVel = tempVel
-        # Change colour of both to red. Infected!
-        _ob1.tCol = (200,0,0)
-        _ob2.tCol = (200,0,0)
+        # Change colour of both objects if either infected!
+        if _ob1.tCol == (200,0,0) or _ob2.tCol == (200,0,0):
+            _ob1.tCol = (200,0,0)
+            _ob2.tCol = (200,0,0)
 
     def render(this):
         if this.sType == "CIRCLE":
             # First, we have to convert any vectors into tuples.
-            # Position is offset by half radius, so that position is centred.
-            tempPos = (int(this.vPos.x - this.halfRad), int(this.vPos.y - this.halfRad))
+            tempPos = (int(this.vPos.x), int(this.vPos.y))
             p.draw.circle(this.surface, this.tCol, tempPos, this.iRad)
         elif this.sType == "SQUARE":
             # First, we have to convert any vectors into tuples, and
             # construct pygame Rectangle object.
             # Position is offset by half radius, so that position is centred.
-            tempRect = (this.vPos.x - this.halfRad, this.vPos.y - this.halfRad, this.fRad, this.fRad)
+            tempRect = (int(this.vPos.x - this.iRad),
+                        int(this.vPos.y - this.iRad),
+                        this.twiceRad, this.twiceRad)
             p.draw.rect(this.surface, this.tCol, tempRect)
 
     def update(this):
         """Euler physics"""
         this.vVel += this.vAcc
         this.vPos += this.vVel
+
+        this.vVel *= 0.996   # Friction.
 
         this.vAcc.xy = 0,0
 
@@ -85,6 +93,9 @@ class Euler:
         elif this.vPos.y > _tWH[1]:
             this.vPos.y = 0
 
-    
+    def limitSpeed(this, _limit):
+        """Scale the magnitude of velocity to stated limit"""
+        if this.vVel.length() > _limit:
+            this.vVel.scale_to_length(_limit)
 
             

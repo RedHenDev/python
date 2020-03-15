@@ -23,9 +23,12 @@ lSnakes = [Snake(canvas, p.math.Vector2(W/2,H/2), 20, 7)]
 
 # Iterate over while loop to append new Euler particles to list.
 lParticles = [Euler(canvas, p.Vector2(W/2,H/2), 20, "CIRCLE")]
+lParticles[0].tCol = (200,0,0)
 i = 0
-while i < 20:
-    newParticle = Euler(canvas, p.Vector2(random.randint(0,W),random.randint(0,H)),10, "CIRCLE")
+while i < 222:
+    newParticle = Euler(canvas,
+                        p.Vector2(random.randint(0,W),random.randint(0,H)),
+                        7, "CIRCLE")
     #newParticle.tCol = (255,255,255)
     lParticles.append(newParticle)
     i+=1
@@ -71,21 +74,41 @@ while running:
     checkInput()
 
     # Repaint background of our pygame surface (canvas).
-    canvas.fill((120,0,120))
+    canvas.fill((200,200,200))
 
     # Update our particles.
+    index = -1
     for pp in lParticles:
+        index += 1
+        # First, add attraction force -- towards 0 indexed particle.
+        if index > 0:
+            #tempDir = lParticles[0].vPos - pp.vPos
+            # Here we're asking the particles to be attracted to the head
+            # of the first snake on the list, the user-controlled serpent.
+            forceStrength = 10
+            tempDir = lSnakes[0].lSegments[0] - pp.vPos
+            tempDist = tempDir.magnitude()
+            pp.vAcc += tempDir.normalize() * 1/(tempDist * 1/forceStrength)
+
+        pp.limitSpeed(9)
+        
         pp.update()
-        pp.overflow((W,H))
+        if index == 0: pp.overflow((W,H))
+        
         # Collision with other particle?
         # If so, swap their velocities.
         for qq in lParticles:
-            if qq == pp: break
-            elif Euler.checkCollision(pp, qq): Euler.swapVel(pp, qq)
+            if qq == pp: continue
+            elif Euler.checkCollision(pp, qq):
+                Euler.swapVel(pp, qq)
+                break
+        
+                
         pp.render()
-        p.draw.circle(canvas, (255,255,255),
-                      (int(pp.vPos.x - pp.halfRad),
-                       int(pp.vPos.y - pp.halfRad)),
+        
+        p.draw.circle(canvas, (101,101,101),
+                      (int(pp.vPos.x),
+                       int(pp.vPos.y)),
                       pp.iRad, 1)
 
     # Update our snakes.
