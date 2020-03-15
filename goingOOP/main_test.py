@@ -22,17 +22,19 @@ canvas = p.display.set_mode((W,H))
 lSnakes = [Snake(canvas, p.math.Vector2(W/2,H/2), 20, 7)]
 
 # Iterate over while loop to append new Euler particles to list.
-lParticles = [Euler(canvas, p.Vector2(W/2,H/2), 20, "CIRCLE")]
-lParticles[0].tCol = (200,0,0)
+lParticles = [Euler(canvas, p.Vector2(W/2,H/2), 12, "CIRCLE")]
+lParticles[0].tCol = (0,200,0)
 i = 0
-while i < 222:
+while i < 111:
     newParticle = Euler(canvas,
                         p.Vector2(random.randint(0,W),random.randint(0,H)),
-                        7, "CIRCLE")
+                        6, "CIRCLE")
     #newParticle.tCol = (255,255,255)
     lParticles.append(newParticle)
     i+=1
-    
+
+# Patient zero!    
+lParticles[12].tCol = (200,0,0)
 
 def snakeExplosion(numberOfSneks, _vPosition):
     """Makes a number of random snakes explode from position passed in"""
@@ -56,7 +58,7 @@ def checkInput():
         
 
 # Begin with 100 sneks at centre of display.
-snakeExplosion(2, p.math.Vector2(W/2, H/2))
+#snakeExplosion(100, p.math.Vector2(W/2, H/2))
 
 # Have user control over these two sneks.
 lSnakes[0].bAuto = False
@@ -85,12 +87,12 @@ while running:
             #tempDir = lParticles[0].vPos - pp.vPos
             # Here we're asking the particles to be attracted to the head
             # of the first snake on the list, the user-controlled serpent.
-            forceStrength = 10
+            forceStrength = 1
             tempDir = lSnakes[0].lSegments[0] - pp.vPos
             tempDist = tempDir.magnitude()
             pp.vAcc += tempDir.normalize() * 1/(tempDist * 1/forceStrength)
 
-        pp.limitSpeed(9)
+        pp.limitSpeed(7)
         
         pp.update()
         if index == 0: pp.overflow((W,H))
@@ -106,7 +108,7 @@ while running:
                 
         pp.render()
         
-        p.draw.circle(canvas, (101,101,101),
+        p.draw.circle(canvas, (0,0,0),
                       (int(pp.vPos.x),
                        int(pp.vPos.y)),
                       pp.iRad, 1)

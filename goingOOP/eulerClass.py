@@ -53,7 +53,11 @@ class Euler:
         _ob1.vVel = _ob2.vVel
         _ob2.vVel = tempVel
         # Change colour of both objects if either infected!
-        if _ob1.tCol == (200,0,0) or _ob2.tCol == (200,0,0):
+        if _ob1.tCol == (0,200,0) or _ob2.tCol == (0,200,0) and _ob2.tCol != (200,0,0) and _ob1.tCol != (200,0,0):
+            _ob2.tCol = (0,200,0)
+            _ob1.tCol = (0,200,0)
+            return
+        elif _ob1.tCol == (200,0,0) or _ob2.tCol == (200,0,0) and _ob2.tCol != (0,200,0) and _ob1.tCol != (0,200,0):
             _ob1.tCol = (200,0,0)
             _ob2.tCol = (200,0,0)
 
