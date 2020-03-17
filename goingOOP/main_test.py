@@ -12,6 +12,12 @@ from eulerClass import *
 
 p.init()
 
+# Epidemiology counter variables.
+countStamp = 0
+vulnerable = 0
+infected = 0
+immune = 0
+
 # Window dimensions.
 W = 800
 H = 600
@@ -25,16 +31,28 @@ lSnakes = [Snake(canvas, p.math.Vector2(W/2,H/2), 20, 7)]
 lParticles = [Euler(canvas, p.Vector2(W/2,H/2), 12, "CIRCLE")]
 lParticles[0].tCol = (0,200,0)
 i = 0
-while i < 111:
+total = 400
+while i < total:
     newParticle = Euler(canvas,
                         p.Vector2(random.randint(0,W),random.randint(0,H)),
                         6, "CIRCLE")
     #newParticle.tCol = (255,255,255)
+    if i < 60:
+        newParticle.tCol = (0,200,0)
+        immune += 1
+
     lParticles.append(newParticle)
     i+=1
 
-# Patient zero!    
-lParticles[12].tCol = (200,0,0)
+# Patient zeroes!    
+lParticles[99].tCol = (200,0,0)
+lParticles[98].tCol = (200,0,0)
+lParticles[97].tCol = (200,0,0)
+lParticles[96].tCol = (200,0,0)
+lParticles[95].tCol = (200,0,0)
+infected = 5
+vulnerable = total - infected - immune
+
 
 def snakeExplosion(numberOfSneks, _vPosition):
     """Makes a number of random snakes explode from position passed in"""
@@ -87,22 +105,30 @@ while running:
             #tempDir = lParticles[0].vPos - pp.vPos
             # Here we're asking the particles to be attracted to the head
             # of the first snake on the list, the user-controlled serpent.
+            # Not any more. Now it's just towards current mouse pos.
             forceStrength = 1
-            tempDir = lSnakes[0].lSegments[0] - pp.vPos
+            # tempDir = lSnakes[0].lSegments[0] - pp.vPos
+            tempMP = p.mouse.get_pos()
+            tempDir = p.Vector2(tempMP[0], tempMP[1]) - pp.vPos
+            # Maybe this is better:
+            # p.math.Vector2(p.mouse.get_pos()[0], p.mouse.get_pos()[1]))
             tempDist = tempDir.magnitude()
+            if tempDir.magnitude() <= 0: tempDir.scale_to_length(1)
             pp.vAcc += tempDir.normalize() * 1/(tempDist * 1/forceStrength)
 
         pp.limitSpeed(7)
         
         pp.update()
-        if index == 0: pp.overflow((W,H))
+        # if index == 0: pp.overflow((W,H))
+        pp.overflow((W,H))
         
         # Collision with other particle?
         # If so, swap their velocities.
+        # Note also counted infection increment here. Messy.
         for qq in lParticles:
             if qq == pp: continue
             elif Euler.checkCollision(pp, qq):
-                Euler.swapVel(pp, qq)
+                infected += Euler.swapVel(pp, qq)
                 break
         
                 
@@ -118,11 +144,19 @@ while running:
         if random.randint(1,100) > 98 and s.bAuto: s.changeDirection()
         elif s.bAuto==False: s.directMe()
         
-        s.move()
-        s.overflow((W,H))
-        s.render()
+        #s.move()
+        #s.overflow((W,H))
+        #s.render()
 
-    
+    # Read out of infection change every ten seconds.
+    if p.time.get_ticks() - countStamp > 10000:
+        countStamp = p.time.get_ticks()
+        vulnerable = total - immune - infected
+        if vulnerable < 0: vulnerable = 0
+        print("Infected = " + str(infected))
+        print("Immune = " + str(immune))
+        print("Vulnerable = " + str(vulnerable))
+        print("Mouse xy = " + str(p.mouse.get_pos()))
         
     # Render things to surface.
     p.display.flip()

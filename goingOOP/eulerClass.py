@@ -19,7 +19,7 @@ class Euler:
         this.sType = _sType
 
         tempC = 200 + random.randint(0,55)
-        this.tCol = (tempC,tempC,tempC)
+        this.tCol = (0,0,tempC)
 
         # Fields pertaining to Euler integration physics.
         # NB vPos above also part of this system.
@@ -53,6 +53,14 @@ class Euler:
         _ob1.vVel = _ob2.vVel
         _ob2.vVel = tempVel
         # Change colour of both objects if either infected!
+        if _ob1.tCol == (200,0,0) and _ob2.tCol != (0,200,0) and _ob2.tCol != (200,0,0):
+            _ob2.tCol = (200,0,0)
+            return 1
+        elif _ob2.tCol == (200,0,0) and _ob1.tCol != (0,200,0) and _ob1.tCol != (200,0,0):
+            _ob1.tCol = (200,0,0)
+            return 1
+        return 0
+        """
         if _ob1.tCol == (0,200,0) or _ob2.tCol == (0,200,0) and _ob2.tCol != (200,0,0) and _ob1.tCol != (200,0,0):
             _ob2.tCol = (0,200,0)
             _ob1.tCol = (0,200,0)
@@ -60,6 +68,7 @@ class Euler:
         elif _ob1.tCol == (200,0,0) or _ob2.tCol == (200,0,0) and _ob2.tCol != (0,200,0) and _ob1.tCol != (0,200,0):
             _ob1.tCol = (200,0,0)
             _ob2.tCol = (200,0,0)
+        """
 
     def render(this):
         if this.sType == "CIRCLE":
