@@ -31,7 +31,7 @@ lSnakes = [Snake(canvas, p.math.Vector2(W/2,H/2), 20, 7)]
 lParticles = [Euler(canvas, p.Vector2(W/2,H/2), 12, "CIRCLE")]
 lParticles[0].tCol = (0,200,0)
 i = 0
-total = 400
+total = 200
 while i < total:
     newParticle = Euler(canvas,
                         p.Vector2(random.randint(0,W),random.randint(0,H)),
@@ -157,6 +157,9 @@ while running:
         print("Immune = " + str(immune))
         print("Vulnerable = " + str(vulnerable))
         print("Mouse xy = " + str(p.mouse.get_pos()))
+        if vulnerable == 0:
+            print("Simulation over. All that can be infected, have been.")
+            running = False
         
     # Render things to surface.
     p.display.flip()
