@@ -36,14 +36,17 @@ class Euler:
     def checkCollision(_ob1, _ob2):
         """Check whether objects are overlapping"""
         if _ob1.vPos.distance_to(_ob2.vPos) < _ob1.iRad + _ob2.iRad:
-            # First, let's make sure the two objects aren't overlapping any more!
-            # To do so, 
+            # First, let's make sure the two objects aren't overlapping any more! 
             tempV = _ob2.vPos - _ob1.vPos
             # Make sure length of vector is not 0, so can normalize.
+            # We do this by adjusting x component of Object 1's position vector.
+            # Slide Object 1 back along collision vector, until at outer edge of objects.
+            
             if tempV.length() == 0:
-                _ob1.vPos.xy = _ob1.vPos.x + 0.1, _ob1.vPos.y + 0.1
+                _ob1.vPos.x = _ob1.vPos.x + 0.1
                 tempV = _ob2.vPos - _ob1.vPos
             _ob1.vPos = _ob2.vPos - (tempV.normalize() * (_ob1.iRad + _ob2.iRad))
+            
             return True
         else: return False
 
@@ -67,7 +70,7 @@ class Euler:
                         int(this.vPos.y - this.iRad),
                         this.twiceRad, this.twiceRad)
             p.draw.rect(this.surface, this.tCol, tempRect)
-
+            
     def update(this):
         """Euler physics"""
         this.vVel += this.vAcc

@@ -3,12 +3,15 @@ Testing our first class.
 Snake class.
 
 4th March 2020
+
+Comandeered (sp?) to dev particles and epidemic sim.
+25th March-ish 2020
 """
 
 import pygame as p
 import random
 from snakeClass import *
-from eulerClass import *
+from eulerClass_epidemic import *
 
 p.init()
 

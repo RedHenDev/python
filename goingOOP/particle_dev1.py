@@ -11,8 +11,8 @@ from eulerClass import *
 p.init()
 
 # Window dimensions.
-W = 800
-H = 600
+W = 512
+H = 512
 
 # Our pygame surface.
 canvas = p.display.set_mode((W,H))
@@ -21,7 +21,7 @@ canvas = p.display.set_mode((W,H))
 lParticles = [Euler(canvas, p.Vector2(W/2,H/2), 12, "CIRCLE")]
 lParticles[0].tCol = (0,200,0)
 i = 0
-total = 200
+total = 64
 while i < total:
     newParticle = Euler(canvas,
                         p.Vector2(random.randint(0,W),random.randint(0,H)),
@@ -38,7 +38,7 @@ def checkInput():
             tempDir = pin.vPos - p.Vector2(p.mouse.get_pos()[0], p.mouse.get_pos()[1])
             # Next, add this (inversely) to the acceleration of the paticle.
             # Inversely, so that the nearer particles receive greater force.
-            tempForce = 20
+            tempForce = 40
             pin.vAcc += tempDir * (1/tempDir.magnitude_squared()) * tempForce
         
 
@@ -53,59 +53,58 @@ while running:
     checkInput()
 
     # Repaint background of our pygame surface (canvas).
-    canvas.fill((160,160,160))
+    canvas.fill((0,101,202))
 
     # Update our particles.
-    index = -1
-    for pp in lParticles:
-        index += 1
+    for pp in range(0, len(lParticles)-1):
         # First, add attraction force -- towards 0 indexed particle.
         # Not that we have exluded 0 particle from this process.
-        if index > 0:
+        if pp > 0:
             #tempDir = lParticles[0].vPos - pp.vPos
             # Here we're asking the particles to be attracted towards current mouse pos.
-            forceStrength = 9
+            forceStrength = 12
             # tempDir = lSnakes[0].lSegments[0] - pp.vPos
             tempMP = p.mouse.get_pos()
-            tempDir = p.Vector2(tempMP[0], tempMP[1]) - pp.vPos
+            tempDir = p.Vector2(tempMP[0], tempMP[1]) - lParticles[pp].vPos
             tempDist = 1/tempDir.magnitude_squared()
             # Make sure magnitude is above zero, else normalize function fails.
             #if tempDir.magnitude() <= 0: tempDir.scale_to_length(1)
-            pp.vAcc += tempDir * tempDist * (forceStrength * 1)
+            lParticles[pp].vAcc += tempDir * tempDist * (forceStrength * 1)
 
             # Change colour according to velocity.
             # Crude mapping function.
-            tempVal = pp.vVel.magnitude()/6 * 100
-            tempVal = 255/100 * tempVal + 42
+            tempVal = lParticles[pp].vVel.magnitude() * 0.15 * 100
+            tempVal = 2.55 * tempVal + 42
             if tempVal > 255: tempVal = 255
             
-            pp.tCol = (tempVal, 0, tempVal)
+            lParticles[pp].tCol = (tempVal, 0, tempVal)
 
-        pp.limitSpeed(6)
+        lParticles[pp].limitSpeed(6)
         
-        pp.update()
-        # if index == 0: pp.overflow((W,H))
-        pp.overflow((W,H))
+        lParticles[pp].update()
+        # if index == 0: lParticles[pp].overflow((W,H))
+        lParticles[pp].overflow((W,H))
 
-        """
-        # Collision with other particle?
-        # If so, swap their velocities.
-        for qq in lParticles:
-            if qq == pp: continue
-            elif Euler.checkCollision(pp, qq):
-                Euler.swapVel(pp, qq)
+        # Improved collision check.
+        # Each particle need only check
+        # the particles beyond it in the list.
+        # Also, we're using a while loop.
+        for j in range(pp+1, len(lParticles)-1):
+            if Euler.checkCollision(lParticles[pp], lParticles[j]):
+                Euler.swapVel(lParticles[pp], lParticles[j])
+                # Now since we've collided, break the loop.
+                # One collision will do this update!
                 break
-        """
                 
-        pp.render()
+        lParticles[pp].render()
 
         # Black outline around each particle.
-        """
+        
         p.draw.circle(canvas, (0,0,0),
-                      (int(pp.vPos.x),
-                       int(pp.vPos.y)),
-                      pp.iRad, 1)
-        """
+                      (int(lParticles[pp].vPos.x),
+                       int(lParticles[pp].vPos.y)),
+                      lParticles[pp].iRad, 1)
+        
         
     # Render things to surface.
     p.display.flip()
