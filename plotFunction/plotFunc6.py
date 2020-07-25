@@ -22,7 +22,7 @@ newX = float(0)
 # Our current increment value.
 iX = float(1)
 # Rendering scalar.
-scalar = 10
+scalar = 1
 
 # Set previous point location to above left of draw window.
 prevPXY = Point(-350,-350)
@@ -49,7 +49,10 @@ def func(_x):
     #return float(_x**2)
     #return float(_x * sin(_x/70 + _x/10))
     #return float(_x**2 + 2)
-    return float(tan(_x))
+    #return float(tan(_x))
+    """ Oblique asymptote. """
+    x2 = (_x * _x) - _x - 2
+    return x2/_x
 def checkInput():
     whatKey = win.checkKey()
     if whatKey.lower() == "q" or whatKey.lower() == "x":
@@ -59,7 +62,7 @@ def checkInput():
 
 # Loop continues indefinitely.
 while looping != 0:
-
+    
     if looping == 1:
         startX = x = -200
 
@@ -71,22 +74,25 @@ while looping != 0:
         # Increment current X value by increment value.
         newX += float(iX)
     else:
-        looping = 2
-        # Don't increment first time through :)
-        newX = float(x)
+        newX = float(x) # Don't increment first time through :)
 
     # Print output Y to screen; function is called in print's string concatenation.
     #print("Thanks. When x = " + str(float(newX)) + " y = " + \
     #     str(func(float(newX))) + " ")
     prevY = func(float(newX - float(iX)))
+    
     y = func(float(newX))
+  
     print("x: " + str(float(newX)) + " y: " + str(y))
     
     pxy = Point(350+float(newX), 350-(func(float(newX))*scalar))
-
+        
     # Draw line from previous to new points. For smoothness.
-    newLine = Line(pxy, prevPXY)
+    if looping == 1:
+        newLine = Line(pxy, pxy)
+    else: newLine = Line(pxy, prevPXY)
     newLine.setOutline("white")
+    newLine.setWidth(3) # Stroke weight of line.
     newLine.draw(win)
     # Record previous point.
     prevPXY = pxy
@@ -103,6 +109,9 @@ while looping != 0:
    
 
     if newX > abs(startX): break
+
+    # We have been through loop once, so looping switches from 1 to 2.
+    looping = 2
 
 # If we are here, then while loop has terminated, so exit.
 print("You have exited :) Thanks for your maths etc.")
