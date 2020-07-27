@@ -20,9 +20,9 @@ x = float(0)
 # Our current value for x.
 newX = float(0)
 # Our current increment value.
-iX = float(1)
+iX = float(0.01)
 # Rendering scalar.
-scalar = 1
+scalar = 100
 
 # Set previous point location to above left of draw window.
 prevPXY = Point(-350,-350)
@@ -50,9 +50,11 @@ def func(_x):
     #return float(_x * sin(_x/70 + _x/10))
     #return float(_x**2 + 2)
     #return float(tan(_x))
+    #return 6*(_x**2) + (11*_x) - 35;
+    return 1/(_x**2)
     """ Oblique asymptote. """
-    x2 = (_x * _x) - _x - 2
-    return x2/_x
+    #x2 = (_x * _x) - _x - 2
+    #return x2/_x
 def checkInput():
     whatKey = win.checkKey()
     if whatKey.lower() == "q" or whatKey.lower() == "x":
@@ -64,7 +66,7 @@ def checkInput():
 while looping != 0:
     
     if looping == 1:
-        startX = x = -200
+        startX = x = -1
 
         newX = float(x)
         # OK, we have now taken initial X value.
@@ -85,7 +87,7 @@ while looping != 0:
   
     print("x: " + str(float(newX)) + " y: " + str(y))
     
-    pxy = Point(350+float(newX), 350-(func(float(newX))*scalar))
+    pxy = Point(350+float(newX)*scalar, 350-(func(float(newX))))
         
     # Draw line from previous to new points. For smoothness.
     if looping == 1:
