@@ -45,16 +45,20 @@ cir.draw(win)
 
 def func(_x):
     if _x==0: return float(0)
+    """ Hyperbola. """
     #return float(1/_x)
+    #return float(_x**3)
     #return float(_x**2)
     #return float(_x * sin(_x/70 + _x/10))
     #return float(_x**2 + 2)
     #return float(tan(_x))
     #return 6*(_x**2) + (11*_x) - 35;
-    return 1/(_x**2)
+    #return 1/(_x**2)
+    #return 5
+    return -1/_x**2
     """ Oblique asymptote. """
-    #x2 = (_x * _x) - _x - 2
-    #return x2/_x
+    x2 = (_x * _x) - _x - 2
+    return x2/_x
 def checkInput():
     whatKey = win.checkKey()
     if whatKey.lower() == "q" or whatKey.lower() == "x":
