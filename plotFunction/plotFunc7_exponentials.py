@@ -6,9 +6,9 @@
 # return values as each new input
 # is given by the user.
 
-""" plotFunc 6 """
+""" plotFunc 7 """
 
-""" Here, we aim to try different function equations. """
+""" Plot exponentials in ascending order, starting with degree 0. """
 
 # Math module used for floor() in version 1.0.
 from math import *
@@ -20,12 +20,12 @@ x = float(0)
 # Our current value for x.
 newX = float(0)
 # Our current increment value.
-iX = float(0.01)
+iX = float(1)
 # Exponential degree, when using this function.
 n = 0
 
 # Rendering scalar.
-scalar = 100
+scalar = 5
 
 
 # Set previous point location to above left of draw window.
@@ -50,7 +50,7 @@ cir.draw(win)
 def func(_x):
     #if _x==0: return float(0)
     """ Exponential """
-    global: n
+    global n
     return float(_x**n)
     """ Hyperbola. """
     #return float(1/_x)
@@ -75,9 +75,8 @@ def checkInput():
 
 # Loop continues indefinitely.
 while looping != 0:
-    
     if looping == 1:
-        startX = x = -1
+        startX = x = -10    # Initial value of x.
 
         newX = float(x)
         # OK, we have now taken initial X value.
@@ -97,6 +96,7 @@ while looping != 0:
     y = func(float(newX))
   
     print("x: " + str(float(newX)) + " y: " + str(y))
+    print("n = " + str(n))
     
     pxy = Point(350+float(newX)*scalar, 350-(func(float(newX))))
         
@@ -105,6 +105,7 @@ while looping != 0:
         newLine = Line(pxy, pxy)
     else: newLine = Line(pxy, prevPXY)
     newLine.setOutline("white")
+    if n % 2 == 0: newLine.setOutline("black")
     newLine.setWidth(3) # Stroke weight of line.
     newLine.draw(win)
     # Record previous point.
@@ -112,16 +113,12 @@ while looping != 0:
     
     if (prevY < 0 and y > 0) or (prevY > 0 and y < 0): print(newX)
     
-    #pCir = Circle(pxy, 0.5)
-    #pCir.setOutline("white")
-    #pCir.setFill("white")
-    #pCir.draw(win)
-    # Now how to pause a short time?
-    # time.sleep(0.001)
     if checkInput(): break
    
-
-    if newX > abs(startX): break
+    if newX > abs(startX):
+        n += 1              # Increment exponential degree.
+        newX = startX  # Reset graphing to start position.
+        prevPXY = Point(350+float(newX)*scalar, 350-(func(float(newX))))
 
     # We have been through loop once, so looping switches from 1 to 2.
     looping = 2
