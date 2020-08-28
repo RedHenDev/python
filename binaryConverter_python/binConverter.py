@@ -5,6 +5,8 @@ Created Fri 21st Aug 2020
 
 import math
 from datetime import datetime
+import time
+
 
 # Enter your own binary code.
 binCode = [1,0,1]
@@ -74,13 +76,16 @@ print("\nBINARY CLOCK\n")
 
 looping = True
 while looping:
-    time = datetime.now().time()
-    print(time.strftime('%I') + " " + time.strftime('%p') + " " + time.strftime('%M'))
-    print(str(convFdec(int(time.strftime('%I')))) + " " + time.strftime('%p') + " " +
-          str(convFdec(int(time.strftime('%M')))) )
-    ip = input()
-    if ip == 'q':
-        looping = False
+    timeN = datetime.now().time()
+    time.sleep(0.9)
+    print('\n' * 100)
+    
+    print(timeN.strftime('%I') + " " + timeN.strftime('%p') + " " + timeN.strftime('%M'))
+    print(str(convFdec(int(timeN.strftime('%I')))) + " " + timeN.strftime('%p') + " " +
+          str(convFdec(int(timeN.strftime('%M')))) + str(convFdec(int(timeN.strftime('%S')))))
+    #ip = input()
+    #if ip == 'q':
+        #looping = False
 
 print("You have quit. Thank you.")
 
