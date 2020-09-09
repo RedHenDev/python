@@ -58,7 +58,7 @@ while running:
     # Update our particles.
     for pp in range(0, len(lParticles)-1):
         # First, add attraction force -- towards 0 indexed particle.
-        # Not that we have exluded 0 particle from this process.
+        # Note that we have exluded 0 particle from this process.
         if pp > 0:
             #tempDir = lParticles[0].vPos - pp.vPos
             # Here we're asking the particles to be attracted towards current mouse pos.
