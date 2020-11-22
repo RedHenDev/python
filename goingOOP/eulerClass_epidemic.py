@@ -42,6 +42,7 @@ class Euler:
             if tempV.length() == 0:
                 _ob1.vPos.xy = _ob1.vPos.x + 0.1, _ob1.vPos.y + 0.1
                 tempV = _ob2.vPos - _ob1.vPos
+                
             _ob1.vPos = _ob2.vPos - (tempV.normalize() * (_ob1.iRad + _ob2.iRad))
             return True
         else: return False

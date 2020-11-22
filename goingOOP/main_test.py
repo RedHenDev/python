@@ -79,7 +79,7 @@ def checkInput():
         
 
 # Begin with 100 sneks at centre of display.
-#snakeExplosion(100, p.math.Vector2(W/2, H/2))
+snakeExplosion(1, p.math.Vector2(W/2, H/2))
 
 # Have user control over these two sneks.
 lSnakes[0].bAuto = False
@@ -147,9 +147,9 @@ while running:
         if random.randint(1,100) > 98 and s.bAuto: s.changeDirection()
         elif s.bAuto==False: s.directMe()
         
-        #s.move()
-        #s.overflow((W,H))
-        #s.render()
+        s.move()
+        s.overflow((W,H))
+        s.render()
 
     # Read out of infection change every ten seconds.
     if p.time.get_ticks() - countStamp > 10000:
