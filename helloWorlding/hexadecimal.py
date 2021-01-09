@@ -26,8 +26,9 @@ def hexLookup(_sym):
 def hexToDen(_str):
     """
     So, we want to iterate over given hex string.
-    Find value in syntactic conext of each index by
-    16, raised to the power of each symbol's value.
+    Find value in syntactic context of each index,
+    which is 16 raised to the power of index,
+    multiplied by each symbol's independent value.
     """
     # First, convert _str to a string with lowercase chars and spaces removed.
     hexS = _str.lower().strip()
@@ -36,7 +37,7 @@ def hexToDen(_str):
     for i in range(0,len(hexS)):
         currentSymbol = hexS[len(hexS)-i-1]
         currentVal = (16 ** i) * hexLookup(currentSymbol)
-        print("Current symbol " + currentSymbol + "'s value is " + str(currentVal))
+        print("Current symbol " + currentSymbol + "'s value at position " + str(i) + " is " + str(currentVal))
         runningTot += currentVal
 
     return runningTot
