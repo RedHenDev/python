@@ -50,10 +50,10 @@ cir.draw(win)
 def func(_x):
     #if _x==0: return float(0)
     """ Exponential """
-    global: n
-    return float(_x**n)
+    #global: n
+    #return float(_x**n)
     """ Hyperbola. """
-    #return float(1/_x)
+    return float(1/_x)
     #return float(_x**3)
     #return float(_x**2)
     #return float(_x * sin(_x/70 + _x/10))
