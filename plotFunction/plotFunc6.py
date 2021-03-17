@@ -53,7 +53,7 @@ def func(_x):
     #global: n
     #return float(_x**n)
     """ Hyperbola. """
-    return float(1/_x)
+    #return float(1/_x)
     #return float(_x**3)
     #return float(_x**2)
     #return float(_x * sin(_x/70 + _x/10))
@@ -66,6 +66,9 @@ def func(_x):
     """ Oblique asymptote. """
     #x2 = (_x * _x) - _x - 2
     #return x2/_x
+    """ Some random quadratic. """
+    #return _x**2 + 5*_x + 6*_x
+    
 def checkInput():
     whatKey = win.checkKey()
     if whatKey.lower() == "q" or whatKey.lower() == "x":
