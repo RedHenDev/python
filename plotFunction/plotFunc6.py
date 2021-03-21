@@ -48,7 +48,7 @@ cir.setOutline("black")
 cir.draw(win)
 
 def func(_x):
-    #if _x==0: return float(0)
+    if _x==0: return float(0)
     """ Exponential """
     #global: n
     #return float(_x**n)
@@ -68,6 +68,8 @@ def func(_x):
     #return x2/_x
     """ Some random quadratic. """
     #return _x**2 + 5*_x + 6*_x
+    """ Does this really converge on pi/6? """
+    return 1/_x**2
     
 def checkInput():
     whatKey = win.checkKey()
