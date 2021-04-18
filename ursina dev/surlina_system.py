@@ -5,13 +5,13 @@ import numpy as nn
 import random as ra
 
 from ursina.prefabs.first_person_controller import FirstPersonController
-from ursina.shaders import lit_with_shadows_shader
+#from ursina.shaders import lit_with_shadows_shader
 
 x = 0
 
 def input(key):
     if key == 'q' or key == 'escape':
-        mouse.visible = True
+        #mouse.visible = True
         #subject.enabled = False
         quit()
 
