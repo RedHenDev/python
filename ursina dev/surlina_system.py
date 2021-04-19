@@ -4,6 +4,8 @@ from ursina import *
 import numpy as nn
 import random as ra
 
+from noise import pnoise2
+
 from ursina.prefabs.first_person_controller import FirstPersonController
 #from ursina.shaders import lit_with_shadows_shader
 
@@ -32,6 +34,8 @@ class Planet:
 
     def rotation(this):
         this.ent.rotation_y += this.rotSpeed * time.dt
+        if this.ent.rotation_y > 10 and this.ent.rotation_y < 14:
+            this.ent.color = color.random_color()
 
     def bob(this):
         global x
@@ -46,17 +50,20 @@ sun = Entity(model="sphere",color=color.rgba(222,200,0,200),scale=12,texture='2k
 #ground.y = -10
 
 #pivot = Entity()
-#DirectionalLight(parent=pivot,y=2,z=3,shadows=True)
+#DirectionalLight(parent=scene,y=2,z=3,shadows=True)
 
 planets = []
 
-for i in range(100):
+for i in range(444):
     bub = Planet(ra.randint(3,14), color.white)
     whatShade = ra.randint(11,255)
     bub.ent.color=color.rgb(whatShade,whatShade,whatShade)
     bub.ent.x = ra.randint(-100,100)
-    bub.ent.y = ra.randint(-100,100)
+    #bub.ent.y = ra.randint(-100,100)
     bub.ent.z = ra.randint(-100,100)
+    freq = 100
+    amp = 120
+    bub.ent.y = pnoise2(9999+bub.ent.x/freq,-99987+bub.ent.z/freq)* amp
     #bub.ent.shader = lit_with_shadows_shader
     planets.append(bub)
     
