@@ -1,5 +1,7 @@
 """ Tutorial for a solar system using Ursina """
 
+""" Currently this is prep and experimental for tut 3 """
+
 from ursina import *
 #from ursina.prefabs.first_person_controller import FirstPersonController
 import random as ra
