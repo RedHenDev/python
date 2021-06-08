@@ -1,4 +1,5 @@
 """ Tutorial for a solar system using Ursina """
+# Part 4.
 
 from ursina import *
 #from ursina.prefabs.first_person_controller import FirstPersonController
@@ -42,22 +43,27 @@ def update():
 
     for p in planets:
         p.orbit()
+        p.rotate()
 
 # Our Planet class -- for making planets.
 class Planet:
     def __init__(this):
-        randS = ra.randint(3,24)
+        #randS = ra.randint(3,24)
         this.name = 'default'
         this.orbitalTheta = ra.randint(0,360)
         this.orbitalVel = 0.01
         this.solarDist = 100
-        this.ent = Entity(model='sphere',scale=randS,
+        this.rings = False
+        this.ent = Entity(model='sphere',scale=1,
                           color=color.lime,texture='assets/2k_moon')
 
     def orbit(this):
-        this.ent.x = this.solarDist * np.cos(this.orbitalTheta)
+        this.ent.x = this.solarDist * np.cos(this.orbitalTheta) * 1.4
         this.ent.z = this.solarDist * np.sin(this.orbitalTheta)
         this.orbitalTheta += this.orbitalVel
+
+    def rotate(this):
+        this.ent.rotation_y -= 0.1
 
 # The sun (centre of the solar system -> )
 sun = Entity(model='sphere',
@@ -72,14 +78,25 @@ for p in range(9):
     baby.ent.scale = dataDia[p] * scalar_Di
     planets.append(baby)
 
-smithy = EditorCamera()
+# Colours of each planet.
+planets[2].ent.color=color.blue
+planets[3].ent.color=color.red
+
+planets[5].rings = True # Saturn ;)
+ring = Entity(model='sphere',scale=planets[5].ent.scale*1.6)
+ring.position = planets[5].ent.position
+ring.scale_y = 1
+ring.color=color.yellow
+ring.reparent_to(planets[5].ent)
+
+smithy = EditorCamera(move_speed=1000)
+camera.clip_plane_far=20000
 
 smithy.y = 8500
 smithy.rotation_x = 90
 
-
 #jessie = Sky()
-#jessie.texture = 'assets/spaceTex'
+#jessie.texture = 'assets/starsTex'
 
 #subject = FirstPersonController()
 app.run()
