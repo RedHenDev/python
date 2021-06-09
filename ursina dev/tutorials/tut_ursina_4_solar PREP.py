@@ -52,6 +52,7 @@ class Planet:
         this.name = 'default'
         this.orbitalTheta = ra.randint(0,360)
         this.orbitalVel = 0.01
+        this.rotationalVel = -0.1
         this.solarDist = 100
         this.rings = False
         this.ent = Entity(model='sphere',scale=1,
@@ -63,34 +64,40 @@ class Planet:
         this.orbitalTheta += this.orbitalVel
 
     def rotate(this):
-        this.ent.rotation_y -= 0.1
+        this.ent.rotation_y += this.rotationalVel
 
 # The sun (centre of the solar system -> )
 sun = Entity(model='sphere',
-             texture='assets/2k_sun',scale=64)
+             texture='assets/2k_sun',scale=964)
 
 
 # Birth our planets in a loop. Add/append them to the planets[] list.
 for p in range(9):
     baby = Planet()
-    baby.solarDist = dataDist[p] * scalar_Dist
+    baby.solarDist = dataDist[p] * scalar_Dist + 964
     baby.orbitalVel = dataVel[p] * scalar_Ov
     baby.ent.scale = dataDia[p] * scalar_Di
     planets.append(baby)
 
-# Colours of each planet.
+# Colour of each planet.
 planets[2].ent.color=color.blue
 planets[3].ent.color=color.red
+planets[5].ent.color=color.gold
+planets[4].ent.color=color.red
+planets[6].ent.color=color.cyan
+planets[7].ent.color=color.blue
 
 planets[5].rings = True # Saturn ;)
-ring = Entity(model='sphere',scale=planets[5].ent.scale*1.6)
+ring = Entity(model=load_model('torus.obj'),
+scale=planets[5].ent.scale)
 ring.position = planets[5].ent.position
+ring.rotation_x = 45
 ring.scale_y = 1
-ring.color=color.yellow
+ring.color=color.white
 ring.reparent_to(planets[5].ent)
 
 smithy = EditorCamera(move_speed=1000)
-camera.clip_plane_far=20000
+camera.clip_plane_far=200000
 
 smithy.y = 8500
 smithy.rotation_x = 90
