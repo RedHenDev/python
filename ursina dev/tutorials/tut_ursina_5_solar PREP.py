@@ -1,5 +1,5 @@
 """ Tutorial for a solar system using Ursina """
-# Part 4.
+# Part 5 (PREP version.)
 
 from ursina import *
 #from ursina.prefabs.first_person_controller import FirstPersonController
@@ -27,7 +27,7 @@ dataDia = [4879,	12104,	12756,	6792,	142984,	120536,
            51118,	49528,	2370]
 
 scalar_Ov = 0.001
-scalar_Di = 0.006
+scalar_Di = 0.008
 scalar_Dist = 2
 
 
@@ -80,15 +80,17 @@ for p in range(9):
     planets.append(baby)
 
 # Colour of each planet.
-planets[2].ent.color=color.blue
+planets[0].ent.color=color.gray
+planets[1].ent.color=color.pink
+planets[2].ent.color=color.cyan
 planets[3].ent.color=color.red
+planets[4].ent.color=color.brown
 planets[5].ent.color=color.gold
-planets[4].ent.color=color.red
 planets[6].ent.color=color.cyan
 planets[7].ent.color=color.blue
 
 planets[5].rings = True # Saturn ;)
-ring = Entity(model=load_model('torus.obj'),
+ring = Entity(model=load_model('assets/torus.obj'),
 scale=planets[5].ent.scale)
 ring.position = planets[5].ent.position
 ring.rotation_x = 45
@@ -107,14 +109,3 @@ smithy.rotation_x = 90
 
 #subject = FirstPersonController()
 app.run()
-
-
-
-
-
-
-
-
-
-
-
