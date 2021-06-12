@@ -60,11 +60,15 @@ sun.z = 1990
 
 blocks = []
 
+for i in range(400):
+    bub = Block(1)
+    blocks.append(bub)
+
 # Perlin noise setup.
 noise = PerlinNoise(octaves=3,seed=1)
 
 # Our terrain objects.
-urizen = Entity()
+#urizen = Entity()
 urizen2 = Entity()
 
 # Terrain data.
@@ -74,30 +78,32 @@ for i in range (25000):
     z = 1984 + math.floor(i % 500)
     freq = 64
     amp = 12
-    y = math.floor(noise([x/freq,z/freq])* amp)
-    urizenData.append(y)
+    y = (noise([x/freq,z/freq])* amp)
+    urizenData.append(math.floor(y))
 
 def generateChunk(_ox, _oz):
-    for i in range(100):
-        bub = Block(1)
+    for i in range(400):
+        #bub = blocks[i]
         whatShade = ra.randint(100,122)
-        bub.ent.color=color.rgb(0,whatShade,0)
-        bub.origColor = bub.ent.color
-        bub.ent.x = math.floor(_ox + math.floor(i/10))
-        bub.ent.z = math.floor(_oz + math.floor(i % 10))
+        blocks[i].ent.color=color.rgb(0,whatShade,0)
+        blocks[i].origColor = blocks[i].ent.color
+        blocks[i].ent.x = math.floor(_ox + math.floor(i/20))
+        blocks[i].ent.z = math.floor(_oz + math.floor(i % 20))
         freq = 64
         amp = 12
-        bub.ent.y = urizenData[int(((bub.ent.x-1984)*500)+
-        bub.ent.z-1984)]
+        blocks[i].ent.y = urizenData[int(((blocks[i].ent.x-1984)*500)+
+        blocks[i].ent.z-1984)]
         #bub.ent.y = math.floor(noise([bub.ent.x/freq,
         #bub.ent.z/freq])* amp)
-        bub.ent.parent = urizen2
-        
+        blocks[i].ent.parent = urizen2
+  
     urizen2.combine()
     urizen2.collider = 'mesh'
     urizen2.texture = 'grass_14.png'
 
+generateChunk(1989,1989)
 
+"""
 for i in range(100):
     bub = Block(1)
     whatShade = ra.randint(100,122)
@@ -121,12 +127,14 @@ for i in range(100):
 urizen.combine()
 urizen.collider = 'mesh'
 urizen.texture = 'grass_14.png'
-#blocks = []
+"""
+
 
 
 #EditorCamera()
 #Sky()
-#scene.fog_density = .1
+scene.fog_density = .03
+scene.fog_color = color.rgb(0,111,184)
 subject = FirstPersonController(model='cube')
 subject.gravity = 0.5
 subject.y = 32
