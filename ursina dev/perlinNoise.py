@@ -16,22 +16,28 @@ sunY = 0
 def input(key):
     global currentZ,currentX
     if key == 'q' or key == 'escape': 
-        locked = False
+        mouse.locked = False
         exit()
     if key == 'g':
-        currentZ += subject.z-blocksWidth*0.5
-        currentX += subject.x-blocksWidth*0.5
-        generateChunk(  currentX,
-                        currentZ)
-        # Adjust subject a little higher to
-        # prevent falling through new chunk. 
-        subject.y += 0.1
-        # Return subject to starting position.
-        urizen.z -= subject.z-blocksWidth*0.5
-        subject.z = blocksWidth*0.5
-        urizen.x -= subject.x-blocksWidth*0.5
-        subject.x = blocksWidth*0.5
-        
+        updateTerrain()
+    if nn.abs(subject.z-blocksWidth*0.5) >= 4:
+        updateTerrain()
+
+def updateTerrain():
+    global currentZ,currentX
+    currentZ += subject.z-blocksWidth*0.5
+    currentX += subject.x-blocksWidth*0.5
+    generateChunk(  currentX,
+                    currentZ)
+    # Adjust subject a little higher to
+    # prevent falling through new chunk. 
+    subject.y += 0.1
+    # Return subject to starting position.
+    urizen.z -= subject.z-blocksWidth*0.5
+    subject.z = blocksWidth*0.5
+    urizen.x -= subject.x-blocksWidth*0.5
+    subject.x = blocksWidth*0.5
+
 
 def update():
     global sunY
@@ -158,6 +164,6 @@ scene.fog_color = color.rgb(0,111,184)
 subject = FirstPersonController(model='cube')
 subject.gravity = 0.5
 subject.y = 32
-subject.x = 5
-subject.z = 5
+subject.x = blocksWidth*0.5
+subject.z = blocksWidth*0.5
 app.run()
