@@ -11,24 +11,34 @@ from perlin_noise import PerlinNoise
 from ursina.prefabs.first_person_controller import FirstPersonController
 #from ursina.shaders import lit_with_shadows_shader
 
-
 sunY = 0
 
 def input(key):
+    global currentZ,currentX
     if key == 'q' or key == 'escape': 
         locked = False
         exit()
     if key == 'g':
-        generateChunk(  subject.x,
-                        subject.z)
+        currentZ += 4-subject.z
+        currentX += 4-subject.x
+        generateChunk(  currentX,
+                        currentZ)
+        subject.y += 0.1
+        urizen.z -= 4-subject.z
+        subject.z = 4
+        urizen.x -= 4-subject.x
+        subject.x = 4
+        
 
 def update():
     global sunY
+    print_on_screen('x='+str(math.floor(subject.x))
+                        +'\nz='+str(math.floor(subject.z)))
     sun.rotation_y += 10 * time.dt
     sunY += 0.01
     sun.y += (nn.sin(sunY) * 2.8) * time.dt
     #for b in blocks:
-    #    b.update()
+    #    b.update() # For highlighting when hovered.
 
 class Block:
     def __init__(this, _scale):
@@ -41,7 +51,6 @@ class Block:
             this.ent.color = color.lime
         else: this.ent.color = this.origColor
 
-
 app = Ursina()
 
 window.color = color.rgb(0,111,184)
@@ -50,64 +59,70 @@ sun = Entity(model="sphere",color=color.rgba(222,200,0,200),
                 scale=12,
                 texture='2k_sun')
 sun.y = 22
-sun.x = 1990
-sun.z = 1990
-
-#ground = Entity(model="cube",color=color.green,scale=(1000,1,1000),collider='mesh')
-#ground.y = -10
-
-#pivot = Entity()
-#DirectionalLight(parent=scene,y=2,z=3,shadows=True)
-
-
+sun.x = 2222
+sun.z = 2222
 
 # Perlin noise setup.
 noise = PerlinNoise(octaves=3,seed=1)
 
-# Our terrain objects.
-#urizen = Entity()
-urizen2 = Entity()
+# Our terrain object.
+urizen = Entity()
 
+# Generate pool of blocks. Also decide colours here.
 blocks = []
-
-for i in range(400):
+blocksWidth = 10
+for i in range(blocksWidth*blocksWidth):
     bub = Block(1)
-    bub.ent.parent = urizen2
+    whatShade = ra.randint(100,122)
+    bub.ent.color=color.rgb(0,whatShade,0)
+    bub.origColor = bub.ent.color
+    bub.ent.parent = urizen
     blocks.append(bub)
+
+# Seed origin -- also where subject begins.
+seedX = 0
+seedZ = 0
+# For tracking subject's movement and position.
+deltaX = 0
+deltaZ = 0
+currentX = seedX
+currentZ = seedZ
 
 # Terrain data.
 urizenData = []
-for i in range (25000): 
-    x = 1984 + math.floor(i/500)
-    z = 1984 + math.floor(i % 500)
+terrainWidth = 100
+for i in range (terrainWidth*terrainWidth): 
+    x = math.floor(i/terrainWidth)
+    z = math.floor(i%terrainWidth)
     freq = 64
     amp = 12
     y = (noise([x/freq,z/freq])* amp)
     urizenData.append(math.floor(y))
 
 def generateChunk(_ox, _oz):
-    for i in range(400):
-        #bub = blocks[i]
-        whatShade = ra.randint(100,122)
-        blocks[i].ent.color=color.rgb(0,whatShade,0)
-        blocks[i].origColor = blocks[i].ent.color
-        blocks[i].ent.x = math.floor(_ox + math.floor(i/20))
-        blocks[i].ent.z = math.floor(_oz + math.floor(i % 20))
-        freq = 64
-        amp = 12
-        blocks[i].ent.y = urizenData[int(((blocks[i].ent.x-1984)*500)+
-        blocks[i].ent.z-1984)]
-        #blocks[i].ent.parent = urizen2
+    global terrainWidth
+    global blocksWidth
+    urizen.model=None
+    for i in range(blocksWidth*blocksWidth):
+        blocks[i].ent.x =    math.floor(_ox + 
+                             math.floor(i/blocksWidth))
+        blocks[i].ent.z =    math.floor(_oz + 
+                             math.floor(i%blocksWidth))
+        x = blocks[i].ent.x
+        z = blocks[i].ent.z
+        blocks[i].ent.y =   urizenData[int(((x-seedX)*
+                            terrainWidth)+z-seedZ)]
     
     for b in blocks:
         b.ent.enable()
-    urizen2.combine(auto_destroy=False)
+    urizen.combine(auto_destroy=False)
     for b in blocks:
         b.ent.disable()
-    urizen2.collider = 'mesh'
-    urizen2.texture = 'grass_14.png'
+    urizen.collider = 'mesh'
+    urizen.texture = 'grass_14.png'
+    
 
-generateChunk(1984,1984)
+generateChunk(seedX,seedZ)
 
 """
 for i in range(100):
@@ -135,15 +150,11 @@ urizen.collider = 'mesh'
 urizen.texture = 'grass_14.png'
 """
 
-
-
-#EditorCamera()
-#Sky()
 scene.fog_density = .03
 scene.fog_color = color.rgb(0,111,184)
 subject = FirstPersonController(model='cube')
 subject.gravity = 0.5
 subject.y = 32
-subject.x = 1989
-subject.z = 1989
+subject.x = 4
+subject.z = 4
 app.run()
