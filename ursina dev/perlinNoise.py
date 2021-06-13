@@ -19,15 +19,18 @@ def input(key):
         locked = False
         exit()
     if key == 'g':
-        currentZ += 4-subject.z
-        currentX += 4-subject.x
+        currentZ += subject.z-blocksWidth*0.5
+        currentX += subject.x-blocksWidth*0.5
         generateChunk(  currentX,
                         currentZ)
+        # Adjust subject a little higher to
+        # prevent falling through new chunk. 
         subject.y += 0.1
-        urizen.z -= 4-subject.z
-        subject.z = 4
-        urizen.x -= 4-subject.x
-        subject.x = 4
+        # Return subject to starting position.
+        urizen.z -= subject.z-blocksWidth*0.5
+        subject.z = blocksWidth*0.5
+        urizen.x -= subject.x-blocksWidth*0.5
+        subject.x = blocksWidth*0.5
         
 
 def update():
@@ -155,6 +158,6 @@ scene.fog_color = color.rgb(0,111,184)
 subject = FirstPersonController(model='cube')
 subject.gravity = 0.5
 subject.y = 32
-subject.x = 4
-subject.z = 4
+subject.x = 5
+subject.z = 5
 app.run()
