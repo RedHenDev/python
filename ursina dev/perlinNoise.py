@@ -9,10 +9,10 @@ import math
 from perlin_noise import PerlinNoise
 
 from ursina.prefabs.first_person_controller import FirstPersonController
-from ursina.shaders import lit_with_shadows_shader
+#from ursina.shaders import lit_with_shadows_shader
 
 
-x = 0
+sunY = 0
 
 def input(key):
     if key == 'q' or key == 'escape': 
@@ -23,10 +23,10 @@ def input(key):
                         subject.z)
 
 def update():
-    global x
+    global sunY
     sun.rotation_y += 10 * time.dt
-    x += 0.01
-    sun.y += (nn.sin(x) * 2.8) * time.dt
+    sunY += 0.01
+    sun.y += (nn.sin(sunY) * 2.8) * time.dt
     #for b in blocks:
     #    b.update()
 
@@ -46,8 +46,9 @@ app = Ursina()
 
 window.color = color.rgb(0,111,184)
 
-sun = Entity(model="sphere",color=color.rgba(222,200,0,200),scale=12,
-             texture='2k_sun')
+sun = Entity(model="sphere",color=color.rgba(222,200,0,200),
+                scale=12,
+                texture='2k_sun')
 sun.y = 22
 sun.x = 1990
 sun.z = 1990
@@ -58,11 +59,7 @@ sun.z = 1990
 #pivot = Entity()
 #DirectionalLight(parent=scene,y=2,z=3,shadows=True)
 
-blocks = []
 
-for i in range(400):
-    bub = Block(1)
-    blocks.append(bub)
 
 # Perlin noise setup.
 noise = PerlinNoise(octaves=3,seed=1)
@@ -70,6 +67,13 @@ noise = PerlinNoise(octaves=3,seed=1)
 # Our terrain objects.
 #urizen = Entity()
 urizen2 = Entity()
+
+blocks = []
+
+for i in range(400):
+    bub = Block(1)
+    bub.ent.parent = urizen2
+    blocks.append(bub)
 
 # Terrain data.
 urizenData = []
@@ -93,15 +97,17 @@ def generateChunk(_ox, _oz):
         amp = 12
         blocks[i].ent.y = urizenData[int(((blocks[i].ent.x-1984)*500)+
         blocks[i].ent.z-1984)]
-        #bub.ent.y = math.floor(noise([bub.ent.x/freq,
-        #bub.ent.z/freq])* amp)
-        blocks[i].ent.parent = urizen2
-  
-    urizen2.combine()
+        #blocks[i].ent.parent = urizen2
+    
+    for b in blocks:
+        b.ent.enable()
+    urizen2.combine(auto_destroy=False)
+    for b in blocks:
+        b.ent.disable()
     urizen2.collider = 'mesh'
     urizen2.texture = 'grass_14.png'
 
-generateChunk(1989,1989)
+generateChunk(1984,1984)
 
 """
 for i in range(100):
