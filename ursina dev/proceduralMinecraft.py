@@ -4,6 +4,7 @@ June 14 2021 - refactoring procedural chunk generation.
 """
 
 from ursina import *
+from ursina.mesh_importer import *
 import numpy as nn
 import random as ra
 import math
@@ -83,7 +84,7 @@ urizen = Entity()
 
 # Generate pool of blocks. Also decide colours here.
 blocks = []
-blocksWidth = 20
+blocksWidth = 16
 for i in range(blocksWidth*blocksWidth):
     bub = Block(1)
     bub.ent.scale_y = 6
@@ -94,7 +95,7 @@ for i in range(blocksWidth*blocksWidth):
 
 # Terrain data.
 urizenData = []
-terrainWidth = 20
+terrainWidth = 100
 for i in range (terrainWidth*terrainWidth): 
     x = math.floor(i/terrainWidth)
     z = math.floor(i%terrainWidth)
@@ -159,11 +160,14 @@ realPosZ = 0#terrainWidth*0.5
 
 #  Let's gooooo!
 generateChunk(currentX,currentZ)
+# mo = load_model(obj_to_ursinamesh('urizen2.obj'))
+# a = Entity(model=mo,scale=10)
+
 """
 sf = sun.add_script(SmoothFollow(
     target=subject, offset=(0,2,0),speed=0.1))
 """
 # Can we save the terrain?
-Mesh.save(urizen, 'urizen')
+# Mesh.save(urizen.model, 'urizen2.obj')
 
 app.run()
