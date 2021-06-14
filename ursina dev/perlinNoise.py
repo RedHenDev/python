@@ -19,8 +19,8 @@ def input(key):
         exit()
     if key == 'g':
         updateTerrain()
-    if nn.abs(subject.z-blocksWidth*0.5) >= 4 or \
-        nn.abs(subject.x-blocksWidth*0.5) >= 4:
+    if  nn.abs(subject.z-blocksWidth*0.5) >= 2 or \
+        nn.abs(subject.x-blocksWidth*0.5) >= 2:
         updateTerrain()
 
 def updateTerrain():
@@ -75,7 +75,7 @@ sun.x = 22
 sun.z = 22
 
 # Perlin noise setup.
-noise = PerlinNoise(octaves=8,seed=1984)
+noise = PerlinNoise(octaves=1,seed=1988)
 
 # Our terrain object.
 urizen = Entity()
@@ -96,12 +96,12 @@ for i in range(blocksWidth*blocksWidth):
 seedX = 0
 seedZ = 0
 # For tracking subject's movement and position.
-currentX = seedX
-currentZ = seedZ
+currentX = 0
+currentZ = 0
 
 # Terrain data.
 urizenData = []
-terrainWidth = 200
+terrainWidth = 50
 for i in range (terrainWidth*terrainWidth): 
     x = math.floor(i/terrainWidth)
     z = math.floor(i%terrainWidth)
