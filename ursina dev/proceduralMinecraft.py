@@ -23,8 +23,8 @@ def input(key):
         exit()
     if key == 'g':
         updateTerrain()
-    if  nn.abs(subject.z) >= 4 or \
-        nn.abs(subject.x) >= 4:
+    if  nn.abs(subject.z) >= math.floor(blocksWidth*0.25) or \
+        nn.abs(subject.x) >= math.floor(blocksWidth*0.25):
         updateTerrain()
 
 def updateTerrain():
@@ -33,19 +33,17 @@ def updateTerrain():
     currentX += subject.x
     # Adjust subject a little higher to
     # prevent falling through new chunk. 
-    # subject.y += 2
+    subject.y += 0.2
     # Return subject to starting position.
     subject.z = 0
     subject.x = 0
     generateChunk(  currentX,
                     currentZ)
-    
-
 
 def update():
     global sunY
     print_on_screen('x='+str(math.floor(subject.x))
-                        +'\nz='+str(math.floor(subject.z)))
+                    +'\nz='+str(math.floor(subject.z)))
     sun.rotation_y += 10 * time.dt
     sunY += 0.01
     sun.y += (nn.sin(sunY) * 2.8) * time.dt
@@ -78,17 +76,17 @@ sun.x = 22
 sun.z = 22
 
 # Perlin noise setup.
-noise = PerlinNoise(octaves=3,seed=1988)
+noise = PerlinNoise(octaves=4,seed=1988)
 
 # Our terrain object.
 urizen = Entity()
 
 # Generate pool of blocks. Also decide colours here.
 blocks = []
-blocksWidth = 12
+blocksWidth = 20
 for i in range(blocksWidth*blocksWidth):
     bub = Block(1)
-    bub.ent.scale_y = 4
+    bub.ent.scale_y = 6
     bub.ent.x = math.floor(i/blocksWidth)
     bub.ent.z = math.floor(i%blocksWidth)
     bub.ent.parent = urizen
@@ -96,7 +94,7 @@ for i in range(blocksWidth*blocksWidth):
 
 # Terrain data.
 urizenData = []
-terrainWidth = 100
+terrainWidth = 20
 for i in range (terrainWidth*terrainWidth): 
     x = math.floor(i/terrainWidth)
     z = math.floor(i%terrainWidth)
@@ -108,13 +106,24 @@ for i in range (terrainWidth*terrainWidth):
 
 def generateChunk(_ox, _oz):
     global terrainWidth, blocksWidth, realPosX, realPosZ
+    global currentZ, currentX
     urizen.model=None
     for i in range(blocksWidth*blocksWidth):
         x = realPosX + math.floor(_ox + math.floor(i/blocksWidth))
         z = realPosZ + math.floor(_oz + math.floor(i%blocksWidth))
-        y = blocks[i].ent.y =   urizenData[int((x*
-                                terrainWidth)+z)]
+        # Check index. If out of range, return to default
+        # chunk position.
+        indi = int((x*terrainWidth)+z)
+        
+        if  x >= terrainWidth or \
+            z >= terrainWidth or \
+            x < 0 or \
+            z < 0 or \
+            indi >= len(urizenData)-1: 
+                y = blocks[i].ent.y = 0
+        else: y = blocks[i].ent.y = urizenData[indi]
 
+        # Decide colour of each block according to height.
         r = 160 + y * 10
         g = 160 + y * 42
         b = 0
@@ -128,8 +137,8 @@ def generateChunk(_ox, _oz):
     urizen.collider = 'mesh'
     urizen.texture = 'grass_mono.png'
     # Centre subject relative to chunk.
-    urizen.x = -blocksWidth*0.5
-    urizen.z = -blocksWidth*0.5
+    urizen.x = math.floor(-blocksWidth*0.5)
+    urizen.z = math.floor(-blocksWidth*0.5)
 
 scene.fog_density = .01
 scene.fog_color = color.rgb(0,211,184)
@@ -145,10 +154,16 @@ subject.z = 0
 # against the Perlin Noise terrain.
 currentX = 0
 currentZ = 0
-realPosX = 50
-realPosZ = 50
+realPosX = 0#terrainWidth*0.5
+realPosZ = 0#terrainWidth*0.5
 
 #  Let's gooooo!
 generateChunk(currentX,currentZ)
+"""
+sf = sun.add_script(SmoothFollow(
+    target=subject, offset=(0,2,0),speed=0.1))
+"""
+# Can we save the terrain?
+Mesh.save(urizen, 'urizen')
 
 app.run()
