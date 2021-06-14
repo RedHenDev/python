@@ -16,11 +16,11 @@ sunY = 0
 def input(key):
     global currentZ,currentX
     if key == 'q' or key == 'escape': 
-        mouse.locked = False
         exit()
     if key == 'g':
         updateTerrain()
-    if nn.abs(subject.z-blocksWidth*0.5) >= 4:
+    if nn.abs(subject.z-blocksWidth*0.5) >= 4 or \
+        nn.abs(subject.x-blocksWidth*0.5) >= 4:
         updateTerrain()
 
 def updateTerrain():
@@ -63,16 +63,19 @@ class Block:
 app = Ursina()
 
 window.color = color.rgb(0,111,184)
+window.exit_button.visible = False
+window.fps_counter.enabled = True
+window.fullscreen = False
 
 sun = Entity(model="sphere",color=color.rgba(222,200,0,200),
                 scale=12,
                 texture='2k_sun')
 sun.y = 22
-sun.x = 2222
-sun.z = 2222
+sun.x = 22
+sun.z = 22
 
 # Perlin noise setup.
-noise = PerlinNoise(octaves=3,seed=1)
+noise = PerlinNoise(octaves=8,seed=1984)
 
 # Our terrain object.
 urizen = Entity()
@@ -86,27 +89,27 @@ for i in range(blocksWidth*blocksWidth):
     bub.ent.color=color.rgb(0,whatShade,0)
     bub.origColor = bub.ent.color
     bub.ent.parent = urizen
+    bub.ent.scale_y = 10
     blocks.append(bub)
 
 # Seed origin -- also where subject begins.
 seedX = 0
 seedZ = 0
 # For tracking subject's movement and position.
-deltaX = 0
-deltaZ = 0
 currentX = seedX
 currentZ = seedZ
 
 # Terrain data.
 urizenData = []
-terrainWidth = 100
+terrainWidth = 200
 for i in range (terrainWidth*terrainWidth): 
     x = math.floor(i/terrainWidth)
     z = math.floor(i%terrainWidth)
     freq = 64
     amp = 12
     y = (noise([x/freq,z/freq])* amp)
-    urizenData.append(math.floor(y))
+    y = math.floor(y)
+    urizenData.append(y)
 
 def generateChunk(_ox, _oz):
     global terrainWidth
@@ -130,8 +133,7 @@ def generateChunk(_ox, _oz):
     urizen.collider = 'mesh'
     urizen.texture = 'grass_14.png'
     
-
-generateChunk(seedX,seedZ)
+generateChunk(currentX,currentZ)
 
 """
 for i in range(100):
@@ -159,11 +161,11 @@ urizen.collider = 'mesh'
 urizen.texture = 'grass_14.png'
 """
 
-scene.fog_density = .03
-scene.fog_color = color.rgb(0,111,184)
-subject = FirstPersonController(model='cube')
-subject.gravity = 0.5
-subject.y = 32
+scene.fog_density = .01
+scene.fog_color = color.rgb(0,211,184)
+subject = FirstPersonController()
+subject.gravity = 0.6
+subject.y = 12
 subject.x = blocksWidth*0.5
 subject.z = blocksWidth*0.5
 app.run()
