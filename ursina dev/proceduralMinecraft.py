@@ -1,10 +1,11 @@
 """ Perlin noise experiments """
 """ 
 June 14 2021 - refactoring procedural chunk generation.
+June 15 2021 - exploring use of static model of terrain.
 """
 
 from ursina import *
-from ursina.mesh_importer import *
+# from ursina.mesh_importer import *
 import numpy as nn
 import random as ra
 import math
@@ -24,22 +25,30 @@ def input(key):
         exit()
     if key == 'g':
         updateTerrain()
-    if  nn.abs(subject.z) >= math.floor(blocksWidth*0.25) or \
-        nn.abs(subject.x) >= math.floor(blocksWidth*0.25):
+    # if  nn.abs(subject.z) > math.floor(blocksWidth*0.25) or \
+    #     nn.abs(subject.x) > math.floor(blocksWidth*0.25):
+    if  nn.abs(subject.z) >= 1 or nn.abs(subject.x) >= 1:
         updateTerrain()
 
 def updateTerrain():
     global currentZ,currentX
-    currentZ += subject.z
-    currentX += subject.x
+    currentZ += nn.floor(subject.z)
+    currentX += nn.floor(subject.x)
     # Adjust subject a little higher to
     # prevent falling through new chunk. 
-    subject.y += 0.2
+    # subject.y += 0.2
     # Return subject to starting position.
     subject.z = 0
     subject.x = 0
     generateChunk(  currentX,
                     currentZ)
+    adjustGhostTerrain()
+    
+
+def adjustGhostTerrain():
+    #  Adjust ghost-terrain.
+    a.z = math.floor(2-currentZ+blocksWidth)
+    a.x = math.floor(3-currentX+terrainWidth-blocksWidth*0.5)
 
 def update():
     global sunY
@@ -81,13 +90,14 @@ noise = PerlinNoise(octaves=4,seed=1988)
 
 # Our terrain object.
 urizen = Entity()
+urizen.texture = 'grass_mono.png'
 
 # Generate pool of blocks. Also decide colours here.
 blocks = []
-blocksWidth = 16
+blocksWidth = 8
 for i in range(blocksWidth*blocksWidth):
     bub = Block(1)
-    bub.ent.scale_y = 6
+    bub.ent.scale_y = 1
     bub.ent.x = math.floor(i/blocksWidth)
     bub.ent.z = math.floor(i%blocksWidth)
     bub.ent.parent = urizen
@@ -129,22 +139,23 @@ def generateChunk(_ox, _oz):
         g = 160 + y * 42
         b = 0
         blocks[i].ent.color=color.rgb(r,g,b)
-    
+        # blocks[i].ent.color=color.black66
+
     for b in blocks:
         b.ent.enable()
     urizen.combine(auto_destroy=False)
     for b in blocks:
         b.ent.disable()
     urizen.collider = 'mesh'
-    urizen.texture = 'grass_mono.png'
+    # urizen.texture = 'grass_mono.png'
     # Centre subject relative to chunk.
-    urizen.x = math.floor(-blocksWidth*0.5)
-    urizen.z = math.floor(-blocksWidth*0.5)
+    # urizen.x = math.floor(-blocksWidth*0.5)-2
+    # urizen.z = math.floor(-blocksWidth*0.5)+2
 
 scene.fog_density = .01
 scene.fog_color = color.rgb(0,211,184)
 subject = FirstPersonController()
-subject.gravity = 0.5
+subject.gravity = 0
 
 #  Original position of subject etc.
 subject.y = 12
@@ -160,9 +171,16 @@ realPosZ = 0#terrainWidth*0.5
 
 #  Let's gooooo!
 generateChunk(currentX,currentZ)
-# mo = load_model(obj_to_ursinamesh('urizen2.obj'))
-# a = Entity(model=mo,scale=10)
-
+# Ghost-terrain.
+mo = load_model('france.obj') 
+a = Entity( model=mo,
+            texture='grass_14.png',
+            color=color.rgb(0,200,0),
+            double_sided = True)
+# Adjust position of ghost-terrain to correspond to
+# smaller terrain's collider.
+a.rotation_z=180
+adjustGhostTerrain()
 """
 sf = sun.add_script(SmoothFollow(
     target=subject, offset=(0,2,0),speed=0.1))
