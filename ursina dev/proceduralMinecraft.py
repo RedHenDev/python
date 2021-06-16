@@ -20,28 +20,42 @@ from ursina.prefabs.first_person_controller import FirstPersonController
 #from ursina.shaders import lit_with_shadows_shader
 
 sunY = 0
-laura = Entity(model='cube',color=color.white)
-jojo = Entity(  model='cube',texture='grass_14.png',
-                collider='box',color=color.rgb(0,200,0),
-                always_on_top=True)
-jojo.y=-999
+
+jojo = Entity(  model='cube',
+                collider=None,
+                color=color.rgba(0,101,101,64),
+                )
+
+def projectBuilder():
+    jojo.position = subject.position + Vec3(camera.forward * 2)
+    jojo.x = nn.round(jojo.x)
+    jojo.y = nn.round(jojo.y)
+    jojo.z = nn.round(jojo.z)
+    jojo.y+=2
 
 def input(key):
     if key == 'q' or key == 'escape': 
         exit()
     if key == 'left mouse up':
-        print('jojooooo')
-        jojo.position = laura.position
-        duplicate(jojo,copy_children=False)
-        jojo.y = -999
+        projectBuilder()
+        e = duplicate(jojo,name='j')
+        e.collider = 'box'
+        e.color=color.white
+        e.texture='grass_mono.png'
+        e.shake(duration=0.5,speed=0.001)
+    elif key == 'right mouse up':
+        e = mouse.hovered_entity
+        if e and e.visible==True:
+            e.animate_rotation(90,1)
+            destroy(e,1.5)
 
 
 def update():
     global sunY
     global currentX, currentZ
-    if  nn.abs(math.floor(subject.z)-math.floor(currentZ)) >= 3 or \
-        nn.abs(math.floor(subject.x)-math.floor(currentX)) >= 3 or \
-        nn.abs(subject.x-subject.x)+nn.abs(subject.z-subject.z) >= 3:
+    if  nn.abs(math.floor(subject.z)-math.floor(currentZ)) >= 2 or \
+        nn.abs(math.floor(subject.x)-math.floor(currentX)) >= 2 or \
+        nn.abs(subject.x-subject.x)+nn.abs(subject.z-subject.z) >= 2:
         currentX = subject.x
         currentZ = subject.z
         generateChunk()
@@ -50,25 +64,12 @@ def update():
     sunY += 0.01
     sun.y += (nn.sin(sunY) * 2.8) * time.dt
     
-    if urizen.hovered:
-        laura.color = color.lime
-        laura.position = mouse.world_point + mouse.world_normal
-        laura.x = math.floor(laura.x)
-        laura.y = math.floor(laura.y)
-        laura.z = math.floor(laura.z)
-    else: 
-        laura.color = color.rgba(255,255,255,64)
-        # laura.position = subject.position + subject.forward
-        laura.y += 69
-        # laura.x = math.floor(laura.x)
-        # laura.y = math.floor(laura.y)
-        # laura.z = math.floor(laura.z)
+    projectBuilder()
 
 class Block:
     def __init__(this, _scale):
-        this.ent = Entity(model="cube",color=color.white,
+        this.ent = Entity(model="cube",
                           scale=_scale,texture='grass_mono.png')
-        this.origColor = this.ent.color
 
     # def update(this):
     #     if this.ent.hovered:
@@ -94,11 +95,12 @@ noise = PerlinNoise(octaves=4,seed=1988)
 
 # Our physical terrain object. Parent to blocks.
 urizen = Entity()
+urizen.visible=False
 # urizen.texture = 'grass_mono.png'
 
 # Generate pool of blocks. Also decide colours here.
 blocks = []
-blocksWidth = 6
+blocksWidth = 5
 for i in range(blocksWidth*blocksWidth):
     bub = Block(1)
     bub.ent.scale_y = 1
@@ -136,9 +138,9 @@ def generateChunk():
             x < 0 or \
             z < 0 or \
             indi >= len(urizenData)-1: 
-                y = blocks[i].ent.y = -4
+                y = blocks[i].ent.y = -7
         else: y = blocks[i].ent.y = urizenData[indi]
-        blocks[i].ent.disable() # NB don't have to enable blocks.
+        # blocks[i].ent.disable() # NB don't have to enable blocks.
         # Decide colour of each block according to height.
         # r = 160 + y * 10
         # g = 160 + y * 42
@@ -146,7 +148,7 @@ def generateChunk():
         # blocks[i].ent.color=color.rgb(r,g,b)
 
     urizen.combine(auto_destroy=False)
-    urizen.visible_self=False
+    # urizen.visible_self=False
     urizen.collider = 'mesh'
     # Centre subject relative to chunk.
     urizen.x = math.floor(subject.x + -((blocksWidth-2.5)*0.5))
@@ -169,7 +171,7 @@ currentX = 0
 currentZ = 0
 
 # Infinite-plane.
-ip = Entity(model='quad',position=Vec3(-10000,-4,-10000),
+ip = Entity(model='quad',position=Vec3(-10000,-7,-10000),
         rotation_x=90,
         scale=30000,color=rgb(100,0,0))
 
