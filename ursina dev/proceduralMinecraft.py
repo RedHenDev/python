@@ -110,8 +110,8 @@ terrainWidth = 100
 for i in range (terrainWidth*terrainWidth):
     # NB. I have reversed the x and z here, to fit
     # ghost-model. 
-    x = math.floor(-i/terrainWidth)
-    z = math.floor(i%terrainWidth)
+    x = math.floor(i%terrainWidth)
+    z = math.floor(i/terrainWidth)
     freq = 64
     amp = 12
     y = (noise([x/freq,z/freq])* amp)
@@ -179,11 +179,11 @@ generateChunk(currentX,currentZ)
 mo = load_model('france.obj') 
 a = Entity( model=mo,
             texture='grass_14.png',
-            color=color.rgba(0,200,0,80),
+            color=color.rgb(0,255,0),
             double_sided = True)
 # Adjust position of ghost-terrain to correspond to
 # smaller terrain's collider.
-# a.rotation_x=180
+a.rotation_y=90
 # adjustGhostTerrain()
 """
 sf = sun.add_script(SmoothFollow(
