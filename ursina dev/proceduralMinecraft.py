@@ -20,26 +20,16 @@ from ursina.prefabs.first_person_controller import FirstPersonController
 sunY = 0
 
 def input(key):
-    global currentZ,currentX
     if key == 'q' or key == 'escape': 
         exit()
     if key == 'g':
         updateTerrain()
-    # if  nn.abs(subject.z) > math.floor(blocksWidth*0.25) or \
-    #     nn.abs(subject.x) > math.floor(blocksWidth*0.25):
-    if  nn.abs(subject.z) >= 1 or nn.abs(subject.x) >= 1:
-        pass
-        updateTerrain()
 
 def updateTerrain():
-    global currentZ,currentX
-    currentZ += subject.z
-    currentX += subject.x
     # Return subject to starting position.
     # subject.z = 0
     # subject.x = 0
-    generateChunk(  currentX,
-                    currentZ)
+    generateChunk()
     # adjustGhostTerrain() 
     
 
@@ -49,11 +39,20 @@ def adjustGhostTerrain():
     a.z += (-currentZ*0.5)
     a.x += (-currentX*0.5)
     # Adjust for subject centrality on urizen.
-    a.x += math.floor(blocksWidth*0.5)
-    a.z += math.floor(-blocksWidth*0.5)
+    a.x += blocksWidth*0.5
+    a.z += -blocksWidth*0.5
 
 def update():
     global sunY
+    global currentX, currentZ
+    if  nn.abs(math.floor(subject.z)-math.floor(currentZ)) >= 1 or \
+        nn.abs(math.floor(subject.x)-math.floor(currentX)) >= 1 or \
+        nn.abs(subject.x-subject.x)+nn.abs(subject.z-subject.z) >= 1:
+    # if  nn.abs(subject.z) >= 1 or nn.abs(subject.x) >= 1:
+        pass
+        currentX = subject.x
+        currentZ = subject.z
+        updateTerrain()
     print_on_screen('x='+str(math.floor(subject.x))
                     +'\nz='+str(math.floor(subject.z)))
     sun.rotation_y += 10 * time.dt
@@ -96,7 +95,7 @@ urizen.texture = 'grass_mono.png'
 
 # Generate pool of blocks. Also decide colours here.
 blocks = []
-blocksWidth = 10
+blocksWidth = 5
 for i in range(blocksWidth*blocksWidth):
     bub = Block(1)
     bub.ent.scale_y = 1
@@ -119,12 +118,12 @@ for i in range (terrainWidth*terrainWidth):
     y = math.floor(y)
     urizenData.append(y)
 
-def generateChunk(_ox, _oz):
-    global terrainWidth, blocksWidth, realPosX, realPosZ
+def generateChunk():
+    global terrainWidth, blocksWidth
     urizen.model=None
     for i in range(blocksWidth*blocksWidth):
-        x = math.floor(realPosX + (subject.x + (i/blocksWidth)))
-        z = math.floor(realPosZ + (subject.z + (i%blocksWidth)))
+        x = math.floor(nn.floor(subject.x) + (i/blocksWidth))
+        z = math.floor(nn.floor(subject.z) + (i%blocksWidth))
         # Check index. If out of range, return to default
         # chunk position.
         indi = int((x*terrainWidth)+z)
@@ -134,7 +133,7 @@ def generateChunk(_ox, _oz):
             x < 0 or \
             z < 0 or \
             indi >= len(urizenData)-1: 
-                y = blocks[i].ent.y = 0
+                y = blocks[i].ent.y = -4
         else: y = blocks[i].ent.y = urizenData[indi]
 
         # Decide colour of each block according to height.
@@ -152,14 +151,14 @@ def generateChunk(_ox, _oz):
     urizen.collider = 'mesh'
     # urizen.collider = None # For testing...
     # Centre subject relative to chunk.
-    urizen.x = subject.x + math.floor(-blocksWidth*0.5)
-    urizen.z = subject.z + math.floor(-blocksWidth*0.5)
+    urizen.x = math.floor(subject.x + -((blocksWidth-2.5)*0.5))
+    urizen.z = math.floor(subject.z + -((blocksWidth-2.5)*0.5))
 
-scene.fog_density = .01
+scene.fog_density = .04
 scene.fog_color = color.rgb(0,211,184)
 subject = FirstPersonController()
-subject.gravity = 0
-subject.speed = 5
+subject.gravity = 1
+subject.speed = 6
 
 #  Original position of subject etc.
 subject.y = 6
@@ -170,11 +169,15 @@ subject.z = 0
 # against the Perlin Noise terrain.
 currentX = 0
 currentZ = 0
-realPosX = 0#terrainWidth*0.5
-realPosZ = 0#terrainWidth*0.5
+
+# Infinite-plane.
+ip = Entity(model='quad',position=Vec3(-10000,-6,-10000),
+        rotation_x=90,
+        scale=30000,color=rgb(100,0,0))
 
 #  Let's gooooo!
-generateChunk(currentX,currentZ)
+generateChunk()
+
 # Ghost-terrain.
 mo = load_model('france.obj') 
 a = Entity( model=mo,
@@ -183,11 +186,12 @@ a = Entity( model=mo,
             double_sided = True)
 # Adjust position of ghost-terrain to correspond to
 # smaller terrain's collider.
+a.x = math.floor(a.x)
+a.z = math.floor(a.z)
 a.rotation_y=90
-# a.x -= math.floor(-blocksWidth)-0.4
-# Adjust for subject centrality on urizen.
-a.x += math.floor(blocksWidth*0.5)
-a.z += math.floor(-blocksWidth*0.5)
+# # Adjust for subject centrality on urizen.
+a.x += 8.39
+a.z -= 2
 """
 sf = sun.add_script(SmoothFollow(
     target=subject, offset=(0,2,0),speed=0.1))
