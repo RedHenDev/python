@@ -29,27 +29,28 @@ def input(key):
     #     nn.abs(subject.x) > math.floor(blocksWidth*0.25):
     if  nn.abs(subject.z) >= 1 or nn.abs(subject.x) >= 1:
         pass
-        # updateTerrain()
+        updateTerrain()
 
 def updateTerrain():
     global currentZ,currentX
-    currentZ += nn.floor(subject.z)
-    currentX += nn.floor(subject.x)
-    # Adjust subject a little higher to
-    # prevent falling through new chunk. 
-    # subject.y += 0.2
+    currentZ += subject.z
+    currentX += subject.x
     # Return subject to starting position.
-    subject.z = 0
-    subject.x = 0
+    # subject.z = 0
+    # subject.x = 0
     generateChunk(  currentX,
                     currentZ)
-    adjustGhostTerrain()
+    # adjustGhostTerrain() 
     
 
 def adjustGhostTerrain():
+    pass
     #  Adjust ghost-terrain.
-    a.z = math.floor(0-currentZ+blocksWidth)
-    a.x = math.floor(4-currentX+terrainWidth-blocksWidth*0.5)
+    a.z += (-currentZ*0.5)
+    a.x += (-currentX*0.5)
+    # Adjust for subject centrality on urizen.
+    a.x += math.floor(blocksWidth*0.5)
+    a.z += math.floor(-blocksWidth*0.5)
 
 def update():
     global sunY
@@ -95,7 +96,7 @@ urizen.texture = 'grass_mono.png'
 
 # Generate pool of blocks. Also decide colours here.
 blocks = []
-blocksWidth = 100
+blocksWidth = 10
 for i in range(blocksWidth*blocksWidth):
     bub = Block(1)
     bub.ent.scale_y = 1
@@ -120,11 +121,10 @@ for i in range (terrainWidth*terrainWidth):
 
 def generateChunk(_ox, _oz):
     global terrainWidth, blocksWidth, realPosX, realPosZ
-    global currentZ, currentX
     urizen.model=None
     for i in range(blocksWidth*blocksWidth):
-        x = math.floor(realPosX + (_ox + (i/blocksWidth)))
-        z = math.floor(realPosZ + (_oz + (i%blocksWidth)))
+        x = math.floor(realPosX + (subject.x + (i/blocksWidth)))
+        z = math.floor(realPosZ + (subject.z + (i%blocksWidth)))
         # Check index. If out of range, return to default
         # chunk position.
         indi = int((x*terrainWidth)+z)
@@ -149,17 +149,17 @@ def generateChunk(_ox, _oz):
     urizen.combine(auto_destroy=False)
     for b in blocks:
         b.ent.disable()
-    # urizen.collider = 'mesh'
-    urizen.collider = None # For testing...
+    urizen.collider = 'mesh'
+    # urizen.collider = None # For testing...
     # Centre subject relative to chunk.
-    # urizen.x = math.floor(-blocksWidth*0.5)-2
-    # urizen.z = math.floor(-blocksWidth*0.5)+2
+    urizen.x = subject.x + math.floor(-blocksWidth*0.5)
+    urizen.z = subject.z + math.floor(-blocksWidth*0.5)
 
 scene.fog_density = .01
 scene.fog_color = color.rgb(0,211,184)
 subject = FirstPersonController()
 subject.gravity = 0
-subject.speed = 50
+subject.speed = 5
 
 #  Original position of subject etc.
 subject.y = 6
@@ -184,7 +184,10 @@ a = Entity( model=mo,
 # Adjust position of ghost-terrain to correspond to
 # smaller terrain's collider.
 a.rotation_y=90
-# adjustGhostTerrain()
+# a.x -= math.floor(-blocksWidth)-0.4
+# Adjust for subject centrality on urizen.
+a.x += math.floor(blocksWidth*0.5)
+a.z += math.floor(-blocksWidth*0.5)
 """
 sf = sun.add_script(SmoothFollow(
     target=subject, offset=(0,2,0),speed=0.1))
