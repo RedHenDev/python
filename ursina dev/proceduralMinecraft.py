@@ -28,7 +28,8 @@ def input(key):
     # if  nn.abs(subject.z) > math.floor(blocksWidth*0.25) or \
     #     nn.abs(subject.x) > math.floor(blocksWidth*0.25):
     if  nn.abs(subject.z) >= 1 or nn.abs(subject.x) >= 1:
-        updateTerrain()
+        pass
+        # updateTerrain()
 
 def updateTerrain():
     global currentZ,currentX
@@ -47,8 +48,8 @@ def updateTerrain():
 
 def adjustGhostTerrain():
     #  Adjust ghost-terrain.
-    a.z = math.floor(2-currentZ+blocksWidth)
-    a.x = math.floor(3-currentX+terrainWidth-blocksWidth*0.5)
+    a.z = math.floor(0-currentZ+blocksWidth)
+    a.x = math.floor(4-currentX+terrainWidth-blocksWidth*0.5)
 
 def update():
     global sunY
@@ -94,7 +95,7 @@ urizen.texture = 'grass_mono.png'
 
 # Generate pool of blocks. Also decide colours here.
 blocks = []
-blocksWidth = 8
+blocksWidth = 100
 for i in range(blocksWidth*blocksWidth):
     bub = Block(1)
     bub.ent.scale_y = 1
@@ -106,8 +107,10 @@ for i in range(blocksWidth*blocksWidth):
 # Terrain data.
 urizenData = []
 terrainWidth = 100
-for i in range (terrainWidth*terrainWidth): 
-    x = math.floor(i/terrainWidth)
+for i in range (terrainWidth*terrainWidth):
+    # NB. I have reversed the x and z here, to fit
+    # ghost-model. 
+    x = math.floor(-i/terrainWidth)
     z = math.floor(i%terrainWidth)
     freq = 64
     amp = 12
@@ -120,8 +123,8 @@ def generateChunk(_ox, _oz):
     global currentZ, currentX
     urizen.model=None
     for i in range(blocksWidth*blocksWidth):
-        x = realPosX + math.floor(_ox + math.floor(i/blocksWidth))
-        z = realPosZ + math.floor(_oz + math.floor(i%blocksWidth))
+        x = math.floor(realPosX + (_ox + (i/blocksWidth)))
+        z = math.floor(realPosZ + (_oz + (i%blocksWidth)))
         # Check index. If out of range, return to default
         # chunk position.
         indi = int((x*terrainWidth)+z)
@@ -146,8 +149,8 @@ def generateChunk(_ox, _oz):
     urizen.combine(auto_destroy=False)
     for b in blocks:
         b.ent.disable()
-    urizen.collider = 'mesh'
-    # urizen.texture = 'grass_mono.png'
+    # urizen.collider = 'mesh'
+    urizen.collider = None # For testing...
     # Centre subject relative to chunk.
     # urizen.x = math.floor(-blocksWidth*0.5)-2
     # urizen.z = math.floor(-blocksWidth*0.5)+2
@@ -156,9 +159,10 @@ scene.fog_density = .01
 scene.fog_color = color.rgb(0,211,184)
 subject = FirstPersonController()
 subject.gravity = 0
+subject.speed = 50
 
 #  Original position of subject etc.
-subject.y = 12
+subject.y = 6
 subject.x = 0
 subject.z = 0
 
@@ -175,12 +179,12 @@ generateChunk(currentX,currentZ)
 mo = load_model('france.obj') 
 a = Entity( model=mo,
             texture='grass_14.png',
-            color=color.rgb(0,200,0),
+            color=color.rgba(0,200,0,80),
             double_sided = True)
 # Adjust position of ghost-terrain to correspond to
 # smaller terrain's collider.
-a.rotation_z=180
-adjustGhostTerrain()
+# a.rotation_x=180
+# adjustGhostTerrain()
 """
 sf = sun.add_script(SmoothFollow(
     target=subject, offset=(0,2,0),speed=0.1))
