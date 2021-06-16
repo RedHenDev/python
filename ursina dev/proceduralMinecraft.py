@@ -17,14 +17,13 @@ import time
 from perlin_noise import PerlinNoise
 
 from ursina.prefabs.first_person_controller import FirstPersonController
-#from ursina.shaders import lit_with_shadows_shader
 
 sunY = 0
 
 jojo = Entity(  model='cube',
                 collider=None,
-                color=color.rgba(0,101,101,64),
-                )
+                color=color.rgba(0,101,101,64))
+buildMode = 1 # Toggle with 'f'
 
 def projectBuilder():
     jojo.position = subject.position + Vec3(camera.forward * 2)
@@ -34,21 +33,23 @@ def projectBuilder():
     jojo.y+=2
 
 def input(key):
+    global buildMode
     if key == 'q' or key == 'escape': 
         exit()
-    if key == 'left mouse up':
+    if key == 'f': 
+        buildMode *= -1
+        jojo.y=-99
+    if key == 'left mouse up' and buildMode==1:
         projectBuilder()
-        e = duplicate(jojo,name='j')
+        e = duplicate(jojo)
         e.collider = 'box'
         e.color=color.white
         e.texture='grass_mono.png'
         e.shake(duration=0.5,speed=0.001)
-    elif key == 'right mouse up':
+    elif key == 'right mouse up' and buildMode==1:
         e = mouse.hovered_entity
         if e and e.visible==True:
-            e.animate_rotation(90,1)
-            destroy(e,1.5)
-
+            destroy(e)
 
 def update():
     global sunY
@@ -60,11 +61,12 @@ def update():
         currentZ = subject.z
         generateChunk()
     
+    if buildMode==1:
+        projectBuilder()
+
     sun.rotation_y += 10 * time.dt
     sunY += 0.01
     sun.y += (nn.sin(sunY) * 2.8) * time.dt
-    
-    projectBuilder()
 
 class Block:
     def __init__(this, _scale):
@@ -148,7 +150,6 @@ def generateChunk():
         # blocks[i].ent.color=color.rgb(r,g,b)
 
     urizen.combine(auto_destroy=False)
-    # urizen.visible_self=False
     urizen.collider = 'mesh'
     # Centre subject relative to chunk.
     urizen.x = math.floor(subject.x + -((blocksWidth-2.5)*0.5))
@@ -162,8 +163,8 @@ subject.speed = 6
 
 #  Original position of subject etc.
 subject.y = 6
-subject.x = 0
-subject.z = 0
+subject.x = 50
+subject.z = 50
 
 # For tracking subject's movement and position
 # against the Perlin Noise terrain.
@@ -200,4 +201,5 @@ sf = sun.add_script(SmoothFollow(
 # Can we save the terrain?
 # Mesh.save(urizen.model, 'urizen2.obj')
 
+subject.cursor.visible = False
 app.run()
