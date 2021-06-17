@@ -52,8 +52,6 @@ destroy(bub)
 urizen.texture = 'grass_14.png'
 urizen.collider='mesh'    
 
-
-
 # Can we save the terrain?
 #Mesh.save(urizen.model, 'bobby.obj')
 EditorCamera()
