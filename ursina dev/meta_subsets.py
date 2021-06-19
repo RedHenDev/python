@@ -1,18 +1,9 @@
-""" Perlin noise experiments """
-""" 
-June 14 2021 - refactoring procedural chunk generation.
-June 15 2021 - exploring use of static model of terrain.
-June 16 2021 - success! Ghost terrain model, with tiny
-                physical terrain.
-June 17 2021 refactoring and developing new 'subset' system.
-June 18 2021 opened on Windows - continuing dev of subset system.
+"""
 June 19 2021 Mac -- meta subset system begun. Working!
 """
 
 from ursina import * 
 import numpy as nn
-import random as ra
-import math
 import time
 
 from perlin_noise import PerlinNoise
@@ -26,16 +17,16 @@ window.exit_button.visible = False
 window.fps_counter.enabled = True
 window.fullscreen = False
 
-scene.fog_density = .04
+scene.fog_density = .02
 scene.fog_color = color.rgb(0,222,200)
 
 subject = FirstPersonController()
 subject.cursor.visible = False
-subject.gravity = 0.7
-subject.speed = 6
+subject.gravity = 0.5
+subject.speed = 5
 
 #  Original position of subject etc.
-subject.y = 12
+subject.y = 16
 subject.x = 0
 subject.z = 0
 
@@ -45,9 +36,9 @@ prevX = 0
 prevZ = 0
 
 # Perlin noise setup.
-noise = PerlinNoise(octaves=4,seed=1988)
+noise = PerlinNoise(octaves=5,seed=1988)
 amp = 32
-freq = 128
+freq = 256
 
 jojo = Entity(  model='cube',
                 collider=None,
@@ -55,6 +46,7 @@ jojo = Entity(  model='cube',
 buildMode = -1 # Toggle with 'f'
 
 grassTex = load_texture('grass_mono.png')
+patternTex = load_texture('grass_14.png')
 
 def projectBuilder():
     jojo.position = subject.position + Vec3(camera.forward * 2)
@@ -83,24 +75,24 @@ def input(key):
 
 def update():
     global prevX, prevZ, ghostTime, ghostDone
-    if  nn.abs(nn.floor(subject.z)-nn.floor(prevZ)) >= 2 or \
-        nn.abs(nn.floor(subject.x)-nn.floor(prevX)) >= 2 or \
-        nn.abs(subject.x-prevX)+nn.abs(subject.z-prevZ) >= 2:
+    if  nn.abs(nn.floor(subject.z)-nn.floor(prevZ)) >= 1 or \
+        nn.abs(nn.floor(subject.x)-nn.floor(prevX)) >= 1 or \
+        nn.abs(subject.x-prevX)+nn.abs(subject.z-prevZ) >= 1:
         prevX = subject.x
         prevZ = subject.z
         generateShell()
     
     if buildMode==1:
         projectBuilder()
-    else: jojo.y = -99 # Hide jojo.
+    else: jojo.y = -9999 # Hide jojo.
 
     # Continue to build 10K terrain!
-    if ghostDone == False and time.time() - ghostTime > 1:
+    if ghostDone == False and time.time() - ghostTime > 0.5:
         generateSubset()
         # Update timeStamp AFTER generation of subset!
         ghostTime = time.time() 
 
-terrainWidth = 100
+terrainWidth = 50
 # Ghost-terrain. Parent to subets.
 ghost = Entity(model=None,collider=None)
 
@@ -110,18 +102,16 @@ shell.visible = False
 
 # Generate pool of cubes for urizen shell.
 blocks = []
-blocksWidth = 5
+blocksWidth = 6
 for i in range(blocksWidth*blocksWidth):
     bub = Entity(model='cube',
     collider=None,parent=shell,visible=False)
-    bub.x = nn.floor(i/blocksWidth)
-    bub.z = nn.floor(i%blocksWidth)
     bub.disable()
     blocks.append(bub)
 
 # Cubes to populate each subset.
 gblocks = []
-subWidth = 100
+subWidth = terrainWidth
 for i in range(subWidth):
     bud = Entity(model='cube',collider=None,
             visible=False)
@@ -144,7 +134,7 @@ def generateGhost():
     global ghostDone
     ghost.combine(auto_destroy=True)
     ghost.texture=grassTex
-    ghost.color=color.rgb(0,222,0)
+    ghost.color=color.rgb(0,0,222)
     ghost.collider=None
     ghostDone=True
     
@@ -155,8 +145,6 @@ for i in range (terrainWidth*terrainWidth):
     # NB. This was reversed in previous non-subset version.
     x = nn.floor(i/terrainWidth)
     z = nn.floor(i%terrainWidth)
-    # freq = 64
-    # amp = 12
     y = (noise([x/freq,z/freq])* amp)
     y = nn.floor(y)
     urizenData.append(y)
@@ -164,26 +152,29 @@ for i in range (terrainWidth*terrainWidth):
 def generateShell():
     global terrainWidth, blocksWidth
     for i in range(blocksWidth*blocksWidth):
-        x = nn.floor(nn.floor(subject.x) + (i/blocksWidth))
-        z = nn.floor(nn.floor(subject.z) + (i%blocksWidth))
+        x = blocks[i].x = nn.floor((subject.x) + 
+                            (i/blocksWidth))-2
+        z = blocks[i].z = nn.floor((subject.z) +
+                             (i%blocksWidth))-2
         # Check index. If out of range, return to default
         # shell position.
         indi = int((x*terrainWidth)+z)
-        
         if  x >= terrainWidth or \
             z >= terrainWidth or \
             x < 0 or \
             z < 0 or \
             indi >= len(urizenData)-1: 
-                y = blocks[i].y = -7
-        else: y = blocks[i].y = urizenData[indi]
+                blocks[i].y = -7
+        else:   blocks[i].y = urizenData[indi]
 
     shell.model = None
     shell.combine(auto_destroy=False)
     shell.collider = 'mesh'
+    shell.texture = patternTex
+    shell.visible = True
     # Centre subject relative to shell.
-    shell.x = nn.floor(subject.x + -((blocksWidth-2.5)*0.5))
-    shell.z = nn.floor(subject.z + -((blocksWidth-2.5)*0.5))
+    # shell.x = nn.floor(subject.x + -((blocksWidth-2.5)*0.5))
+    # shell.z = nn.floor(subject.z + -((blocksWidth-2.5)*0.5))
 
 gbi = 0 # Current index. I.e., of created ghostblock so far.
 ghostTime = 0 # Time stamp for when to generate new subset.
