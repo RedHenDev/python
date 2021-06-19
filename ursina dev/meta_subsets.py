@@ -40,7 +40,7 @@ prevZ = 0
 noise = PerlinNoise(octaves=4,seed=99)
 amp = 24
 freq = 128
-terrainWidth = 200
+terrainWidth = 100
 terrainDepth = 1
 
 jojo = Entity(  model='cube',
@@ -52,6 +52,9 @@ grassTex = load_texture('grass_mono.png')
 patternTex = load_texture('grass_14.png')
 monoTex = load_texture('mono64.png')
 monoStrokeTex = load_texture('mono64Stroke.png')
+
+def nMap(n, start1, stop1, start2, stop2):
+    return ((n-start1)/(stop1-start1))*(stop2-start2)+start2
 
 def projectBuilder():
     jojo.position = (subject.position +
@@ -65,6 +68,7 @@ def input(key):
     global buildMode
     if key == 'q' or key == 'escape': 
         exit()
+    if key == 'g': subject.position = Vec3(100,32,100)
     if key == 'f': 
         buildMode *= -1 # Toggle build mode.     
     if key == 'left mouse up' and buildMode==1:
@@ -93,7 +97,7 @@ def update():
     else: jojo.y = -9999 # Hide jojo.
 
     # Continue to build 10K terrain!
-    if ghostDone == False and time.time() - ghostTime > 0.5:
+    if ghostDone == False and time.time() - ghostTime > 0.25:
         generateSubset()
         # Update timeStamp AFTER generation of subset!
         ghostTime = time.time() 
@@ -117,9 +121,8 @@ for i in range(blocksWidth*blocksWidth):
 gblocks = []
 subWidth = terrainWidth
 for i in range(subWidth*terrainDepth):
-    bud = Entity(model='cube',collider=None,
-            visible=False)
-    bub.disable()
+    bud = Entity(   model='cube',collider=None,
+                    texture = grassTex)
     gblocks.append(bud)
 # Empty entity for each subset-gblocks combine.
 # In turn, all subsets combined into ghost at end of process.
@@ -128,8 +131,7 @@ si = 0 # Current subset index. As we work across terrain.
 subsDone = False
 totNumSubs = int((terrainWidth*terrainWidth)/subWidth)
 for i in range(totNumSubs):
-    bud = Entity(model=None,collider=None,
-            visible=False)
+    bud = Entity(model=None,collider=None)
     bud.parent=ghost
     subsets.append(bud)
 
@@ -140,7 +142,8 @@ def generateGhost():
     subject.gravity = 0
     ghost.combine(auto_destroy=True)
     ghost.texture=monoStrokeTex
-    ghost.color=color.rgb(0,111,222)
+    # Inherit colour from gblocks :)
+    # ghost.color=color.rgb(0,111,0)
     ghost.collider=None
     ghostDone=True
     subject.gravity = 0.5
@@ -170,6 +173,7 @@ def generateShell():
             z < 0 or \
             indi >= len(urizenData)-1: 
                 blocks[i].y = -5
+        
         else:   blocks[i].y = urizenData[indi]
 
     shell.model = None
@@ -199,6 +203,8 @@ def generateSubset():
         # subset position. NB Not sure we need this anymore?
         indi = int((x*terrainWidth)+z)
         y = gblocks[i-gbi].y = urizenData[indi]
+        # To compute Perlin on the fly...
+        # y = gblocks[i-gbi].y = nn.floor(noise([x/freq,z/freq])* amp)
         # I could iterate here for layers...
         # for j in range(terrainDepth):
         #     gblocks[i-gbi+subWidth*j].x = x   # Layers...
@@ -207,11 +213,16 @@ def generateSubset():
         #     gblocks[i-gbi+subWidth*j].parent=subsets[si]
         #     gblocks[i-gbi+subWidth*j].disable()
 
-        # To compute Perlin on the fly...
-        # nn.floor(noise([x/freq,z/freq])* amp)
         gblocks[i-gbi].collider=None
         gblocks[i-gbi].parent=subsets[si]
-        gblocks[i-gbi].disable()
+        r = g = b = 0
+        if y < 1:
+            r = nMap(y,-7,0,100,164) + ra.randrange(-10,10)
+        elif y < 6:
+            g = nMap(y,1,5,164,200) + ra.randrange(-10,10)
+        else:
+            b = nMap(y,6,12,200,255) + ra.randrange(-10,10)
+        gblocks[i-gbi].color = color.rgb(r,g,b)
     
     # If finished all subsets...
     # First combine gblocks into this final
@@ -226,9 +237,7 @@ def generateSubset():
         subsets[si].combine(auto_destroy=False)
         gbi += subWidth # Increment to new ghost block index.
         subsets[si].collider = None
-        subsets[si].visible = True
-        subsets[si].texture = monoTex
-        subsets[si].color = color.rgb(202,0,0)
+        subsets[si].texture = grassTex
         if si >= totNumSubs: subsDone = True
         else: si += 1  # Increment to next subset index.
 
