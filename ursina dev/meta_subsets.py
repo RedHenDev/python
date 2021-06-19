@@ -6,6 +6,7 @@ June 16 2021 - success! Ghost terrain model, with tiny
                 physical terrain.
 June 17 2021 refactoring and developing new 'subset' system.
 June 18 2021 opened on Windows - continuing dev of subset system.
+June 19 2021 Mac -- meta subset system begun. Working!
 """
 
 from ursina import * 
@@ -30,11 +31,11 @@ scene.fog_color = color.rgb(0,222,200)
 
 subject = FirstPersonController()
 subject.cursor.visible = False
-subject.gravity = 0.01
-subject.speed = 5
+subject.gravity = 0.7
+subject.speed = 6
 
 #  Original position of subject etc.
-subject.y = 32
+subject.y = 12
 subject.x = 0
 subject.z = 0
 
@@ -46,7 +47,7 @@ prevZ = 0
 # Perlin noise setup.
 noise = PerlinNoise(octaves=4,seed=1988)
 amp = 32
-freq = 104
+freq = 128
 
 jojo = Entity(  model='cube',
                 collider=None,
@@ -66,15 +67,14 @@ def input(key):
     global buildMode
     if key == 'q' or key == 'escape': 
         exit()
-    if key == 'g': generateGhost()
     if key == 'f': 
         buildMode *= -1 # Toggle build mode.     
     if key == 'left mouse up' and buildMode==1:
         projectBuilder()
         e = duplicate(jojo)
         e.collider = 'box'
+        e.texture=grassTex
         e.color=color.white
-        e.texture='grass_mono.png'
         e.shake(duration=0.5,speed=0.01)
     elif key == 'right mouse up' and buildMode==1:
         e = mouse.hovered_entity
@@ -95,29 +95,25 @@ def update():
     else: jojo.y = -99 # Hide jojo.
 
     # Continue to build 10K terrain!
-    if ghostDone == False and time.time() - ghostTime > 2:
-        # subject.gravity = 0 # Prevent subject glitching through terrain.
-        # subject.y += 0.2
+    if ghostDone == False and time.time() - ghostTime > 1:
         generateSubset()
-        # subject.gravity = 0.5
-        ghostTime = time.time() # Update timeStamp AFTER generation!
-
+        # Update timeStamp AFTER generation of subset!
+        ghostTime = time.time() 
 
 terrainWidth = 100
 # Ghost-terrain. Parent to subets.
 ghost = Entity(model=None,collider=None)
 
 # Our physical terrain object. Parent to blocks.
-shell = Entity()
+shell = Entity(model=None,collider=None)
 shell.visible = False
-shell.texture = 'grass_14.png'
 
 # Generate pool of cubes for urizen shell.
 blocks = []
 blocksWidth = 5
 for i in range(blocksWidth*blocksWidth):
-    bub = Entity(model='cube',texture='grass_14.png',
-    collider=None,parent = shell)
+    bub = Entity(model='cube',
+    collider=None,parent=shell,visible=False)
     bub.x = nn.floor(i/blocksWidth)
     bub.z = nn.floor(i%blocksWidth)
     bub.disable()
@@ -125,7 +121,7 @@ for i in range(blocksWidth*blocksWidth):
 
 # Cubes to populate each subset.
 gblocks = []
-subWidth = 50
+subWidth = 100
 for i in range(subWidth):
     bud = Entity(model='cube',collider=None,
             visible=False)
@@ -135,7 +131,9 @@ for i in range(subWidth):
 # In turn, all subsets combined into ghost at end of process.
 subsets = []
 si = 0 # Current subset index. As we work across terrain.
-for i in range(int((terrainWidth*terrainWidth)/subWidth)):
+subsDone = False
+totNumSubs = int((terrainWidth*terrainWidth)/subWidth)
+for i in range(totNumSubs):
     bud = Entity(model=None,collider=None,
             visible=False,parent=ghost)
     bub.disable()
@@ -145,10 +143,10 @@ for i in range(int((terrainWidth*terrainWidth)/subWidth)):
 def generateGhost():
     global ghostDone
     ghost.combine(auto_destroy=True)
-    ghost.texture='grass_mono.png'
-    ghost.color=color.rgb(222,0,0)
+    ghost.texture=grassTex
+    ghost.color=color.rgb(0,222,0)
     ghost.collider=None
-    ghostDone = True
+    ghostDone=True
     
 
 # Terrain data.
@@ -191,8 +189,10 @@ gbi = 0 # Current index. I.e., of created ghostblock so far.
 ghostTime = 0 # Time stamp for when to generate new subset.
 ghostDone = False
 def generateSubset():
-    global gbi, si, terrainWidth, subWidth, ghostDone
-    # Safety catch...
+    global gbi, si, terrainWidth, subWidth, subsDone, ghostDone
+    global totNumSubs
+    # Safety catches...
+    if subsDone: return
     if gbi >= len(urizenData)-1: 
         if ghostDone == False:
             generateGhost()
@@ -221,11 +221,12 @@ def generateSubset():
     else: 
         subsets[si].combine(auto_destroy=False)
         gbi += subWidth # Increment to new ghost block index.
-        si += 1        # Increment to next subset index.
-        subsets[si].collider=None
+        subsets[si].collider = None
         subsets[si].visible = True
         subsets[si].texture = grassTex
-        subsets[si].color = color.rgb(200,0,0)
+        subsets[si].color = color.rgb(222,0,0)
+        if si >= totNumSubs: subsDone = True
+        else: si += 1        # Increment to next subset index.
 
 #  Let's gooooo!
 generateShell()
