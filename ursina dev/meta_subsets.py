@@ -5,6 +5,7 @@ June 19 2021 Mac -- meta subset system begun. Working!
 from ursina import * 
 import numpy as nn
 import time
+import random as ra
 
 from perlin_noise import PerlinNoise
 
@@ -17,7 +18,7 @@ window.exit_button.visible = False
 window.fps_counter.enabled = True
 window.fullscreen = False
 
-scene.fog_density = .02
+scene.fog_density = .01
 scene.fog_color = color.rgb(0,222,200)
 
 subject = FirstPersonController()
@@ -36,18 +37,21 @@ prevX = 0
 prevZ = 0
 
 # Perlin noise setup.
-noise = PerlinNoise(octaves=10,seed=99)
-amp = 12
-freq = 64
-terrainDepth = 7
+noise = PerlinNoise(octaves=4,seed=99)
+amp = 24
+freq = 128
+terrainWidth = 200
+terrainDepth = 1
 
 jojo = Entity(  model='cube',
                 collider=None,
-                color=color.rgba(0,101,101,64))
+                color=color.rgba(0,101,101,84))
 buildMode = -1 # Toggle with 'f'
 
 grassTex = load_texture('grass_mono.png')
 patternTex = load_texture('grass_14.png')
+monoTex = load_texture('mono64.png')
+monoStrokeTex = load_texture('mono64Stroke.png')
 
 def projectBuilder():
     jojo.position = (subject.position +
@@ -94,7 +98,6 @@ def update():
         # Update timeStamp AFTER generation of subset!
         ghostTime = time.time() 
 
-terrainWidth = 100
 # Ghost-terrain. Parent to subets.
 ghost = Entity(model=None,collider=None)
 
@@ -108,7 +111,6 @@ blocksWidth = 5
 for i in range(blocksWidth*blocksWidth):
     bub = Entity(model='cube',
     collider=None,parent=shell,visible=False)
-    bub.disable()
     blocks.append(bub)
 
 # Cubes to populate each subset.
@@ -116,7 +118,7 @@ gblocks = []
 subWidth = terrainWidth
 for i in range(subWidth*terrainDepth):
     bud = Entity(model='cube',collider=None,
-            visible=False,scale_y=terrainDepth)
+            visible=False)
     bub.disable()
     gblocks.append(bud)
 # Empty entity for each subset-gblocks combine.
@@ -129,7 +131,6 @@ for i in range(totNumSubs):
     bud = Entity(model=None,collider=None,
             visible=False)
     bud.parent=ghost
-    bub.disable()
     subsets.append(bud)
 
 # Combine all subsets.
@@ -138,8 +139,8 @@ def generateGhost():
     subject.y += 12 # Prevent fall glitch.
     subject.gravity = 0
     ghost.combine(auto_destroy=True)
-    ghost.texture=grassTex
-    ghost.color=color.rgb(200,20,20)
+    ghost.texture=monoStrokeTex
+    ghost.color=color.rgb(0,111,222)
     ghost.collider=None
     ghostDone=True
     subject.gravity = 0.5
@@ -158,9 +159,8 @@ for i in range (terrainWidth*terrainWidth):
 def generateShell():
     global terrainWidth, blocksWidth
     for i in range(blocksWidth*blocksWidth):
-        x = blocks[i].x = nn.floor(subject.x + (i/blocksWidth))
-        z = blocks[i].z = nn.floor(subject.z +
-        (i%blocksWidth))
+        x = blocks[i].x = nn.floor(subject.x + (i/blocksWidth))-1
+        z = blocks[i].z = nn.floor(subject.z + (i%blocksWidth))-1
         # Check index. If out of range, return to default
         # shell position.
         indi = int((x*terrainWidth)+z)
@@ -169,8 +169,8 @@ def generateShell():
             x < 0 or \
             z < 0 or \
             indi >= len(urizenData)-1: 
-                blocks[i].y = -7
-        else:   blocks[i].y = nn.floor(urizenData[indi]+(terrainDepth*0.5))
+                blocks[i].y = -5
+        else:   blocks[i].y = urizenData[indi]
 
     shell.model = None
     shell.combine(auto_destroy=False)
@@ -182,8 +182,8 @@ gbi = 0 # Current index. I.e., of created ghostblock so far.
 ghostTime = 0 # Time stamp for when to generate new subset.
 ghostDone = False
 def generateSubset():
-    global gbi, si, terrainWidth, subWidth, subsDone, ghostDone
-    global totNumSubs
+    global gbi, si, terrainWidth, subWidth, subsDone, ghostDone, terrainDepth
+    global totNumSubs, terrainDepth
     # Safety catches...
     if subsDone: return
     if gbi >= len(urizenData)-1: 
@@ -198,8 +198,16 @@ def generateSubset():
         # Check index. If out of range, return to default
         # subset position. NB Not sure we need this anymore?
         indi = int((x*terrainWidth)+z)
+        y = gblocks[i-gbi].y = urizenData[indi]
         # I could iterate here for layers...
-        gblocks[i-gbi].y = urizenData[indi]
+        # for j in range(terrainDepth):
+        #     gblocks[i-gbi+subWidth*j].x = x   # Layers...
+        #     gblocks[i-gbi+subWidth*j].z = z
+        #     gblocks[i-gbi+subWidth*j].y = y - (j+1)
+        #     gblocks[i-gbi+subWidth*j].parent=subsets[si]
+        #     gblocks[i-gbi+subWidth*j].disable()
+
+        # To compute Perlin on the fly...
         # nn.floor(noise([x/freq,z/freq])* amp)
         gblocks[i-gbi].collider=None
         gblocks[i-gbi].parent=subsets[si]
@@ -219,10 +227,10 @@ def generateSubset():
         gbi += subWidth # Increment to new ghost block index.
         subsets[si].collider = None
         subsets[si].visible = True
-        subsets[si].texture = grassTex
-        subsets[si].color = color.rgb(111,0,0)
+        subsets[si].texture = monoTex
+        subsets[si].color = color.rgb(202,0,0)
         if si >= totNumSubs: subsDone = True
-        else: si += 1        # Increment to next subset index.
+        else: si += 1  # Increment to next subset index.
 
 #  Let's gooooo!
 generateShell()
