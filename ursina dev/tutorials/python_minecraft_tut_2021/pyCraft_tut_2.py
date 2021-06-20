@@ -1,5 +1,5 @@
 """
-Minecraft in Python tut 1
+Minecraft in Python tut 2
 """
 
 from ursina import *
