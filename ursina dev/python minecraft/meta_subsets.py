@@ -41,7 +41,7 @@ prevZ = 0
 noise = PerlinNoise(octaves=4,seed=99)
 amp = 24
 freq = 128
-terrainWidth = 20
+terrainWidth = 32
 terrainDepth = 1
 
 grassTex = load_texture('grass_mono.png')
@@ -50,63 +50,38 @@ monoTex = load_texture('mono64.png')
 monoStrokeTex = load_texture('mono64Stroke.png')
 wireTex = load_texture('wireframe.png')
 
-stepSound = Audio('step.ogg',autoplay=False,loop=False)
-
-pickAxe = Entity(model='Diamond-Pickaxe.obj',
-            texture='Diffuse.png',
-            x=1,y=1,z=1.6,scale=0.06,rotation_x=90,
-            rotation_y=45,
-            parent=subject)
-
-creeps = Entity(model='creeper',
-                texture='creeper.png',
-                x=22,y=-3,z=26,
-                scale=0.1)
+# stepSound = Audio('step.wav',autoplay=False,loop=False)
 
 def nMap(n, start1, stop1, start2, stop2):
     return ((n-start1)/(stop1-start1))*(stop2-start2)+start2
 
-# Building functions etc.
-class B:
-    GRASS = color.rgb(0,200,0)
-    STONE = color.rgb(255,255,255)
-    WOOD = color.rgb(150,75,0)
-buildColour = B.STONE
 jojo = Entity(  model='cube',
                 collider=None,
                 texture=wireTex,
-                color=B.STONE)
+                color=color.rgba(255,255,255,84))
 buildMode = -1 # Toggle with 'f'
 def projectBuilder():
-    global buildColour
     jojo.position = (subject.position +
                     Vec3(camera.forward * 2))
     jojo.x = nn.round(jojo.x)
     jojo.y = nn.floor(jojo.y)
     jojo.z = nn.round(jojo.z)
     jojo.y+=2
-    jojo.color=buildColour
 
 def input(key):
-    global buildMode, buildColour, stepSound
+    global buildMode
     if key == 'q' or key == 'escape': 
         exit()
     if key == 'g': subject.position = Vec3(100,32,100)
     if key == 'f': 
-        buildMode *= -1 # Toggle build mode.  
-    if key == '1': buildColour = B.GRASS
-    if key == '2': buildColour = B.STONE
-    if key == '3': buildColour = B.WOOD 
+        buildMode *= -1 # Toggle build mode.     
     if key == 'left mouse up' and buildMode==1:
         projectBuilder()
         e = duplicate(jojo)
         e.collider = 'box'
         e.texture=grassTex
-        e.color=buildColour
+        e.color=color.white
         e.shake(duration=0.5,speed=0.01)
-        stepSound.pitch = ra.randrange(8,9)*0.1
-        stepSound.length = 0.1
-        stepSound.play()
     elif key == 'right mouse up' and buildMode==1:
         e = mouse.hovered_entity
         if e and e.visible==True:
@@ -119,9 +94,9 @@ def update():
         nn.abs(subject.x-prevX)+nn.abs(subject.z-prevZ) >= 1:
         prevX = subject.x
         prevZ = subject.z
-        if stepSound.playing == False:
-            stepSound.pitch = ra.random()+0.7
-            stepSound.play()
+        # if stepSound.playing == False:
+        #     stepSound.pitch = ra.random()+0.5
+        #     stepSound.play()
         generateShell()
     
     if buildMode==1:
@@ -133,10 +108,6 @@ def update():
         generateSubset()
         # Update timeStamp AFTER generation of subset!
         ghostTime = time.time() 
-
-    # Control creeper. Look at subject; cancel out pitch.
-    creeps.look_at(subject)
-    creeps.rotation_x = 0
 
 # Ghost-terrain. Parent to subets.
 ghost = Entity(model=None,collider=None)
@@ -247,6 +218,7 @@ def generateSubset():
         #     gblocks[i-gbi+subWidth*j].z = z
         #     gblocks[i-gbi+subWidth*j].y = y - (j+1)
         #     gblocks[i-gbi+subWidth*j].parent=subsets[si]
+        #     gblocks[i-gbi+subWidth*j].disable()
 
         gblocks[i-gbi].collider=None
         gblocks[i-gbi].parent=subsets[si]

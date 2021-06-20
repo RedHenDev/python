@@ -1,0 +1,37 @@
+"Minecraft Diamond-Pickaxe" (https://skfb.ly/6znDu) by Blender3D is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+
+"Minecraft - Creeper" (https://skfb.ly/6QTSz) by Vincent Yanez is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+
+
+Enum method: https://stackoverflow.com/questions/36932/how-can-i-represent-an-enum-in-python
+See also: https://www.python.org/dev/peps/pep-0435/
+
+Before PEP 435, Python didn't have an equivalent but you could implement your own.
+
+Myself, I like keeping it simple (I've seen some horribly complex examples on the net), something like this ...
+
+class Animal:
+    DOG = 1
+    CAT = 2
+
+x = Animal.DOG
+In Python 3.4 (PEP 435), you can make Enum the base class. This gets you a little bit of extra functionality, described in the PEP. For example, enum members are distinct from integers, and they are composed of a name and a value.
+
+from enum import Enum
+
+class Animal(Enum):
+    DOG = 1
+    CAT = 2
+
+print(Animal.DOG)
+# <Animal.DOG: 1>
+
+print(Animal.DOG.value)
+# 1
+
+print(Animal.DOG.name)
+# "DOG"
+If you don't want to type the values, use the following shortcut:
+
+class Animal(Enum):
+    DOG, CAT = range(2)
