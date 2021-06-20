@@ -237,6 +237,7 @@ def generateSubset():
     for i in range(gbi,gbi+subWidth):
         x = gblocks[i-gbi].x = nn.floor(i/terrainWidth)
         z = gblocks[i-gbi].z = nn.floor(i%terrainWidth)
+        # NB above line -- gbi+i surely? Oops.
         # Check index. If out of range, return to default
         # subset position. NB Not sure we need this anymore?
         indi = int((x*terrainWidth)+z)

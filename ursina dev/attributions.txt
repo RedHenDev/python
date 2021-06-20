@@ -8,6 +8,13 @@ Fantozzi
 (Submitted by qubodup)- Public Domain
 https://opengameart.org/content/fantozzis-footsteps-grasssand-stone
 
+https://www.meme-arsenal.com/create/meme/4780558 - Minecraft 'python edition' logo, made with meme-arsenal
+
+"Minecraft - Chicken" (https://skfb.ly/6R76D) by Vincent Yanez is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+
+To convert from fbx (etc.) to obj, while retaining textures correctly: 
+https://products.aspose.app/3d/conversion/fbx-to-obj
+
 Enum method: https://stackoverflow.com/questions/36932/how-can-i-represent-an-enum-in-python
 See also: https://www.python.org/dev/peps/pep-0435/
 
