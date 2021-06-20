@@ -17,10 +17,11 @@ window.color = color.rgb(0,111,184)
 window.exit_button.visible = False
 window.fps_counter.enabled = True
 window.fullscreen = False
+window.show_ursina_splash = True
 # window.render_mode = 'wireframe'
 
 scene.fog_density = .01
-scene.fog_color = color.rgb(0,222,200)
+scene.fog_color = color.rgb(0,222,222)
 
 subject = FirstPersonController()
 subject.cursor.visible = False
@@ -41,7 +42,7 @@ prevZ = 0
 noise = PerlinNoise(octaves=4,seed=99)
 amp = 24
 freq = 128
-terrainWidth = 20
+terrainWidth = 50
 terrainDepth = 1
 
 grassTex = load_texture('grass_mono.png')
@@ -157,8 +158,7 @@ for i in range(blocksWidth*blocksWidth):
 gblocks = []
 subWidth = terrainWidth
 for i in range(subWidth*terrainDepth):
-    bud = Entity(   model='cube',collider=None,
-                    texture = grassTex)
+    bud = Entity(model='cube',collider=None)
     gblocks.append(bud)
 # Empty entity for each subset-gblocks combine.
 # In turn, all subsets combined into ghost at end of process.
@@ -169,20 +169,22 @@ totNumSubs = int((terrainWidth*terrainWidth)/subWidth)
 for i in range(totNumSubs):
     bud = Entity(model=None,collider=None)
     bud.parent=ghost
+    bud.texture=patternTex 
     subsets.append(bud)
 
 # Combine all subsets.
 def generateGhost():
     global ghostDone
-    subject.y += 12 # Prevent fall glitch.
-    subject.gravity = 0
+    application.pause()
+    # subject.y += 12 # Prevent fall glitch.
+    # subject.gravity = 0
     ghost.combine(auto_destroy=True)
-    ghost.texture=monoStrokeTex
     # Inherit colour from gblocks :)
-    # ghost.color=color.rgb(0,111,0)
+    ghost.texture=grassTex
     ghost.collider=None
     ghostDone=True
-    subject.gravity = 0.5
+    application.resume()
+    # subject.gravity = 0.5
     
 
 # Terrain data.
@@ -250,13 +252,18 @@ def generateSubset():
 
         gblocks[i-gbi].collider=None
         gblocks[i-gbi].parent=subsets[si]
+        # Set colour for each block against height.
+        yy = y
+        yy += ra.randrange(-2,2)
         r = g = b = 0
-        if y < 1:
-            r = nMap(y,-7,0,100,164) + ra.randrange(-10,10)
-        elif y < 6:
-            g = nMap(y,1,5,164,200) + ra.randrange(-10,10)
+        if yy < 5:
+            r = nMap(yy,0,5,100,164) + ra.randrange(-10,10)
+        elif yy < 10:
+            g = nMap(yy,5,10,164,200) + ra.randrange(-10,10)
         else:
-            b = nMap(y,6,12,200,255) + ra.randrange(-10,10)
+            r = 200 + ra.randrange(-10,10)
+            g = 200 + ra.randrange(-10,10)
+            b = 200 + ra.randrange(-10,10)
         gblocks[i-gbi].color = color.rgb(r,g,b)
     
     # If finished all subsets...
@@ -272,7 +279,6 @@ def generateSubset():
         subsets[si].combine(auto_destroy=False)
         gbi += subWidth # Increment to new ghost block index.
         subsets[si].collider = None
-        subsets[si].texture = grassTex
         if si >= totNumSubs: subsDone = True
         else: si += 1  # Increment to next subset index.
 

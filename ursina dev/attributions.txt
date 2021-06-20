@@ -2,6 +2,11 @@
 
 "Minecraft - Creeper" (https://skfb.ly/6QTSz) by Vincent Yanez is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
 
+Fantozzi's Footsteps (Grass/Sand & Stone)
+Author: 
+Fantozzi
+(Submitted by qubodup)- Public Domain
+https://opengameart.org/content/fantozzis-footsteps-grasssand-stone
 
 Enum method: https://stackoverflow.com/questions/36932/how-can-i-represent-an-enum-in-python
 See also: https://www.python.org/dev/peps/pep-0435/
