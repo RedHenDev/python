@@ -1,7 +1,8 @@
 """
-Minecraft in Python, with Ursina, tut 2
+Minecraft in Python, with Ursina, tut 3 PREP ONLY
 """
 
+from random import randrange
 from ursina import *
 from ursina.prefabs.first_person_controller import FirstPersonController
 from numpy import floor
@@ -16,10 +17,11 @@ window.exit_button.visible = False
 
 prevTime = time.time()
 
-scene.fog_color = color.rgb(0,222,0)
-scene.fog_density = 0.02
+scene.fog_color = color.rgb(0,200,211)
+scene.fog_density = 0.04
 
 grassStrokeTex = load_texture('grass_14.png')
+monoTex = load_texture('grass_mono.png')
 
 def input(key):
     if key == 'q' or key == 'escape':
@@ -32,15 +34,16 @@ def update():
         abs(subject.x - prevX) > 1:
         generateShell()
 
-    if time.time() - prevTime > 0.5:
+    if time.time() - prevTime > 0.25:
+        prevTime = time.time()
         generateSubset()
 
 noise = PerlinNoise(octaves=2,seed=2021)
-amp = 32
+amp = 24
 freq = 100
 terrain = Entity(model=None,collider=None)
 terrainWidth = 100
-subWidth = terrainWidth
+subWidth = int(terrainWidth/2)
 subsets = []
 subCubes = []
 sci = 0 # subCube index.
@@ -67,7 +70,8 @@ def generateSubset():
         z = subCubes[i].z = floor((i+sci)%terrainWidth)
         y = subCubes[i].y = floor((noise([x/freq,z/freq]))*amp)
         subCubes[i].parent = subsets[currentSubset]
-        subCubes[i].color = color.green
+        r = randrange(100,200)
+        subCubes[i].color = color.rgb(r,0,0)
         subCubes[i].visible = False
     
     subsets[currentSubset].combine(auto_destroy=False)
@@ -79,12 +83,10 @@ terrainFinished = False
 def finishTerrain():
     global terrainFinished
     if terrainFinished==True: return
-    application.pause()
     terrain.combine()
     terrainFinished = True
-    subject.y = 32
-    terrain.texture = grassStrokeTex
-    application.resume()
+    subject.y = 64
+    terrain.texture = monoTex
 
 
 # for i in range(terrainWidth*terrainWidth):
@@ -99,7 +101,7 @@ def finishTerrain():
 # terrain.texture = grassStrokeTex
 
 shellies = []
-shellWidth = 6
+shellWidth = 3
 for i in range(shellWidth*shellWidth):
     bud = Entity(model='cube',collider='box')
     bud.visible=False
@@ -120,8 +122,8 @@ def generateShell():
 subject = FirstPersonController()
 subject.cursor.visible = False
 subject.gravity = 0.5
-subject.x = subject.z = 5
-subject.y = 12
+subject.x = subject.z = 25
+subject.y = 32
 prevZ = subject.z
 prevX = subject.x
 
