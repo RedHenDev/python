@@ -17,10 +17,11 @@ window.color = color.rgb(0,111,184)
 window.exit_button.visible = False
 window.fps_counter.enabled = True
 window.fullscreen = False
+window.show_ursina_splash = True
 # window.render_mode = 'wireframe'
 
 scene.fog_density = .01
-scene.fog_color = color.rgb(0,222,200)
+scene.fog_color = color.rgb(0,222,222)
 
 subject = FirstPersonController()
 subject.cursor.visible = False
@@ -41,7 +42,7 @@ prevZ = 0
 noise = PerlinNoise(octaves=4,seed=99)
 amp = 24
 freq = 128
-terrainWidth = 32
+terrainWidth = 50
 terrainDepth = 1
 
 grassTex = load_texture('grass_mono.png')
@@ -50,38 +51,63 @@ monoTex = load_texture('mono64.png')
 monoStrokeTex = load_texture('mono64Stroke.png')
 wireTex = load_texture('wireframe.png')
 
-# stepSound = Audio('step.wav',autoplay=False,loop=False)
+stepSound = Audio('step.ogg',autoplay=False,loop=False)
+
+pickAxe = Entity(model='Diamond-Pickaxe.obj',
+            texture='Diffuse.png',
+            x=1,y=1,z=1.6,scale=0.06,rotation_x=90,
+            rotation_y=45,
+            parent=subject)
+
+creeps = Entity(model='creeper',
+                texture='creeper.png',
+                x=22,y=-3,z=26,
+                scale=0.1)
 
 def nMap(n, start1, stop1, start2, stop2):
     return ((n-start1)/(stop1-start1))*(stop2-start2)+start2
 
+# Building functions etc.
+class B:
+    GRASS = color.rgb(0,200,0)
+    STONE = color.rgb(255,255,255)
+    WOOD = color.rgb(150,75,0)
+buildColour = B.STONE
 jojo = Entity(  model='cube',
                 collider=None,
                 texture=wireTex,
-                color=color.rgba(255,255,255,84))
+                color=B.STONE)
 buildMode = -1 # Toggle with 'f'
 def projectBuilder():
+    global buildColour
     jojo.position = (subject.position +
                     Vec3(camera.forward * 2))
     jojo.x = nn.round(jojo.x)
     jojo.y = nn.floor(jojo.y)
     jojo.z = nn.round(jojo.z)
     jojo.y+=2
+    jojo.color=buildColour
 
 def input(key):
-    global buildMode
+    global buildMode, buildColour, stepSound
     if key == 'q' or key == 'escape': 
         exit()
     if key == 'g': subject.position = Vec3(100,32,100)
     if key == 'f': 
-        buildMode *= -1 # Toggle build mode.     
+        buildMode *= -1 # Toggle build mode.  
+    if key == '1': buildColour = B.GRASS
+    if key == '2': buildColour = B.STONE
+    if key == '3': buildColour = B.WOOD 
     if key == 'left mouse up' and buildMode==1:
         projectBuilder()
         e = duplicate(jojo)
         e.collider = 'box'
         e.texture=grassTex
-        e.color=color.white
+        e.color=buildColour
         e.shake(duration=0.5,speed=0.01)
+        stepSound.pitch = ra.randrange(8,9)*0.1
+        stepSound.length = 0.1
+        stepSound.play()
     elif key == 'right mouse up' and buildMode==1:
         e = mouse.hovered_entity
         if e and e.visible==True:
@@ -94,9 +120,9 @@ def update():
         nn.abs(subject.x-prevX)+nn.abs(subject.z-prevZ) >= 1:
         prevX = subject.x
         prevZ = subject.z
-        # if stepSound.playing == False:
-        #     stepSound.pitch = ra.random()+0.5
-        #     stepSound.play()
+        if stepSound.playing == False:
+            stepSound.pitch = ra.random()+0.7
+            stepSound.play()
         generateShell()
     
     if buildMode==1:
@@ -108,6 +134,10 @@ def update():
         generateSubset()
         # Update timeStamp AFTER generation of subset!
         ghostTime = time.time() 
+
+    # Control creeper. Look at subject; cancel out pitch.
+    creeps.look_at(subject)
+    creeps.rotation_x = 0
 
 # Ghost-terrain. Parent to subets.
 ghost = Entity(model=None,collider=None)
@@ -128,8 +158,7 @@ for i in range(blocksWidth*blocksWidth):
 gblocks = []
 subWidth = terrainWidth
 for i in range(subWidth*terrainDepth):
-    bud = Entity(   model='cube',collider=None,
-                    texture = grassTex)
+    bud = Entity(model='cube',collider=None)
     gblocks.append(bud)
 # Empty entity for each subset-gblocks combine.
 # In turn, all subsets combined into ghost at end of process.
@@ -140,20 +169,22 @@ totNumSubs = int((terrainWidth*terrainWidth)/subWidth)
 for i in range(totNumSubs):
     bud = Entity(model=None,collider=None)
     bud.parent=ghost
+    bud.texture=patternTex 
     subsets.append(bud)
 
 # Combine all subsets.
 def generateGhost():
     global ghostDone
-    subject.y += 12 # Prevent fall glitch.
-    subject.gravity = 0
+    application.pause()
+    # subject.y += 12 # Prevent fall glitch.
+    # subject.gravity = 0
     ghost.combine(auto_destroy=True)
-    ghost.texture=monoStrokeTex
     # Inherit colour from gblocks :)
-    # ghost.color=color.rgb(0,111,0)
+    ghost.texture=grassTex
     ghost.collider=None
     ghostDone=True
-    subject.gravity = 0.5
+    application.resume()
+    # subject.gravity = 0.5
     
 
 # Terrain data.
@@ -206,6 +237,7 @@ def generateSubset():
     for i in range(gbi,gbi+subWidth):
         x = gblocks[i-gbi].x = nn.floor(i/terrainWidth)
         z = gblocks[i-gbi].z = nn.floor(i%terrainWidth)
+        # NB above line -- gbi+i surely? Oops.
         # Check index. If out of range, return to default
         # subset position. NB Not sure we need this anymore?
         indi = int((x*terrainWidth)+z)
@@ -218,17 +250,21 @@ def generateSubset():
         #     gblocks[i-gbi+subWidth*j].z = z
         #     gblocks[i-gbi+subWidth*j].y = y - (j+1)
         #     gblocks[i-gbi+subWidth*j].parent=subsets[si]
-        #     gblocks[i-gbi+subWidth*j].disable()
 
         gblocks[i-gbi].collider=None
         gblocks[i-gbi].parent=subsets[si]
+        # Set colour for each block against height.
+        yy = y
+        yy += ra.randrange(-2,2)
         r = g = b = 0
-        if y < 1:
-            r = nMap(y,-7,0,100,164) + ra.randrange(-10,10)
-        elif y < 6:
-            g = nMap(y,1,5,164,200) + ra.randrange(-10,10)
+        if yy < 5:
+            r = nMap(yy,0,5,100,164) + ra.randrange(-10,10)
+        elif yy < 10:
+            g = nMap(yy,5,10,164,200) + ra.randrange(-10,10)
         else:
-            b = nMap(y,6,12,200,255) + ra.randrange(-10,10)
+            r = 200 + ra.randrange(-10,10)
+            g = 200 + ra.randrange(-10,10)
+            b = 200 + ra.randrange(-10,10)
         gblocks[i-gbi].color = color.rgb(r,g,b)
     
     # If finished all subsets...
@@ -244,7 +280,6 @@ def generateSubset():
         subsets[si].combine(auto_destroy=False)
         gbi += subWidth # Increment to new ghost block index.
         subsets[si].collider = None
-        subsets[si].texture = grassTex
         if si >= totNumSubs: subsDone = True
         else: si += 1  # Increment to next subset index.
 
