@@ -18,10 +18,10 @@ window.exit_button.visible = False
 prevTime = time.time()
 
 scene.fog_color = color.rgb(0,200,211)
-scene.fog_density = 0.04
+scene.fog_density = 0.02
 
 grassStrokeTex = load_texture('grass_14.png')
-monoTex = load_texture('grass_mono.png')
+monoTex = load_texture('stroke_mono.png')
 
 def input(key):
     if key == 'q' or key == 'escape':
@@ -33,17 +33,22 @@ def update():
     if  abs(subject.z - prevZ) > 1 or \
         abs(subject.x - prevX) > 1:
         generateShell()
+    
+    # Safety net, in case of glitching through terrain.
+    if subject.y < -amp:
+        subject.y = floor((noise([subject.x/freq,
+        subject.z/freq]))*amp)+2
 
-    if time.time() - prevTime > 0.25:
+    if time.time() - prevTime > 0.55:
         prevTime = time.time()
         generateSubset()
 
-noise = PerlinNoise(octaves=2,seed=2021)
-amp = 24
+noise = PerlinNoise(octaves=4,seed=2021)
+amp = 32
 freq = 100
 terrain = Entity(model=None,collider=None)
-terrainWidth = 100
-subWidth = int(terrainWidth/2)
+terrainWidth = 200
+subWidth = int(terrainWidth/4)
 subsets = []
 subCubes = []
 sci = 0 # subCube index.
@@ -70,8 +75,8 @@ def generateSubset():
         z = subCubes[i].z = floor((i+sci)%terrainWidth)
         y = subCubes[i].y = floor((noise([x/freq,z/freq]))*amp)
         subCubes[i].parent = subsets[currentSubset]
-        r = randrange(100,200)
-        subCubes[i].color = color.rgb(r,0,0)
+        b = randrange(188,244)
+        subCubes[i].color = color.rgb(0,0,b)
         subCubes[i].visible = False
     
     subsets[currentSubset].combine(auto_destroy=False)
