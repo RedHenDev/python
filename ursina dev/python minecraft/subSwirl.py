@@ -10,9 +10,11 @@ when combining new subsets into terrain mesh...
 Tried it. Not successful. No clear gains. But -- perhaps I
 did something wrong.
 
+Yeah, I should probably call this 'DeathCraft'. I.e. running
+fast...and red mist?
+
 """
 
-from operator import sub
 from random import randrange
 from ursina import * 
 from ursina.prefabs.first_person_controller import FirstPersonController
@@ -28,9 +30,8 @@ window.exit_button.visible = False
 
 prevTime = time.time()
 
-scene.fog_color = color.rgb(0,200,211)
-# scene.fog_density = 0.02
-scene.fog_density=(10,200)
+scene.fog_color = color.rgb(222,0,0)
+scene.fog_density = 0.04
 
 grassStrokeTex = load_texture('grass_14.png')
 monoTex = load_texture('stroke_mono.png')
@@ -47,8 +48,7 @@ def update():
     if  abs(subject.z - prevZ) > 1 or \
         abs(subject.x - prevX) > 1:
             generateShell()
-            
-    
+
     # Safety net, in case of glitching through terrain.
     if subject.y < -amp:
         subject.y = floor((noise([subject.x/freq,
@@ -63,12 +63,13 @@ def update():
             finishTerrain()
         prevTime = time.time()
 
-noise = PerlinNoise(octaves=2,seed=2021)
-amp = 42
-freq = 100
+noise = PerlinNoise(octaves=6,seed=99)
+amp = 24
+freq = 164
 terrain = Entity(model=None,collider=None)
-terrainLimit = 600 # How many subsets before combining.
-subWidth = 6
+terrain.texture = monoTex
+terrainLimit = 100 # How many subsets before combining.
+subWidth = 5
 subArea = subWidth*subWidth
 subsets = []
 subCubes = []
@@ -105,7 +106,7 @@ def generateSubswirl():
     for i in range(subArea):
         x = subCubes[i].x = floor(i/subWidth) + subPos.x
         z = subCubes[i].z = floor(i%subWidth) + subPos.y
-        y = subCubes[i].y = ((noise([x/freq,z/freq]))*amp)
+        y = subCubes[i].y = floor((noise([x/freq,z/freq]))*amp)
         subCubes[i].parent = subsets[-1]
         r = randrange(142,244)
         subCubes[i].color = color.rgb(r,0,0)
@@ -127,7 +128,7 @@ def generateSubswirl():
 # Instantiate our 'ghost' subset cubes.
 for i in range(subArea):
     bud = Entity(model='cube')
-    bud.disable()
+    # bud.disable()
     subCubes.append(bud)
     
 terrain.texture = monoTex
@@ -143,8 +144,6 @@ def finishTerrain():
     # Make sure our subset list is empty, since its
     # entities have just been destroyed.
     subsets = []
-
-    currentSubset=0
     
 shellies = []
 shellWidth = 3
@@ -160,23 +159,24 @@ def generateShell():
                             subject.x - 0.5*shellWidth)
         z = shellies[i].z = floor((i%shellWidth) + 
                             subject.z - 0.5*shellWidth)
-        shellies[i].y = ((noise([x/freq,z/freq]))*amp)
+        shellies[i].y = floor((noise([x/freq,z/freq]))*amp)
 
 subject = FirstPersonController()
 subject.cursor.visible = False
 subject.gravity = 0.5
+subject.speed = 15
 subject.x = subject.z = subWidth*0.5
 subject.y = amp+3
 prevZ = subject.z
 prevX = subject.x
 
 disp = Entity(model='quad',parent=camera.ui,
-scale_y=0.1,scale_x=1,y=-0.5)
-
+scale_y=0.1,scale_x=1,y=-0.3,
+color=color.rgba(0,0,255,111))
 
 chickenModel = load_model('chicken.obj')
 vincent = Entity(model=chickenModel,scale=1,
-                x=22,z=16,y=7.1,
+                x=22,z=16,y=3.1,
                 texture='chicken.png',
                 double_sided=True,
                 collider='mesh')
