@@ -17,15 +17,16 @@ fast...and red mist?
 
 from random import randrange
 from ursina import * 
-from ursina.prefabs.first_person_controller import FirstPersonController
+# from ursina.prefabs.first_person_controller import FirstPersonController
 from numpy import floor
 from numpy import abs
 import time
 from perlin_noise import PerlinNoise  
+from subjective_controller import *
 
 app = Ursina()
 
-window.color = color.rgb(0,200,211)
+window.color = color.rgb(222,0,0)
 window.exit_button.visible = False
 
 prevTime = time.time()
@@ -161,10 +162,11 @@ def generateShell():
                             subject.z - 0.5*shellWidth)
         shellies[i].y = floor((noise([x/freq,z/freq]))*amp)
 
-subject = FirstPersonController()
+subject = SubjectiveController()
 subject.cursor.visible = False
 subject.gravity = 0.5
-subject.speed = 15
+subject.speed = 6
+subject.step_height = 1
 subject.x = subject.z = subWidth*0.5
 subject.y = amp+3
 prevZ = subject.z
