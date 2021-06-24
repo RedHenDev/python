@@ -32,14 +32,14 @@ def update():
     global prevZ, prevX, prevTime
     if  abs(subject.z - prevZ) > 1 or \
         abs(subject.x - prevX) > 1:
-        generateShell()
+            generateShell()
     
     # Safety net, in case of glitching through terrain.
     if subject.y < -amp:
         subject.y = floor((noise([subject.x/freq,
         subject.z/freq]))*amp)+2
 
-    if time.time() - prevTime > 0.55:
+    if time.time() - prevTime > 0.02:
         prevTime = time.time()
         generateSubset()
 
@@ -47,7 +47,7 @@ noise = PerlinNoise(octaves=4,seed=2021)
 amp = 32
 freq = 100
 terrain = Entity(model=None,collider=None)
-terrainWidth = 200
+terrainWidth = 50
 subWidth = int(terrainWidth/4)
 subsets = []
 subCubes = []
@@ -90,7 +90,7 @@ def finishTerrain():
     if terrainFinished==True: return
     terrain.combine()
     terrainFinished = True
-    subject.y = 64
+    subject.y = amp
     terrain.texture = monoTex
 
 

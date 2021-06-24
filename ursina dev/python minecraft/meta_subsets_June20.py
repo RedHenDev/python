@@ -64,8 +64,8 @@ creeps = Entity(model='creeper',
                 x=22,y=-3,z=26,
                 scale=0.1)
 
-def nMap(n, start1, stop1, start2, stop2):
-    return ((n-start1)/(stop1-start1))*(stop2-start2)+start2
+def nMap(n, min1, max1, min2, max2):
+    return ((n-min1)/(max1-min1))*(max2-min2)+min2
 
 # Building functions etc.
 class B:
