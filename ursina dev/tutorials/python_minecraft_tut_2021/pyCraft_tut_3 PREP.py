@@ -1,5 +1,12 @@
 """
 Minecraft in Python, with Ursina, tut 3 PREP ONLY
+
+0) Corrections (x2) + safety net, in case of glitching
+    idea - place at correct y + subject.height, 
+    then subject.land()
+1) e.look_at(target) + cancel x rotation
+2) Colours with nMap() and randrange()
+3) building and 'mining' + change building block type
 """
 
 from random import randrange
@@ -76,6 +83,7 @@ def generateSubset():
         y = subCubes[i].y = floor((noise([x/freq,z/freq]))*amp)
         subCubes[i].parent = subsets[currentSubset]
         b = randrange(188,244)
+
         subCubes[i].color = color.rgb(0,0,b)
         subCubes[i].visible = False
     
