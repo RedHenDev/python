@@ -1,21 +1,17 @@
 """
-Minecraft in Python, with Ursina, tut 3 PREP ONLY
+Minecraft in Python, with Ursina, tut 3
 
-0) Corrections (x2) + safety net, in case of glitching
-    idea - place at correct y + subject.height, 
-    then subject.land()
-1) e.look_at(target) + cancel x rotation
 2) Colours with nMap() and randrange()
 3) building and 'mining' + change building block type
 """
 
-from random import randrange
 from ursina import *
 from ursina.prefabs.first_person_controller import FirstPersonController
 from numpy import floor
 from numpy import abs
 import time
 from perlin_noise import PerlinNoise  
+from nMap import nMap
 
 app = Ursina()
 
@@ -24,7 +20,7 @@ window.exit_button.visible = False
 
 prevTime = time.time()
 
-scene.fog_color = color.rgb(0,200,211)
+scene.fog_color = color.rgb(0,222,0)
 scene.fog_density = 0.02
 
 grassStrokeTex = load_texture('grass_14.png')
@@ -36,26 +32,30 @@ def input(key):
     if key == 'g': generateSubset()
 
 def update():
-    global prevZ, prevX, prevTime
+    global prevZ, prevX, prevTime, amp
     if  abs(subject.z - prevZ) > 1 or \
         abs(subject.x - prevX) > 1:
             generateShell()
-    
-    # Safety net, in case of glitching through terrain.
-    if subject.y < -amp:
-        subject.y = floor((noise([subject.x/freq,
-        subject.z/freq]))*amp)+2
 
-    if time.time() - prevTime > 0.02:
-        prevTime = time.time()
+    if time.time() - prevTime > 0.05:
         generateSubset()
+        prevTime = time.time()  
+    
+    # Safety net in case of glitching through terrain :)
+    if subject.y < -amp+1:
+        subject.y = subject.height + floor((noise([subject.x/freq,
+                            subject.z/freq]))*amp)
+        subject.land()
 
-noise = PerlinNoise(octaves=4,seed=2021)
-amp = 12
+    vincent.look_at(subject, 'forward')
+    # vincent.rotation_x = 0
+
+noise = PerlinNoise(octaves=4,seed=99)
+amp = 24
 freq = 100
 terrain = Entity(model=None,collider=None)
-terrainWidth = 50
-subWidth = int(terrainWidth/4)
+terrainWidth = 20
+subWidth = int(terrainWidth/10)
 subsets = []
 subCubes = []
 sci = 0 # subCube index.
@@ -82,13 +82,22 @@ def generateSubset():
         z = subCubes[i].z = floor((i+sci)%terrainWidth)
         y = subCubes[i].y = floor((noise([x/freq,z/freq]))*amp)
         subCubes[i].parent = subsets[currentSubset]
-        b = randrange(188,244)
 
-        subCubes[i].color = color.rgb(0,0,b)
+        # Set colour of subCube :D
+        r = 0
+        g = 0
+        b = 0
+        if y > amp*0.3:
+            b = 255
+        if y == 4:
+            r = g = b = 255
+        else:
+            g = nMap(y, 0, amp*0.5, 0, 255)
+        subCubes[i].color = color.rgb(r,g,b)
         subCubes[i].visible = False
     
     subsets[currentSubset].combine(auto_destroy=False)
-    subsets[currentSubset].texture = grassStrokeTex
+    # subsets[currentSubset].texture = monoTex
     sci += subWidth
     currentSubset += 1
 
@@ -96,11 +105,11 @@ terrainFinished = False
 def finishTerrain():
     global terrainFinished
     if terrainFinished==True: return
+    terrain.texture = grassStrokeTex
     terrain.combine()
     terrainFinished = True
-    subject.y = amp
-    terrain.texture = monoTex
-    # terrain.disable()
+    terrain.texture = grassStrokeTex
+    
 
 
 # for i in range(terrainWidth*terrainWidth):
@@ -136,14 +145,14 @@ def generateShell():
 subject = FirstPersonController()
 subject.cursor.visible = False
 subject.gravity = 0.5
-subject.x = subject.z = 25
-subject.y = 32
+subject.x = subject.z = 5
+subject.y = 12
 prevZ = subject.z
 prevX = subject.x
 
 chickenModel = load_model('chicken.obj')
 vincent = Entity(model=chickenModel,scale=1,
-                x=22,z=16,y=7.1,
+                x=22,z=16,y=4,
                 texture='chicken.png',
                 double_sided=True)
 
