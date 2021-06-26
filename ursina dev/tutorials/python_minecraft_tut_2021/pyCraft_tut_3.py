@@ -42,8 +42,10 @@ def update():
         prevTime = time.time()  
     
     # Safety net in case of glitching through terrain :)
+    # I've changed 'subject.height' to 2 -- since
+    # the height property doesn't seem to exist...?
     if subject.y < -amp+1:
-        subject.y = subject.height + floor((noise([subject.x/freq,
+        subject.y = 2 + floor((noise([subject.x/freq,
                             subject.z/freq]))*amp)
         subject.land()
 

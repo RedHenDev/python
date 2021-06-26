@@ -30,10 +30,11 @@ def update():
     global prevZ, prevX, prevTime
     if  abs(subject.z - prevZ) > 1 or \
         abs(subject.x - prevX) > 1:
-        generateShell()
+            generateShell()
 
     if time.time() - prevTime > 0.5:
         generateSubset()
+        prevTime = time.time()  # Forgot this! :)
 
 noise = PerlinNoise(octaves=2,seed=2021)
 amp = 32
