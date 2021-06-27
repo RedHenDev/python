@@ -51,22 +51,28 @@ def build():
     e.texture = stoneTex
     e.shake(duration=0.5,speed=0.01)
 def mine():
-    global terrain
+    global terrain, subsets
     print('Started mining...')
-    minePos = bte.position
+    subsets[int(floor(bte.x))].y -= 1
+    """
+    newHole = 0
     for i in terrain.model.vertices:
-        if i[0] > bte.position.x - 0.6 and \
-            i[0] < bte.position.x + 0.6 and \
-            i[2] > bte.position.z - 0.6 and \
-            i[2] < bte.position.z + 0.6:   
+        if i[0] > bte.x - 0.6 and \
+            i[0] < bte.x + 0.6 and \
+            i[2] > bte.z - 0.6 and \
+            i[2] < bte.z + 0.6:   
             i[1] -= 1
-            print('Found matching vertex!')
+            newHole = Vec3(bte.x,bte.z,i[1])
+    if newHole != 0:
+        holes.append(newHole)
     terrain.model.generate() 
-    # nm = Entity(model='cube',texture=monoTex)
-    # nm.position = minePos + Vec3(0,-1,0)
+    e = mouse.hovered_entity
+    if e and e.visible == True:
+        destroy(e)
+# Data recording mined co-ordinates.
+holes = [] # List of Vec3s - (x,z,depth)
+"""
 
-    # e = mouse.hovered_entity
-    # destroy(e)
 
 def input(key):
     if key == 'q' or key == 'escape':
@@ -89,8 +95,8 @@ def update():
         prevTime = time.time()  
     
     # Safety net in case of glitching through terrain :)
-    if subject.y < -amp-1:
-        subject.y = 2 + floor((noise([subject.x/freq,
+    if subject.y < -amp-2:
+        subject.y = floor((noise([subject.x/freq,
                             subject.z/freq]))*amp)
         subject.land()
 
@@ -105,7 +111,7 @@ noise = PerlinNoise(octaves=4,seed=99)
 amp = 24
 freq = 100
 terrain = Entity(model=None,collider=None)
-terrainWidth = 10
+terrainWidth = 100
 subWidth = int(terrainWidth/10)
 subsets = []
 subCubes = []
@@ -152,13 +158,12 @@ def generateSubset():
             r = nMap(y, 0, amp, 110, 255)     
         subCubes[i].color = color.rgb(r,g,b)
         subCubes[i].visible = False
-    
+    subsets[currentSubset].texture = monoTex
     subsets[currentSubset].combine(auto_destroy=False)
-    # subsets[currentSubset].texture = monoTex
     sci += subWidth
     currentSubset += 1
 
-terrainFinished = False
+terrainFinished = True
 def finishTerrain():
     global terrainFinished
     if terrainFinished==True: return
@@ -195,6 +200,11 @@ def generateShell():
         z = shellies[i].z = floor((i%shellWidth) + 
                             subject.z - 0.5*shellWidth)
         shellies[i].y = floor((noise([x/freq,z/freq]))*amp)
+        # Now check for mined holes...
+        # for j in holes:
+        #     if x == j[0] and z == j[1]:
+        #         shellies[i].y = j[2]
+        #         break
 
 
 
