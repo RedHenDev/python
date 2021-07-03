@@ -50,10 +50,43 @@ def build():
     e.collider = 'cube'
     e.texture = stoneTex
     e.shake(duration=0.5,speed=0.01)
+def regenerate(wh, v3):
+    global freq, amp, terrainWidth
+    for i in range(subWidth):
+        x = subCubes[i].x = v3[0]
+        z = subCubes[i].z = v3[2]
+        y = subCubes[i].y = -1+floor((noise([x/freq,z/freq]))*amp)
+        subsets[wh].model = None
+        subCubes[i].parent = subsets[wh]
+
+        # Set colour of subCube :D
+        y += randrange(-4,4)
+        r = 0
+        g = 0
+        b = 0
+        if y > amp*0.3:
+            b = 255
+        if y == 4:
+            r = g = b = 255
+        else:
+            g = nMap(y, 0, amp*0.5, 0, 255)
+        # Red zone?
+        if z > terrainWidth*0.5:
+            g = 0
+            b = 0
+            r = nMap(y, 0, amp, 110, 255)     
+        subCubes[i].color = color.rgb(r,g,b)
+        subCubes[i].visible = False
+    subsets[wh].texture = monoTex
+    subsets[wh].combine(auto_destroy=False)
 def mine():
     global terrain, subsets
     print('Started mining...')
-    subsets[int(floor(bte.x))].y -= 1
+    # First thing, work out which subset and
+    # which subCube...
+    which = (bte.z*terrainWidth)+(bte.x/(terrainWidth/subWidth))
+    which = int(floor(which))
+    regenerate(which, bte.position)
     """
     newHole = 0
     for i in terrain.model.vertices:
@@ -111,7 +144,7 @@ noise = PerlinNoise(octaves=4,seed=99)
 amp = 24
 freq = 100
 terrain = Entity(model=None,collider=None)
-terrainWidth = 100
+terrainWidth = 10
 subWidth = int(terrainWidth/10)
 subsets = []
 subCubes = []
