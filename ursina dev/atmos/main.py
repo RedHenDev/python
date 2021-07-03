@@ -47,7 +47,7 @@ class VertexSheet(Entity):
             z = i[2]
             i[1] = floor((noise([x/freq,z/freq]))*amp)
         this.model.generate()
-        this.collider = 'mesh'
+        
 terrain = Entity()
 vs = []
 for v in range(16):
@@ -56,7 +56,13 @@ for v in range(16):
     v.parent = terrain
     vs.append(v)
 terrain.combine(auto_destroy=True)
+terrain.collider = 'mesh'
 terrain.texture='mono64.png'
+roof = duplicate(terrain)
+roof.collider='mesh'
+roof.y = 8
+roof.rotation_x = 180
+roof.z += 32
 locZ = 0
 def newRegen():
     global locZ
@@ -77,7 +83,9 @@ def input(key):
         newRegen()
 
 subject = FirstPersonController()
-subject.gravity = 0.0
-subject.y = 3
+subject.gravity = 0.4
+subject.y = 2
+subject.z = 16
+subject.x = 16
 
 app.run()
