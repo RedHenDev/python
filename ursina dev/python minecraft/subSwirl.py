@@ -23,16 +23,17 @@ from numpy import abs
 import time
 from perlin_noise import PerlinNoise  
 from subjective_controller import *
+from nMap import nMap
 
 app = Ursina()
 
-window.color = color.rgb(222,0,0)
+window.color = color.rgb(0,211,222)
 window.exit_button.visible = False
 
 prevTime = time.time()
 
-scene.fog_color = color.rgb(222,0,0)
-scene.fog_density = 0.04
+scene.fog_color = color.rgb(0,222,255)
+scene.fog_density = 0.01
 
 grassStrokeTex = load_texture('grass_14.png')
 monoTex = load_texture('stroke_mono.png')
@@ -45,7 +46,7 @@ def input(key):
 
 def update():
     global prevZ, prevX, prevTime, subsets, terrainLimit
-    global subArea
+    global subArea, subSpeed
     if  abs(subject.z - prevZ) > 1 or \
         abs(subject.x - prevX) > 1:
             generateShell()
@@ -57,20 +58,21 @@ def update():
         subject.disable()   # To reset physics...
         subject.enable()
 
-    if time.time() - prevTime > 0.1:
+    if time.time() - prevTime > subSpeed:
         generateSubswirl()
-        # print(str(len(subsets)*subArea))
-        if len(subsets) == terrainLimit:
-            finishTerrain()
+        
+        # if len(subsets) == terrainLimit:
+        #     finishTerrain()
         prevTime = time.time()
 
-noise = PerlinNoise(octaves=6,seed=99)
+noise = PerlinNoise(octaves=24,seed=99)
 amp = 24
-freq = 164
+freq = 664
 terrain = Entity(model=None,collider=None)
 terrain.texture = monoTex
-terrainLimit = 100 # How many subsets before combining.
-subWidth = 5
+terrainLimit = 300 # How many subsets before combining.
+subWidth = 4
+subSpeed = 0.04
 subArea = subWidth*subWidth
 subsets = []
 subCubes = []
@@ -109,10 +111,11 @@ def generateSubswirl():
         z = subCubes[i].z = floor(i%subWidth) + subPos.y
         y = subCubes[i].y = floor((noise([x/freq,z/freq]))*amp)
         subCubes[i].parent = subsets[-1]
-        r = randrange(142,244)
-        subCubes[i].color = color.rgb(r,0,0)
+        g = nMap(y,0,amp/2,64,255)
+        subCubes[i].color = color.rgb(0,g,0)
     
     subsets[-1].combine(auto_destroy=False)
+    subsets[-1].texture = monoTex
 
     # Co-ordinate new vector by iteration around swirl.
     iterations+=1
@@ -129,6 +132,7 @@ def generateSubswirl():
 # Instantiate our 'ghost' subset cubes.
 for i in range(subArea):
     bud = Entity(model='cube')
+    bud.scale_y=4
     # bud.disable()
     subCubes.append(bud)
     
@@ -149,7 +153,8 @@ def finishTerrain():
 shellies = []
 shellWidth = 3
 for i in range(shellWidth*shellWidth):
-    bud = Entity(model='cube',collider='box')
+    bud = Entity(model='cube',scale_y=4,collider='box')
+
     bud.visible=False
     shellies.append(bud)
 

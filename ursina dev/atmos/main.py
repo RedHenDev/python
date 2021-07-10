@@ -83,7 +83,7 @@ def input(key):
         newRegen()
 
 subject = FirstPersonController()
-subject.gravity = 0.4
+subject.gravity = 0.0
 subject.y = 2
 subject.z = 16
 subject.x = 16
