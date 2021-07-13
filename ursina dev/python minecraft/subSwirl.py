@@ -22,7 +22,8 @@ setting its Perlin position, disabling it and moving to
 next subCube if it does -- i.e. for when player backtracks
 over terrain they've already visited.
 Optimizing by combining whole of terrain would be nice...
-
+Maybe a List of terrains, where we combine 1K subsets at
+a go or something?
 """
 
 from random import randrange
@@ -57,12 +58,12 @@ def input(key):
 def update():
     global prevZ, prevX, prevTime, subsets, terrainLimit
     global subArea, subSpeed, toIterate, subPos
-    global changes, iterations
+    global changes, iterations, swirling, comboTip
             
     generateShell()
 
-    if  abs(subject.z - prevZ) > 25 or \
-        abs(subject.x - prevX) > 25:
+    if  abs(subject.z - prevZ) >= 10 or \
+        abs(subject.x - prevX) >= 10:
         prevZ = subject.z
         prevX = subject.x
         # Reset swirling settings...
@@ -72,8 +73,8 @@ def update():
         # Center on subject position...
         subPos = Vec2(  floor(subject.x),
                         floor(subject.z))
-
-
+        swirling = 1
+        comboTip.enabled=False
 
     # Safety net, in case of glitching through terrain.
     if subject.y < -amp:
@@ -83,19 +84,29 @@ def update():
 
     if time.time() - prevTime > subSpeed:
         generateSubswirl()
-        
-        # if len(subsets) == terrainLimit:
-        #     finishTerrain()
+        if (len(subsets)) >= terrainLimit-4:
+            comboTip = Tooltip('<pink>Warning! Combining ' + 
+                    str(terrainLimit) + ' subsets of #' + 
+                    str(len(terrains)) + ' terrain!')
+            comboTip.enabled=True
+        if len(subsets) == terrainLimit:
+            finishTerrain()
+            comboTip.enabled=False
+            swirling=-1
         prevTime = time.time()
 
 noise = PerlinNoise(octaves=24,seed=99)
 amp = 24
 freq = 664
-terrain = Entity(model=None,collider=None)
-terrain.texture = monoTex
-terrainLimit = 300 # How many subsets before combining.
-subWidth = 10
-subSpeed = 0.04
+terrains = []
+terrains.append(Entity(model=None))
+terrainLimit = 555 # How many subsets before combining.
+comboTip = Tooltip('<pink>Warning! Combining ' + 
+                    str(terrainLimit) + 'subsets of #' + 
+                    str(len(terrains)) + ' terrain!')
+comboTip.enabled=False
+subWidth = 4
+subSpeed = 0.02
 subArea = subWidth*subWidth
 subsets = []
 subCubes = []
@@ -119,7 +130,7 @@ swirlVecs = [
 # Dictionary for recording whether terrain blocks exist
 # at location specified in key.
 subDic = {
-    "0.0,0.0": 'hi'
+    "0.0,0.0": '0'
 }
 
 def generateSubswirl():
@@ -127,7 +138,7 @@ def generateSubswirl():
     global currentVec, iterations, changes, subArea
     global subPos, toIterate, swirlVecs
 
-    sub = Entity(model=None,parent=terrain)
+    sub = Entity(model=None,parent=terrains[0])
     subsets.append(sub)
 
     # Translate position of subset, according to
@@ -135,24 +146,31 @@ def generateSubswirl():
     subPos.x += (swirlVecs[currentVec].x*subWidth)
     subPos.y += (swirlVecs[currentVec].y*subWidth)
 
+    # Make sure we have created a new block, else
+    # later on here don't bother calling the
+    # costly combine method...
+    createdSomeTerrain = False
+
     for i in range(subArea):
         x = subCubes[i].x = floor(i/subWidth) + subPos.x
         z = subCubes[i].z = floor(i%subWidth) + subPos.y
         # Check if already terrain block here...
-        if subDic.get(str(x)+'-'+str(z))=='hi': 
+        if subDic.get(str(x)+'-'+str(z))=='0': 
             subCubes[i].disable()
             continue
         # No block already here, so we can create one :)
         subCubes[i].enable()
+        createdSomeTerrain = True
         # Record this block in dictionary.
-        subDic[str(x)+'-'+str(z)]='hi'
+        subDic[str(x)+'-'+str(z)]='0'
         y = subCubes[i].y = floor((noise([x/freq,z/freq]))*amp)
         subCubes[i].parent = subsets[-1]
         g = nMap(y,0,amp/2,64,255)
         subCubes[i].color = color.rgb(0,g,0)
     
-    subsets[-1].combine(auto_destroy=False)
-    subsets[-1].texture = monoTex
+    if createdSomeTerrain==True:
+        subsets[-1].combine(auto_destroy=False)
+        subsets[-1].texture = monoTex
 
     # Co-ordinate new vector by iteration around swirl.
     iterations+=1
@@ -171,20 +189,21 @@ for i in range(subArea):
     bud = Entity(model='cube')
     bud.scale_y=4   # This must match ghost terrain.
     subCubes.append(bud)
-    
-terrain.texture = monoTex
-def finishTerrain():
-    global subsets, terrain, currentSubset
 
+def finishTerrain():
+    global subsets, terrains, currentSubset, swirling
     # Since subsets will be destroyed, reparent subcubes.
     for sc in subCubes:
         sc.parent = scene
 
-    terrain.combine()
+    terrains[-1].texture = monoTex
+    terrains[-1].combine()
+    # Create new empty terrain ready for next combination.
+    terrains.append(Entity(model=None))
     
     # Make sure our subset list is empty, since its
     # entities have just been destroyed.
-    subsets = []
+    subsets *= 0
     
 shellies = []
 shellWidth = 3
@@ -206,10 +225,10 @@ def generateShell():
 subject = SubjectiveController()
 subject.cursor.visible = False
 subject.gravity = 0.5
-subject.speed = 6
+subject.speed = 4
 subject.step_height = 1
 subject.x = subject.z = subWidth*0.5
-subject.y = amp+3
+subject.y = amp+6
 prevZ = subject.z
 prevX = subject.x
 
