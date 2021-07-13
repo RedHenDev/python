@@ -13,6 +13,16 @@ did something wrong.
 Yeah, I should probably call this 'DeathCraft'. I.e. running
 fast...and red mist?
 
+13th July 2021 -- infinite system working!
+Basically, we subswirl around the player's position, the
+player having moved 5 blocks. Maybe we should make this
+a new number...a higher number.
+Also, we check whether a block already exists before
+setting its Perlin position, disabling it and moving to
+next subCube if it does -- i.e. for when player backtracks
+over terrain they've already visited.
+Optimizing by combining whole of terrain would be nice...
+
 """
 
 from random import randrange
@@ -46,17 +56,30 @@ def input(key):
 
 def update():
     global prevZ, prevX, prevTime, subsets, terrainLimit
-    global subArea, subSpeed
-    if  abs(subject.z - prevZ) > 1 or \
-        abs(subject.x - prevX) > 1:
-            generateShell()
+    global subArea, subSpeed, toIterate, subPos
+    global changes, iterations
+            
+    generateShell()
+
+    if  abs(subject.z - prevZ) > 25 or \
+        abs(subject.x - prevX) > 25:
+        prevZ = subject.z
+        prevX = subject.x
+        # Reset swirling settings...
+        toIterate = 1
+        iterations = 0
+        changes = -1
+        # Center on subject position...
+        subPos = Vec2(  floor(subject.x),
+                        floor(subject.z))
+
+
 
     # Safety net, in case of glitching through terrain.
     if subject.y < -amp:
         subject.y = floor((noise([subject.x/freq,
-        subject.z/freq]))*amp)+3
-        subject.disable()   # To reset physics...
-        subject.enable()
+        subject.z/freq]))*amp)+4
+        subject.land()
 
     if time.time() - prevTime > subSpeed:
         generateSubswirl()
@@ -71,13 +94,14 @@ freq = 664
 terrain = Entity(model=None,collider=None)
 terrain.texture = monoTex
 terrainLimit = 300 # How many subsets before combining.
-subWidth = 4
+subWidth = 10
 subSpeed = 0.04
 subArea = subWidth*subWidth
 subsets = []
 subCubes = []
 currentSubset = 0
 swirling = 1 # Are we generating terrain?
+
 
 # For new position of subset.
 currentVec = 0
@@ -92,6 +116,11 @@ swirlVecs = [
     Vec2(0,-1),
     Vec2(-1,0)
 ]
+# Dictionary for recording whether terrain blocks exist
+# at location specified in key.
+subDic = {
+    "0.0,0.0": 'hi'
+}
 
 def generateSubswirl():
     if swirling==-1: return
@@ -109,6 +138,14 @@ def generateSubswirl():
     for i in range(subArea):
         x = subCubes[i].x = floor(i/subWidth) + subPos.x
         z = subCubes[i].z = floor(i%subWidth) + subPos.y
+        # Check if already terrain block here...
+        if subDic.get(str(x)+'-'+str(z))=='hi': 
+            subCubes[i].disable()
+            continue
+        # No block already here, so we can create one :)
+        subCubes[i].enable()
+        # Record this block in dictionary.
+        subDic[str(x)+'-'+str(z)]='hi'
         y = subCubes[i].y = floor((noise([x/freq,z/freq]))*amp)
         subCubes[i].parent = subsets[-1]
         g = nMap(y,0,amp/2,64,255)
@@ -132,8 +169,7 @@ def generateSubswirl():
 # Instantiate our 'ghost' subset cubes.
 for i in range(subArea):
     bud = Entity(model='cube')
-    bud.scale_y=4
-    # bud.disable()
+    bud.scale_y=4   # This must match ghost terrain.
     subCubes.append(bud)
     
 terrain.texture = monoTex

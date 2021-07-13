@@ -18,7 +18,7 @@ noise = PerlinNoise(octaves=1, seed=1984)
 scale_terrain = 6
 width_terrain = 1
 prevTime = 0
-subSpeed = 0.2
+subSpeed = 0.1
 
 class VertexSheet(Entity):
     def __init__(this, _orig=Vec2(0,0)):
@@ -39,7 +39,7 @@ class VertexSheet(Entity):
             # bub.color=color.random_color()
             # bub.color[0]=0
             # bub.color[2]=0
-            # bub.color=color.rgb(0,111,0)
+            bub.color=color.rgb(0,211,0)
             bub.parent = this
             this.quads.append(bub)
         this.combine(auto_destroy=True)
