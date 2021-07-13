@@ -138,6 +138,7 @@ def update():
     if time.time() - prevTime > subSpeed:
         genSubset()
         prevTime = time.time()
+    
 
 def input(key):
     if key=='q' or key=='escape':

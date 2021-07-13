@@ -15,7 +15,7 @@ fast...and red mist?
 
 13th July 2021 -- infinite system working!
 Basically, we subswirl around the player's position, the
-player having moved 5 blocks. Maybe we should make this
+player having moved 10 blocks. Maybe we should make this
 a new number...a higher number.
 Also, we check whether a block already exists before
 setting its Perlin position, disabling it and moving to
@@ -23,7 +23,23 @@ next subCube if it does -- i.e. for when player backtracks
 over terrain they've already visited.
 Optimizing by combining whole of terrain would be nice...
 Maybe a List of terrains, where we combine 1K subsets at
-a go or something?
+a go or something? DONE
+
+To Do...
+
+0) Would be nice to use 3 or 4 proper octaves...
+
+1) Reset subset count (for determining when to combine into
+a terrain) somehow once we have triggered new swirl pos.
+Or rather -- more sophisticated counter as per when
+subject has approached edge of generated area so far --
+so that a good amount of terrain surrounds them, before
+stopping swirling. This could be independent of the
+combination of terrains, which is really a separate issue?
+Essentially, we always want swirling enabled when subject
+is not surrounded by enough terrain.
+
+2) Bug with floating terrain artefact once combining terrain.
 """
 
 from random import randrange
@@ -44,7 +60,7 @@ window.exit_button.visible = False
 prevTime = time.time()
 
 scene.fog_color = color.rgb(0,222,255)
-scene.fog_density = 0.01
+scene.fog_density = 0.02
 
 grassStrokeTex = load_texture('grass_14.png')
 monoTex = load_texture('stroke_mono.png')
@@ -75,6 +91,7 @@ def update():
                         floor(subject.z))
         swirling = 1
         comboTip.enabled=False
+        
 
     # Safety net, in case of glitching through terrain.
     if subject.y < -amp:
@@ -85,6 +102,7 @@ def update():
     if time.time() - prevTime > subSpeed:
         generateSubswirl()
         if (len(subsets)) >= terrainLimit-4:
+            comboTip.enabled=False
             comboTip = Tooltip('<pink>Warning! Combining ' + 
                     str(terrainLimit) + ' subsets of #' + 
                     str(len(terrains)) + ' terrain!')
@@ -100,13 +118,13 @@ amp = 24
 freq = 664
 terrains = []
 terrains.append(Entity(model=None))
-terrainLimit = 555 # How many subsets before combining.
+terrainLimit = 888 # How many subsets before combining.
 comboTip = Tooltip('<pink>Warning! Combining ' + 
                     str(terrainLimit) + 'subsets of #' + 
                     str(len(terrains)) + ' terrain!')
 comboTip.enabled=False
-subWidth = 4
-subSpeed = 0.02
+subWidth = 6
+subSpeed = 0.05
 subArea = subWidth*subWidth
 subsets = []
 subCubes = []
