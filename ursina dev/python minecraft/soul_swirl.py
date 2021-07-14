@@ -35,7 +35,7 @@ is not surrounded by enough terrain.
 from random import randrange
 from ursina import *  
 # from ursina.prefabs.first_person_controller import FirstPersonController
-from numpy import csingle, floor
+from numpy import floor
 from numpy import abs
 from numpy import cos
 from numpy import sin
@@ -47,16 +47,16 @@ from nMap import nMap
 
 app = Ursina()
 
-window.color = color.rgb(0,211,222)
+window.color = color.rgb(0,10,222)
 window.exit_button.visible = False
 
 prevTime = time.time()
 
-scene.fog_color = color.rgb(0,222,255)
+scene.fog_color = color.rgb(0,10,222)
 scene.fog_density = 0.02
 
 grassStrokeTex = load_texture('grass_14.png')
-monoTex = load_texture('stroke_mono.png')
+monoTex = load_texture('grass_mono.png')
 
 def input(key):
     global swirling, canSwirl
@@ -83,19 +83,17 @@ def update():
         swirling=1*canSwirl
 
     # Safety net, in case of glitching through terrain.
-    if subject.y < -amp:
-        subject.y = floor((noise([subject.x/freq,
-        subject.z/freq]))*amp)+4
-        subject.land()
+    # if subject.y < -100:
+    #     subject.y = floor((noise([subject.x/freq,
+    #     subject.z/freq]))*amp)+4
+    #     subject.land()
 
     if time.time() - prevTime > subSpeed:
         for i in range(perCycle):
             genSub()
         prevTime = time.time()
 
-noise = PerlinNoise(octaves=24,seed=99)
-amp = 24
-freq = 664
+noise = PerlinNoise(octaves=1,seed=99)
 terrains = []
 terrains.append(Entity(model=None))
 terrainLimit = 888 # How many subsets before combining.
@@ -104,20 +102,24 @@ comboTip = Tooltip('<pink>Warning! Combining ' +
                     str(len(terrains)) + ' terrain!')
 comboTip.enabled=False
 subsets = []
-numSubCubes = 32 # Number of cubes per subset.
-subSpeed = 0 # How long before new cubes added to terrain?
-perCycle = 8    # How many cubes positioned per update?
-radLimit = 64   # How far a radius before swirling off?
+numSubCubes = 64 # def=32Number of cubes per subset.
+subSpeed = 0 # def=0How long before new cubes added to terrain?
+perCycle = 32    # def=8How many cubes positioned per update?
+radLimit = 128   # def=64How far a radius before swirling off?
 cs = 0 # Current subset.
 bsf = 0 # Blocks so far.
 for i in range(999):
     bud = Entity(model=None)
-    bud.texture=grassStrokeTex
+    bud.texture=monoTex
     bud.disable()
     subsets.append(bud)
 subCubes = []
 for i in range(numSubCubes):
     bud = Entity(model='cube')
+    randRot=random.randint(1,4)
+    bud.rotation_y = 90*randRot
+    randRot=random.randint(1,4)
+    bud.rotation_z = 90*randRot
     bud.disable()
     subCubes.append(bud)
 
@@ -130,8 +132,20 @@ canSwirl = 1 # Are we allowed to turn on swirling?
 subDic = {}
 
 def getPerlin(_x,_z):
-    global amp, freq
-    return floor((noise([_x/freq,_z/freq]))*amp)
+    y = 0
+    freq = 420
+    amp = 99       
+    y += ((noise([_x/freq,_z/freq]))*amp)
+    freq = 76
+    amp = 60
+    y += ((noise([_x/freq,_z/freq]))*amp)       
+    freq = 24
+    amp = 20
+    y += ((noise([_x/freq,_z/freq]))*amp)
+    freq = 1
+    amp = 3
+    y += ((noise([_x/freq,_z/freq]))*amp)
+    return floor(y)
 
 rad = 0
 theta = 0
@@ -153,8 +167,10 @@ def genSub():
         subCubes[bsf].x = x
         subCubes[bsf].z = z
         y = subCubes[bsf].y = getPerlin(x,z)
-        subCubes[bsf].color = color.rgb(0,
-                              nMap(y,0,amp,64,255),200)
+        r = 0
+        b = 0
+        g = nMap(y,-16,16,0,255)
+        subCubes[bsf].color = color.rgb(r,g,b)
 
         # Time to combine cubes into subset?
         # NB. this will 'destroy' its child cubes,
@@ -170,7 +186,7 @@ def genSub():
     else:
         pass
         #print('already block at ' + 'x'+str(x)+'z'+str(z))
-        #rad+=0.01
+        #rad+=1
         
     # Swirl to next terrain position.
     theta-=(128/((rad+1)*3.14))*thetaDir
@@ -195,7 +211,7 @@ def generateShell():
                             subject.x - 0.5*shellWidth)
         z = shellies[i].z = floor((i%shellWidth) + 
                             subject.z - 0.5*shellWidth)
-        shellies[i].y = floor((noise([x/freq,z/freq]))*amp)
+        shellies[i].y = getPerlin(x,z)
 
 subject = SubjectiveController()
 subject.cursor.visible = False
@@ -203,7 +219,7 @@ subject.gravity = 0.5
 subject.speed = 12
 subject.step_height = 1
 subject.x = subject.z = 0
-subject.y = amp+6
+subject.y = 3
 prevZ = subject.z
 prevX = subject.x
 
