@@ -3,16 +3,6 @@ Minecraft in Python, with Ursina.
 New idea for a 'subSwirl' system: June 22 2021.
 Working! 23 June 2021 :)
 
-We could also generate a load of subsets at start -- to
-prevent need of generating these entities on the fly.
-This would also mean we have to be a bit more sophisticated
-when combining new subsets into terrain mesh...
-Tried it. Not successful. No clear gains. But -- perhaps I
-did something wrong.
-
-Yeah, I should probably call this 'DeathCraft'. I.e. running
-fast...and red mist?
-
 13th July 2021 -- infinite system working!
 Basically, we subswirl around the player's position, the
 player having moved 10 blocks. Maybe we should make this
@@ -43,10 +33,13 @@ is not surrounded by enough terrain.
 """
 
 from random import randrange
-from ursina import * 
+from ursina import *  
 # from ursina.prefabs.first_person_controller import FirstPersonController
 from numpy import floor
 from numpy import abs
+from numpy import cos
+from numpy import sin
+from numpy import radians
 import time
 from perlin_noise import PerlinNoise  
 from subjective_controller import *
@@ -75,23 +68,16 @@ def update():
     global prevZ, prevX, prevTime, subsets, terrainLimit
     global subArea, subSpeed, toIterate, subPos
     global changes, iterations, swirling, comboTip
+    global rad
             
     generateShell()
 
-    if  abs(subject.z - prevZ) >= 10 or \
-        abs(subject.x - prevX) >= 10:
+    if  abs(subject.z - prevZ) >= 4 or \
+        abs(subject.x - prevX) >= 4:
         prevZ = subject.z
         prevX = subject.x
-        # Reset swirling settings...
-        toIterate = 1
-        iterations = 0
-        changes = -1
-        # Center on subject position...
-        subPos = Vec2(  floor(subject.x),
-                        floor(subject.z))
-        swirling = 1
-        comboTip.enabled=False
-        
+        # Reset swirling settings...?
+        rad = 0
 
     # Safety net, in case of glitching through terrain.
     if subject.y < -amp:
@@ -100,17 +86,7 @@ def update():
         subject.land()
 
     if time.time() - prevTime > subSpeed:
-        generateSubswirl()
-        if (len(subsets)) >= terrainLimit-4:
-            comboTip.enabled=False
-            comboTip = Tooltip('<pink>Warning! Combining ' + 
-                    str(terrainLimit) + ' subsets of #' + 
-                    str(len(terrains)) + ' terrain!')
-            comboTip.enabled=True
-        if len(subsets) == terrainLimit:
-            finishTerrain()
-            comboTip.enabled=False
-            swirling=-1
+        genSub()
         prevTime = time.time()
 
 noise = PerlinNoise(octaves=24,seed=99)
@@ -124,7 +100,7 @@ comboTip = Tooltip('<pink>Warning! Combining ' +
                     str(len(terrains)) + ' terrain!')
 comboTip.enabled=False
 subWidth = 6
-subSpeed = 0.05
+subSpeed = 0
 subArea = subWidth*subWidth
 subsets = []
 subCubes = []
@@ -147,81 +123,41 @@ swirlVecs = [
 ]
 # Dictionary for recording whether terrain blocks exist
 # at location specified in key.
-subDic = {
-    '00': '0'
-}
+subDic = {}
 
-def generateSubswirl():
+def getPerlin(_x,_z):
+    global amp, freq
+    return floor((noise([_x/freq,_z/freq]))*amp)
+
+rad = 0
+theta = 0
+def genSub():
+    global theta, rad, swirling
     if swirling==-1: return
-    global currentVec, iterations, changes, subArea
-    global subPos, toIterate, swirlVecs
-
-    sub = Entity(model=None,parent=terrains[0])
-    subsets.append(sub)
-
-    # Translate position of subset, according to
-    # current vector.
-    subPos.x += (swirlVecs[currentVec].x*subWidth)
-    subPos.y += (swirlVecs[currentVec].y*subWidth)
-
-    # Make sure we have created a new block, else
-    # later on here don't bother calling the
-    # costly combine method...
-    createdSomeTerrain = False
-
-    for i in range(subArea):
-        x = subCubes[i].x = floor(i/subWidth) + subPos.x
-        z = subCubes[i].z = floor(i%subWidth) + subPos.y
-        # Check if already terrain block here...
-        if subDic.get(str(x)+'-'+str(z))=='0': 
-            subCubes[i].disable()
-            continue
-        # No block already here, so we can create one :)
-        subCubes[i].enable()
-        createdSomeTerrain = True
-        # Record this block in dictionary.
-        subDic[str(x)+'-'+str(z)]='0'
-        y = subCubes[i].y = floor((noise([x/freq,z/freq]))*amp)
-        subCubes[i].parent = subsets[-1]
-        g = nMap(y,0,amp/2,64,255)
-        subCubes[i].color = color.rgb(0,g,0)
+    # Is there already a terrain block here?
+    x = round(subject.x + rad * cos(radians(theta)))
+    z = round(subject.z + rad * sin(radians(theta)))
+    if subDic.get(str(x)+str(z))==None:
+        bud = Entity(   model='cube',
+                    texture=grassStrokeTex)
+        subDic['x'+str(x)+'z'+str(z)]='i'
+        print(subDic)
+        bud.x = x
+        bud.z = z
+        y = bud.y = getPerlin(x,z)
+        bud.color = color.rgb(0,
+                    nMap(y,0,amp,64,255),200)
     
-    if createdSomeTerrain==True:
-        subsets[-1].combine(auto_destroy=False)
-        subsets[-1].texture = monoTex
+    # Swirl to next terrain position.
+    theta-=90/((rad+1)*3.14)
+    if theta <= -360: 
+        theta = 0
+        rad += 1
 
-    # Co-ordinate new vector by iteration around swirl.
-    iterations+=1
-    if iterations == toIterate:
-        currentVec+=1
-        if currentVec == len(swirlVecs):
-            currentVec = 1
-        changes+=1
-        iterations = 0
-        if changes == 2:
-            changes=0
-            toIterate+=1
 
-# Instantiate our 'ghost' subset cubes.
-for i in range(subArea):
-    bud = Entity(model='cube')
-    bud.scale_y=4   # This must match ghost terrain.
-    subCubes.append(bud)
 
-def finishTerrain():
-    global subsets, terrains, currentSubset, swirling
-    # Since subsets will be destroyed, reparent subcubes.
-    for sc in subCubes:
-        sc.parent = scene
 
-    terrains[-1].texture = monoTex
-    terrains[-1].combine()
-    # Create new empty terrain ready for next combination.
-    terrains.append(Entity(model=None))
-    
-    # Make sure our subset list is empty, since its
-    # entities have just been destroyed.
-    subsets *= 0
+
     
 shellies = []
 shellWidth = 3
@@ -249,10 +185,6 @@ subject.x = subject.z = subWidth*0.5
 subject.y = amp+6
 prevZ = subject.z
 prevX = subject.x
-
-disp = Entity(model='quad',parent=camera.ui,
-scale_y=0.1,scale_x=1,y=-0.3,
-color=color.rgba(0,0,255,111))
 
 chickenModel = load_model('chicken.obj')
 vincent = Entity(model=chickenModel,scale=1,
