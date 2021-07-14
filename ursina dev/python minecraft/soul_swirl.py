@@ -173,7 +173,7 @@ def genSub():
         #rad+=0.01
         
     # Swirl to next terrain position.
-    theta-=(90/((rad+1)*3.14))*thetaDir
+    theta-=(128/((rad+1)*3.14))*thetaDir
     if theta <= -360: 
         theta = 0
         rad += 1
@@ -200,7 +200,7 @@ def generateShell():
 subject = SubjectiveController()
 subject.cursor.visible = False
 subject.gravity = 0.5
-subject.speed = 3
+subject.speed = 12
 subject.step_height = 1
 subject.x = subject.z = 0
 subject.y = amp+6
