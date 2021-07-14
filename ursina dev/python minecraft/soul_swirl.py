@@ -47,16 +47,16 @@ from nMap import nMap
 
 app = Ursina()
 
-window.color = color.rgb(0,10,222)
+window.color = color.rgb(0,222,244)
 window.exit_button.visible = False
 
 prevTime = time.time()
 
-scene.fog_color = color.rgb(0,10,222)
-scene.fog_density = 0.02
+# scene.fog_color = color.rgb(0,10,222)
+# scene.fog_density = 0.02
 
 grassStrokeTex = load_texture('grass_14.png')
-monoTex = load_texture('grass_mono.png')
+monoTex = load_texture('stroke_mono.png')
 
 def input(key):
     global swirling, canSwirl
@@ -70,17 +70,18 @@ def update():
     global prevZ, prevX, prevTime, subsets
     global subSpeed, perCycle
     global swirling, comboTip
-    global rad
+    global rad, radLimit, origin
             
     generateShell()
 
-    if  abs(subject.z - prevZ) >= 0.9 or \
-        abs(subject.x - prevX) >= 0.9:
+    if  abs(subject.z - prevZ) >= 1 or \
+        abs(subject.x - prevX) >= 1:
         prevZ = subject.z
         prevX = subject.x
         # Reset swirling settings...?
-        rad = 1
+        rad = 0
         swirling=1*canSwirl
+        origin=subject.position
 
     # Safety net, in case of glitching through terrain.
     # if subject.y < -100:
@@ -90,10 +91,12 @@ def update():
 
     if time.time() - prevTime > subSpeed:
         for i in range(perCycle):
-            genSub()
+            newGen()
+            # genSub()
         prevTime = time.time()
 
 noise = PerlinNoise(octaves=1,seed=99)
+
 terrains = []
 terrains.append(Entity(model=None))
 terrainLimit = 888 # How many subsets before combining.
@@ -101,11 +104,12 @@ comboTip = Tooltip('<pink>Warning! Combining ' +
                     str(terrainLimit) + 'subsets of #' + 
                     str(len(terrains)) + ' terrain!')
 comboTip.enabled=False
+
 subsets = []
-numSubCubes = 64 # def=32Number of cubes per subset.
-subSpeed = 0 # def=0How long before new cubes added to terrain?
-perCycle = 32    # def=8How many cubes positioned per update?
-radLimit = 128   # def=64How far a radius before swirling off?
+numSubCubes = 32 # def=32Number of cubes per subset.
+subSpeed = 0.0 # def=0How long before new cubes added to terrain?
+perCycle = 8    # def=8How many cubes positioned per update?
+radLimit = 32   # def=64How far a radius before swirling off?
 cs = 0 # Current subset.
 bsf = 0 # Blocks so far.
 for i in range(999):
@@ -115,11 +119,12 @@ for i in range(999):
     subsets.append(bud)
 subCubes = []
 for i in range(numSubCubes):
-    bud = Entity(model='cube')
-    randRot=random.randint(1,4)
-    bud.rotation_y = 90*randRot
-    randRot=random.randint(1,4)
-    bud.rotation_z = 90*randRot
+    bud = Entity(model='cube',scale_y=2)
+    # Add random rotation to help diversify the texture.
+    # randRot=random.randint(1,4)
+    # bud.rotation_y = 90*randRot
+    # randRot=random.randint(1,4)
+    # bud.rotation_z = 90*randRot
     bud.disable()
     subCubes.append(bud)
 
@@ -133,19 +138,20 @@ subDic = {}
 
 def getPerlin(_x,_z):
     y = 0
-    freq = 420
-    amp = 99       
+    freq = 64
+    amp = 42      
     y += ((noise([_x/freq,_z/freq]))*amp)
-    freq = 76
-    amp = 60
+    freq = 32
+    amp = 21
     y += ((noise([_x/freq,_z/freq]))*amp)       
-    freq = 24
-    amp = 20
+    freq = 12
+    amp = 11
     y += ((noise([_x/freq,_z/freq]))*amp)
     freq = 1
     amp = 3
     y += ((noise([_x/freq,_z/freq]))*amp)
     return floor(y)
+
 
 rad = 0
 theta = 0
@@ -154,11 +160,11 @@ swished = 0  # When swished twice, we increment rad.
 def genSub():
     global theta, rad, swirling, radLimit
     global cs, bsf, numSubCubes
-    global swished, thetaDir
+    global swished, thetaDir, origin
     if swirling==-1: return
     # Is there already a terrain block here?
-    x = round(subject.x + rad * cos(radians(theta)))
-    z = round(subject.z + rad * sin(radians(theta)))
+    x = round(origin.x + rad * cos(radians(theta)))
+    z = round(origin.z + rad * sin(radians(theta)))
     if subDic.get('x'+str(x)+'z'+str(z))!='i':
         subCubes[bsf].enable()
         subCubes[bsf].parent=subsets[cs]
@@ -197,10 +203,55 @@ def genSub():
             swirling=-1
             rad=1
     
+def newGen():
+    global theta, rad, swirling, radLimit
+    global cs, bsf, numSubCubes
+    global swished, thetaDir, origin
+    if swirling==-1: return
+    # Is there already a terrain block here?
+    x = floor(origin.x - radLimit + rad)
+    z = floor(origin.z + 12)
+    if subDic.get('x'+str(x)+'z'+str(z))!='i':
+        subCubes[bsf].enable()
+        subCubes[bsf].parent=subsets[cs]
+        subDic['x'+str(x)+'z'+str(z)]='i'
+        # print(subDic)
+        subCubes[bsf].x = x
+        subCubes[bsf].z = z
+        y = subCubes[bsf].y = getPerlin(x,z)
+        r = 0
+        b = 0
+        g = nMap(y,-16,16,0,255)
+        subCubes[bsf].color = color.rgb(r,g,b)
+
+        # Time to combine cubes into subset?
+        # NB. this will 'destroy' its child cubes,
+        # so we need to start bsf again at zero.
+        # And, to iterate to next subset.
+        subCubes[bsf].disable()
+        bsf+=1
+        if bsf==numSubCubes:
+            subsets[cs].combine(auto_destroy=False)
+            subsets[cs].enable()
+            cs+=1
+            bsf=0
+    else:
+        pass
+        # origin.z+=1
+        rad = 0
+        #print('already block at ' + 'x'+str(x)+'z'+str(z))
+        #rad+=1
+        
+    # Swirl to next terrain position.
+    rad+=1
+    if rad==radLimit*2:
+        origin.z-=1
+        rad=0
+
 shellies = []
 shellWidth = 3
 for i in range(shellWidth*shellWidth):
-    bud = Entity(model='cube',scale_y=4,collider='box')
+    bud = Entity(model='cube',scale_y=2,collider='box')
     bud.visible=False
     shellies.append(bud)
 
@@ -215,13 +266,14 @@ def generateShell():
 
 subject = SubjectiveController()
 subject.cursor.visible = False
-subject.gravity = 0.5
-subject.speed = 12
+subject.gravity = 0.2
+subject.speed = 3
 subject.step_height = 1
 subject.x = subject.z = 0
-subject.y = 3
+subject.y = 12
 prevZ = subject.z
 prevX = subject.x
+origin = subject.position
 
 chickenModel = load_model('chicken.obj')
 vincent = Entity(model=chickenModel,scale=1,
