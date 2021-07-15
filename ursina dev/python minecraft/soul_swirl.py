@@ -19,9 +19,10 @@ larger List of terrains. How is subSwirl achieving this? DONE
 2.2) Need to match subset number to terrainLimit. And look over to make sure legit.
 3) Create Nether/cave.
 4) Attempt vertices deletion/repositioning...
+5) Try using a custom model with texture -- see if uv map works!
 """
 
-from random import randrange
+from random import randint, randrange
 from ursina import *  
 # from ursina.prefabs.first_person_controller import FirstPersonController
 from numpy import floor
@@ -46,6 +47,8 @@ scene.fog_density = 0.01
 
 grassStrokeTex = load_texture('grass_14.png')
 monoTex = load_texture('stroke_mono.png')
+blockMod = load_model('block.obj')
+blockTex = load_texture('block_texture.png')
 
 def input(key):
     global swirling, canSwirl
@@ -72,17 +75,9 @@ def update():
         rad = 0
         swirling=1*canSwirl
         origin=subject.position
-        #comboTip.enabled=False
-
-    # Safety net, in case of glitching through terrain.
-    # if subject.y < -100:
-    #     subject.y = floor((noise([subject.x/freq,
-    #     subject.z/freq]))*amp)+4
-    #     subject.land()
 
     if time.time() - prevTime > subSpeed:
         for i in range(perCycle):
-            # newGen()
             genSub()
         
         if (cs) >= terrainLimit-4:
@@ -95,23 +90,24 @@ def update():
         if cs == terrainLimit-1:
             finishTerrain()
             comboTip.enabled=False
-            #swirling=-1
             
         prevTime = time.time()
 
 def finishTerrain():
-    global subsets, terrains, subCubes, cs
+    global terrains, cs
     # Since subsets will be destroyed, reparent subcubes.
-    for sc in subCubes:
-        sc.parent = scene
+    # Legacy!
+    # for sc in subCubes:
+    #     sc.parent = scene
 
-    terrains[-1].texture = monoTex
+    # terrains[-1].texture = blockTex
     terrains[-1].combine(auto_destroy=False)
     # Create new empty terrain ready for next combination.
     terrains.append(Entity(model=None))
     
     # Make sure our subset list is empty, since its
     # entities have just been destroyed.
+    # No they haven't! That was legacy...
     #subsets *= 0
     cs = 0
 
@@ -126,23 +122,23 @@ comboTip = Tooltip('<pink>Warning! Combining ' +
 comboTip.enabled=False
 
 subsets = []
-numSubCubes = 72 # def=32Number of cubes per subset.
-subSpeed = 0.06 # def=0.04How long before new cubes added to terrain?
-perCycle = 36    # def=8How many cubes positioned per update?
-radLimit = 128   # def=64How far a radius before swirling off?
+numSubCubes = 16 # def=16Number of cubes per subset.
+subSpeed = 0.0 # def=0.02How long before new cubes added to terrain?
+perCycle = 16    # def=16How many cubes positioned per update?
+radLimit = 128   # def=128How far a radius before swirling off?
 cs = 0 # Current subset.
 bsf = 0 # Blocks so far.
-for i in range(200):
+for i in range(100):
     bud = Entity(model=None)
-    bud.texture=monoTex
+    bud.texture=blockTex
     bud.disable()
     subsets.append(bud)
 subCubes = []
 for i in range(numSubCubes):
-    bud = Entity(model='cube',scale_y=2)
+    bud = Entity(model=blockMod,scale_y=1)
     # Add random rotation to help diversify the texture.
-    # randRot=random.randint(1,4)
-    # bud.rotation_y = 90*randRot
+    randRot=random.randint(1,4)
+    bud.rotation_y = 90*randRot
     # randRot=random.randint(1,4)
     # bud.rotation_z = 90*randRot
     bud.disable()
@@ -184,8 +180,8 @@ def genSub():
     global thetaDir, origin
     if swirling==-1: return
     # Is there already a terrain block here?
-    x = round(origin.x + rad * cos(radians(theta)))
-    z = round(origin.z + rad * sin(radians(theta)))
+    x = floor(origin.x + rad * cos(radians(theta)))
+    z = floor(origin.z + rad * sin(radians(theta)))
     if subDic.get('x'+str(x)+'z'+str(z))!='i':
         subCubes[bsf].enable()
         subCubes[bsf].parent=subsets[cs]
@@ -196,8 +192,9 @@ def genSub():
         y = subCubes[bsf].y = getPerlin(x,z)
         r = 0
         b = 0
-        g = nMap(y,-16,16,0,255)
-        subCubes[bsf].color = color.rgb(r,g,b)
+        g = nMap(y,-16,16,0,220) + randint(-20,20)
+        subCubes[bsf].color = color.rgb(g,g,g)
+        
 
         # Time to combine cubes into subset?
         # NB. this will 'destroy' its child cubes,
@@ -216,20 +213,22 @@ def genSub():
         #rad+=1
         
     # Swirl to next terrain position.
-    theta-=(128/((rad+1)*3.14))*thetaDir
-    if theta <= -360: 
+    if rad==0:
+       theta=0
+       rad=0.5
+    else: theta+=45/rad
+    # theta-=(128/((rad+1)*3.14))*thetaDir
+    if theta >= 360: 
         theta = 0
-        rad += 1
+        rad += 0.5
         if rad > radLimit:
             swirling=-1
-            rad=1
-    
-
+            rad=0
 
 shellies = []
 shellWidth = 3
 for i in range(shellWidth*shellWidth):
-    bud = Entity(model='cube',scale_y=2,collider='box')
+    bud = Entity(model='cube',scale_y=1,collider='box')
     bud.visible=False
     shellies.append(bud)
 
