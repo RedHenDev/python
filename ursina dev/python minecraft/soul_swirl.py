@@ -2,34 +2,23 @@
 Minecraft in Python, with Ursina.
 New idea for a 'subSwirl' system: June 22 2021.
 Working! 23 June 2021 :)
-
 13th July 2021 -- infinite system working!
-Basically, we subswirl around the player's position, the
-player having moved 10 blocks. Maybe we should make this
-a new number...a higher number.
-Also, we check whether a block already exists before
-setting its Perlin position, disabling it and moving to
-next subCube if it does -- i.e. for when player backtracks
-over terrain they've already visited.
-Optimizing by combining whole of terrain would be nice...
-Maybe a List of terrains, where we combine 1K subsets at
-a go or something? DONE
+14th July 2021 -- Octaves, combing subsets. Some optimisation.
 
-To Do...
+15th To DO
 
-0) Would be nice to use 3 or 4 proper octaves...
-
-1) Reset subset count (for determining when to combine into
-a terrain) somehow once we have triggered new swirl pos.
-Or rather -- more sophisticated counter as per when
-subject has approached edge of generated area so far --
-so that a good amount of terrain surrounds them, before
-stopping swirling. This could be independent of the
-combination of terrains, which is really a separate issue?
-Essentially, we always want swirling enabled when subject
-is not surrounded by enough terrain.
-
-2) Bug with floating terrain artefact once combining terrain.
+0) Try tweaking optimizations to match subSwirl performance. DONE
+1) Try using subswirl vector movement instead of polar co-ordinates.
+1.1) OR -> better algorithm, which moves from subject pos outward, to find edge of terrain,
+then begins generating from there? Also, could combine this with more sophisticated
+'phase' algorithm for block-by-block swirling (can be nested in a loop to do more than
+one block each update cycle).
+2) Reduce Octave complexity -- perhaps just 2 instead of the 4? DONE
+2.1) Complete optimizations so that we have silky 60fps -- combine subsets into
+larger List of terrains. How is subSwirl achieving this? DONE
+2.2) Need to match subset number to terrainLimit. And look over to make sure legit.
+3) Create Nether/cave.
+4) Attempt vertices deletion/repositioning...
 """
 
 from random import randrange
@@ -52,8 +41,8 @@ window.exit_button.visible = False
 
 prevTime = time.time()
 
-# scene.fog_color = color.rgb(0,10,222)
-# scene.fog_density = 0.02
+scene.fog_color = color.rgb(0,211,255)
+scene.fog_density = 0.01
 
 grassStrokeTex = load_texture('grass_14.png')
 monoTex = load_texture('stroke_mono.png')
@@ -71,17 +60,19 @@ def update():
     global subSpeed, perCycle
     global swirling, comboTip
     global rad, radLimit, origin
+    global terrainLimit, cs
             
     generateShell()
 
-    if  abs(subject.z - prevZ) >= 1 or \
-        abs(subject.x - prevX) >= 1:
+    if  abs(subject.z - prevZ) >= 10 or \
+        abs(subject.x - prevX) >= 10:
         prevZ = subject.z
         prevX = subject.x
         # Reset swirling settings...?
         rad = 0
         swirling=1*canSwirl
         origin=subject.position
+        #comboTip.enabled=False
 
     # Safety net, in case of glitching through terrain.
     # if subject.y < -100:
@@ -91,28 +82,57 @@ def update():
 
     if time.time() - prevTime > subSpeed:
         for i in range(perCycle):
-            newGen()
-            # genSub()
+            # newGen()
+            genSub()
+        
+        if (cs) >= terrainLimit-4:
+            comboTip.enabled=False
+            comboTip = Tooltip('<pink>Warning! Combining ' + 
+                    str(terrainLimit) + ' subsets of #' + 
+                    str(len(terrains)) + ' terrain!')
+            comboTip.enabled=True
+            
+        if cs == terrainLimit-1:
+            finishTerrain()
+            comboTip.enabled=False
+            #swirling=-1
+            
         prevTime = time.time()
+
+def finishTerrain():
+    global subsets, terrains, subCubes, cs
+    # Since subsets will be destroyed, reparent subcubes.
+    for sc in subCubes:
+        sc.parent = scene
+
+    terrains[-1].texture = monoTex
+    terrains[-1].combine(auto_destroy=False)
+    # Create new empty terrain ready for next combination.
+    terrains.append(Entity(model=None))
+    
+    # Make sure our subset list is empty, since its
+    # entities have just been destroyed.
+    #subsets *= 0
+    cs = 0
 
 noise = PerlinNoise(octaves=1,seed=99)
 
 terrains = []
 terrains.append(Entity(model=None))
-terrainLimit = 888 # How many subsets before combining.
+terrainLimit = 100 # How many subsets before combining.
 comboTip = Tooltip('<pink>Warning! Combining ' + 
                     str(terrainLimit) + 'subsets of #' + 
                     str(len(terrains)) + ' terrain!')
 comboTip.enabled=False
 
 subsets = []
-numSubCubes = 32 # def=32Number of cubes per subset.
-subSpeed = 0.0 # def=0How long before new cubes added to terrain?
-perCycle = 8    # def=8How many cubes positioned per update?
-radLimit = 32   # def=64How far a radius before swirling off?
+numSubCubes = 72 # def=32Number of cubes per subset.
+subSpeed = 0.06 # def=0.04How long before new cubes added to terrain?
+perCycle = 36    # def=8How many cubes positioned per update?
+radLimit = 128   # def=64How far a radius before swirling off?
 cs = 0 # Current subset.
 bsf = 0 # Blocks so far.
-for i in range(999):
+for i in range(200):
     bud = Entity(model=None)
     bud.texture=monoTex
     bud.disable()
@@ -128,7 +148,6 @@ for i in range(numSubCubes):
     bud.disable()
     subCubes.append(bud)
 
-currentSubset = 0
 swirling = 1 # Are we generating terrain?
 canSwirl = 1 # Are we allowed to turn on swirling?
 
@@ -143,13 +162,15 @@ def getPerlin(_x,_z):
     y += ((noise([_x/freq,_z/freq]))*amp)
     freq = 32
     amp = 21
-    y += ((noise([_x/freq,_z/freq]))*amp)       
+    y += ((noise([_x/freq,_z/freq]))*amp)
+    """
     freq = 12
     amp = 11
     y += ((noise([_x/freq,_z/freq]))*amp)
     freq = 1
     amp = 3
     y += ((noise([_x/freq,_z/freq]))*amp)
+    """
     return floor(y)
 
 
@@ -160,7 +181,7 @@ swished = 0  # When swished twice, we increment rad.
 def genSub():
     global theta, rad, swirling, radLimit
     global cs, bsf, numSubCubes
-    global swished, thetaDir, origin
+    global thetaDir, origin
     if swirling==-1: return
     # Is there already a terrain block here?
     x = round(origin.x + rad * cos(radians(theta)))
@@ -203,50 +224,7 @@ def genSub():
             swirling=-1
             rad=1
     
-def newGen():
-    global theta, rad, swirling, radLimit
-    global cs, bsf, numSubCubes
-    global swished, thetaDir, origin
-    if swirling==-1: return
-    # Is there already a terrain block here?
-    x = floor(origin.x - radLimit + rad)
-    z = floor(origin.z + 12)
-    if subDic.get('x'+str(x)+'z'+str(z))!='i':
-        subCubes[bsf].enable()
-        subCubes[bsf].parent=subsets[cs]
-        subDic['x'+str(x)+'z'+str(z)]='i'
-        # print(subDic)
-        subCubes[bsf].x = x
-        subCubes[bsf].z = z
-        y = subCubes[bsf].y = getPerlin(x,z)
-        r = 0
-        b = 0
-        g = nMap(y,-16,16,0,255)
-        subCubes[bsf].color = color.rgb(r,g,b)
 
-        # Time to combine cubes into subset?
-        # NB. this will 'destroy' its child cubes,
-        # so we need to start bsf again at zero.
-        # And, to iterate to next subset.
-        subCubes[bsf].disable()
-        bsf+=1
-        if bsf==numSubCubes:
-            subsets[cs].combine(auto_destroy=False)
-            subsets[cs].enable()
-            cs+=1
-            bsf=0
-    else:
-        pass
-        # origin.z+=1
-        rad = 0
-        #print('already block at ' + 'x'+str(x)+'z'+str(z))
-        #rad+=1
-        
-    # Swirl to next terrain position.
-    rad+=1
-    if rad==radLimit*2:
-        origin.z-=1
-        rad=0
 
 shellies = []
 shellWidth = 3

@@ -156,7 +156,7 @@ def generateSubswirl():
     global currentVec, iterations, changes, subArea
     global subPos, toIterate, swirlVecs
 
-    sub = Entity(model=None,parent=terrains[0])
+    sub = Entity(model=None,parent=terrains[-1])
     subsets.append(sub)
 
     # Translate position of subset, according to
