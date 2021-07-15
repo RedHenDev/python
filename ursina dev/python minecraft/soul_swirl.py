@@ -118,7 +118,7 @@ comboTip.enabled=False
 
 subsets = []
 numSubCubes = 16 # def=16Number of cubes per subset.
-subSpeed = 0.0 # def=0.02How long before new cubes added to terrain?
+subSpeed = 0 # def=0.02How long before new cubes added to terrain?
 perCycle = 16    # def=16How many cubes positioned per update?
 radLimit = 128   # def=128How far a radius before swirling off?
 cs = 0 # Current subset.
@@ -132,7 +132,7 @@ subCubes = []
 for i in range(numSubCubes):
     bud = Entity(model=blockMod,scale_y=1)
     # Add random rotation to help diversify the texture.
-    randRot=random.randint(1,4)
+    randRot=random.randint(0,3)
     bud.rotation_y = 90*randRot
     bud.disable()
     subCubes.append(bud)
