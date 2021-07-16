@@ -150,7 +150,7 @@ def input(key):
         subject.y += 10
 
 subject = FirstPersonController()
-subject.gravity = 0.2
+subject.gravity = 0
 subject.speed = 16
 subject.y = 111
 subject.z = 5
