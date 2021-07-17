@@ -1,6 +1,7 @@
 """
 Minecraft in Python, with Ursina, tut 7
 
+-1) Theta reset!
 0) Combine subsets into terrains
 1) Create our own subCube model, with texture
 2) rotate subCubes for better texture distribution
@@ -8,8 +9,6 @@ Minecraft in Python, with Ursina, tut 7
 4) More efficient terrain generation
 ...
 future) Mining? 
-
-
 """
 
 from random import randrange

@@ -61,7 +61,7 @@ def update():
     global prevZ, prevX, prevTime, subsets
     global subSpeed, perCycle
     global swirling, comboTip
-    global rad, radLimit, origin
+    global rad, radLimit, origin, theta
     global terrainLimit, cs
             
     generateShell()
@@ -72,6 +72,7 @@ def update():
         prevX = subject.x
         # Reset swirling settings...?
         rad = 0
+        theta = 0
         swirling=1*canSwirl
         origin=subject.position
 
@@ -100,16 +101,18 @@ def update():
 def finishTerrain():
     global terrains, cs
     
+    for s in subsets:
+        s.parent=terrains[-1]
     terrains[-1].combine(auto_destroy=False)
     # Create new empty terrain ready for next combination.
-    terrains.append(Entity(model=None))
+    terrains.append(Entity(texture=blockTex))
     # Current subset back to 0.
     cs = 0
 
 noise = PerlinNoise(octaves=1,seed=99)
 
 terrains = []
-terrains.append(Entity(model=None))
+terrains.append(Entity(texture=blockTex))
 terrainLimit = 420 # How many subsets before combining.
 comboTip = Tooltip('<pink>Warning! Combining ' + 
                     str(terrainLimit) + 'subsets of #' + 
@@ -124,13 +127,14 @@ radLimit = 128   # def=128How far a radius before swirling off?
 cs = 0 # Current subset.
 bsf = 0 # Blocks so far.
 for i in range(terrainLimit):
-    bud = Entity(model=None)
+    bud = Entity()
     bud.texture=blockTex
     bud.disable()
     subsets.append(bud)
 subCubes = []
 for i in range(numSubCubes):
-    bud = Entity(model=blockMod,scale_y=1)
+    bud = Entity(model=blockMod,scale_y=1,
+    texture=blockTex)
     # Add random rotation to help diversify the texture.
     randRot=random.randint(0,3)
     bud.rotation_y = 90*randRot
@@ -181,7 +185,6 @@ def genSub():
         y = subCubes[bsf].y = getPerlin(x,z)
         g = nMap(y,-16,16,0,220) + randint(-20,20)
         subCubes[bsf].color = color.rgb(g,g,g)
-
         # Time to combine cubes into subset?
         # NB. we need to start bsf again at zero.
         # And, to iterate to next subset.
