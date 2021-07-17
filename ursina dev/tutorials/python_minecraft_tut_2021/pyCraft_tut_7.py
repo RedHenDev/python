@@ -1,11 +1,11 @@
 """
 Minecraft in Python, with Ursina, tut 7
 
--1) Theta reset!
-0) Combine subsets into terrains
-1) Create our own subCube model, with texture
-2) rotate subCubes for better texture distribution
-3) colours!
+DONE -1) Theta reset!
+DONE 0) Combine subsets into megasets
+DONE 1) Create our own subCube model, with texture
+DONE 2) rotate subCubes for better texture distribution
+DONE 3) colours!
 4) More efficient terrain generation
 ...
 future) Mining? 
@@ -38,6 +38,12 @@ grassStrokeTex = load_texture('grass_14.png')
 monoTex = load_texture('stroke_mono.png')
 wireTex = load_texture('wireframe.png')
 stoneTex = load_texture('grass_mono.png')
+
+cubeTex = load_texture('block_texture.png')
+cubeModel = load_model('moonCube.obj')
+
+axoTex = load_texture('axolotl.png')
+axoModel = load_model('axolotl.obj')
 
 bte = Entity(model='cube',texture=wireTex)
 class BTYPE:
@@ -97,6 +103,7 @@ def update():
         abs(subject.x - prevX) > 1:
             origin=subject.position
             rad=0
+            theta=0
             generating = 1 * canGenerate
             prevZ = subject.z
             prevX = subject.x
@@ -116,7 +123,7 @@ def update():
 
 noise = PerlinNoise(octaves=1,seed=99)
 
-
+megasets = []
 subsets = []
 subCubes = []
 # New variables :)
@@ -127,7 +134,7 @@ perCycle = 16
 currentCube = 0
 currentSubset = 0
 numSubCubes = 16
-numSubsets = 420
+numSubsets = 42 # I.e. how many combined into a megaset?
 theta = 0
 rad = 0
 # Dictionary for recording whether terrain blocks exist
@@ -136,14 +143,15 @@ subDic = {}
 
 # Instantiate our 'ghost' subset cubes.
 for i in range(numSubCubes):
-    bud = Entity(model='cube')
+    bud = Entity(model=cubeModel)
+    bud.rotation_y = random.randint(1,4)*90
     bud.disable()
     subCubes.append(bud)
 
 # Instantiate our empty subsets.
 for i in range(numSubsets):
     bud = Entity(model=None)
-    bud.texture = monoTex
+    bud.texture = cubeTex
     bud.disable()
     subsets.append(bud)
 
@@ -173,15 +181,29 @@ def genTerrain():
         subCubes[currentCube].z = z
         subDic['x'+str(x)+'z'+str(z)] = 'i'
         subCubes[currentCube].parent = subsets[currentSubset]
-        subCubes[currentCube].y = genPerlin(x,z)
+        y = subCubes[currentCube].y = genPerlin(x,z)
+        g = nMap(y,-8,21,12,243)
+        g += random.randint(-12,12)
+        subCubes[currentCube].color = color.rgb(0,g,0)
         subCubes[currentCube].disable()
         currentCube+=1
 
+        # Ready to build a subset?
         if currentCube==numSubCubes:
             subsets[currentSubset].combine(auto_destroy=False)
             subsets[currentSubset].enable()
             currentSubset+=1
             currentCube=0
+
+            # And ready to build a megaset?
+            if currentSubset==numSubsets:
+                megasets.append(Entity(texture=cubeTex))
+                # Parent all subsets to our new megaset.
+                for s in subsets:
+                    s.parent=megasets[-1]
+                megasets[-1].combine(auto_destroy=False)
+                currentSubset=0
+                print('Megaset #' + str(len(megasets))+'!')
 
     else:
         pass
@@ -216,7 +238,7 @@ subject = FirstPersonController()
 subject.cursor.visible = False
 subject.gravity = 0.5
 subject.x = subject.z = 5
-subject.y = 64
+subject.y = 32
 prevZ = subject.z
 prevX = subject.x
 origin = subject.position # Vec3 object? .x .y .z
@@ -225,6 +247,11 @@ chickenModel = load_model('chicken.obj')
 vincent = Entity(model=chickenModel,scale=1,
                 x=22,z=16,y=4,
                 texture='chicken.png',
+                double_sided=True)
+
+baby = Entity(model=axoModel,scale=10,
+                x=-22,z=16,y=4,
+                texture=axoTex,
                 double_sided=True)
 
 generateShell()
