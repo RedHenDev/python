@@ -1,8 +1,13 @@
 """
-Minecraft in Python, with Ursina, tut 6
+Minecraft in Python, with Ursina, tut 7
 
 0) Combine subsets into terrains
-1) Mining? 
+1) Create our own subCube model, with texture
+2) rotate subCubes for better texture distribution
+3) colours!
+4) More efficient terrain generation
+...
+future) Mining? 
 
 
 """
