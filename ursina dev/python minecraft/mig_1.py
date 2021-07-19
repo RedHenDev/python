@@ -31,6 +31,7 @@ from numpy import abs
 from numpy import cos
 from numpy import sin
 from numpy import radians
+from numpy import pi
 import time
 from perlin_noise import PerlinNoise  
 from subjective_controller import *
@@ -46,8 +47,10 @@ prevTime = time.time()
 scene.fog_color = color.rgb(0,211,255)
 scene.fog_density = 0.01
 
-blockMod = load_model('block.obj')
-blockTex = load_texture('block_texture.png')
+# blockMod = load_model('block.obj')
+# blockTex = load_texture('block_texture.png')
+blockMod = load_model('new_hex.obj')
+blockTex = load_texture('new_hex_tex.png')
 
 def input(key):
     global swirling, canSwirl
@@ -116,9 +119,9 @@ comboTip = Tooltip('<pink>Warning! Combining ' +
 comboTip.enabled=False
 
 subsets = []
-numSubCubes = 16 # def=16Number of cubes per subset.
-subSpeed = 0 # def=0.02How long before new cubes added to terrain?
-perCycle = 160    # def=16How many cubes positioned per update?
+numSubCubes = 32 # def=16Number of cubes per subset.
+subSpeed = 0.02 # def=0.02How long before new cubes added to terrain?
+perCycle = 64    # def=16How many cubes positioned per update?
 radLimit = 999   # def=128How far a radius before swirling off?
 cs = 0 # Current subset.
 bsf = 0 # Blocks so far.
@@ -129,11 +132,13 @@ for i in range(terrainLimit):
     subsets.append(bud)
 subCubes = []
 for i in range(numSubCubes):
-    bud = Entity(model=blockMod,scale_y=1,
-    texture=blockTex)
+    bud = Entity(model=blockMod,scale=0.6,
+                scale_y=0.7,scale_z=1.33,
+                texture=blockTex)
     # Add random rotation to help diversify the texture.
-    randRot=random.randint(0,3)
-    bud.rotation_y = 90*randRot
+    # randRot=random.randint(0,3)
+    # bud.rotation_y = 90*randRot
+    bud.rotation_x=90
     bud.disable()
     subCubes.append(bud)
 
@@ -163,7 +168,7 @@ def getPerlin(_x,_z):
     return floor(y)
 
 rad = 0
-theta = 0
+theta = 45
 def genSub():
     global theta, rad, swirling, radLimit
     global cs, bsf, numSubCubes
@@ -172,6 +177,7 @@ def genSub():
     # Is there already a terrain block here?
     x = floor(origin.x + rad * cos(radians(theta)))
     z = floor(origin.z + rad * sin(radians(theta)))
+    x += z%2*0.5
     if subDic.get('x'+str(x)+'z'+str(z))!='i':
         subCubes[bsf].enable()
         subCubes[bsf].parent=subsets[cs]
@@ -203,13 +209,13 @@ def genSub():
         # print('already block at ' + 'x'+str(x)+'z'+str(z))
         # rad+=0.5
         
-    # Swirl to next terrain position.
+    # Swirl to next hexagonal terrain position.
     if rad==0:
-        theta=0
+        theta=45
         rad=0.5
-    else: theta+=45/(rad*2)
-    if theta >= 360: 
-        theta = 0
+    else: theta+=45/rad
+    if theta >= 360:
+        theta=45/rad
         rad += 0.5
         if rad > radLimit:
             swirling=-1
@@ -218,7 +224,8 @@ def genSub():
 shellies = []
 shellWidth = 3 # Best performance and physics.
 for i in range(shellWidth*shellWidth):
-    bud = Entity(model='cube',scale_y=1,collider='box')
+    bud = Entity(model=blockMod,scale=0.6,
+    scale_z=1.33,collider='box')
     bud.visible=False
     shellies.append(bud)
 
