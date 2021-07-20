@@ -50,7 +50,7 @@ scene.fog_density = 0.01
 # blockMod = load_model('block.obj')
 # blockTex = load_texture('block_texture.png')
 blockMod = load_model('new_hex.obj')
-blockTex = load_texture('new_hex_tex.png')
+blockTex = load_texture('grass_64_hex_tex.png')
 
 def input(key):
     global swirling, canSwirl
@@ -132,13 +132,13 @@ for i in range(terrainLimit):
     subsets.append(bud)
 subCubes = []
 for i in range(numSubCubes):
-    bud = Entity(model=blockMod,scale=0.6,
-                scale_y=0.7,scale_z=1.33,
+    bud = Entity(model=blockMod,scale=0.58,
+                scale_y=0.67,scale_z=2,
                 texture=blockTex)
     # Add random rotation to help diversify the texture.
     # randRot=random.randint(0,3)
     # bud.rotation_y = 90*randRot
-    bud.rotation_x=90
+    bud.rotation_x=-90 # To correct for Blender orientation.
     bud.disable()
     subCubes.append(bud)
 
