@@ -105,8 +105,8 @@ subsets = []
 def genSubset():
     global iterations, toIterate, currentVec
     global changes, subPos
-    x = subPos.x += swirlVecs[currentVec].x*width_terrain
-    z = subPos.y += swirlVecs[currentVec].y*width_terrain
+    subPos.x += swirlVecs[currentVec].x*width_terrain
+    subPos.y += swirlVecs[currentVec].y*width_terrain
     pos = subPos
     sub = VertexSheet(pos)
     sub.texture = load_texture('mono64.png')
