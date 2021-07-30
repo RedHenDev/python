@@ -22,7 +22,7 @@ from numpy import radians
 import time
 from perlin_noise import PerlinNoise  
 from nMap import nMap
-from new_combine import new_combine
+# from new_combine import new_combine
 
 app = Ursina()
 
@@ -118,7 +118,7 @@ def update():
             genTerrain()
         prevTime = time.time()  
     
-    vincent.look_at(subject, 'forward')
+    
     # vincent.rotation_x = 0
 
     buildTool()
@@ -145,7 +145,7 @@ subDic = {}
 
 # Instantiate our 'ghost' subset cubes.
 for i in range(numSubCubes):
-    bud = Entity(model=cubeModel)
+    bud = Entity(model='block')
     bud.rotation_y = random.randint(1,4)*90
     bud.disable()
     subCubes.append(bud)
@@ -184,17 +184,17 @@ def genTerrain():
         subDic['x'+str(x)+'z'+str(z)] = 'i'
         subCubes[currentCube].parent = subsets[currentSubset]
         y = subCubes[currentCube].y = genPerlin(x,z)
-        g = nMap(y,-8,21,12,243)
+        g = nMap(y,-8,21,143,243)
         g += random.randint(-12,12)
-        subCubes[currentCube].color = color.rgb(0,g,0)
+        subCubes[currentCube].color = color.rgb(g,g,g)
         subCubes[currentCube].disable()
         currentCube+=1
 
         # Ready to build a subset?
         if currentCube==numSubCubes:
-            new_combine(subsets[currentSubset],
-                        auto_destroy=False)
-            # subsets[currentSubset].combine(auto_destroy=False)
+            # new_combine(subsets[currentSubset],
+                        # auto_destroy=False)
+            subsets[currentSubset].combine(auto_destroy=False)
             subsets[currentSubset].enable()
             currentSubset+=1
             currentCube=0
@@ -254,7 +254,7 @@ vincent = Entity(model=chickenModel,scale=1,
                 x=22,z=16,y=4,
                 texture='chicken.png',
                 double_sided=True)
-
+# vincent.add_script(SmoothFollow(target=subject,speed=0.1,rotation_speed=8))
 baby = Entity(model=axoModel,scale=10,
                 x=-22,z=16,y=4,
                 texture=axoTex,
