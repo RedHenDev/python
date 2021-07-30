@@ -23,6 +23,7 @@ import time
 from perlin_noise import PerlinNoise  
 from nMap import nMap
 # from new_combine import new_combine
+from safe_combine import safe_combine
 
 app = Ursina()
 
@@ -39,9 +40,9 @@ monoTex = load_texture('stroke_mono.png')
 wireTex = load_texture('wireframe.png')
 stoneTex = load_texture('grass_mono.png')
 
-cubeTex = load_texture('block_texture.png')
+# cubeTex = load_texture('block_texture.png')
 
-cubeModel = load_model('moonCube')
+# cubeModel = load_model('moonCube')
 
 
 axoTex = load_texture('axolotl.png')
@@ -145,16 +146,16 @@ subDic = {}
 
 # Instantiate our 'ghost' subset cubes.
 for i in range(numSubCubes):
-    bud = Entity(model='block')
+    bud = Entity(model='block',texture='block_texture')
     bud.rotation_y = random.randint(1,4)*90
-    bud.disable()
+    # bud.disable()
     subCubes.append(bud)
 
 # Instantiate our empty subsets.
 for i in range(numSubsets):
-    bud = Entity(model=None)
-    bud.texture = cubeTex
-    bud.disable()
+    bud = Entity(model='block',texture = 'block_texture')
+    # bud.texture = 'block_texture'
+    # bud.disable()
     subsets.append(bud)
 
 def genPerlin(_x, _z):
@@ -192,8 +193,8 @@ def genTerrain():
 
         # Ready to build a subset?
         if currentCube==numSubCubes:
-            # new_combine(subsets[currentSubset],
-                        # auto_destroy=False)
+            # safe_combine(subsets[currentSubset],
+            #              auto_destroy=False)
             subsets[currentSubset].combine(auto_destroy=False)
             subsets[currentSubset].enable()
             currentSubset+=1
@@ -201,7 +202,8 @@ def genTerrain():
             
             # And ready to build a megaset?
             if currentSubset==numSubsets:
-                megasets.append(Entity(texture=cubeTex))
+                megasets.append(Entity( model='block',
+                                        texture='block_texture'))
                 # Parent all subsets to our new megaset.
                 for s in subsets:
                     s.parent=megasets[-1]
