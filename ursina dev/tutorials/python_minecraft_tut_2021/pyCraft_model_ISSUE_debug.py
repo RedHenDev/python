@@ -148,14 +148,13 @@ subDic = {}
 for i in range(numSubCubes):
     bud = Entity(model='block',texture='block_texture')
     bud.rotation_y = random.randint(1,4)*90
-    # bud.disable()
+    bud.disable()
     subCubes.append(bud)
 
 # Instantiate our empty subsets.
 for i in range(numSubsets):
     bud = Entity(model='block',texture = 'block_texture')
-    # bud.texture = 'block_texture'
-    # bud.disable()
+    bud.disable()
     subsets.append(bud)
 
 def genPerlin(_x, _z):
@@ -193,8 +192,6 @@ def genTerrain():
 
         # Ready to build a subset?
         if currentCube==numSubCubes:
-            # safe_combine(subsets[currentSubset],
-            #              auto_destroy=False)
             subsets[currentSubset].combine(auto_destroy=False)
             subsets[currentSubset].enable()
             currentSubset+=1
