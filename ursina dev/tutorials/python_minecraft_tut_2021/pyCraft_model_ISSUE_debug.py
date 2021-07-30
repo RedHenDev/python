@@ -22,12 +22,7 @@ from numpy import radians
 import time
 from perlin_noise import PerlinNoise  
 from nMap import nMap
-# NB this import is different from youtube tutorial video.
-# In the 3.6.0 update for ursina, a minor change in the
-# combine() function may cause the terrain to generate
-# in pieces instead of as expected. This safe_combine()
-# function simply uses the legacy code from 3.5.0.
-from safe_combine import safe_combine
+from new_combine import new_combine
 
 app = Ursina()
 
@@ -197,7 +192,7 @@ def genTerrain():
 
         # Ready to build a subset?
         if currentCube==numSubCubes:
-            safe_combine(subsets[currentSubset],
+            new_combine(subsets[currentSubset],
                         auto_destroy=False)
             # subsets[currentSubset].combine(auto_destroy=False)
             subsets[currentSubset].enable()
@@ -210,9 +205,7 @@ def genTerrain():
                 # Parent all subsets to our new megaset.
                 for s in subsets:
                     s.parent=megasets[-1]
-                # In case user has Ursina version 3.6.0.
-                safe_combine(megasets[-1],auto_destroy=False)
-                # megasets[-1].combine(auto_destroy=False)
+                megasets[-1].combine(auto_destroy=False)
                 for s in subsets:
                     s.parent=scene
                 currentSubset=0
