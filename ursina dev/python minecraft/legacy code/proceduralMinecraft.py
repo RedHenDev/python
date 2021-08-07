@@ -175,7 +175,7 @@ ip = Entity(model='quad',position=Vec3(-10000,-7,-10000),
 generateChunk()
 
 # Ghost-terrain.
-mo = load_model('france') 
+mo = load_model('i') 
 a = Entity( model=mo,
             texture='grass_14.png',
             color=color.rgb(0,255,0),
@@ -197,4 +197,5 @@ sf = sun.add_script(SmoothFollow(
 # Mesh.save(urizen.model, 'urizen2.obj')
 
 subject.cursor.visible = False
+subject.gravity = 0
 app.run()
