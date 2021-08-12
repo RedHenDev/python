@@ -1,4 +1,5 @@
 import http.client
+import json
 
 conn = http.client.HTTPSConnection("apidojo-yahoo-finance-v1.p.rapidapi.com")
 
@@ -7,9 +8,13 @@ headers = {
     'x-rapidapi-host': "apidojo-yahoo-finance-v1.p.rapidapi.com"
     }
 
-conn.request("GET", "/auto-complete?q=SPCE&region=GB", headers=headers)
+conn.request("GET", "/stock/v2/get-summary?symbol=SPCE&region=GB", headers=headers)
 
 res = conn.getresponse()
 data = res.read()
 
-print(data.decode("utf-8"))
+d = data.decode("utf-8")
+
+e = json.loads(d)
+
+print('$'+str(e['price']['regularMarketPrice']['raw']))
