@@ -120,7 +120,7 @@ def pi_city_build(_string):
             e.parent=mrPi
 
 def ord_city_build(_string):
-    global mrPi
+    # global mrPi
     z = 0
     count = 0
     for i in _string:
@@ -134,13 +134,56 @@ def ord_city_build(_string):
             x = count
             e = Entity( model='cube',x=x,y=0.5,z=-z)
             e.scale_y = 4 + ord(i)/100
-            # e.texture='brick'
+            # e.texture='block_texture.png'
             # e.texture_scale.y = (e.scale_y*2)
             e.collider='box'
             y = ord(i)/100 + 0.01 # Prevent division by zero.
             e.color = color.rgba(0,255/y,255/y,200)
             count+=1
-            e.parent=mrPi
+            # e.parent=mrPi
+
+def pycraft_build(_string):
+    from random import randint
+    prev_height = 0
+    step = 0.4
+    z = 0
+    # Essentially the x position.
+    count = 0
+    # To remove gaps from line of spaces.
+    prev_space = False
+    for i in _string:
+        if i=='\n':
+            if prev_space==False: 
+                z+=1
+            prev_space=True
+            count=0
+        elif i==' ':
+            # count += 1
+            prev_space=True
+            continue
+        else: 
+            prev_space=False
+            x = count
+            if ord(i)/64 > prev_height:
+                block_y = prev_height+step
+            elif ord(i)/64 < prev_height:
+                block_y = prev_height-step
+            else:
+                block_y = prev_height
+            prev_height = ord(i)/64
+            e = Entity( model='block.obj',
+                        x=x,
+                        y=block_y,
+                        z=-z)
+            e.label = i
+            # e.scale_y = 4 + ord(i)/100
+            e.texture='block_texture.png'
+            # e.texture_scale.y = (e.scale_y*2)
+            e.collider='box'
+            e.rotation_y = 90*randint(1,5)
+            y = ord(i)/100 + 0.01 # Prevent division by zero.
+            e.color = color.rgba(255/y,255/y,255/y)
+            count+=1
 
 def load(_fileName):
     import sys, os
@@ -155,9 +198,13 @@ def load(_fileName):
     return txt_data
 
 def update():
-    if mouse.hovered_entity!=None:
+    try:
+        i = mouse.hovered_entity.label
+    except: return
+    if  mouse.hovered_entity!=None:
         # report(str(round((mouse.hovered_entity.scale.y-1)*10)))
-        report(chr(round((mouse.hovered_entity.scale_y-4)*100)))
+        # report(chr(round((mouse.hovered_entity.scale_y-4)*100)))
+        report(mouse.hovered_entity.label)
 
 def input(key):
     if key=='escape': quit()
@@ -170,7 +217,8 @@ report(_data)
 # city_build(_data)
 mrPi = Entity()
 # pi_city_build(_data)
-ord_city_build(_data)
+# ord_city_build(_data)
+pycraft_build(_data)
 # mrPi.combine(auto_destroy=True)
 # mrPi.collider=mrPi.model
 # mesh_build(_data)
