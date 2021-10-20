@@ -10,6 +10,7 @@ grund = Entity(model='quad',rotation_x=90,scale=100)
 grund.collider = 'box'
 grund.texture='grass'
 grund.texture_scale*=10
+grund.color=color.rgb(0,255,0)
 # Sky colour.
 window.color = color.cyan
 
@@ -173,7 +174,7 @@ def pycraft_build(_string):
             prev_height = ord(i)/64
             e = Entity( model='block.obj',
                         x=x,
-                        y=block_y,
+                        y=block_y-1,
                         z=-z)
             e.label = i
             # e.scale_y = 4 + ord(i)/100

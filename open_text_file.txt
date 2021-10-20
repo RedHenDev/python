@@ -1,0 +1,11 @@
+def load(_fileName):
+    import sys, os
+
+    # Open main module directory for correct file.
+    path = os.path.dirname(os.path.abspath(sys.argv[0]))
+    os.chdir(path)
+
+    with open(_fileName, 'r') as f:
+        txt_data = f.read()
+
+    return txt_data
