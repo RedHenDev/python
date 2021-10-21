@@ -63,7 +63,7 @@ urizen('hexizen_128.map',True)
 minimap_scale = 0.02
 uri = duplicate(dungeon)
 uri.texture='white_cube'
-# uri.color=color.rgba(200,200,200,200)
+uri.color=color.rgba(0,200,200,255)
 uri.scale *= minimap_scale
 uri.origin = (subject.position +
                         subject.camera_pivot.up * 2 + 
