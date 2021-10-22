@@ -8,7 +8,7 @@ from file_byte import load, save
 app = Ursina()
 
 noise = PerlinNoise(octaves=1,seed=int(99))
-terrainSize = 128
+terrainSize = 256
 td = {} # Terrain dictionary.
 # quad = load_model('stretch_hex.obj')
 # dungeon = Entity(model=Mesh(), texture='grass_64_hex_tex.png')
@@ -59,7 +59,7 @@ scene.fog_color = color.cyan
 scene.fog_density = 0.01
 
 # False saves terrain to file; True plays!
-urizen('urizen_128.map',True)
+urizen('mapBuild_test_1.map',True)
 minimap_scale = 0.02
 uri = duplicate(dungeon)
 uri.texture='white_cube'
