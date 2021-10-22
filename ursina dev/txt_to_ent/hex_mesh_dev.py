@@ -10,10 +10,10 @@ app = Ursina()
 noise = PerlinNoise(octaves=1,seed=int(99))
 terrainSize = 128
 td = {} # Terrain dictionary.
-# quad = load_model('stretch_hex.obj')
-# dungeon = Entity(model=Mesh(), texture='grass_64_hex_tex.png')
-quad = load_model('block.obj')
-dungeon = Entity(model=Mesh(), texture='block_texture.png')
+quad = load_model('stretch_hex.obj')
+dungeon = Entity(model=Mesh(), texture='grass_64_hex_tex.png')
+# quad = load_model('block.obj')
+# dungeon = Entity(model=Mesh(), texture='block_texture.png')
 model = dungeon.model
 
 def genPerlin(_x, _z):
@@ -41,7 +41,7 @@ def urizen(_map_name, load_terrain=True):
                 cc = nMap(y,-32,32,0.32,0.84)
                 cc += randint(1,100)/100
                 model.colors.extend((Vec4(cc,cc,cc,1),) * len(quad.vertices))
-                model.vertices.extend([Vec3(x,y,z)+v for v in quad.vertices])
+                model.vertices.extend([Vec3(x+z%2*0.5,y,z)+v for v in quad.vertices])
     if load_terrain==False:
         save(_map_name, td)
     else:
@@ -59,7 +59,7 @@ scene.fog_color = color.cyan
 scene.fog_density = 0.01
 
 # False saves terrain to file; True plays!
-urizen('urizen_128.map',True)
+urizen('hexizen_128.map',True)
 minimap_scale = 0.02
 uri = duplicate(dungeon)
 uri.texture='white_cube'
@@ -97,8 +97,5 @@ def update():
     try:
         target_y = 2 + td.get(str(floor(subject.x))+'_'+str(floor(subject.z)))
         subject.y = lerp(subject.y, target_y, 0.1)
-    except: 
-        # subject.y = subject.y
-        subject.x = 64
-        subject.z = 64
+    except: subject.y = subject.y
 app.run()
