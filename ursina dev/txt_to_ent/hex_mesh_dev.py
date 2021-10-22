@@ -8,7 +8,7 @@ from file_byte import load, save
 app = Ursina()
 
 noise = PerlinNoise(octaves=1,seed=int(99))
-terrainSize = 128
+terrainSize = 0 # To be derived from loaded map data :)
 map_name = 'mapBuild_test_2.map'
 td = {} # Terrain dictionary.
 quad = load_model('stretch_hex.obj')
@@ -31,6 +31,9 @@ def urizen(_map_name, load_terrain=True):
     global td
     if load_terrain==True:
         td = load(_map_name)
+        # Derive terrainSize from length of dictionary.
+        terrainSize = floor(math.sqrt(len(td)))
+        print(terrainSize)
     for z in range(terrainSize):
         for x in range(terrainSize):
             if load_terrain==False:

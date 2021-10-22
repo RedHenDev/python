@@ -12,7 +12,7 @@ from file_byte import load, save
 
 # app = Ursina()
 
-noise = PerlinNoise(octaves=1,seed=int(19882211))
+noise = PerlinNoise(octaves=8,seed=int(19882211))
 terrainSize = 128
 mapName = 'mapBuild_test_2.map'
 td = {} # Terrain dictionary.
@@ -24,12 +24,12 @@ td = {} # Terrain dictionary.
 
 def genPerlin(_x, _z):
     y = 0
-    freq = 64
-    amp = 32      
+    freq = 200
+    amp = 32     
     y += ((noise([_x/freq,_z/freq]))*amp)
-    freq = 64
-    amp = 21
-    y += ((noise([_x/freq,_z/freq]))*amp)
+    # freq = 64
+    # amp = 21
+    # y += ((noise([_x/freq,_z/freq]))*amp)
     return y
 
 def urizen(_map_name, load_terrain=False):
@@ -40,7 +40,7 @@ def urizen(_map_name, load_terrain=False):
         for x in range(terrainSize):
             if load_terrain==False:
                 y = floor(genPerlin(x,z))
-                y += math.sin(x)*0.5
+                # y += math.sin(x)*0.5
                 td[str(x)+'_'+str(z)] = y    
             else:
                 y = td.get(str(x)+'_'+str(z))
