@@ -13,9 +13,11 @@ map_name = 'mapBuild_test_4.map'
 td = {} # Terrain dictionary.
 quad = load_model('stretch_hex.obj')
 dungeon = Entity(model=Mesh(), texture='grass_64_hex_tex.png')
+dungeon2 = Entity(model=Mesh(),color=color.rgb(255,0,255))
 # quad = load_model('block.obj')
 # dungeon = Entity(model=Mesh(), texture='block_texture.png')
 model = dungeon.model
+model2 = dungeon2.model
 
 def genPerlin(_x, _z):
     y = 0
@@ -46,9 +48,15 @@ def urizen(_map_name, load_terrain=True):
                 cc += randint(1,100)/100
                 # Add colours and vertices twice.
                 # This also effects model.uvs below!
-                layers = 2
-                model.colors.extend((Vec4(cc,cc,cc,1),) * len(quad.vertices))
-                model.vertices.extend([Vec3(x+z%2*0.5,y,z)+v for v in quad.vertices])
+                layers = 1
+                # ***
+                if (randint(1,5)!=1):
+                    model.colors.extend((Vec4(cc,cc,cc,1),) * len(quad.vertices))
+                    model.vertices.extend([Vec3(x+z%2*0.5,y,z)+v for v in quad.vertices])
+                else:
+                    model2.colors.extend((Vec4(cc,cc,cc,1),) * len(quad.vertices))
+                    model2.vertices.extend([Vec3(x+z%2*0.5,y,z)+v for v in quad.vertices])
+                
                 # cc = nMap(y-layers,-32,32,0.32,0.84)
                 # cc += randint(1,100)/100
                 # model.colors.extend((Vec4(cc,cc,cc,1),) * len(quad.vertices))
@@ -58,6 +66,9 @@ def urizen(_map_name, load_terrain=True):
     else:
         model.uvs = (quad.uvs) * (terrainSize * terrainSize * layers)
         model.generate()
+        # ***
+        model2.uvs = (quad.uvs) * (terrainSize * terrainSize * layers)
+        model2.generate()
 
 subject = FirstPersonController()
 subject.z = 64
@@ -92,6 +103,7 @@ counter=0
 def update():
     global counter
     counter+=1
+    dungeon2.y = math.sin(counter*0.02)*0.5
     # Minimap.
     # uri.set_position(   subject.position +
     #                     subject.camera_pivot.up * 2 + 
