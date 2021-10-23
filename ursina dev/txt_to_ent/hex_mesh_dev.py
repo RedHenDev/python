@@ -12,8 +12,8 @@ terrainSize = 0 # To be derived from loaded map data :)
 map_name = 'mapBuild_test_4.map'
 td = {} # Terrain dictionary.
 quad = load_model('stretch_hex.obj')
-dungeon = Entity(model=Mesh(), texture='grass_64_hex_tex.png')
-dungeon2 = Entity(model=Mesh(),color=color.rgb(255,0,255))
+dungeon = Entity(model=Mesh(),texture='grass_64_hex_tex.png')
+dungeon2 = Entity(model=Mesh(),texture='grass_64_hex_tex_2.png')
 # quad = load_model('block.obj')
 # dungeon = Entity(model=Mesh(), texture='block_texture.png')
 model = dungeon.model
@@ -50,7 +50,7 @@ def urizen(_map_name, load_terrain=True):
                 # This also effects model.uvs below!
                 layers = 1
                 # ***
-                if (randint(1,5)!=1):
+                if (randint(1,2)!=1):
                     model.colors.extend((Vec4(cc,cc,cc,1),) * len(quad.vertices))
                     model.vertices.extend([Vec3(x+z%2*0.5,y,z)+v for v in quad.vertices])
                 else:
@@ -103,7 +103,7 @@ counter=0
 def update():
     global counter
     counter+=1
-    dungeon2.y = math.sin(counter*0.02)*0.5
+    # dungeon2.y = math.sin(counter*0.02)*0.5
     # Minimap.
     # uri.set_position(   subject.position +
     #                     subject.camera_pivot.up * 2 + 
