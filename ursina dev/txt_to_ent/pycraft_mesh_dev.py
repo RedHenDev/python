@@ -35,20 +35,32 @@ mark.parent=uri
 mark.scale *= 8
 mark.always_on_top=True
 """
+def paintTerrain():
+    x = subject.x + 9 * math.sin(math.radians(subject.rotation_y))
+    z = subject.z + 9 * math.cos(math.radians(subject.rotation_y))
+    x = math.floor(x)
+    z = math.floor(z)
+    newT = False
+    width = 12
+    for j in range(-width,width):
+        for k in range(-width,width):
+            if td.get(str(x+j)+'_'+str(z+k))==None:
+                newT = True
+                td[str(x+j)+'_'+str(z+k)]=genTerrain(x+j,z+k)
+    # Only generate model if new terrain to be built.
+    if newT==True:
+        regen()    
 
 def input(key):
-    global td
     if key=='g':
-        td[str(32)+'_'+str(64)] =genTerrain(32,64)
-        td[str(32)+'_'+str(65)] =genTerrain(32,65)
-        td[str(32)+'_'+str(66)] =genTerrain(32,66)
-        td[str(32)+'_'+str(67)] =genTerrain(32,67)
-        regen()
+        paintTerrain()
 
 counter=0
 def update():
     global counter
     counter+=1
+    if counter%32==0:
+        paintTerrain()
     """
     # Minimap.
     uri.set_position(   subject.position +
@@ -62,12 +74,9 @@ def update():
                         subject.position*minimap_scale+
                         subject.down*2)
     """
-    if counter%1==0:
-        try:
-            target_y = 2 + td.get(str(floor(subject.x+0.5))+'_'+str(floor(subject.z)))
-            subject.y = lerp(subject.y, target_y, 0.1)
-        except: 
-            pass
-        # subject.x = 32
-        # subject.z = 32
+    try:
+        target_y = 2 + td.get(str(floor(subject.x+0.5))+'_'+str(floor(subject.z)))
+        subject.y = lerp(subject.y, target_y, 0.1)
+    except: 
+        subject.y=subject.y
 app.run()

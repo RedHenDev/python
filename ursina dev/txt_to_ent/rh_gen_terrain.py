@@ -58,13 +58,17 @@ def genTerrain(x,z):
     #     model2.vertices.extend([Vec3(x,y,z)+v for v in block.vertices])
 
     model.uvs = (block.uvs) * (terrainSize * terrainSize)
-    model.generate()
+    # model.generate()
     # model2.uvs = (block.uvs) * (terrainSize * terrainSize)
     # model2.generate()
     return y
     
 def regen():
     model = terrainObject.model
+    block = terrainB
+    terrainSize = terrainS
+    
+    model.uvs = (block.uvs) * (terrainSize * terrainSize)
     model.generate()
 
 def loadMap(_map_name):
