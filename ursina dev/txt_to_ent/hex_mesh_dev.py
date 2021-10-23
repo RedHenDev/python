@@ -9,7 +9,7 @@ app = Ursina()
 
 noise = PerlinNoise(octaves=1,seed=int(99))
 terrainSize = 0 # To be derived from loaded map data :)
-map_name = 'mapBuild_test_2.map'
+map_name = 'mapBuild_test_4.map'
 td = {} # Terrain dictionary.
 quad = load_model('stretch_hex.obj')
 dungeon = Entity(model=Mesh(), texture='grass_64_hex_tex.png')
@@ -44,12 +44,19 @@ def urizen(_map_name, load_terrain=True):
                 y = td.get(str(x)+'_'+str(z))
                 cc = nMap(y,-32,32,0.32,0.84)
                 cc += randint(1,100)/100
+                # Add colours and vertices twice.
+                # This also effects model.uvs below!
+                layers = 2
                 model.colors.extend((Vec4(cc,cc,cc,1),) * len(quad.vertices))
                 model.vertices.extend([Vec3(x+z%2*0.5,y,z)+v for v in quad.vertices])
+                # cc = nMap(y-layers,-32,32,0.32,0.84)
+                # cc += randint(1,100)/100
+                # model.colors.extend((Vec4(cc,cc,cc,1),) * len(quad.vertices))
+                # model.vertices.extend([Vec3(x+z%2*0.5,y-layers,z)+v for v in quad.vertices])
     if load_terrain==False:
         save(_map_name, td)
     else:
-        model.uvs = (quad.uvs) * (terrainSize * terrainSize)
+        model.uvs = (quad.uvs) * (terrainSize * terrainSize * layers)
         model.generate()
 
 subject = FirstPersonController()

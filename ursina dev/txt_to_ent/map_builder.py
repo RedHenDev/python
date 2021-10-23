@@ -12,9 +12,8 @@ from file_byte import load, save
 
 # app = Ursina()
 
-noise = PerlinNoise(octaves=8,seed=int(19882211))
 terrainSize = 128
-mapName = 'mapBuild_test_2.map'
+mapName = 'mapBuild_test_4.map'
 td = {} # Terrain dictionary.
 # quad = load_model('stretch_hex.obj')
 # dungeon = Entity(model=Mesh(), texture='grass_64_hex_tex.png')
@@ -23,10 +22,25 @@ td = {} # Terrain dictionary.
 # model = dungeon.model
 
 def genPerlin(_x, _z):
+    _seed = (ord('l'))
+    noise1 = PerlinNoise(octaves=1,seed=_seed)
+    noise2 = PerlinNoise(octaves=3,seed=_seed)
+    noise3 = PerlinNoise(octaves=6,seed=_seed)
+    noise4 = PerlinNoise(octaves=12,seed=_seed)
+
     y = 0
-    freq = 200
-    amp = 32     
-    y += ((noise([_x/freq,_z/freq]))*amp)
+    freq = 64
+    amp = 32 
+    y += ((noise1([_x/freq,_z/freq]))*amp)
+    
+    amp = 16
+    y += ((noise2([_x/freq,_z/freq]))*amp)
+    
+    amp = 8
+    y += ((noise3([_x/freq,_z/freq]))*amp)
+    
+    amp = 1
+    y += ((noise4([_x/freq,_z/freq]))*amp)
     # freq = 64
     # amp = 21
     # y += ((noise([_x/freq,_z/freq]))*amp)
@@ -49,8 +63,8 @@ def urizen(_map_name, load_terrain=False):
                 model.colors.extend((Vec4(cc,cc,cc,1),) 
                                         * len(quad.vertices))
                 # For hexagonal terrain blocks.
-                # model.vertices.extend([Vec3(x+z%2*0.5,y,z)
-                model.vertices.extend([Vec3(x,y,z)
+                model.vertices.extend([Vec3(x+z%2*0.5,y,z)
+                # model.vertices.extend([Vec3(x,y,z)
                                         +v for v in quad.vertices])
     if load_terrain==False:
         save(_map_name, td)
