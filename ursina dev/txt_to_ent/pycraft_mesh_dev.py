@@ -1,6 +1,6 @@
 from ursina import *
 from ursina.prefabs.first_person_controller import FirstPersonController
-from rh_gen_terrain import loadMap
+from rh_gen_terrain import loadMap, genTerrain, regen
 
 app = Ursina()
 
@@ -36,15 +36,20 @@ mark.scale *= 8
 mark.always_on_top=True
 """
 
-# def input(key):
-#     if key=='g':
-#         # genTerrain()
+def input(key):
+    global td
+    if key=='g':
+        td[str(32)+'_'+str(64)] =genTerrain(32,64)
+        td[str(32)+'_'+str(65)] =genTerrain(32,65)
+        td[str(32)+'_'+str(66)] =genTerrain(32,66)
+        td[str(32)+'_'+str(67)] =genTerrain(32,67)
+        regen()
 
-# counter=0
+counter=0
 def update():
-    """
     global counter
     counter+=1
+    """
     # Minimap.
     uri.set_position(   subject.position +
                         subject.camera_pivot.up * 2 + 
@@ -57,10 +62,12 @@ def update():
                         subject.position*minimap_scale+
                         subject.down*2)
     """
-    try:
-        target_y = 2 + td.get(str(floor(subject.x))+'_'+str(floor(subject.z)))
-        subject.y = lerp(subject.y, target_y, 0.1)
-    except: 
-        subject.x = 32
-        subject.z = 32
+    if counter%1==0:
+        try:
+            target_y = 2 + td.get(str(floor(subject.x+0.5))+'_'+str(floor(subject.z)))
+            subject.y = lerp(subject.y, target_y, 0.1)
+        except: 
+            pass
+        # subject.x = 32
+        # subject.z = 32
 app.run()
