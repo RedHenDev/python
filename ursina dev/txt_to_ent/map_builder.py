@@ -13,7 +13,7 @@ from file_byte import load, save
 # app = Ursina()
 
 terrainSize = 256
-mapName = 'terrain_2.map'
+mapName = 'terrain_3.map'
 td = {} # Terrain dictionary.
 # quad = load_model('stretch_hex.obj')
 # dungeon = Entity(model=Mesh(), texture='grass_64_hex_tex.png')

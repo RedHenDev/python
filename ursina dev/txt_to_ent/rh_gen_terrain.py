@@ -12,15 +12,15 @@ from perlin_noise import PerlinNoise
 from file_byte import load
 from nMap import nMap
 from random import randint
-from numpy import floor, sqrt
+from numpy import floor, sqrt, abs
+
+_seed = (ord('l'))
+noise1 = PerlinNoise(octaves=1,seed=_seed)
+noise2 = PerlinNoise(octaves=3,seed=_seed)
+noise3 = PerlinNoise(octaves=6,seed=_seed)
+noise4 = PerlinNoise(octaves=12,seed=_seed)
 
 def genPerlin(_x, _z):
-    _seed = (ord('l'))
-    noise1 = PerlinNoise(octaves=1,seed=_seed)
-    noise2 = PerlinNoise(octaves=3,seed=_seed)
-    noise3 = PerlinNoise(octaves=6,seed=_seed)
-    noise4 = PerlinNoise(octaves=12,seed=_seed)
-
     y = 0
     freq = 256
     amp = 112 
@@ -54,6 +54,16 @@ swirlVecs = [
     Vec2(0,-1),
     Vec2(-1,0)
 ]
+
+def check_subset(subject):
+    for s in subsets:
+        if (abs(s.pos.x - subject.x)>256 or 
+            abs(s.pos.y - subject.z)>256):
+            print('ghost')
+            # s.disable()
+        else:
+            # print('zombie')
+            s.enable()
 
 def set_subPos(pos):
     subPos.x = pos.x
@@ -93,18 +103,27 @@ def setup_subsets():
     
     for i in range(512):
         e = Entity(model=Mesh(),texture='block_texture.png')
+        e.pos = Vec2(0,0)
         subsets.append(e)
 
 def gen_subset(x,z):
     global currentSubset
     block = terrainB   # Model with which we mould blocks. 
+    subsets[currentSubset].enable()
     model = subsets[currentSubset].model
     
+    # Record position of subset.
+    subsets[currentSubset].pos.x = x
+    subsets[currentSubset].pos.y = z
+
     y = floor(genPerlin(x,z))   
     cc = nMap(y,-32,32,0.32,0.84)
     cc += randint(1,100)/100
     model.colors.extend((Vec4(cc,cc,cc,1),) * len(block.vertices))
     model.vertices.extend([Vec3(x,y,z)+v for v in block.vertices])
+
+    # for i in range(1,3):
+    #     model.vertices.extend([Vec3(x,y-i,z)+v for v in block.vertices])
 
     return y
 
@@ -176,6 +195,10 @@ def loadMap(_map_name):
             else:
                 model2.colors.extend((Vec4(cc,cc,cc,1),) * len(block.vertices))
                 model2.vertices.extend([Vec3(x,y,z)+v for v in block.vertices])
+
+            # for i in range(1,3):
+            #     model.vertices.extend([Vec3(x,y-i,z)+v for v in block.vertices])
+
 
     model.uvs = (block.uvs) * (terrainSize * terrainSize)
     model.generate()

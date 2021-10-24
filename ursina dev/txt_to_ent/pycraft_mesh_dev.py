@@ -1,7 +1,52 @@
 from ursina import *
 from ursina.prefabs.first_person_controller import FirstPersonController
 from rh_gen_terrain import loadMap, swirl, swirl_pos, reset_swirl, gen_subset, set_subPos, next_subset, subset_regen
+from rh_gen_terrain import check_subset
 from numpy import abs
+
+"""
+Some notes about how this mess works:
+Perlin must be co-ordinated with the map_builder that
+contributed the loaded terrain at start.
+
+This module controls how wide each subset will be
+and how often created and after how many steps
+a new origin for the swirling terrain to be
+generated.
+
+rh_gen_terrain controls how many subsets and
+when to use the first on the list again etc
+(at present 24th Oct 2021 this is not organised
+really at all) - what we really need is to turn off
+subsets behind the player, on again if in front.
+So, subsets also need to record their location in
+a dictionary. Now, this won't work until we sort
+out the above issue of subsets being reused by
+new terrain generation resulting in subsets being
+giant dispersed things.
+
+The reason for subsets is precisely for being able
+to turn off and on for 60fps over giant terrains.
+Also, for rapid generation of terrain (although
+this seems to be more a matter of balancing
+size of new chunks etc (see details above)). Oh, meaning
+that we might just as well do without subsets and
+add new 'chunks' to existing single terrain entity.
+
+Seems to work well with a large 256 size terrain
+and subset of size 8x8, 512 subsets, radius of 16
+for projected subset start pos ahead of subject,
+painting terrain every 5 frames, and resetting start pos
+after subject moving more than 8 units.
+
+Another thing we need to look at is diversity of
+terrain texture, i.e. using the dual/multiple entity
+system that has been proven to work. Second, we
+need to test out mining.
+
+But right now I just want to test running this without
+the subsets hack. Yeah, was waaaaay too slow.
+"""
 
 app = Ursina()
 
@@ -11,9 +56,10 @@ subject.x = 128
 subject.z = 128
 subject.gravity = 0.0
 subject.cursor.visible=False
+subject.speed = 6
 window.color=color.cyan
-scene.fog_color = color.cyan
-scene.fog_density = 0.01
+scene.fog_color = color.white
+scene.fog_density = 0.02
 
 def new_terrain_gen_orig():
     radius = 16
@@ -79,10 +125,12 @@ counter=0
 preVpos = subject.position
 def update():
     global counter, preVpos
+
     counter+=1
     if counter%5==0:
     #     new_terrain_gen_orig()
         paintTerrain()
+        # check_subset(subject)
     if abs(subject.position.x - preVpos.x) > 8 or \
         abs(subject.position.z - preVpos.z) > 8:
         new_terrain_gen_orig()
@@ -101,7 +149,7 @@ def update():
                         subject.down*2)
     """
     try:
-        target_y = 2 + td.get(str(floor(subject.x+0.5))+'_'+str(floor(subject.z)))
+        target_y = 2 + td.get(str(floor(subject.x+0.5))+'_'+str(floor(subject.z+0.5)))
         subject.y = lerp(subject.y, target_y, 0.1)
     except: 
         subject.y=subject.y
