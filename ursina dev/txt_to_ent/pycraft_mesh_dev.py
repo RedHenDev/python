@@ -1,11 +1,12 @@
 from ursina import *
 from ursina.prefabs.first_person_controller import FirstPersonController
 from rh_gen_terrain import loadMap, swirl, swirl_pos, reset_swirl, gen_subset, set_subPos, next_subset, subset_regen
+from numpy import abs
 
 app = Ursina()
 
 subject = FirstPersonController()
-subject.y = 32
+subject.y = 100
 subject.x = 32
 subject.z = 32
 subject.gravity = 0.0
@@ -14,9 +15,21 @@ window.color=color.cyan
 scene.fog_color = color.cyan
 scene.fog_density = 0.01
 
+def new_terrain_gen_orig():
+    radius = 8
+    x = subject.x + radius * math.sin(math.radians(subject.rotation_y))
+    z = subject.z + radius * math.cos(math.radians(subject.rotation_y))
+    pos = Vec2(0,0)
+    pos.x = x
+    pos.y = z
+    # pos = Vec2(subject.x,subject.z)
+    set_subPos(pos)
+    reset_swirl()
+
 map_name = 'terrain_1.map'
 td = {} # Terrain dictionary.
 td = loadMap(map_name)
+new_terrain_gen_orig()
 """
 minimap_scale = 0.02
 uri = duplicate(dungeon)
@@ -35,15 +48,7 @@ mark.parent=uri
 mark.scale *= 8
 mark.always_on_top=True
 """
-def new_terrain_gen_orig():
-    radius = 8
-    x = subject.x + radius * math.sin(math.radians(subject.rotation_y))
-    z = subject.z + radius * math.cos(math.radians(subject.rotation_y))
-    pos = Vec2(0,0)
-    pos.x = x
-    pos.y = z
-    set_subPos(pos)
-    reset_swirl()
+
 
 def paintTerrain():
     width = 4
@@ -72,14 +77,17 @@ def input(key):
         new_terrain_gen_orig()
 
 counter=0
+preVpos = subject.position
 def update():
-    global counter
+    global counter, preVpos
     counter+=1
-    if counter%30==0:
-        new_terrain_gen_orig()
-        counter=0
-    if counter%4==0:
+    if counter%3==0:
+    #     new_terrain_gen_orig()
         paintTerrain()
+    if abs(subject.position.x - preVpos.x) > 2 or \
+        abs(subject.position.z - preVpos.z) > 2:
+        new_terrain_gen_orig()
+        preVpos = subject.position
     """
     # Minimap.
     uri.set_position(   subject.position +

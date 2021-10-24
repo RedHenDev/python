@@ -91,7 +91,7 @@ def setup_subsets():
     global subsets
     if len(subsets)!=0: return
     
-    for i in range(36):
+    for i in range(128):
         e = Entity(model=Mesh(),texture='block_texture.png')
         subsets.append(e)
 
@@ -120,7 +120,8 @@ def next_subset():
     currentSubset += 1
     if currentSubset == len(subsets)-1:
         currentSubset = 0
-        # subsets[0].model.clear() 
+        # subsets[0].model.clear(regenerate=False) 
+        print('used all subsets')
     # Perhaps clear subset here?
     # Well, academic since we actually want
     # to find the subset furthest away and behind player?
