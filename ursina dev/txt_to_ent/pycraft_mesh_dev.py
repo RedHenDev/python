@@ -6,9 +6,9 @@ from numpy import abs
 app = Ursina()
 
 subject = FirstPersonController()
-subject.y = 100
-subject.x = 32
-subject.z = 32
+subject.y = 256
+subject.x = 128
+subject.z = 128
 subject.gravity = 0.0
 subject.cursor.visible=False
 window.color=color.cyan
@@ -16,7 +16,7 @@ scene.fog_color = color.cyan
 scene.fog_density = 0.01
 
 def new_terrain_gen_orig():
-    radius = 8
+    radius = 16
     x = subject.x + radius * math.sin(math.radians(subject.rotation_y))
     z = subject.z + radius * math.cos(math.radians(subject.rotation_y))
     pos = Vec2(0,0)
@@ -26,7 +26,7 @@ def new_terrain_gen_orig():
     set_subPos(pos)
     reset_swirl()
 
-map_name = 'terrain_1.map'
+map_name = 'terrain_2.map'
 td = {} # Terrain dictionary.
 td = loadMap(map_name)
 new_terrain_gen_orig()
@@ -48,7 +48,6 @@ mark.parent=uri
 mark.scale *= 8
 mark.always_on_top=True
 """
-
 
 def paintTerrain():
     width = 4
@@ -81,11 +80,11 @@ preVpos = subject.position
 def update():
     global counter, preVpos
     counter+=1
-    if counter%3==0:
+    if counter%5==0:
     #     new_terrain_gen_orig()
         paintTerrain()
-    if abs(subject.position.x - preVpos.x) > 2 or \
-        abs(subject.position.z - preVpos.z) > 2:
+    if abs(subject.position.x - preVpos.x) > 8 or \
+        abs(subject.position.z - preVpos.z) > 8:
         new_terrain_gen_orig()
         preVpos = subject.position
     """

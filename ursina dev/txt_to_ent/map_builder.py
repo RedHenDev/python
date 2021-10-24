@@ -12,8 +12,8 @@ from file_byte import load, save
 
 # app = Ursina()
 
-terrainSize = 64
-mapName = 'terrain_1.map'
+terrainSize = 256
+mapName = 'terrain_2.map'
 td = {} # Terrain dictionary.
 # quad = load_model('stretch_hex.obj')
 # dungeon = Entity(model=Mesh(), texture='grass_64_hex_tex.png')
@@ -29,11 +29,11 @@ def genPerlin(_x, _z):
     noise4 = PerlinNoise(octaves=12,seed=_seed)
 
     y = 0
-    freq = 128
-    amp = 32 
+    freq = 256
+    amp = 112 
     y += ((noise1([_x/freq,_z/freq]))*amp)
     
-    amp = 16
+    amp = 56
     y += ((noise2([_x/freq,_z/freq]))*amp)
     
     amp = 8

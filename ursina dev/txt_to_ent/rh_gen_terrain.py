@@ -22,10 +22,10 @@ def genPerlin(_x, _z):
     noise4 = PerlinNoise(octaves=12,seed=_seed)
 
     y = 0
-    freq = 128
-    amp = 32 
+    freq = 256
+    amp = 112 
     y += ((noise1([_x/freq,_z/freq]))*amp)
-    amp = 16
+    amp = 56
     y += ((noise2([_x/freq,_z/freq]))*amp)
     amp = 8
     y += ((noise3([_x/freq,_z/freq]))*amp)
@@ -91,7 +91,7 @@ def setup_subsets():
     global subsets
     if len(subsets)!=0: return
     
-    for i in range(128):
+    for i in range(512):
         e = Entity(model=Mesh(),texture='block_texture.png')
         subsets.append(e)
 
@@ -159,6 +159,7 @@ def loadMap(_map_name):
     _td = load(_map_name)
     # Derive terrain size. Position subject.
     terrainSize = int(floor(sqrt(len(_td))))
+    print(terrainSize)
     for z in range(terrainSize):
         for x in range(terrainSize):
             
