@@ -1,6 +1,6 @@
 from ursina import *
 from ursina.prefabs.first_person_controller import FirstPersonController
-from rh_gen_terrain import loadMap, genTerrain, regen, gen_subset, next_subset, subset_regen
+from rh_gen_terrain import loadMap, swirl, swirl_pos, reset_swirl, gen_subset, set_subPos, next_subset, subset_regen
 
 app = Ursina()
 
@@ -35,37 +35,50 @@ mark.parent=uri
 mark.scale *= 8
 mark.always_on_top=True
 """
+def new_terrain_gen_orig():
+    radius = 8
+    x = subject.x + radius * math.sin(math.radians(subject.rotation_y))
+    z = subject.z + radius * math.cos(math.radians(subject.rotation_y))
+    pos = Vec2(0,0)
+    pos.x = x
+    pos.y = z
+    set_subPos(pos)
+    reset_swirl()
+
 def paintTerrain():
-    x = subject.x + 9 * math.sin(math.radians(subject.rotation_y))
-    z = subject.z + 9 * math.cos(math.radians(subject.rotation_y))
-    x = math.floor(x)
-    z = math.floor(z)
+    width = 4
+    pos = swirl_pos(width*2)
+    swirl() # Find next position to create terrain.
+    x = math.floor(pos.x)
+    z = math.floor(pos.y)
     newT = False
-    width = 6
+    
     for j in range(-width,width):
         for k in range(-width,width):
             if td.get(str(x+j)+'_'+str(z+k))==None:
                 newT = True
                 # td[str(x+j)+'_'+str(z+k)]=genTerrain(x+j,z+k)
                 td[str(x+j)+'_'+str(z+k)]=gen_subset(x+j,z+k)
-    # Only generate model if new terrain to be built.
+# Only generate model if new terrain to be built.
     if newT==True:
-        # But why 4? 
+        # But why 4? - since each width is half a length.
         # Could optimize by precalculating this once.
         # regen(width*width*4)
-        subset_regen(width*width*3)
+        subset_regen(width*width*4)
         next_subset()
-        
 
 def input(key):
     if key=='g':
-        paintTerrain()
+        new_terrain_gen_orig()
 
 counter=0
 def update():
     global counter
     counter+=1
-    if counter%60==0:
+    if counter%30==0:
+        new_terrain_gen_orig()
+        counter=0
+    if counter%4==0:
         paintTerrain()
     """
     # Minimap.

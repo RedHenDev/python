@@ -41,6 +41,52 @@ terrainB = None
 subsets = []
 currentSubset = 0
 
+# For new position of subset.
+currentVec = 0
+iterations = 0
+toIterate = 1
+changes = -1
+subPos = Vec2(32,32)
+swirlVecs = [
+    Vec2(0,0),
+    Vec2(0,1),
+    Vec2(1,0),
+    Vec2(0,-1),
+    Vec2(-1,0)
+]
+
+def set_subPos(pos):
+    subPos.x = pos.x
+    subPos.y = pos.y
+
+def reset_swirl():
+    global currentVec, iterations, toIterate, changes
+    currentVec = 0
+    iterations = 0
+    toIterate = 1
+    changes = -1
+
+def swirl():
+    global iterations,toIterate,currentVec,changes
+    # Co-ordinate new vector by iteration around swirl.
+    iterations+=1
+    if iterations == toIterate:
+        currentVec+=1
+        if currentVec == len(swirlVecs):
+            currentVec = 1
+        changes+=1
+        iterations = 0
+        if changes == 2:
+            changes=0
+            toIterate+=1
+
+def swirl_pos(subWidth):
+    # Translate position of subset, according to
+    # current vector.
+    subPos.x += (swirlVecs[currentVec].x*subWidth)
+    subPos.y += (swirlVecs[currentVec].y*subWidth)
+    return subPos
+
 def setup_subsets():
     global subsets
     if len(subsets)!=0: return
@@ -74,6 +120,7 @@ def next_subset():
     currentSubset += 1
     if currentSubset == len(subsets)-1:
         currentSubset = 0
+        # subsets[0].model.clear() 
     # Perhaps clear subset here?
     # Well, academic since we actually want
     # to find the subset furthest away and behind player?
