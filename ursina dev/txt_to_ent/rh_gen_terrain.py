@@ -38,41 +38,68 @@ terrainObject = None
 terrainS = None
 terrainB = None
 
-def genTerrain(x,z):
-    block = terrainB
-    terrainSize = terrainS
-    model = terrainObject.model
+subsets = []
+currentSubset = 0
 
-    y = floor(genPerlin(x,z))
-    # print(y)
-    # td[str(x)+'_'+str(z)] = y    
-            
-    # y = _td.get(str(x)+'_'+str(z))
+def setup_subsets():
+    global subsets
+    if len(subsets)!=0: return
+    
+    for i in range(36):
+        e = Entity(model=Mesh(),texture='block_texture.png')
+        subsets.append(e)
+
+def gen_subset(x,z):
+    global currentSubset
+    block = terrainB   # Model with which we mould blocks. 
+    model = subsets[currentSubset].model
+    
+    y = floor(genPerlin(x,z))   
     cc = nMap(y,-32,32,0.32,0.84)
     cc += randint(1,100)/100
-    # if randint(1,2)!=1:
     model.colors.extend((Vec4(cc,cc,cc,1),) * len(block.vertices))
     model.vertices.extend([Vec3(x,y,z)+v for v in block.vertices])
-    # else:
-    #     model2.colors.extend((Vec4(cc,cc,cc,1),) * len(block.vertices))
-    #     model2.vertices.extend([Vec3(x,y,z)+v for v in block.vertices])
 
-    model.uvs = (block.uvs) * (terrainSize * terrainSize)
-    # model.generate()
-    # model2.uvs = (block.uvs) * (terrainSize * terrainSize)
-    # model2.generate()
     return y
-    
-def regen():
+
+def subset_regen(_width):
+    global currentSubset
+    model = subsets[currentSubset].model
+    block = terrainB
+    model.uvs += (block.uvs) * _width
+    model.generate()
+
+def next_subset():
+    global currentSubset
+    currentSubset += 1
+    if currentSubset == len(subsets)-1:
+        currentSubset = 0
+    # Perhaps clear subset here?
+    # Well, academic since we actually want
+    # to find the subset furthest away and behind player?
+
+def genTerrain(x,z):
+    block = terrainB
+    model = terrainObject.model
+    y = floor(genPerlin(x,z))   
+    cc = nMap(y,-32,32,0.32,0.84)
+    cc += randint(1,100)/100
+    model.colors.extend((Vec4(cc,cc,cc,1),) * len(block.vertices))
+    model.vertices.extend([Vec3(x,y,z)+v for v in block.vertices])
+
+    return y
+
+def regen(_width):
     model = terrainObject.model
     block = terrainB
-    terrainSize = terrainS
-    
-    model.uvs = (block.uvs) * (terrainSize * terrainSize)
+    model.uvs += (block.uvs) * _width
     model.generate()
 
 def loadMap(_map_name):
     global terrainObject, terrainS, terrainB
+
+    setup_subsets()
+
     terrainSize = 0 # To be derived from loaded map data :)
     block = load_model('block.obj')
     dungeon = Entity(model=Mesh(),texture='block_texture.png')

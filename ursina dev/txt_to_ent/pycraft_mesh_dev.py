@@ -1,6 +1,6 @@
 from ursina import *
 from ursina.prefabs.first_person_controller import FirstPersonController
-from rh_gen_terrain import loadMap, genTerrain, regen
+from rh_gen_terrain import loadMap, genTerrain, regen, gen_subset, next_subset, subset_regen
 
 app = Ursina()
 
@@ -41,15 +41,21 @@ def paintTerrain():
     x = math.floor(x)
     z = math.floor(z)
     newT = False
-    width = 12
+    width = 6
     for j in range(-width,width):
         for k in range(-width,width):
             if td.get(str(x+j)+'_'+str(z+k))==None:
                 newT = True
-                td[str(x+j)+'_'+str(z+k)]=genTerrain(x+j,z+k)
+                # td[str(x+j)+'_'+str(z+k)]=genTerrain(x+j,z+k)
+                td[str(x+j)+'_'+str(z+k)]=gen_subset(x+j,z+k)
     # Only generate model if new terrain to be built.
     if newT==True:
-        regen()    
+        # But why 4? 
+        # Could optimize by precalculating this once.
+        # regen(width*width*4)
+        subset_regen(width*width*3)
+        next_subset()
+        
 
 def input(key):
     if key=='g':
@@ -59,7 +65,7 @@ counter=0
 def update():
     global counter
     counter+=1
-    if counter%32==0:
+    if counter%60==0:
         paintTerrain()
     """
     # Minimap.
