@@ -14,23 +14,50 @@ from nMap import nMap
 from random import randint
 from numpy import floor, sqrt, abs
 
-_seed = (ord('l'))
-noise1 = PerlinNoise(octaves=1,seed=_seed)
-noise2 = PerlinNoise(octaves=3,seed=_seed)
-noise3 = PerlinNoise(octaves=6,seed=_seed)
-noise4 = PerlinNoise(octaves=12,seed=_seed)
+_seed = (ord('j')+ord('o'))
+# terrain_3.map
+# _seed = (ord('l'))
+# noise1 = PerlinNoise(octaves=1,seed=_seed)
+# noise2 = PerlinNoise(octaves=3,seed=_seed)
+# noise3 = PerlinNoise(octaves=6,seed=_seed)
+# noise4 = PerlinNoise(octaves=12,seed=_seed)
+# terrain_3.map ?
+# noise1 = PerlinNoise(octaves=3,seed=_seed)
+# noise2 = PerlinNoise(octaves=6,seed=_seed)
+# noise3 = PerlinNoise(octaves=12,seed=_seed)
+
+# terrain_5.map
+noise = PerlinNoise(octaves=6,seed=_seed)
 
 def genPerlin(_x, _z):
     y = 0
-    freq = 256
-    amp = 112 
-    y += ((noise1([_x/freq,_z/freq]))*amp)
-    amp = 56
-    y += ((noise2([_x/freq,_z/freq]))*amp)
-    amp = 8
-    y += ((noise3([_x/freq,_z/freq]))*amp)
-    amp = 1
-    y += ((noise4([_x/freq,_z/freq]))*amp)
+
+    # For terrain_4.map
+    # freq = 256
+    # amp = 112 
+    # y += ((noise1([_x/freq,_z/freq]))*amp)
+    # amp = 56
+    # y += ((noise2([_x/freq,_z/freq]))*amp)
+    # amp = 8
+    # y += ((noise3([_x/freq,_z/freq]))*amp)
+    # amp = 1
+    # y += ((noise4([_x/freq,_z/freq]))*amp)
+
+    # terrain_3.map
+    # freq = 256
+    # amp = 64 
+    # y += ((noise1([_x/freq,_z/freq]))*amp)
+    # amp = 12
+    # y += ((noise2([_x/freq,_z/freq]))*amp)
+    # amp = 1
+    # y += ((noise3([_x/freq,_z/freq]))*amp)
+
+    freq=300
+    amp=32
+    y += ((noise([_x/freq,_z/freq]))*amp)
+
+    y+= math.sin(_x)*0.5-0.5
+    y+= math.cos(_z)*0.5-0.5
 
     return y
 

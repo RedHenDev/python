@@ -51,7 +51,7 @@ the subsets hack. Yeah, was waaaaay too slow.
 app = Ursina()
 
 subject = FirstPersonController()
-subject.y = 256
+subject.y = 99
 subject.x = 128
 subject.z = 128
 subject.gravity = 0.0
@@ -72,7 +72,7 @@ def new_terrain_gen_orig():
     set_subPos(pos)
     reset_swirl()
 
-map_name = 'terrain_2.map'
+map_name = 'terrain_5.map'
 td = {} # Terrain dictionary.
 td = loadMap(map_name)
 new_terrain_gen_orig()

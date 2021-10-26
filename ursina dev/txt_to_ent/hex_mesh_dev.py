@@ -77,7 +77,7 @@ subject.y = 100
 subject.gravity = 0.0
 subject.cursor.visible=False
 window.color=color.cyan
-scene.fog_color = color.cyan
+scene.fog_color = color.white
 scene.fog_density = 0.02
 
 # False saves terrain to file; True plays!
@@ -115,7 +115,7 @@ def update():
     #                     subject.position*minimap_scale+
     #                     subject.down*2)
     try:
-        target_y = 2 + td.get(str(floor(subject.x))+'_'+str(floor(subject.z)))
+        target_y = 2 + td.get(str(floor(subject.x+0.5))+'_'+str(floor(subject.z+0.5)))
         subject.y = lerp(subject.y, target_y, 0.1)
     except: subject.y = subject.y
 app.run()

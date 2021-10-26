@@ -3,6 +3,11 @@ Mesh terrain builder.
 Saves to .map file.
 Map file can then be loaded to
 generate a terrain.
+
+Notes for dev
+
+It would be nice to also communicate the
+perlin details along with the map info.
 """
 from random import randint
 from ursina import *
@@ -13,7 +18,7 @@ from file_byte import load, save
 # app = Ursina()
 
 terrainSize = 256
-mapName = 'terrain_3.map'
+mapName = 'terrain_5.map'
 td = {} # Terrain dictionary.
 # quad = load_model('stretch_hex.obj')
 # dungeon = Entity(model=Mesh(), texture='grass_64_hex_tex.png')
@@ -21,29 +26,35 @@ td = {} # Terrain dictionary.
 # dungeon = Entity(model=Mesh(), texture='block_texture.png')
 # model = dungeon.model
 
-def genPerlin(_x, _z):
-    _seed = (ord('l'))
-    noise1 = PerlinNoise(octaves=1,seed=_seed)
-    noise2 = PerlinNoise(octaves=3,seed=_seed)
-    noise3 = PerlinNoise(octaves=6,seed=_seed)
-    noise4 = PerlinNoise(octaves=12,seed=_seed)
+_seed = (ord('j')+ord('o'))
+# New style, as per perlin-noise module example.
+# noise1 = PerlinNoise(octaves=3,seed=_seed)
+# noise2 = PerlinNoise(octaves=6,seed=_seed)
+# noise3 = PerlinNoise(octaves=9,seed=_seed)
+# noise4 = PerlinNoise(octaves=12,seed=_seed)
 
+noise = PerlinNoise(octaves=6,seed=_seed)
+
+def genPerlin(_x, _z):
     y = 0
-    freq = 256
-    amp = 112 
-    y += ((noise1([_x/freq,_z/freq]))*amp)
-    
-    amp = 56
-    y += ((noise2([_x/freq,_z/freq]))*amp)
-    
-    amp = 8
-    y += ((noise3([_x/freq,_z/freq]))*amp)
-    
-    amp = 1
-    y += ((noise4([_x/freq,_z/freq]))*amp)
-    # freq = 64
-    # amp = 21
-    # y += ((noise([_x/freq,_z/freq]))*amp)
+    # New style, as per perlin-noise module example.
+    # freq = 256
+    # amp = 64 
+    # y += ((noise1([_x/freq,_z/freq]))*amp)
+    # amp = 12
+    # y += ((noise2([_x/freq,_z/freq]))*amp)
+    # amp = 1
+    # y += ((noise3([_x/freq,_z/freq]))*amp)
+    # amp = 1
+    # y += ((noise4([_x/freq,_z/freq]))*amp)
+
+    freq=300
+    amp=32
+    y += ((noise([_x/freq,_z/freq]))*amp)
+
+    y += math.sin(_x)*0.5-0.5
+    y+= math.cos(_z)*0.5-0.5
+
     return y
 
 def urizen(_map_name, load_terrain=False):
@@ -54,7 +65,7 @@ def urizen(_map_name, load_terrain=False):
         for x in range(terrainSize):
             if load_terrain==False:
                 y = floor(genPerlin(x,z))
-                # y += math.sin(x)*0.5
+                
                 td[str(x)+'_'+str(z)] = y    
             else:
                 y = td.get(str(x)+'_'+str(z))
