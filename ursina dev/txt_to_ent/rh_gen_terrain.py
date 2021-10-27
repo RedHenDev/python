@@ -82,12 +82,20 @@ swirlVecs = [
     Vec2(-1,0)
 ]
 
+def mine(subject,td):
+    from fh_mining import mine_action
+    mine_action(subject,td,subsets,terrainObject.model)
+
+def terrain_input(key,subject,td):
+    if key=='left mouse up':
+        mine(subject,td)
+
 def check_subset(subject):
     for s in subsets:
-        if (abs(s.pos.x - subject.x)>256 or 
-            abs(s.pos.y - subject.z)>256):
-            print('ghost')
-            # s.disable()
+        if (abs(s.pos.x - subject.x)>128 or 
+            abs(s.pos.y - subject.z)>128):
+            # print('ghost')
+            s.disable()
         else:
             # print('zombie')
             s.enable()
@@ -197,6 +205,7 @@ def loadMap(_map_name):
     terrainSize = 0 # To be derived from loaded map data :)
     block = load_model('block.obj')
     dungeon = Entity(model=Mesh(),texture='block_texture.png')
+    dungeon.scale=0.999999
     dungeon2 = Entity(model=Mesh(),texture='block_texture2.png')
     model = dungeon.model
     model2 = dungeon2.model

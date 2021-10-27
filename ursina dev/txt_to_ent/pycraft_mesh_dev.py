@@ -1,7 +1,7 @@
 from ursina import *
 from ursina.prefabs.first_person_controller import FirstPersonController
 from rh_gen_terrain import loadMap, swirl, swirl_pos, reset_swirl, gen_subset, set_subPos, next_subset, subset_regen
-from rh_gen_terrain import check_subset
+from rh_gen_terrain import check_subset, terrain_input
 from numpy import abs
 
 """
@@ -109,7 +109,7 @@ def paintTerrain():
                 newT = True
                 # td[str(x+j)+'_'+str(z+k)]=genTerrain(x+j,z+k)
                 td[str(x+j)+'_'+str(z+k)]=gen_subset(x+j,z+k)
-# Only generate model if new terrain to be built.
+    # Only generate model if new terrain to be built.
     if newT==True:
         # But why 4? - since each width is half a length.
         # Could optimize by precalculating this once.
@@ -121,20 +121,27 @@ def input(key):
     if key=='g':
         new_terrain_gen_orig()
 
+    terrain_input(key,subject,td)
+
 counter=0
 preVpos = subject.position
 def update():
+    from fh_mining import build_tool_entity
     global counter, preVpos
 
     counter+=1
-    if counter%5==0:
-    #     new_terrain_gen_orig()
+    # How quickly to generate new terrain.
+    if counter%3==0:
         paintTerrain()
-        # check_subset(subject)
-    if abs(subject.position.x - preVpos.x) > 8 or \
+        # Disable and enable individual subsets
+        # according to distance from subject.
+        check_subset(subject)
+    if  abs(subject.position.x - preVpos.x) > 8 or \
         abs(subject.position.z - preVpos.z) > 8:
         new_terrain_gen_orig()
         preVpos = subject.position
+
+    build_tool_entity(subject,camera,td)
     """
     # Minimap.
     uri.set_position(   subject.position +
