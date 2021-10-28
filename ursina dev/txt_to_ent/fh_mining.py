@@ -10,10 +10,9 @@ us straight through and collecting the subject and td
 objects as it goes.
 """
 
-from ursina import Entity, color, duplicate, math
+from ursina import Entity, color, math
 
-bte=Entity(model='cube',color=color.white,scale=1.01)
-# bte.always_on_top=True
+bte=Entity(model='cube',color=color.rgba(1,1,1,0.1),scale=1.01)
 bte.pos = bte.position
 
 def build_tool_entity(subject,camera,td):
@@ -42,93 +41,15 @@ def build_tool_entity(subject,camera,td):
 def mine_action(subject, td, subsets, model, vd):
     global bte
     print('mining!')
-    # print(td.get(   str(int(math.floor(bte.x)))+'_'+
-    #                 str(int(math.floor(bte.z)))))
     
-    # e = duplicate(bte)
-    # e.color=color.cyan
-    # e.always_on_top=True
+    
     wv = vd.get(str(int(bte.x))+'_'+str(int(bte.z)))
-    for v in range(wv,wv+36):
-        model.vertices[v][1] = 999
-    model.generate()
-    # totalV = 0
-    # vChange = False
-        
-    # for v in model.vertices:
-    #     # Is the vertex close enough to
-    #     # where we want to mine (bte position)?
-    #     if (v[0] >=bte.x - 0.5 and
-    #         v[0] <=bte.x + 0.5 and
-    #         v[1] >=bte.y - 0.5 and
-    #         v[1] <=bte.y + 0.5 and
-    #         v[2] >=bte.z - 0.5 and
-    #         v[2] <=bte.z + 0.5):
-    #         # Yes!
-    #         v[1] = 999
-    #         # Move vertex high into air to
-    #         # give illusion of being destroyed.
-    #         # model.colors[:] = color.rgba(0,0,0,0)
-    #         # Note that we have made change.
-    #         # Gather average height for cave dic.
-    #         vChange = True
-    #         totalV += 1
-    #         # The mystery of 36 vertices!! :o
-    #         # print('tV= ' + str(totalV))
-    #         if totalV==36: break
-    
-    # if vChange == True:
-    #     model.generate()
+    # del subsets[wv[0]].model.vertices[wv[1]:wv[1]+36]
+    for v in range(wv[1]+1,wv[1]+36):
+        subsets[wv[0]].model.vertices[v][1]=-999
+    subsets[wv[0]].model.generate()
 
-
-
-
-"""
-# Our real mining of the terrain :)
-        # Iterate over all the subsets that we have...
-        totalV = 0
-        for s in range(len(this.subsets)):
-            vChange = False
-            
-            for v in this.subsets[s].model.vertices:
-                # Is the vertex close enough to
-                # where we want to mine (bte position)?
-                if (v[0] >=this.bte.x - 0.5 and
-                    v[0] <=this.bte.x + 0.5 and
-                    v[1] >=this.bte.y - 0.5 and
-                    v[1] <=this.bte.y + 0.5 and
-                    v[2] >=this.bte.z - 0.5 and
-                    v[2] <=this.bte.z + 0.5):
-                    # Yes!
-                    #v[1] -= 1
-                    # Move vertex high into air to
-                    # give illusion of being destroyed.
-                    v[1] = 9999
-                    # Note that we have made change.
-                    # Gather average height for cave dic.
-                    vChange = True
-                    totalV += 1
-                    # The mystery of 36 vertices!! :o
-                    # print('tV= ' + str(totalV))
-                    if totalV==36: break
-            
-            if vChange == True:
-
-                # Now we need to spawn a new cube below
-                # the bte's position -- if no cube or
-                # gap there already.
-                # Next, spawn 4 cubes to create illusion
-                # of more layers -- if each position is
-                # neither a gap nor a place where terrain
-                # already is.
-                # Record new gap on dictionary.
-                this.tDic[  'x'+str(this.bte.x)+
-                            'y'+str(this.bte.y)+
-                            'z'+str(this.bte.z)] = 'gap'
-                this.mineSpawn()
-                # Now that we've spawned what (if anything)
-                # we need to, update subset model. Done.
-                this.subsets[s].model.generate()
-                this.builds.combine()
-                return
-"""
+    # wv = vd.get(str(int(bte.x))+'_'+str(int(bte.z)))
+    # for v in range(wv,wv+36): 
+    #     model.vertices[v][1] = 999
+    # model.generate()

@@ -1,7 +1,7 @@
 from ursina import *
 from ursina.prefabs.first_person_controller import FirstPersonController
 from rh_gen_terrain import loadMap, swirl, swirl_pos, reset_swirl, gen_subset, set_subPos, next_subset, subset_regen
-from rh_gen_terrain import check_subset, terrain_input
+from rh_gen_terrain import check_subset, terrain_input, setup_terrain
 from numpy import abs
 
 """
@@ -58,9 +58,9 @@ subject.gravity = 0.0
 subject.cursor.visible=False
 subject.speed = 6
 # window.color=color.cyan
-scene.fog_color = color.cyan
+scene.fog_color = color.pink
 scene.fog_density = 0.02
-Sky(color=color.cyan)
+Sky(color=color.pink)
 
 def new_terrain_gen_orig():
     radius = 16
@@ -76,10 +76,11 @@ def new_terrain_gen_orig():
 map_name = 'terrain_6.map'
 td = {} # Terrain dictionary.
 vd = {} # Vertex dictionary.
-td, vd = loadMap(map_name)
+# td, vd = loadMap(map_name)
 # Position subject at centre of given map.
-subject.x = math.sqrt(len(td))*0.5
-subject.z = subject.x
+# subject.x = math.sqrt(len(td))*0.5
+# subject.z = subject.x
+setup_terrain()
 new_terrain_gen_orig()
 """
 minimap_scale = 0.02
@@ -113,7 +114,8 @@ def paintTerrain():
             if td.get(str(x+j)+'_'+str(z+k))==None:
                 newT = True
                 # td[str(x+j)+'_'+str(z+k)]=genTerrain(x+j,z+k)
-                td[str(x+j)+'_'+str(z+k)]=gen_subset(x+j,z+k)
+                # Actually store the list of vertices on the vd?
+                td[str(x+j)+'_'+str(z+k)], vd[str(x+j)+'_'+str(z+k)]=gen_subset(x+j,z+k)
     # Only generate model if new terrain to be built.
     if newT==True:
         # But why 4? - since each width is half a length.
@@ -132,11 +134,14 @@ counter=0
 preVpos = subject.position
 def update():
     from fh_mining import build_tool_entity
+    from nMap import nMap
     global counter, preVpos
 
     counter+=1
     # How quickly to generate new terrain.
     if counter%3==0:
+        c = nMap(subject.rotation_y,0,360,100,255)
+        scene.fog_color=color.rgb(c,0,c)
         paintTerrain()
         # Disable and enable individual subsets
         # according to distance from subject.

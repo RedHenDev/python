@@ -159,8 +159,8 @@ def gen_subset(x,z):
 
     # for i in range(1,3):
     #     model.vertices.extend([Vec3(x,y-i,z)+v for v in block.vertices])
-
-    return y
+    vob = (currentSubset,len(model.vertices)-37)
+    return y, vob
 
 def subset_regen(_width):
     global currentSubset
@@ -197,6 +197,22 @@ def regen(_width):
     model.uvs += (block.uvs) * _width
     model.generate()
 
+"""
+For use when not loading terrain from file.
+"""
+def setup_terrain():
+    global terrainObject, terrainS, terrainB
+    setup_subsets()
+
+    terrainSize = 0 # To be derived from loaded map data :)
+    block = load_model('block.obj')
+    dungeon = Entity(model=Mesh(),texture='block_texture.png')
+    dungeon2 = Entity(model=Mesh(),texture='block_texture2.png')
+
+    terrainObject = dungeon
+    terrainB = block
+    terrainS = terrainSize
+
 def loadMap(_map_name):
     global terrainObject, terrainS, terrainB
 
@@ -212,7 +228,7 @@ def loadMap(_map_name):
     _td={}
     _td = load(_map_name)
     vd = {}
-    vCount = 0
+    vCount = 0 # To track vertices to vd. See below.
     # Derive terrain size. Position subject.
     terrainSize = int(floor(sqrt(len(_td))))
     print(terrainSize)
@@ -235,6 +251,8 @@ def loadMap(_map_name):
 
             vd[str(x)+'_'+str(z)] = vCount
             vCount+=36
+            # This is used when mining -
+            # knowing which vertices in the model to remove.
 
             # for i in range(1,3):
             #     model.vertices.extend([Vec3(x,y-i,z)+v for v in block.vertices])
