@@ -52,8 +52,8 @@ app = Ursina()
 
 subject = FirstPersonController()
 subject.y = 99
-subject.x = 128
-subject.z = 128
+subject.x = 4
+subject.z = 4
 subject.gravity = 0.0
 subject.cursor.visible=False
 subject.speed = 6
@@ -100,8 +100,9 @@ mark.parent=uri
 mark.scale *= 8
 mark.always_on_top=True
 """
-
+countCubes = 0
 def paintTerrain():
+    global countCubes
     width = 4
     pos = swirl_pos(width*2)
     swirl() # Find next position to create terrain.
@@ -113,6 +114,7 @@ def paintTerrain():
         for k in range(-width,width):
             if td.get(str(x+j)+'_'+str(z+k))==None:
                 newT = True
+                countCubes+=1
                 # td[str(x+j)+'_'+str(z+k)]=genTerrain(x+j,z+k)
                 # Actually store the list of vertices on the vd?
                 td[str(x+j)+'_'+str(z+k)], vd[str(x+j)+'_'+str(z+k)]=gen_subset(x+j,z+k)
@@ -121,8 +123,12 @@ def paintTerrain():
         # But why 4? - since each width is half a length.
         # Could optimize by precalculating this once.
         # regen(width*width*4)
-        subset_regen(width*width*4)
-        next_subset()
+        
+        if countCubes>=width*width:
+            countCubes=0
+            subset_regen(width*width*4)
+            next_subset()
+            
 
 def input(key):
     if key=='g':
@@ -140,15 +146,16 @@ def update():
     # How quickly to generate new terrain.
     if counter%3==0:
         paintTerrain()
+        build_tool_entity(subject,camera,td)
         # Disable and enable individual subsets
         # according to distance from subject.
-        check_subset(subject)
+        # check_subset(subject)
     if  abs(subject.position.x - preVpos.x) > 8 or \
         abs(subject.position.z - preVpos.z) > 8:
         new_terrain_gen_orig()
         preVpos = subject.position
 
-    build_tool_entity(subject,camera,td)
+    
     """
     # Minimap.
     uri.set_position(   subject.position +

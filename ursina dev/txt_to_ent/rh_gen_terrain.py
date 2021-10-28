@@ -27,7 +27,7 @@ _seed = (ord('j')+ord('o'))
 # noise3 = PerlinNoise(octaves=12,seed=_seed)
 
 # terrain_5.map
-noise = PerlinNoise(octaves=6,seed=_seed)
+noise = PerlinNoise(octaves=8,seed=_seed)
 
 def genPerlin(_x, _z):
     y = 0
@@ -52,12 +52,21 @@ def genPerlin(_x, _z):
     # amp = 1
     # y += ((noise3([_x/freq,_z/freq]))*amp)
 
-    freq=300
+    # terrain_6.map
+    # freq=300
+    # amp=32
+    # y += ((noise([_x/freq,_z/freq]))*amp)
+
+    # y+= math.sin(_x)*0.5-0.5
+    # y+= math.cos(_z)*0.5-0.5
+
+    # Just a setting -- no map file :)
+    freq=444
     amp=32
     y += ((noise([_x/freq,_z/freq]))*amp)
 
     y+= math.sin(_x)*0.5-0.5
-    y+= math.cos(_z)*0.5-0.5
+    # y+= math.cos(_z)*0.5-0.5
 
     return y
 
@@ -148,6 +157,7 @@ def gen_subset(x,z):
     model = subsets[currentSubset].model
     
     # Record position of subset.
+    # For checking distance...
     subsets[currentSubset].pos.x = x
     subsets[currentSubset].pos.y = z
 
@@ -156,9 +166,9 @@ def gen_subset(x,z):
     cc += randint(1,100)/100
     model.colors.extend((Vec4(cc,cc,cc,1),) * len(block.vertices))
     model.vertices.extend([Vec3(x,y,z)+v for v in block.vertices])
-
     # for i in range(1,3):
     #     model.vertices.extend([Vec3(x,y-i,z)+v for v in block.vertices])
+    
     vob = (currentSubset,len(model.vertices)-37)
     return y, vob
 
