@@ -42,13 +42,13 @@ def mine_action(subject, td, subsets, model, vd):
     global bte
     print('mining!')
     
-    
     wv = vd.get(str(int(bte.x))+'_'+str(int(bte.z)))
     # del subsets[wv[0]].model.vertices[wv[1]:wv[1]+36]
-    for v in range(wv[1]+1,wv[1]+36):
-        subsets[wv[0]].model.vertices[v][1]=-999
+    for v in range(wv[1]+1,wv[1]+37):
+        subsets[wv[0]].model.vertices[v][1]=999
     subsets[wv[0]].model.generate()
 
+    # For mining on loaded model.
     # wv = vd.get(str(int(bte.x))+'_'+str(int(bte.z)))
     # for v in range(wv,wv+36): 
     #     model.vertices[v][1] = 999

@@ -134,14 +134,11 @@ counter=0
 preVpos = subject.position
 def update():
     from fh_mining import build_tool_entity
-    from nMap import nMap
     global counter, preVpos
 
     counter+=1
     # How quickly to generate new terrain.
     if counter%3==0:
-        c = nMap(subject.rotation_y,0,360,100,255)
-        scene.fog_color=color.rgb(c,0,c)
         paintTerrain()
         # Disable and enable individual subsets
         # according to distance from subject.
