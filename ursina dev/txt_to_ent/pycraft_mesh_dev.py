@@ -57,9 +57,10 @@ subject.z = 128
 subject.gravity = 0.0
 subject.cursor.visible=False
 subject.speed = 6
-window.color=color.cyan
-scene.fog_color = color.white
+# window.color=color.cyan
+scene.fog_color = color.cyan
 scene.fog_density = 0.02
+Sky(color=color.cyan)
 
 def new_terrain_gen_orig():
     radius = 16
@@ -72,9 +73,13 @@ def new_terrain_gen_orig():
     set_subPos(pos)
     reset_swirl()
 
-map_name = 'terrain_5.map'
+map_name = 'terrain_6.map'
 td = {} # Terrain dictionary.
-td = loadMap(map_name)
+vd = {} # Vertex dictionary.
+td, vd = loadMap(map_name)
+# Position subject at centre of given map.
+subject.x = math.sqrt(len(td))*0.5
+subject.z = subject.x
 new_terrain_gen_orig()
 """
 minimap_scale = 0.02
@@ -121,7 +126,7 @@ def input(key):
     if key=='g':
         new_terrain_gen_orig()
 
-    terrain_input(key,subject,td)
+    terrain_input(key,subject,td, vd)
 
 counter=0
 preVpos = subject.position

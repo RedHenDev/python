@@ -82,13 +82,13 @@ swirlVecs = [
     Vec2(-1,0)
 ]
 
-def mine(subject,td):
+def mine(subject,td,vd):
     from fh_mining import mine_action
-    mine_action(subject,td,subsets,terrainObject.model)
+    mine_action(subject,td,subsets,terrainObject.model,vd)
 
-def terrain_input(key,subject,td):
+def terrain_input(key,subject,td,vd):
     if key=='left mouse up':
-        mine(subject,td)
+        mine(subject,td,vd)
 
 def check_subset(subject):
     for s in subsets:
@@ -205,13 +205,14 @@ def loadMap(_map_name):
     terrainSize = 0 # To be derived from loaded map data :)
     block = load_model('block.obj')
     dungeon = Entity(model=Mesh(),texture='block_texture.png')
-    dungeon.scale=0.999999
     dungeon2 = Entity(model=Mesh(),texture='block_texture2.png')
     model = dungeon.model
     model2 = dungeon2.model
 
     _td={}
     _td = load(_map_name)
+    vd = {}
+    vCount = 0
     # Derive terrain size. Position subject.
     terrainSize = int(floor(sqrt(len(_td))))
     print(terrainSize)
@@ -225,16 +226,18 @@ def loadMap(_map_name):
             y = _td.get(str(x)+'_'+str(z))
             cc = nMap(y,-32,32,0.32,0.84)
             cc += randint(1,100)/100
-            if randint(1,2)!=1:
+            if randint(2,2)!=1:
                 model.colors.extend((Vec4(cc,cc,cc,1),) * len(block.vertices))
                 model.vertices.extend([Vec3(x,y,z)+v for v in block.vertices])
             else:
                 model2.colors.extend((Vec4(cc,cc,cc,1),) * len(block.vertices))
                 model2.vertices.extend([Vec3(x,y,z)+v for v in block.vertices])
 
+            vd[str(x)+'_'+str(z)] = vCount
+            vCount+=36
+
             # for i in range(1,3):
             #     model.vertices.extend([Vec3(x,y-i,z)+v for v in block.vertices])
-
 
     model.uvs = (block.uvs) * (terrainSize * terrainSize)
     model.generate()
@@ -245,4 +248,4 @@ def loadMap(_map_name):
     terrainB = block
     terrainS = terrainSize
 
-    return _td
+    return _td, vd

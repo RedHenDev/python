@@ -39,43 +39,47 @@ def build_tool_entity(subject,camera,td):
             radius+=1
             if best!=None: bte.y = best
     
-def mine_action(subject, td, subsets, model):
+def mine_action(subject, td, subsets, model, vd):
     global bte
-    print('mining?')
-    print(td.get(   str(int(math.floor(bte.x)))+'_'+
-                    str(int(math.floor(bte.z)))))
+    print('mining!')
+    # print(td.get(   str(int(math.floor(bte.x)))+'_'+
+    #                 str(int(math.floor(bte.z)))))
     
-    e = duplicate(bte)
-    e.color=color.cyan
+    # e = duplicate(bte)
+    # e.color=color.cyan
     # e.always_on_top=True
-
-    totalV = 0
-    vChange = False
+    wv = vd.get(str(int(bte.x))+'_'+str(int(bte.z)))
+    for v in range(wv,wv+36):
+        model.vertices[v][1] = 999
+    model.generate()
+    # totalV = 0
+    # vChange = False
         
-    for v in model.vertices:
-        # Is the vertex close enough to
-        # where we want to mine (bte position)?
-        if (v[0] >=bte.x - 0.5 and
-            v[0] <=bte.x + 0.5 and
-            v[1] >=bte.y - 0.5 and
-            v[1] <=bte.y + 0.5 and
-            v[2] >=bte.z - 0.5 and
-            v[2] <=bte.z + 0.5):
-            # Yes!
-            #v[1] -= 1
-            # Move vertex high into air to
-            # give illusion of being destroyed.
-            # model.colors[:] = color.rgba(0,0,0,0)
-            # Note that we have made change.
-            # Gather average height for cave dic.
-            vChange = True
-            totalV += 1
-            # The mystery of 36 vertices!! :o
-            # print('tV= ' + str(totalV))
-            if totalV==36: break
+    # for v in model.vertices:
+    #     # Is the vertex close enough to
+    #     # where we want to mine (bte position)?
+    #     if (v[0] >=bte.x - 0.5 and
+    #         v[0] <=bte.x + 0.5 and
+    #         v[1] >=bte.y - 0.5 and
+    #         v[1] <=bte.y + 0.5 and
+    #         v[2] >=bte.z - 0.5 and
+    #         v[2] <=bte.z + 0.5):
+    #         # Yes!
+    #         v[1] = 999
+    #         # Move vertex high into air to
+    #         # give illusion of being destroyed.
+    #         # model.colors[:] = color.rgba(0,0,0,0)
+    #         # Note that we have made change.
+    #         # Gather average height for cave dic.
+    #         vChange = True
+    #         totalV += 1
+    #         # The mystery of 36 vertices!! :o
+    #         # print('tV= ' + str(totalV))
+    #         if totalV==36: break
     
     # if vChange == True:
-        # model.generate()
+    #     model.generate()
+
 
 
 
