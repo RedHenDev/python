@@ -147,7 +147,9 @@ def setup_subsets():
     if len(subsets)!=0: return
     
     for i in range(512):
-        e = Entity(model=Mesh(),texture='block_texture.png')
+        e = Entity(model=Mesh(),texture='texture_atlas_1.png')
+        # *** adjust scale of texture.
+        e.texture_scale*=0.5
         e.pos = Vec2(0,0)
         subsets.append(e)
 
@@ -168,10 +170,14 @@ def gen_subset(x,z):
     cc += randint(1,100)/100
     model.colors.extend((Vec4(cc,cc,cc,1),) * len(block.vertices))
     model.vertices.extend([Vec3(x,y,z)+v for v in block.vertices])
-    if z > 100:
-        uvv = 1
-    else: uvv = random()
-    model.uvs.extend([Vec2(uvv,uvv)+u for u in block.uvs])
+    if z > 10:
+        uu = 0.75
+        uv = 1
+    else: 
+        uu = 2
+        uv = 1
+    model.uvs.extend([Vec2(uu,uv)+u for u in block.uvs])
+    
     # for i in range(1,3):
     #     model.vertices.extend([Vec3(x,y-i,z)+v for v in block.vertices])
     
@@ -182,7 +188,10 @@ def subset_regen(_width):
     global currentSubset
     model = subsets[currentSubset].model
     block = terrainB
+    # ***
+    # These now generate in gen_subset (i.e. texture atlas).
     # model.uvs += (block.uvs) * _width
+    # Mesh.project_uvs(model)
     model.generate()
 
 def next_subset():
@@ -222,12 +231,17 @@ def setup_terrain():
 
     terrainSize = 0 # To be derived from loaded map data :)
     block = load_model('block.obj')
-    dungeon = Entity(model=Mesh(),texture='block_texture.png')
+    # dungeon = Entity(model=Mesh(),texture='block_texture.png')
+    dungeon = Entity(model=Mesh(),texture='texture_atlas_1.png')
+    
     dungeon2 = Entity(model=Mesh(),texture='block_texture2.png')
 
     terrainObject = dungeon
     terrainB = block
     terrainS = terrainSize
+
+    # *** debug
+    # print(terrainB.uvs)
 
 def loadMap(_map_name):
     global terrainObject, terrainS, terrainB
