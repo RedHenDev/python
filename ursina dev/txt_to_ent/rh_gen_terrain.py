@@ -7,6 +7,7 @@ all that this function needs access to is td? I.e.
 all the terrain entity objects will belong to this
 module itself?
 """
+from os import unsetenv
 from ursina import *
 from perlin_noise import PerlinNoise
 from file_byte import load
@@ -27,7 +28,7 @@ _seed = (ord('j')+ord('o'))
 # noise3 = PerlinNoise(octaves=12,seed=_seed)
 
 # terrain_5.map
-noise = PerlinNoise(octaves=8,seed=_seed)
+noise = PerlinNoise(octaves=5,seed=_seed)
 
 def genPerlin(_x, _z):
     y = 0
@@ -151,6 +152,7 @@ def setup_subsets():
         subsets.append(e)
 
 def gen_subset(x,z):
+    from random import random
     global currentSubset
     block = terrainB   # Model with which we mould blocks. 
     subsets[currentSubset].enable()
@@ -166,6 +168,10 @@ def gen_subset(x,z):
     cc += randint(1,100)/100
     model.colors.extend((Vec4(cc,cc,cc,1),) * len(block.vertices))
     model.vertices.extend([Vec3(x,y,z)+v for v in block.vertices])
+    if z > 100:
+        uvv = 1
+    else: uvv = random()
+    model.uvs.extend([Vec2(uvv,uvv)+u for u in block.uvs])
     # for i in range(1,3):
     #     model.vertices.extend([Vec3(x,y-i,z)+v for v in block.vertices])
     
@@ -176,7 +182,7 @@ def subset_regen(_width):
     global currentSubset
     model = subsets[currentSubset].model
     block = terrainB
-    model.uvs += (block.uvs) * _width
+    # model.uvs += (block.uvs) * _width
     model.generate()
 
 def next_subset():
