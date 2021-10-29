@@ -12,7 +12,7 @@ from ursina import *
 from perlin_noise import PerlinNoise
 from file_byte import load
 from nMap import nMap
-from random import randint
+from random import randint, randrange
 from numpy import floor, sqrt, abs
 
 _seed = (ord('j')+ord('o'))
@@ -147,9 +147,9 @@ def setup_subsets():
     if len(subsets)!=0: return
     
     for i in range(512):
-        e = Entity(model=Mesh(),texture='texture_atlas_1.png')
+        e = Entity(model=Mesh(),texture='texture_atlas_3.png')
         # *** adjust scale of texture.
-        e.texture_scale*=0.5
+        e.texture_scale*=64/e.texture.width
         e.pos = Vec2(0,0)
         subsets.append(e)
 
@@ -170,13 +170,21 @@ def gen_subset(x,z):
     cc += randint(1,100)/100
     model.colors.extend((Vec4(cc,cc,cc,1),) * len(block.vertices))
     model.vertices.extend([Vec3(x,y,z)+v for v in block.vertices])
+    # *** UVs
+    tilesX = 2
+    tilesY = 1
+    # colX from left.
+    # rowY from top.
     if z > 10:
-        uu = 0.75
-        uv = 1
+        colX = 1
+        rowY = 2
     else: 
-        uu = 2
-        uv = 1
-    model.uvs.extend([Vec2(uu,uv)+u for u in block.uvs])
+        colX = 1
+        rowY = 1
+    uu = tilesX/colX
+    uv = tilesY*rowY 
+
+    model.uvs.extend([Vec2(8,7)+u for u in block.uvs])
     
     # for i in range(1,3):
     #     model.vertices.extend([Vec3(x,y-i,z)+v for v in block.vertices])

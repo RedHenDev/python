@@ -40,7 +40,7 @@ def build_tool_entity(subject,camera,td):
     
 def mine_action(subject, td, subsets, model, vd):
     global bte
-    print('mining!')
+    print(subject.z)
     
     x = str(int(bte.x))
     z = str(int(bte.z))
