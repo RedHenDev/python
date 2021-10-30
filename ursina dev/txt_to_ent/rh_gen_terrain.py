@@ -286,7 +286,7 @@ def loadMap(_map_name):
             else:
                 model2.colors.extend((Vec4(cc,cc,cc,1),) * len(block.vertices))
                 model2.vertices.extend([Vec3(x,y,z)+v for v in block.vertices])
-
+            # Keep track of vertex id for mining :)
             vd[str(x)+'_'+str(z)] = vCount
             vCount+=36
             # This is used when mining -
