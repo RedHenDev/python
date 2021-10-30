@@ -5,15 +5,23 @@ Terrain generation by mesh class
 from ursina import *
 
 class MeshTerrain:
-    
     def __init__(this,_map_name):
         this.block = load_model('block.obj')
         this.textureAtlas = 'texture_atlas_3.png'
         
         this.subsets = []
         this.subsetNum = 512
-        this.subWidth = 4
+        this.subWidth = 8
+        this.currentSubset = 0
+        this.totalCubes = this.subWidth*this.subWidth
 
+        # For tracking amount of blocks in each
+        # subset. See paintTerrain().
+        this.countCubes = 0
+
+        # Dictionaries.
+        # td for location, vd for vertices and mining. 
+        this.td = {}
         this.vd = {}
 
         # Controls for swirling terrain.
@@ -30,7 +38,7 @@ class MeshTerrain:
             Vec2(-1,0)
         ]
 
-        setup_subsets()
+        this.setup_subsets()
 
     def setup_subsets(this):
         if len(this.subsets)!=0: return
@@ -69,9 +77,9 @@ class MeshTerrain:
                             this.subWidth)
         this.subPos.y += (  this.swirlVecs[this.currentVec].y *
                             this.subWidth)
-        # return this.subPos
+        return this.subPos
 
-    def gen_subset(this):
+    def gen_subset(this,x,z):
         from random import randint
         from nMap import nMap
         # subsets[currentSubset].enable()
@@ -81,10 +89,8 @@ class MeshTerrain:
         # For checking distance...
         # this.subsets[this.currentSubset].pos.x = this.subsets[this.currentSubset].x
         # this.subsets[this.currentSubset].pos.y = this.subsets[this.currentSubset].z
-        x = this.subsets[this.currentSubset].x
-        z = this.subsets[this.currentSubset].z
 
-        y = floor(genPerlin(x,z))   
+        y = floor(this.genPerlin(x,z))   
         cc = nMap(y,-32,32,0.32,0.84)
         cc += randint(1,100)/100
         model.colors.extend((   Vec4(cc,cc,cc,1),) * 
@@ -104,12 +110,12 @@ class MeshTerrain:
             rowY = 1
         uu = tilesX/colX
         uv = tilesY*rowY 
-        model.uvs.extend([Vec2(8,7) + u for u in block.uvs])
+        model.uvs.extend([Vec2(8,7) + u for u in this.block.uvs])
 
         # Record which subset and index of first vertex
         # on vd dictionary for Mining.
-        this.vd = (this.currentSubset,len(model.vertices)-37)
-        # return y, vob
+        vob = (this.currentSubset,len(model.vertices)-37)
+        return y, vob
     
     def subset_regen(this):
         # These now generate in gen_subset (i.e. texture atlas).
@@ -121,3 +127,41 @@ class MeshTerrain:
         if this.currentSubset == len(this.subsets)-1:
             this.currentSubset = 0 
             print('used all subsets')
+
+    def genPerlin(this,x,z):
+        return 0
+        """
+    def mine(this,subject,td,vd):
+        from fh_mining import mine_action
+        mine_action(subject,td,subsets,terrainObject.model,vd)
+
+    def terrain_input(this,key,subject,td,vd):
+        if key=='left mouse up':
+            mine(subject,td,vd)
+        """
+    
+    def paintTerrain(this):
+        # Find position according to swirl vector...
+        pos = this.swirl_pos()
+        this.swirl() # Next position to create terrain.
+        x = math.floor(pos.x)
+        z = math.floor(pos.y)
+        newT = False
+        wid = floor(this.subWidth * 0.5)
+        for j in range(-wid,wid):
+            for k in range(-wid,wid):
+                if this.td.get(str(x+j)+'_'+str(z+k))==None:
+                    newT = True
+                    this.countCubes+=1
+                    # td[str(x+j)+'_'+str(z+k)]=genTerrain(x+j,z+k)
+                    # Actually store the list of vertices on the vd?
+                    this.td[str(x+j)+'_'+str(z+k)], \
+                    this.vd[str(x+j)+'_'+str(z+k)]= \
+                        this.gen_subset(x+j,z+k)
+        # Only generate model if new terrain to be built.
+        if newT==True:
+            if this.countCubes>=this.totalCubes:
+                this.countCubes=0
+                # this.subset_regen(this.totalCubes*2)
+                this.subset_regen()
+                this.next_subset()
