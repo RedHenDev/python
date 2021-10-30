@@ -107,14 +107,16 @@ class MeshTerrain:
         # *** UVs - NB. scale of texture must be adjusted.
         uv_tiles = 8
         if z > 10:
-            what_tile_x = 1
-            what_tile_y = 1
+            what_tile_x = 8
+            what_tile_y = 7
             # Counting from top left to bottom right.
         else: 
-            what_tile_x = 0.25
-            what_tile_y = 1
-        uu = uv_tiles - what_tile_x + 1
-        uv = uv_tiles - what_tile_y
+            what_tile_x = 8
+            what_tile_y = 5
+        # uu = uv_tiles - what_tile_x + 1
+        # uv = uv_tiles - what_tile_y
+        uu = what_tile_x
+        uv = what_tile_y
         model.uvs.extend([Vec2(uu,uv) + u for u in this.block.uvs])
         # model.uvs.extend([Vec2(8,7) + u for u in this.block.uvs])
 

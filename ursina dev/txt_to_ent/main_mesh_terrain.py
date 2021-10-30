@@ -11,8 +11,8 @@ app = Ursina()
 
 subject = FirstPersonController()
 subject.y = 99
-subject.x = 0
-subject.z = 0
+subject.x = 4
+subject.z = 4
 subject.gravity = 0.0
 subject.cursor.visible=False
 subject.speed = 6
@@ -30,7 +30,6 @@ def input(key):
 counter=0
 preVpos = subject.position
 def update():
-    from fh_mining import build_tool_entity
     global counter, preVpos
 
     counter+=1

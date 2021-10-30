@@ -3,7 +3,7 @@ from ursina import Entity, color, math
 class Miner:
     def __init__(this,_subject,_camera,_td,_vd,_subsets):
         this.bte=Entity(model='cube',
-                        color=color.rgba(1,1,1,0.1),
+                        color=color.rgba(1,1,0,0.4),
                         scale=1.01)
 
         this.subject = _subject
