@@ -7,10 +7,10 @@ from math import sin
 
 class PerlinTerrain:
     def __init__(this,  _nObjs=1,_freq=444,_amp=32,
-                        _octs=4,_seed=99):
+                        _octs=5,_seed=99):
         this.noises = []
-        this.seed = (ord('j')+ord('o'))
         this.seed = _seed
+        this.seed = (ord('j')+ord('o'))
         this.freq = _freq
         this.amp = _amp
         this.octs = _octs

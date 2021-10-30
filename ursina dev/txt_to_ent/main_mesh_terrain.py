@@ -2,16 +2,12 @@
 Minecraft-like terrain from mesh
 30/10/21
 """
-
 from ursina import *
 from ursina.prefabs.first_person_controller import FirstPersonController
 from numpy import abs
 from rh_mesh_terrain import MeshTerrain
 
 app = Ursina()
-
-map_name = 'terrain_6.map'
-terrain = MeshTerrain(map_name)
 
 subject = FirstPersonController()
 subject.y = 99
@@ -25,21 +21,11 @@ scene.fog_color = color.pink
 scene.fog_density = 0.02
 Sky(color=color.pink)
 
-def new_terrain_gen_orig():
-    radius = 16
-    x = subject.x + radius * math.sin(math.radians(subject.rotation_y))
-    z = subject.z + radius * math.cos(math.radians(subject.rotation_y))
-    pos = Vec2(x,z)
-    terrain.subPos = pos
-    terrain.reset_swirl()
-
-new_terrain_gen_orig()
+map_name = 'terrain_6.map'
+terrain = MeshTerrain(subject,camera)
 
 def input(key):
-    if key=='g':
-        new_terrain_gen_orig()
-
-    # terrain_input(key,subject,td, vd)
+    terrain.terrain_input(key)
 
 counter=0
 preVpos = subject.position
@@ -51,14 +37,16 @@ def update():
     # How quickly to generate new terrain.
     if counter%3==0:
         terrain.paintTerrain()
-        # build_tool_entity(subject,camera,td)
+        terrain.miner.build_tool_entity()
         
         # Disable and enable individual subsets
         # according to distance from subject.
         # check_subset(subject)
-    if  abs(subject.position.x - preVpos.x) > 8 or \
-        abs(subject.position.z - preVpos.z) > 8:
-        new_terrain_gen_orig()
+    if  abs(subject.x - preVpos.x) > 8 or \
+        abs(subject.z - preVpos.z) > 8:
+        terrain.new_swirl_origin(   subject.x,
+                                    subject.z,
+                                    subject.rotation_y)
         preVpos = subject.position
 
     try:

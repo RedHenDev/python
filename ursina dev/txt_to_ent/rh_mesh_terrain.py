@@ -4,13 +4,17 @@ Terrain generation by mesh class
 """
 from ursina import *
 from rh_perlin_noise import PerlinTerrain
+from rh_miner import Miner
 
 class MeshTerrain:
-    def __init__(this,_map_name):
+    def __init__(this,_subject,_camera):
         this.block = load_model('block.obj')
         this.textureAtlas = 'texture_atlas_3.png'
         
-        this.perlin = PerlinTerrain()
+        # Dictionaries.
+        # td for location, vd for vertices and mining. 
+        this.td = {}
+        this.vd = {}
 
         this.subsets = []
         this.subsetNum = 512
@@ -18,14 +22,14 @@ class MeshTerrain:
         this.currentSubset = 0
         this.totalCubes = this.subWidth*this.subWidth
 
+        this.perlin = PerlinTerrain()
+        this.miner = Miner( _subject,_camera,
+                            this.td,this.vd,
+                            this.subsets)
+
         # For tracking amount of blocks in each
         # subset. See paintTerrain().
         this.countCubes = 0
-
-        # Dictionaries.
-        # td for location, vd for vertices and mining. 
-        this.td = {}
-        this.vd = {}
 
         # Controls for swirling terrain.
         this.currentVec = 0
@@ -100,20 +104,19 @@ class MeshTerrain:
                                 len(this.block.vertices))
         model.vertices.extend([ Vec3(x,y,z) + v for v in 
                                 this.block.vertices])
-        # *** UVs
-        tilesX = 2
-        tilesY = 1
-        # colX from left.
-        # rowY from top.
+        # *** UVs - NB. scale of texture must be adjusted.
+        uv_tiles = 8
         if z > 10:
-            colX = 1
-            rowY = 2
+            what_tile_x = 1
+            what_tile_y = 1
+            # Counting from top left to bottom right.
         else: 
-            colX = 1
-            rowY = 1
-        uu = tilesX/colX
-        uv = tilesY*rowY 
-        model.uvs.extend([Vec2(8,7) + u for u in this.block.uvs])
+            what_tile_x = 2
+            what_tile_y = 1
+        uu = uv_tiles - what_tile_x + 1
+        uv = uv_tiles - what_tile_y
+        model.uvs.extend([Vec2(uu,uv) + u for u in this.block.uvs])
+        # model.uvs.extend([Vec2(8,7) + u for u in this.block.uvs])
 
         # Record which subset and index of first vertex
         # on vd dictionary for Mining.
@@ -137,12 +140,19 @@ class MeshTerrain:
     def mine(this,subject,td,vd):
         from fh_mining import mine_action
         mine_action(subject,td,subsets,terrainObject.model,vd)
-
-    def terrain_input(this,key,subject,td,vd):
+    """
+    def terrain_input(this,key):
         if key=='left mouse up':
-            mine(subject,td,vd)
-        """
+            this.miner.mine()
     
+    def new_swirl_origin(this,x,z,rot,rad=16):
+        rot = math.radians(rot)
+        x += rad * math.sin(rot)
+        z += rad * math.cos(rot)
+        pos = Vec2(x,z)
+        this.subPos = pos
+        this.reset_swirl()
+
     def paintTerrain(this):
         # Find position according to swirl vector...
         pos = this.swirl_pos()
