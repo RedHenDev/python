@@ -111,7 +111,7 @@ class MeshTerrain:
             what_tile_y = 1
             # Counting from top left to bottom right.
         else: 
-            what_tile_x = 2
+            what_tile_x = 0.25
             what_tile_y = 1
         uu = uv_tiles - what_tile_x + 1
         uv = uv_tiles - what_tile_y
