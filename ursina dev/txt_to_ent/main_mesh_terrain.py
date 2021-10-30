@@ -11,8 +11,8 @@ app = Ursina()
 
 subject = FirstPersonController()
 subject.y = 99
-subject.x = 4
-subject.z = 4
+subject.x = 32
+subject.z = 32
 subject.gravity = 0.0
 subject.cursor.visible=False
 subject.speed = 6
@@ -34,7 +34,9 @@ def update():
 
     counter+=1
     # How quickly to generate new terrain.
-    if counter%3==0:
+    # if counter%3==0:
+    if counter==3:
+        counter=0
         terrain.paintTerrain()
         terrain.miner.build_tool_entity()
         
