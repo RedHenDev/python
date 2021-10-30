@@ -3,12 +3,15 @@ Terrain generation by mesh class
 30/10/21
 """
 from ursina import *
+from rh_perlin_noise import PerlinTerrain
 
 class MeshTerrain:
     def __init__(this,_map_name):
         this.block = load_model('block.obj')
         this.textureAtlas = 'texture_atlas_3.png'
         
+        this.perlin = PerlinTerrain()
+
         this.subsets = []
         this.subsetNum = 512
         this.subWidth = 8
@@ -129,7 +132,7 @@ class MeshTerrain:
             print('used all subsets')
 
     def genPerlin(this,x,z):
-        return 0
+        return this.perlin.findHeight(x,z)
         """
     def mine(this,subject,td,vd):
         from fh_mining import mine_action
