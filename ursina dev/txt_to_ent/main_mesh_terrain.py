@@ -35,9 +35,10 @@ def update():
     counter+=1
     # How quickly to generate new terrain.
     # if counter%3==0:
-    if counter==3:
+    if counter==6:
         counter=0
-        terrain.paintTerrain()
+        if terrain.generating:
+            terrain.paintTerrain()
         terrain.miner.build_tool_entity()
         
         # Disable and enable individual subsets
@@ -63,6 +64,6 @@ def update():
     if foundBlock==False:
         subject.y -= 19.8 * time.dt
     else:
-        subject.y = lerp(subject.y, target_y+2, 3*time.dt)
+        subject.y = lerp(subject.y, target_y+2, 9*time.dt)
     
 app.run()

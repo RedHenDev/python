@@ -22,7 +22,7 @@ class Miner:
         # Iterate until nearest block found forward.
         while radius < max:
             origin = this.subject.position
-            origin.y = math.floor(origin.y)
+            origin.y = math.floor(origin.y+1)
             where = (   origin + 
                         this.camera.forward * radius)
             x = (np.round(where.x))

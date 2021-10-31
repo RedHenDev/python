@@ -16,6 +16,9 @@ class MeshTerrain:
         this.td = {}
         this.vd = {}
 
+        # Should we be generating new terrain?
+        this.generating = True
+
         this.subsets = []
         this.subsetNum = 512
         this.subWidth = 8
@@ -86,11 +89,11 @@ class MeshTerrain:
                             this.subWidth)
         return this.subPos
 
-    def gen_subset(this,x,y,z):
+    def gen_block(this,x,y,z,model):
         from random import randint
         from nMap import nMap
         # subsets[currentSubset].enable()
-        model = this.subsets[this.currentSubset].model
+        # model = this.subsets[this.currentSubset].model
         
         # Record position of subset.
         # For checking distance...
@@ -142,6 +145,8 @@ class MeshTerrain:
     def terrain_input(this,key):
         if key=='left mouse up':
             this.miner.mine()
+        if key=='g':
+            this.generating = not this.generating
     
     def new_swirl_origin(this,x,z,rot,rad=16):
         rot = math.radians(rot)
@@ -166,10 +171,11 @@ class MeshTerrain:
                     newT = True
                     this.countCubes+=1
                     # td[str(x+j)+'_'+str(z+k)]=genTerrain(x+j,z+k)
-                    # Actually store the list of vertices on the vd?
+                    # Store the list of vertices on the vd.
+                    model = this.subsets[this.currentSubset].model
                     this.td[str(x+j)+'_'+str(y)+'_'+str(z+k)] = 't'
                     this.vd[str(x+j)+'_'+str(y)+'_'+str(z+k)]= \
-                        this.gen_subset(x+j,y,z+k)
+                        this.gen_block(x+j,y,z+k,model)
         # Only generate model if new terrain to be built.
         if newT==True:
             if this.countCubes>=this.totalCubes:
