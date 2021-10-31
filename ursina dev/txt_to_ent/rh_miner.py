@@ -37,7 +37,7 @@ class Miner:
             except:
                 pass
             radius+=1
-            if what!=None or what!='g':
+            if what!=None and what!='g':
                 this.bte.position = best
 
     def mine(this):
