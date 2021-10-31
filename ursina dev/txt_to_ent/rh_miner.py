@@ -37,7 +37,7 @@ class Miner:
             except:
                 pass
             radius+=1
-            if what!=None and what!='g':
+            if what=='t':
                 this.bte.position = best
 
     def mine(this):
@@ -46,19 +46,45 @@ class Miner:
         z = str(math.floor(this.bte.z))
         
         wv = this.vd.get(x+'_'+y+'_'+z)
+        wt = this.td.get(x+'_'+y+'_'+z)
+        ob = this.td.get(x+'_'+str(int(y)-1)+'_'+z)
 
-        if wv != None:
+        if wt == 't' and ob == None:
             for v in range(wv[1]+1,wv[1]+37):
                 this.subsets[wv[0]].model.vertices[v][1]-=1
             this.subsets[wv[0]].model.generate()
 
             # Update dictionaries.
             this.td[x+'_'+y+'_'+z] = 'g'
-            this.vd[x+'_'+y+'_'+z]=None
+            # Protect upper pos from spawned wall.
+            # *** Need to detect dig trajectory and
+            # do these 'protections' properly.
+            if this.td[x+'_'+str(int(y)+1)+'_'+z]==None:
+                this.td[x+'_'+str(int(y)+1)+'_'+z] = 'g'
+            this.vd[x+'_'+y+'_'+z] = None
             this.td[x+'_'+str(int(y)-1)+'_'+z] = 't'
             # Record vertices tuple. First, which
             # subset. Second, vertex index.
             this.vd[x+'_'+str(int(y)-1)+'_'+z]=\
                                 (wv[0],wv[1])
-        else: print('failure to complete dig')
-        # Spawn terrain walls?
+            # Spawn terrain walls?
+            # Return centre-point to rh_mesh_terrain
+            # and which subset it belongs to.
+            return (int(x),int(y),int(z),wv[0])
+        elif wt == 't' and ob != None:
+            for v in range(wv[1]+1,wv[1]+37):
+                this.subsets[wv[0]].model.vertices[v][1]+=999
+            this.subsets[wv[0]].model.generate()
+            # Update dictionaries.
+            this.td[x+'_'+y+'_'+z] = 'g'
+            # Protect upper pos from spawned wall.
+            # *** Need to detect dig trajectory and
+            # do these 'protections' properly.
+            if this.td[x+'_'+str(int(y)+1)+'_'+z]==None:
+                this.td[x+'_'+str(int(y)+1)+'_'+z] = 'g'
+            this.vd[x+'_'+y+'_'+z] = None
+            # Return dig epicentre and subset index.
+            return (int(x),int(y),int(z),wv[0])
+        else: 
+            print('No dice, grandma')
+            return False
