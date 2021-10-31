@@ -86,7 +86,7 @@ class MeshTerrain:
                             this.subWidth)
         return this.subPos
 
-    def gen_subset(this,x,z):
+    def gen_subset(this,x,y,z):
         from random import randint
         from nMap import nMap
         # subsets[currentSubset].enable()
@@ -97,7 +97,7 @@ class MeshTerrain:
         # this.subsets[this.currentSubset].pos.x = this.subsets[this.currentSubset].x
         # this.subsets[this.currentSubset].pos.y = this.subsets[this.currentSubset].z
 
-        y = floor(this.genPerlin(x,z))   
+        # y = floor(this.genPerlin(x,z))   
         cc = nMap(y,-32,32,0.32,0.84)
         cc += randint(1,100)/100
         model.colors.extend((   Vec4(cc,cc,cc,1),) * 
@@ -123,7 +123,7 @@ class MeshTerrain:
         # Record which subset and index of first vertex
         # on vd dictionary for Mining.
         vob = (this.currentSubset,len(model.vertices)-37)
-        return y, vob
+        return vob
     
     def subset_regen(this):
         # These now generate in gen_subset (i.e. texture atlas).
@@ -138,11 +138,7 @@ class MeshTerrain:
 
     def genPerlin(this,x,z):
         return this.perlin.findHeight(x,z)
-        """
-    def mine(this,subject,td,vd):
-        from fh_mining import mine_action
-        mine_action(subject,td,subsets,terrainObject.model,vd)
-    """
+
     def terrain_input(this,key):
         if key=='left mouse up':
             this.miner.mine()
@@ -165,14 +161,15 @@ class MeshTerrain:
         wid = floor(this.subWidth * 0.5)
         for j in range(-wid,wid):
             for k in range(-wid,wid):
-                if this.td.get(str(x+j)+'_'+str(z+k))==None:
+                y = floor(this.genPerlin(x+j,z+k))
+                if this.td.get(str(x+j)+'_'+str(y)+'_'+str(z+k))==None:
                     newT = True
                     this.countCubes+=1
                     # td[str(x+j)+'_'+str(z+k)]=genTerrain(x+j,z+k)
                     # Actually store the list of vertices on the vd?
-                    this.td[str(x+j)+'_'+str(z+k)], \
-                    this.vd[str(x+j)+'_'+str(z+k)]= \
-                        this.gen_subset(x+j,z+k)
+                    this.td[str(x+j)+'_'+str(y)+'_'+str(z+k)] = 't'
+                    this.vd[str(x+j)+'_'+str(y)+'_'+str(z+k)]= \
+                        this.gen_subset(x+j,y,z+k)
         # Only generate model if new terrain to be built.
         if newT==True:
             if this.countCubes>=this.totalCubes:

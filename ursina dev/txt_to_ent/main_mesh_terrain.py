@@ -50,9 +50,19 @@ def update():
                                     subject.rotation_y)
         preVpos = subject.position
 
-    try:
-        target_y = 2 + terrain.td.get(str(floor(subject.x+0.5))+'_'+str(floor(subject.z+0.5)))
-        subject.y = lerp(subject.y, target_y, 0.1)
-    except: 
-        subject.y=subject.y
+    
+    foundBlock = False
+    for i in range(5,-5,-1):
+        if terrain.td.get(str(floor(subject.x+0.5))+
+                        '_'+str(floor(subject.y+0.5)+i)+
+                        '_'+str(floor(subject.z+0.5)))\
+                        =='t': 
+            target_y = floor(subject.y+0.5)+i
+            foundBlock = True
+            break
+    if foundBlock==False:
+        subject.y -= 19.8 * time.dt
+    else:
+        subject.y = lerp(subject.y, target_y+2, 3*time.dt)
+    
 app.run()
