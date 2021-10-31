@@ -41,16 +41,24 @@ class Miner:
                 this.bte.position = best
 
     def mine(this):
-        x = str(int(this.bte.x))
-        y = str(int(this.bte.y))
-        z = str(int(this.bte.z))
+        x = str(math.floor(this.bte.x))
+        y = str(math.floor(this.bte.y))
+        z = str(math.floor(this.bte.z))
+        
         wv = this.vd.get(x+'_'+y+'_'+z)
-        for v in range(wv[1]+1,wv[1]+37):
-            this.subsets[wv[0]].model.vertices[v][1]-=1
 
+        if wv != None:
+            for v in range(wv[1]+1,wv[1]+37):
+                this.subsets[wv[0]].model.vertices[v][1]-=1
+            this.subsets[wv[0]].model.generate()
+
+            # Update dictionaries.
+            this.td[x+'_'+y+'_'+z] = 'g'
+            this.vd[x+'_'+y+'_'+z]=None
+            this.td[x+'_'+str(int(y)-1)+'_'+z] = 't'
+            # Record vertices tuple. First, which
+            # subset. Second, vertex index.
+            this.vd[x+'_'+str(int(y)-1)+'_'+z]=\
+                                (wv[0],wv[1])
+        else: print('failure to complete dig')
         # Spawn terrain walls?
-
-        this.subsets[wv[0]].model.generate()
-
-        this.td[x+'_'+y+'_'+z] = 'g'
-        this.td[x+'_'+str(int(y)-1)+'_'+z] = 't'
