@@ -59,7 +59,12 @@ class Miner:
             # Protect upper pos from spawned wall.
             # *** Need to detect dig trajectory and
             # do these 'protections' properly.
-            if this.td[x+'_'+str(int(y)+1)+'_'+z]==None:
+            # Using a try: except: due to sporadic KeyError.
+            try:
+                a = this.td[x+'_'+str(int(y)+1)+'_'+z]
+                if a==None:
+                    this.td[x+'_'+str(int(y)+1)+'_'+z] = 'g'
+            except:
                 this.td[x+'_'+str(int(y)+1)+'_'+z] = 'g'
             this.vd[x+'_'+y+'_'+z] = None
             this.td[x+'_'+str(int(y)-1)+'_'+z] = 't'
@@ -80,7 +85,12 @@ class Miner:
             # Protect upper pos from spawned wall.
             # *** Need to detect dig trajectory and
             # do these 'protections' properly.
-            if this.td[x+'_'+str(int(y)+1)+'_'+z]==None:
+            # Using a try: except: due to sporadic KeyError.
+            try:
+                a = this.td[x+'_'+str(int(y)+1)+'_'+z]
+                if a==None:
+                    this.td[x+'_'+str(int(y)+1)+'_'+z] = 'g'
+            except:
                 this.td[x+'_'+str(int(y)+1)+'_'+z] = 'g'
             this.vd[x+'_'+y+'_'+z] = None
             # Return dig epicentre and subset index.

@@ -6,8 +6,8 @@ from perlin_noise import PerlinNoise
 from math import sin
 
 class PerlinTerrain:
-    def __init__(this,  _nObjs=1,_freq=444,_amp=32,
-                        _octs=8,_seed=99):
+    def __init__(this,  _nObjs=4,_freq=404,_amp=42,
+                        _octs=7,_seed=99):
         this.noises = []
         this.seed = _seed
         this.seed = (ord('j')+ord('o'))
@@ -16,7 +16,7 @@ class PerlinTerrain:
         this.octs = _octs
 
         for i in range(_nObjs):
-            noise = PerlinNoise(octaves=this.octs*(i+1),
+            noise = PerlinNoise(octaves=this.octs-(i+1),
                                 seed=this.seed)
             this.noises.append(noise)
         

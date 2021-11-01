@@ -217,6 +217,11 @@ class MeshTerrain:
                     this.countCubes+=1
                     
                     this.gen_block(x+j,y,z+k,this.currentSubset)
+                    
+                    # Create extra below! ***
+                    this.gen_block(x+j,y-1,z+k,this.currentSubset)
+                    this.countCubes+=1
+
                     # Protect surface from spawned walls.
                     # Mark all as a 'gap'.
                     this.td[str(x+j)+'_'+str(y+1)+'_'+str(z+k)]='g'
