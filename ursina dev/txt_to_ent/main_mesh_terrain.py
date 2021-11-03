@@ -35,7 +35,7 @@ def update():
     counter+=1
     # How quickly to generate new terrain.
     # if counter%3==0:
-    if counter==6:
+    if counter==3:
         counter=0
         if terrain.generating:
             terrain.paintTerrain()
@@ -44,11 +44,12 @@ def update():
         # Disable and enable individual subsets
         # according to distance from subject.
         # check_subset(subject)
-    if  abs(subject.x - preVpos.x) > 8 or \
-        abs(subject.z - preVpos.z) > 8:
+    if  abs(subject.x - preVpos.x) > 4 or \
+        abs(subject.z - preVpos.z) > 4:
         terrain.new_swirl_origin(   subject.x,
                                     subject.z,
-                                    subject.rotation_y)
+                                    subject.rotation_y,
+                                    4)
         preVpos = subject.position
 
     

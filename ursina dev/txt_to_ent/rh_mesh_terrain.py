@@ -21,7 +21,7 @@ class MeshTerrain:
 
         this.subsets = []
         this.subsetNum = 512
-        this.subWidth = 8
+        this.subWidth = 6
         this.currentSubset = 0
         this.totalCubes = this.subWidth*this.subWidth
 
@@ -89,7 +89,7 @@ class MeshTerrain:
                             this.subWidth)
         return this.subPos
 
-    def gen_block(this,x,y,z,subsetNum):
+    def gen_block(this,x,y,z,subsetNum,tex='grass'):
         from random import randint
         from nMap import nMap
         # subsets[currentSubset].enable()
@@ -108,16 +108,16 @@ class MeshTerrain:
         model.vertices.extend([ Vec3(x,y,z) + v for v in 
                                 this.block.vertices])
         # *** UVs - NB. scale of texture must be adjusted.
-        uv_tiles = 8
-        if z > 10:
+        if tex=='grass':
             what_tile_x = 8
             what_tile_y = 7
-            # Counting from top left to bottom right.
-        else: 
+        if tex=='soil':
+            what_tile_x = 10
+            what_tile_y = 7
+        if tex=='grey_stone':
             what_tile_x = 8
             what_tile_y = 5
-        # uu = uv_tiles - what_tile_x + 1
-        # uv = uv_tiles - what_tile_y
+            # Counting from top left to bottom right.
         uu = what_tile_x
         uv = what_tile_y
         model.uvs.extend([Vec2(uu,uv) + u for u in this.block.uvs])
@@ -139,9 +139,9 @@ class MeshTerrain:
     def next_subset(this):
         this.currentSubset += 1
         if this.currentSubset >= len(this.subsets)-1:
-            # this.currentSubset = 0 
+            this.currentSubset = 0 
             print('used all subsets')
-            this.generating=False
+            # this.generating=False
 
     def genPerlin(this,x,z):
         return this.perlin.findHeight(x,z)
@@ -158,31 +158,31 @@ class MeshTerrain:
         y = math.floor(epicentre[1])
         z = math.floor(epicentre[2]+1)
         if this.td.get(str(x)+'_'+str(y)+'_'+str(z))==None:
-            this.gen_block(x,y,z,m)
+            this.gen_block(x,y,z,m,tex='soil')
         # South wall:
         x = math.floor(epicentre[0])
         y = math.floor(epicentre[1])
         z = math.floor(epicentre[2]-1)
         if this.td.get(str(x)+'_'+str(y)+'_'+str(z))==None:
-            this.gen_block(x,y,z,m)
+            this.gen_block(x,y,z,m,tex='soil')
         # East wall:
         x = math.floor(epicentre[0]+1)
         y = math.floor(epicentre[1])
         z = math.floor(epicentre[2])
         if this.td.get(str(x)+'_'+str(y)+'_'+str(z))==None:
-            this.gen_block(x,y,z,m)
+            this.gen_block(x,y,z,m,tex='soil')
         # West wall:
         x = math.floor(epicentre[0]-1)
         y = math.floor(epicentre[1])
         z = math.floor(epicentre[2])
         if this.td.get(str(x)+'_'+str(y)+'_'+str(z))==None:
-            this.gen_block(x,y,z,m)
+            this.gen_block(x,y,z,m,tex='soil')
         # Upper wall:
         x = math.floor(epicentre[0])
         y = math.floor(epicentre[1]+1)
         z = math.floor(epicentre[2])
         if this.td.get(str(x)+'_'+str(y)+'_'+str(z))==None:
-            this.gen_block(x,y,z,m)
+            this.gen_block(x,y,z,m,tex='soil')
         
         # Regenerate subset's model with spawned walls :)
         this.subsets[m].model.generate()
@@ -217,10 +217,10 @@ class MeshTerrain:
                     this.countCubes+=1
                     
                     this.gen_block(x+j,y,z+k,this.currentSubset)
-                    
+
                     # Create extra below! ***
-                    this.gen_block(x+j,y-1,z+k,this.currentSubset)
-                    this.countCubes+=1
+                    # this.gen_block(x+j,y-1,z+k,this.currentSubset)
+                    # this.countCubes+=1
 
                     # Protect surface from spawned walls.
                     # Mark all as a 'gap'.
