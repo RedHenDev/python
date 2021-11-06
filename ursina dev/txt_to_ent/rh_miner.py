@@ -41,6 +41,7 @@ class Miner:
                 this.bte.position = best
 
     def mine(this):
+        from ursina import Vec2
         x = str(math.floor(this.bte.x))
         y = str(math.floor(this.bte.y))
         z = str(math.floor(this.bte.z))
@@ -49,10 +50,13 @@ class Miner:
         wt = this.td.get(x+'_'+y+'_'+z)
         ob = this.td.get(x+'_'+str(int(y)-1)+'_'+z)
 
+        # First, remove block and add new block below site.
         if wt == 't' and ob == None:
             for v in range(wv[1]+1,wv[1]+37):
-                this.subsets[wv[0]].model.vertices[v][1]-=1
-            this.subsets[wv[0]].model.generate()
+                # this.subsets[wv[0]].model.vertices[v][1]-=1
+                this.subsets[wv[0]].model.vertices[v][1]+=999
+            # this.subsets[wv[0]].model.generate()
+            # New block will be added upon return...
 
             # Update dictionaries.
             this.td[x+'_'+y+'_'+z] = 'g'
@@ -67,11 +71,13 @@ class Miner:
             except:
                 this.td[x+'_'+str(int(y)+1)+'_'+z] = 'g'
             this.vd[x+'_'+y+'_'+z] = None
+            """
             this.td[x+'_'+str(int(y)-1)+'_'+z] = 't'
             # Record vertices tuple. First, which
             # subset. Second, vertex index.
             this.vd[x+'_'+str(int(y)-1)+'_'+z]=\
                                 (wv[0],wv[1])
+            """
             # Spawn terrain walls?
             # Return centre-point to rh_mesh_terrain
             # and which subset it belongs to.

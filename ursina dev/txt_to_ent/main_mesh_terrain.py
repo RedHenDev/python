@@ -35,26 +35,26 @@ def update():
     counter+=1
     # How quickly to generate new terrain.
     # if counter%3==0:
+    if terrain.generating:
+            terrain.paintTerrain()
     if counter==3:
         counter=0
-        if terrain.generating:
-            terrain.paintTerrain()
         terrain.miner.build_tool_entity()
         
         # Disable and enable individual subsets
         # according to distance from subject.
         # check_subset(subject)
-    if  abs(subject.x - preVpos.x) > 4 or \
-        abs(subject.z - preVpos.z) > 4:
+    if  abs(subject.x - preVpos.x) > 6 or \
+        abs(subject.z - preVpos.z) > 6:
         terrain.new_swirl_origin(   subject.x,
                                     subject.z,
                                     subject.rotation_y,
                                     4)
         preVpos = subject.position
-
     
+    step_height = 3
     foundBlock = False
-    for i in range(5,-5,-1):
+    for i in range(-step_height,step_height,1):
         if terrain.td.get(str(floor(subject.x+0.5))+
                         '_'+str(floor(subject.y+0.5)+i)+
                         '_'+str(floor(subject.z+0.5)))\

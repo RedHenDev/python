@@ -21,7 +21,7 @@ class MeshTerrain:
 
         this.subsets = []
         this.subsetNum = 512
-        this.subWidth = 6
+        this.subWidth = 4
         this.currentSubset = 0
         this.totalCubes = this.subWidth*this.subWidth
 
@@ -58,6 +58,7 @@ class MeshTerrain:
                         texture=this.textureAtlas)
             # Adjust scale of texture.
             e.texture_scale*=64/e.texture.width
+            # Used in checking terrain dist from subject.
             e.pos = Vec2(0,0)
             this.subsets.append(e)
 
@@ -111,12 +112,15 @@ class MeshTerrain:
         if tex=='grass':
             what_tile_x = 8
             what_tile_y = 7
-        if tex=='soil':
+        elif tex=='soil':
             what_tile_x = 10
             what_tile_y = 7
-        if tex=='grey_stone':
+        elif tex=='grey_stone':
             what_tile_x = 8
             what_tile_y = 5
+        elif tex=='snow':
+            what_tile_x = 8
+            what_tile_y = 6
             # Counting from top left to bottom right.
         uu = what_tile_x
         uv = what_tile_y
@@ -131,6 +135,29 @@ class MeshTerrain:
         this.vd[str(x)+'_'+str(y)+'_'+str(z)] = vob
         # return vob
     
+    """
+    def set_texture(this,tex,model=None,uvs=None):
+        if model==None and uvs==None: return
+        # *** UVs - NB. scale of texture must be adjusted.
+        if tex=='grass':
+            what_tile_x = 8
+            what_tile_y = 7
+        if tex=='soil':
+            what_tile_x = 10
+            what_tile_y = 7
+        if tex=='grey_stone':
+            what_tile_x = 8
+            what_tile_y = 5
+            # Counting from top left to bottom right.
+        uu = what_tile_x
+        uv = what_tile_y
+        if uvs==None:
+            model.uvs.extend([Vec2(uu,uv) + u for u in this.block.uvs])
+            return
+    """    
+            
+
+
     def subset_regen(this):
         # These now generate in gen_subset (i.e. texture atlas).
         # model.uvs += (block.uvs) * this.subWidth*this.subWidth*4
@@ -144,7 +171,7 @@ class MeshTerrain:
             # this.generating=False
 
     def genPerlin(this,x,z):
-        return this.perlin.findHeight(x,z)
+        return this.perlin.findHeight(x,z,False)
 
     def gen_walls(this,epicentre):
         if epicentre==False: return
@@ -183,6 +210,12 @@ class MeshTerrain:
         z = math.floor(epicentre[2])
         if this.td.get(str(x)+'_'+str(y)+'_'+str(z))==None:
             this.gen_block(x,y,z,m,tex='soil')
+        # Lower wall:
+        x = math.floor(epicentre[0])
+        y = math.floor(epicentre[1]-1)
+        z = math.floor(epicentre[2])
+        if this.td.get(str(x)+'_'+str(y)+'_'+str(z))==None:
+            this.gen_block(x,y,z,m,tex='grey_stone')
         
         # Regenerate subset's model with spawned walls :)
         this.subsets[m].model.generate()
@@ -216,7 +249,12 @@ class MeshTerrain:
                     newT = True
                     this.countCubes+=1
                     
-                    this.gen_block(x+j,y,z+k,this.currentSubset)
+                    # Biomes.
+                    if x+j > 10:
+                        tex = 'grey_stone'
+                    else: tex = 'grass'
+                    if y > 5: tex = 'snow'
+                    this.gen_block(x+j,y,z+k,this.currentSubset,tex)
 
                     # Create extra below! ***
                     # this.gen_block(x+j,y-1,z+k,this.currentSubset)

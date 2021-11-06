@@ -6,8 +6,8 @@ from perlin_noise import PerlinNoise
 from math import sin
 
 class PerlinTerrain:
-    def __init__(this,  _nObjs=4,_freq=404,_amp=42,
-                        _octs=7,_seed=99):
+    def __init__(this,  _nObjs=2,_freq=128,_amp=16,
+                        _octs=8,_seed=99):
         this.noises = []
         this.seed = _seed
         this.seed = (ord('j')+ord('o'))
@@ -21,11 +21,13 @@ class PerlinTerrain:
             this.noises.append(noise)
         
     def findHeight(this,_x,_z,sineBumps=True):
+        from ursina import math
         y = 0
         for i in range(len(this.noises)):
-            y += ((this.noises[i]([ _x/this.freq,
-                                    _z/this.freq]))*
+            y += ((this.noises[i]([ _x/this.freq*(0.1*i+1),
+                                    _z/this.freq*(0.1*i+1)]))*
                                     this.amp/((i+1)*2))
         if sineBumps==True:
-            y+= sin(_x)*0.5-0.5
+            y+= math.sin(_x)*1-0.5
+            y+= math.cos(_z)*1-0.5
         return y
