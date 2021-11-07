@@ -53,9 +53,7 @@ class Miner:
         # First, remove block and add new block below site.
         if wt == 't' and ob == None:
             for v in range(wv[1]+1,wv[1]+37):
-                # this.subsets[wv[0]].model.vertices[v][1]-=1
                 this.subsets[wv[0]].model.vertices[v][1]+=999
-            # this.subsets[wv[0]].model.generate()
             # New block will be added upon return...
 
             # Update dictionaries.
@@ -72,15 +70,11 @@ class Miner:
                 this.td[x+'_'+str(int(y)+1)+'_'+z] = 'g'
             this.vd[x+'_'+y+'_'+z] = None
             """
-            this.td[x+'_'+str(int(y)-1)+'_'+z] = 't'
-            # Record vertices tuple. First, which
-            # subset. Second, vertex index.
-            this.vd[x+'_'+str(int(y)-1)+'_'+z]=\
-                                (wv[0],wv[1])
+            # Record vertices tuple on return. 
+            # First, which subset. Second, vertex index.
             """
             # Spawn terrain walls?
-            # Return centre-point to rh_mesh_terrain
-            # and which subset it belongs to.
+            # Return centre-point to rh_mesh_terrain.
             return (int(x),int(y),int(z),wv[0])
         elif wt == 't' and ob != None:
             for v in range(wv[1]+1,wv[1]+37):
