@@ -6,7 +6,7 @@ from perlin_noise import PerlinNoise
 from math import sin
 
 class PerlinTerrain:
-    def __init__(this,  _nObjs=2,_freq=128,_amp=16,
+    def __init__(this,  _nObjs=4,_freq=128,_amp=20,
                         _octs=8,_seed=99):
         this.noises = []
         this.seed = _seed

@@ -9,7 +9,7 @@ app = Ursina()
 
 noise = PerlinNoise(octaves=1,seed=int(99))
 terrainSize = 0 # To be derived from loaded map data :)
-map_name = 'mapBuild_test_4.map'
+map_name = 'terrain_maps/mapBuild_test_4.map'
 td = {} # Terrain dictionary.
 quad = load_model('stretch_hex.obj')
 dungeon = Entity(model=Mesh(),texture='grass_64_hex_tex.png')
