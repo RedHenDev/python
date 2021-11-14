@@ -6,7 +6,7 @@ from perlin_noise import PerlinNoise
 from math import sin
 
 class PerlinTerrain:
-    def __init__(this,  _nObjs=4,_freq=128,_amp=20,
+    def __init__(this,  _nObjs=4,_freq=333,_amp=20,
                         _octs=8,_seed=99):
         this.noises = []
         this.seed = _seed
@@ -24,8 +24,8 @@ class PerlinTerrain:
         from ursina import math
         y = 0
         for i in range(len(this.noises)):
-            y += ((this.noises[i]([ _x/this.freq*(0.1*i+1),
-                                    _z/this.freq*(0.1*i+1)]))*
+            y += ((this.noises[i]([ _x/this.freq,
+                                    _z/this.freq]))*
                                     this.amp/((i+1)*2))
         if sineBumps==True:
             y+= math.sin(_x)*1-0.5

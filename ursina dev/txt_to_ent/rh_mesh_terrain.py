@@ -8,10 +8,10 @@ from rh_miner import Miner
 
 class MeshTerrain:
     def __init__(this,_subject,_camera):
-        # this.block = load_model('block.obj')
-        this.block = load_model('stretch_hex.obj')
-        # this.textureAtlas = 'texture_atlas_3.png'
-        this.textureAtlas = 'grass_64_hex_tex.png'
+        this.block = load_model('block.obj')
+        # this.block = load_model('stretch_hex.obj')
+        this.textureAtlas = 'texture_atlas_3.png'
+        # this.textureAtlas = 'grass_64_hex_tex.png'
         
         # Dictionaries.
         # td for location, vd for vertices and mining. 
@@ -99,7 +99,7 @@ class MeshTerrain:
         model = this.subsets[subsetNum].model
         
         # For hex...
-        x+=z%2*0.5
+        # x+=z%2*0.5
 
         # Record position of subset.
         # For checking distance...
@@ -132,8 +132,8 @@ class MeshTerrain:
         model.uvs.extend([Vec2(uu,uv) + u for u in this.block.uvs])
         # model.uvs.extend([Vec2(8,7) + u for u in this.block.uvs])
         # For hex...
-        x-=z%2*0.5
-        x=int(x)
+        # x-=z%2*0.5
+        # x=int(x)
         # Record cube on terrain dictionary td.
         this.td[str(x)+'_'+str(y)+'_'+str(z)] = 't'
         # Record which subset and index of first vertex
