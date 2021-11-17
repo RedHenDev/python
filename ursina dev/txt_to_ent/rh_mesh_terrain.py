@@ -2,6 +2,7 @@
 Terrain generation by mesh class
 30/10/21
 """
+from random import randint
 from ursina import *
 from rh_perlin_noise import PerlinTerrain
 from rh_miner import Miner
@@ -222,7 +223,7 @@ class MeshTerrain:
         y = math.floor(epicentre[1]-1)
         z = math.floor(epicentre[2])
         if this.td.get(str(x)+'_'+str(y)+'_'+str(z))==None:
-            this.gen_block(x,y,z,m,tex='grey_stone')
+            this.gen_block(x,y,z,m,tex='soil')
         
         # Regenerate subset's model with spawned walls :)
         this.subsets[m].model.generate()
@@ -251,16 +252,16 @@ class MeshTerrain:
         wid = floor(this.subWidth * 0.5)
         for j in range(-wid,wid):
             for k in range(-wid,wid):
-                y = floor(this.genPerlin(x+j,z+k))
-                if this.td.get(str(x+j)+'_'+str(y)+'_'+str(z+k))==None:
+                y = this.genPerlin(x+j,z+k)
+                if this.td.get(str(x+j)+'_'+str(floor(y))+'_'+str(z+k))==None:
                     newT = True
                     this.countCubes+=1
                     
                     # Biomes.
-                    if x+j > 10:
+                    if x+j > 10+randint(-2,2):
                         tex = 'grey_stone'
                     else: tex = 'grass'
-                    if y > 5: tex = 'snow'
+                    if y > 5+randint(-1,1): tex = 'snow'
                     this.gen_block(x+j,y,z+k,this.currentSubset,tex)
 
                     # Create extra below! ***

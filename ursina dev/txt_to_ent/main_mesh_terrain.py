@@ -60,11 +60,12 @@ def update():
                         '_'+str(floor(subject.z+0.5)))\
                         =='t': 
             target_y = floor(subject.y+0.5)+i
+            # target_y = subject.y+0.5+i
             foundBlock = True
             break
     if foundBlock==False:
         subject.y -= 19.8 * time.dt
     else:
-        subject.y = lerp(subject.y, target_y+2, 9*time.dt)
+        subject.y = lerp(subject.y, target_y+2, 6*time.dt)
     
 app.run()
