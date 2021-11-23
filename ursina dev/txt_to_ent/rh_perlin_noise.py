@@ -23,10 +23,11 @@ class PerlinTerrain:
     def findHeight(this,_x,_z,sineBumps=True):
         from ursina import math
         y = 0
+        ht = 0
         for i in range(len(this.noises)):
             y += ((this.noises[i]([ _x/this.freq,
                                     _z/this.freq]))*
-                                    this.amp/((i+1)))
+                                    this.amp)
         if sineBumps==True:
             y+= math.sin(_x)*1-0.5
             y+= math.cos(_z)*1-0.5

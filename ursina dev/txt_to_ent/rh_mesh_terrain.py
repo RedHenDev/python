@@ -252,7 +252,7 @@ class MeshTerrain:
         wid = floor(this.subWidth * 0.5)
         for j in range(-wid,wid):
             for k in range(-wid,wid):
-                y = this.genPerlin(x+j,z+k)
+                y = floor(this.genPerlin(x+j,z+k))
                 if this.td.get(str(x+j)+'_'+str(floor(y))+'_'+str(z+k))==None:
                     newT = True
                     this.countCubes+=1
