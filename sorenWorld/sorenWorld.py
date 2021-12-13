@@ -5,10 +5,12 @@ from random import random
 app = Ursina()
 
 Sky(color=color.rgb(0,200,255))
+window.fullscreen=True
 
 me = FirstPersonController()
 me.y = 100
 me.x = me.z = 16
+me.cursor.visible=False
 
 mod = load_model('cube')
 terrain = Entity(model=Mesh(), texture='grey_noise.png')
@@ -29,8 +31,34 @@ for z in range(terrainWidth):
         model.uvs.extend([Vec2(0,0) + u for u in mod.uvs])
 model.generate()
 
+class Flake:
+    def __init__(this):
+        this.ent=Entity(model='quad',texture='flake_1.png')
+        this.ent.double_sided=True
+        this.ent.scale=random()*0.2
+        this.rotSpeed=random()*500
+
+    def update(this):
+        this.ent.rotation_y += this.rotSpeed*time.dt
+        this.ent.y+=-1*time.dt
+        if this.ent.y < 2:
+            this.ent.y = me.y + 3 + random() * 5
+            this.ent.x = me.x + random() * 20 - 10
+            this.ent.z = me.z + random() * 20 - 10
+
+flakes = []
+
+for i in range(512):
+    e = Flake()
+    e.ent.y = 3 + random()*5
+    e.ent.x = random()*20-10
+    e.ent.z = random()*20-10
+    flakes.append(e)
+
 me.gravity=0
 def update():
+    for f in flakes:
+        f.update()
     try:
         me.y = lerp(me.y,floor(texture.get_pixel(
         floor(me.x+0.5),floor(me.z+0.5)).v * 10 + 1),6*time.dt)
