@@ -1,6 +1,6 @@
-# from ursina import *
+from ursina import *
 
-# app = Ursina()
+app = Ursina()
 
 # read from a texture and place tiles based on the color
 quad = load_model('cube')
@@ -8,7 +8,7 @@ dungeon = Entity(model=Mesh(), texture='brick')
 model = dungeon.model
 
 # ***
-# dungeon.rotation_x += 90
+dungeon.rotation_x += 90
 
 texture = load_texture('heightmap_1')
 for y in range(texture.height):
@@ -26,6 +26,6 @@ them change based on the tile type so you can use a tilemap
 model.uvs = (quad.uvs) * (texture.width * texture.height)
 model.generate() # call to create the mesh
 
-# subject = EditorCamera()
+subject = EditorCamera()
 
-# app.run()
+app.run()
