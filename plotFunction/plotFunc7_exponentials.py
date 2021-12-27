@@ -50,8 +50,8 @@ cir.draw(win)
 def func(_x):
     #if _x==0: return float(0)
     """ Exponential """
-    global n
-    return float(_x**n)
+    #global n
+    #return float(_x**n)
     """ Hyperbola. """
     #return float(1/_x)
     #return float(_x**3)
@@ -66,6 +66,7 @@ def func(_x):
     """ Oblique asymptote. """
     #x2 = (_x * _x) - _x - 2
     #return x2/_x
+    
 def checkInput():
     whatKey = win.checkKey()
     if whatKey.lower() == "q" or whatKey.lower() == "x":
