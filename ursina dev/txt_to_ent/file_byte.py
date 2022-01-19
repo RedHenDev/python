@@ -8,6 +8,8 @@ def save(_fileName, _payload):
     import pickle, sys, os
 
     # Open main module directory for correct file.
+    # sys.arg is  a list of arguments passed to
+    # command line, where [0] is name of the script.
     path = os.path.dirname(os.path.abspath(sys.argv[0]))
     os.chdir(path)
 
