@@ -21,7 +21,7 @@ class MeshTerrain:
         this.numSubsets = 512
         
         # Must be even number! See genTerrain()
-        this.subWidth = 10 
+        this.subWidth = 8 
         this.swirlEngine = SwirlEngine(this.subWidth)
         this.currentSubset = 0
 
@@ -87,17 +87,13 @@ class MeshTerrain:
     
     # I.e. after mining, to create illusion of depth.
     def genWalls(this,epi,subset):
+        from config import six_cube_dirs
         if epi==None: return
         # Refactor this -- place in mining_system 
         # except for cal to genBlock?
-        wp =    [   Vec3(0,1,0),
-                    Vec3(0,-1,0),
-                    Vec3(-1,0,0),
-                    Vec3(1,0,0),
-                    Vec3(0,0,-1),
-                    Vec3(0,0,1)]
+        
         for i in range(0,6):
-            np = epi + wp[i]
+            np = epi + six_cube_dirs[i]
             if this.td.get( (floor(np.x),
                             floor(np.y),
                             floor(np.z)))==None:

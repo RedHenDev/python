@@ -35,7 +35,7 @@ terrain.generatingTerrain=True
 # snowfall = SnowFall(subject)
 # *** 
 # scene.fog_density=(0,50)
-scene.fog_density=(3,100)
+scene.fog_density=(0,100)
 scene.fog_color=indra.color
 # scene.fog_color=color.white
 # camera.clip_plane_far=2000
@@ -71,12 +71,13 @@ def input(key):
     if key=='m': saveMap(subject.position,terrain.td)
     if key=='l': loadMap(subject,terrain)
     # ***
-    inventory_input(key,mouse,subject)
+    inv_input(key,subject,mouse)
 
 count = 0
 earthquake=0
 def update():
     global count, pX, pZ, earthquake
+
     # ***
     # beaker.text=str(int(subject.x))
     # beaker.background=True
