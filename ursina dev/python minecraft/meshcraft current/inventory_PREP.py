@@ -1,17 +1,5 @@
 from ursina import *
 
-# inventory=Panel()
-# inventory=Entity(model='quad',parent=camera.ui)
-# inventory.color=color.dark_gray
-# inventory.scale=0.1
-# inventory.scale_x*=9
-# inventory.origin=(0,4.5)
-
-# hLighter=Entity(model='quad',parent=camera.ui)
-# hLighter.color=color.black
-# hLighter.scale=0.088
-# hLighter.origin=(4.5,5.1)
-
 # Inventory hotbar.
 hotbar = Entity(model='quad',parent=camera.ui)
 # Set the size and position.
@@ -115,4 +103,3 @@ def inv_input(key,subject,mouse):
         for h in hs: 
             h.color=color.dark_gray
         hs[subject.blockTnum].color=color.white
-        
