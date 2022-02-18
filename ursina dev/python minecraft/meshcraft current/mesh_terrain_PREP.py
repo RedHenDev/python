@@ -5,7 +5,7 @@ from mining_system_PREP import *
 from building_system_PREP import *
 # ***
 import random as ra
-from inventory_PREP import mins
+from inventory_PREP import mins, minerals
 
 class MeshTerrain:
     def __init__(this,_sub,_cam):
@@ -82,6 +82,7 @@ class MeshTerrain:
                                 bp)
             if bsite!=None:
                 this.genBlock(bsite.x,bsite.y,bsite.z,subset=0,blockType=mins[this.subject.blockTnum])
+                # print(mins[this.subject.blockTnum])
                 gapShell(this.td,bsite)
                 this.subsets[0].model.generate()
     
@@ -123,35 +124,37 @@ class MeshTerrain:
                 floor(y),
                 floor(z))] = vob
 
+        # *** New colour system.
+        # Do we have a color element on the list?
+        if len(minerals[blockType]) > 2:
+            # print(minerals[blockType][2])
+            model.colors.extend((minerals[blockType][2],)*
+                                    this.numVertices)
+        else:
+            # Decide random tint for colour of block :)
+            c = ra.random()-0.5
+            model.colors.extend( (Vec4(1-c,1-c,1-c,1),)*
+                                    this.numVertices)
+
         # Decide random tint for colour of block :)
-        c = ra.random()-0.5
-        model.colors.extend( (Vec4(1-c,1-c,1-c,1),)*
-                                this.numVertices)
+        # c = ra.random()-0.5
+        # model.colors.extend( (Vec4(1-c,1-c,1-c,1),)*
+        #                         this.numVertices)
+
         # This is the texture atlas co-ord for grass :)
-        uu = 8
-        uv = 7
+        # uu = 8
+        # uv = 7
         # Randomly place stone blocks.
-        if blockType=='grass' and ra.random() > 0.86:
-            blockType='stone'
-        if blockType=='soil':
-            uu = 10
-            uv = 7
-        elif blockType=='stone':
-            uu = 8
-            uv = 5
-        elif blockType=='ice':
-            uu = 9
-            uv = 7
-        elif blockType=='snow':
-            uu = 8
-            uv = 6
-        
-            
+        # if blockType=='grass' and ra.random() > 0.86:
         # If high enough, cap with snow blocks :D
-        if y > 2:
-            blockType='snow'
-            uu = 8
-            uv = 6
+        # if y > 2:
+        #     blockType='snow'
+        #     uu = 8
+        #     uv = 6
+        # ***
+        uu = minerals[blockType][0]
+        uv = minerals[blockType][1]
+        
         model.uvs.extend([Vec2(uu,uv) + u for u in this.block.uvs])
         
         # Record terrain in dictionary :)
@@ -174,7 +177,13 @@ class MeshTerrain:
                 if this.td.get( (floor(x+k),
                                 floor(y),
                                 floor(z+j)))==None:
-                    this.genBlock(x+k,y,z+j,blockType='grass')
+                    # ***
+                    if ra.random() > 0.86:
+                        mineralType='stone'
+                    else: mineralType='grass'
+                    if y > 2:
+                        mineralType='snow'
+                    this.genBlock(x+k,y,z+j,blockType=mineralType)
 
         this.subsets[this.currentSubset].model.generate()
         # Current subset hack ;)

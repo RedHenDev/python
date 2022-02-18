@@ -16,11 +16,11 @@ from ursina import *
 hotbar = Entity(model='quad',parent=camera.ui)
 # Set the size and position.
 hotbar.scale_y=(window.windowed_size.y/9)/window.windowed_size.y
-print(f'Window size is {window.windowed_size.y}')
+# print(f'Window size is {window.windowed_size.y}')
 hotbar.scale_x=0.8
 hotbar.y=-0.5 + (hotbar.scale_y*0.5)
 # Appearance.
-hotbar.color=color.dark_gray
+hotbar.color=color.light_gray
 
 minerals =  {   'grass' : (8,7),
                 'soil' : (10,7),
@@ -28,7 +28,7 @@ minerals =  {   'grass' : (8,7),
                 'concrete' : (9,6),
                 'ice' : (9,7),
                 'snow' : (8,6),
-                'ruby' : (9,6,color.rgba(1,0,0,1))
+                'ruby' : (9,6,Vec4(1,0,0,1))
             }
 # Create iterable list from dictionary keys (not values).
 mins = list(minerals.keys())
@@ -38,33 +38,38 @@ class hotspot(Entity):
         super().__init__()
         this.model='quad'
         this.parent=camera.ui
-        this.color=color.light_gray
+        this.color=color.dark_gray
         # Why 10 here instead of 9? Weird.
         this.scale=hotbar.scale_x/10.3
         this.y=-0.5+(hotbar.scale_y*0.5)
 
-class iceCube(Entity):
+class item_icon(Entity):
     def __init__(this,blockType='grass'):
         super().__init__()
-        this.model='block.obj'
+        this.model='quad'
         this.parent=camera.ui
         this.blockType=blockType
 
         this.color=color.white
         # And why 10 instead of 9?
-        this.scale=hotbar.scale_x/10.4
+        this.scale=hotbar.scale_x/10.3
         # WHy 0.54?
-        this.y=-0.54+(hotbar.scale_y*0.5)
+        this.y=-0.5+(hotbar.scale_y*0.5)
         this.texture='texture_atlas_3.png'
-        this.texture_scale*=(64/this.texture.width) 
-            
+        this.texture_scale*=64/this.texture.width
+        # (32/(this.texture.width))  
         this.setup_texture()
 
     def setup_texture(this):
         uu=minerals[this.blockType][0]
         uv=minerals[this.blockType][1]
-        this.model.uvs = [Vec2(uu,uv) + u for u in this.model.uvs]
+        basemod=load_model('block.obj')
+        cb=copy(basemod.uvs)
+        # print(len(cb.uvs))
+        del cb[:-33]
+        this.model.uvs = [Vec2(uu,uv) + u for u in cb]
         this.model.generate()
+        this.rotation_z=180
     
     def setup_color(this):
         # Do we have a color element on the list?
@@ -73,14 +78,19 @@ class iceCube(Entity):
             this.color=minerals[this.blockType][2]
 
 # Test hotspots.
+hs=[]
 for i in range(9):
     e = hotspot()
     e.x = (-4.5*e.scale_x) + ((e.scale_x+0.01) * i)
+    hs.append(e)
+hs[0].color=color.lime
+gs = []
 for i in range(9):
-    e = iceCube(mins[i%len(mins)])
+    e = item_icon(mins[i%len(mins)])
     e.x = (-4.5*e.scale_x) + ((e.scale_x+0.01) * i)
     e.setup_color()
-    e.x = (-4.5*e.scale_x) + ((e.scale_x+0.01) * i)
+    e.scale*=0.9
+    gs.append(e)
 
 
 def inv_input(key,subject,mouse):
@@ -91,9 +101,12 @@ def inv_input(key,subject,mouse):
     elif key=='e' and not subject.enabled:
         subject.enable()
         mouse.locked=True
+
     
-    # if key=='r': 
-    #     hLighter.origin_x-=1
-    #     if hLighter.origin_x<-4.5:
-    #         hLighter.origin_x=4.5
-    #     subject.blockTnum=(subject.blockTnum+1)%len(mins)
+    if key=='r':
+        # Just cycle through possible blocks, 'len(mins)'.
+        subject.blockTnum=(subject.blockTnum+1)%(len(mins))
+        for h in hs: 
+            h.color=color.dark_gray
+        hs[subject.blockTnum].color=color.lime
+        

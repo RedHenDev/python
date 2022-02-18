@@ -11,7 +11,7 @@ from save_load_system_PREP import saveMap, loadMap
 
 # ***
 from mob_system_PREP import *
-window.vsync=False
+window.vsync=True
 
 window.color = color.rgb(0,200,255)
 indra = Sky()
