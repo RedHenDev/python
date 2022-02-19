@@ -136,21 +136,6 @@ class MeshTerrain:
             model.colors.extend( (Vec4(1-c,1-c,1-c,1),)*
                                     this.numVertices)
 
-        # Decide random tint for colour of block :)
-        # c = ra.random()-0.5
-        # model.colors.extend( (Vec4(1-c,1-c,1-c,1),)*
-        #                         this.numVertices)
-
-        # This is the texture atlas co-ord for grass :)
-        # uu = 8
-        # uv = 7
-        # Randomly place stone blocks.
-        # if blockType=='grass' and ra.random() > 0.86:
-        # If high enough, cap with snow blocks :D
-        # if y > 2:
-        #     blockType='snow'
-        #     uu = 8
-        #     uv = 6
         # ***
         uu = minerals[blockType][0]
         uv = minerals[blockType][1]

@@ -41,10 +41,23 @@ def mine(td,vd,subsets):
     # Have we got a block highlighted? If not, return.
     if wv==None: return
     
+    # Deleting the vertices (and colours) not a solution!
+    # Try it out!
+    # del subsets[wv[0]].model.vertices[wv[1]+1:wv[1]+37]
+    # del subsets[wv[0]].model.colors[wv[1]+1:wv[1]+37]
     for i in range(wv[1]+1,wv[1]+37):
-        subsets[wv[0]].model.vertices[i][1]+=999
+        # Make invisible?
+        subsets[wv[0]].model.colors[i][3]=0.5
+        # subsets[wv[0]].model.vertices[i][1]+=999
     
-    subsets[wv[0]].model.generate()
+    # This is called outside, so redundant here.
+    # subsets[wv[0]].model.generate()
+
+    # Nice idea? Nope. Well, idea is to move just this
+    # block to full transparency, not the whole subset.
+    # But advantage would be that we don't have to 
+    # generate the model!
+    # subsets[wv[0]].texture_scale*=2
 
     # g for gap in terrain. And wipe vd entry.
     # ***
