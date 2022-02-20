@@ -22,18 +22,22 @@ minerals =  {   'grass' : (8,7),
 mins = list(minerals.keys())
 
 class item_panel(Entity):
-    def __init__(this):
+    def __init__(this,cols=9,rows=3):
         super().__init__()
         this.model='quad'
+        this.ratio=rows/cols
+        this.cols=cols
+        this.rows=rows 
         # NB y is 1/3 of x. I.e. rows v cols.
-        this.scale=(0.8,0.8*0.33)
+        this.scale=0.8
+        this.scale_y*=this.ratio
         this.parent=camera.ui
-        this.trays=[Vec2(x,y) for x in range(9) for y in range(1)]
+        this.trays=[Vec2(x,y) for x in range(this.cols) for y in range(this.rows)]
         this.texture='white_box.png'
-        this.texture_scale=(9,3)
+        this.texture_scale=(this.cols,this.rows)
     
     def update(this):
-        this.model.colorize(color.random_color)
+        pass
 
 ite=item_panel()
 

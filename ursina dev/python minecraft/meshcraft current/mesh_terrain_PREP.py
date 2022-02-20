@@ -18,7 +18,7 @@ class MeshTerrain:
         this.numVertices = len(this.block.vertices)
 
         this.subsets = []
-        this.numSubsets = 512
+        this.numSubsets = 64
         
         # Must be even number! See genTerrain()
         this.subWidth = 8 
@@ -50,11 +50,11 @@ class MeshTerrain:
             this.subsets[epi[1]].model.generate()
 
     # Highlight looked-at block :)
-    # Don't need the pos or cam?
-    # !*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!
+    # ***
     def update(this):
         highlight(  this.subject.position,
-                    this.camera,this.td)
+                    this.camera,this.td,
+                    this.subject.height)
         # Blister-mining!
         if bte.visible==True:
             # Build site indicator...

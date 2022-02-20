@@ -25,7 +25,8 @@ subject.runSpeed=12
 subject.walkSpeed=4
 # ***
 subject.y=22
-subject.height=1.86
+subject.height=1.5
+subject.camera_pivot.y=1.5
 camera.dash=10 # Rate at which fov changes when running.
 window.fullscreen=False
 # ***
@@ -34,7 +35,7 @@ window.fullscreen=False
 # ***
 terrain = MeshTerrain(subject,camera)
 # ***
-terrain.generatingTerrain=True
+terrain.generatingTerrain=False
 # snowfall = SnowFall(subject)
 # *** 
 # scene.fog_density=(0,50)
@@ -50,7 +51,7 @@ beaker.scale=2
 beaker.origin=(-0.5,.5)
 
 # ***
-for i in range(32):
+for i in range(64):
     terrain.genTerrain()
 # loadMap(subject,terrain)
 

@@ -10,10 +10,10 @@ bp.texture_scale=0.25
 # bp.origin_y-=5.1
 # bp.scale=0.11
 
-def highlight(pos,cam,td):
+def highlight(pos,cam,td,sub_h=1):
     for i in range(1,32):
         # Adjust for player's height!
-        wp=pos+Vec3(0,1.86,0)+cam.forward*(i*0.5)
+        wp=pos+Vec3(0,sub_h,0)+cam.forward*(i*0.5)
         # This trajectory is close to perfect!
         # If we can hit perfection...one day...?
         x = round(wp.x)
