@@ -55,18 +55,23 @@ class item_icon(Draggable):
     def __init__(this,blockType='grass'):
         super().__init__()
         this.model='quad'
-        this.parent=camera.ui
+        this.parent=ite # Let's try this...
         this.blockType=blockType
 
         this.color=color.white
         # And why 10 instead of 9?
-        this.scale=hotbar.scale_x/10.3
+        this.scale_x = this.parent.scale_x/9
+        this.scale_y = this.parent.scale_y
         # WHy 0.54?
-        this.y=-0.5+(hotbar.scale_y*0.5)
+        # this.y=-0.5+(hotbar.scale_y*0.5)
         this.texture='texture_atlas_3.png'
         this.texture_scale*=64/this.texture.width
         # (32/(this.texture.width))  
         this.setup_texture()
+
+    def drop(this):
+        print(9*5*this.x*this.parent.scale.x*this.parent.ratio)
+        print(3*5*this.y*this.parent.ratio)
 
     def setup_texture(this):
         uu=minerals[this.blockType][0]
@@ -84,6 +89,8 @@ class item_icon(Draggable):
         if len(minerals[this.blockType]) > 2:
             # Yes! Set color :)
             this.color=minerals[this.blockType][2]
+
+test_item = item_icon()
 
 # Test hotspots.
 # hs=[]
@@ -119,6 +126,6 @@ def inv_input(key,subject,mouse):
     if key=='r':
         # Just cycle through possible blocks, 'len(mins)'.
         subject.blockTnum=(subject.blockTnum+1)%(len(mins))
-        for h in hs: 
-            h.color=color.dark_gray
-        hs[subject.blockTnum].color=color.white
+        # for h in hs: 
+        #     h.color=color.dark_gray
+        # hs[subject.blockTnum].color=color.white
