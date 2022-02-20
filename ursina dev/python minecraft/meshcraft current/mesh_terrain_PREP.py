@@ -5,7 +5,7 @@ from mining_system_PREP import *
 from building_system_PREP import *
 # ***
 import random as ra
-from inventory_PREP import mins, minerals
+from inv_system import mins, minerals
 
 class MeshTerrain:
     def __init__(this,_sub,_cam):
@@ -170,6 +170,9 @@ class MeshTerrain:
                         mineralType='snow'
                     this.genBlock(x+k,y,z+j,blockType=mineralType)
 
+        # *** Normals...etc. experiments...
+        # this.subsets[this.currentSubset].model.generate_normals()
+        # this.subsets[this.currentSubset].model.colorize()
         this.subsets[this.currentSubset].model.generate()
         # Current subset hack ;)
         if this.currentSubset<this.numSubsets-1:

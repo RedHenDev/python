@@ -29,6 +29,9 @@ subject.height=1.86
 camera.dash=10 # Rate at which fov changes when running.
 window.fullscreen=False
 # ***
+# window.display_mode='normals'
+
+# ***
 terrain = MeshTerrain(subject,camera)
 # ***
 terrain.generatingTerrain=True
@@ -52,7 +55,8 @@ for i in range(32):
 # loadMap(subject,terrain)
 
 # *** UI elements
-from inventory_PREP import *
+# from inventory_PREP import *
+from inv_system import *
 subject.blockTnum=0
 
 grass_audio = Audio('step.ogg',autoplay=False,loop=False)
