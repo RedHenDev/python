@@ -3,7 +3,6 @@
 from ursina import *
 
 grey = FrameAnimation3d('panda_walk_',fps=1)
-# ***
 grey.texture='panda_texture'
 grey.position = Vec3(0,10,10)
 grey.turnSpeed = 1

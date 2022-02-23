@@ -19,7 +19,7 @@ minerals =  {   'grass' : (8,7),
                 'ruby' : (9,6,Vec4(1,0,0,1))
             }
 # Create iterable list from dictionary keys (not values).
-mins = list(minerals.keys())
+mins=list(minerals.keys())
 
 class item_panel(Entity):
     def __init__(this,cols=9,rows=3):
@@ -60,9 +60,9 @@ class item_icon(Draggable):
 
         this.color=color.white
         # And why 10 instead of 9?
-        this.scale_x = this.parent.scale_x/9
-        this.scale_y = this.parent.scale_y
-        # WHy 0.54?
+        this.scale_x=this.parent.scale_x/9
+        this.scale_y=this.parent.scale_y
+        # Why 0.54?
         # this.y=-0.5+(hotbar.scale_y*0.5)
         this.texture='texture_atlas_3.png'
         this.texture_scale*=64/this.texture.width
@@ -70,8 +70,10 @@ class item_icon(Draggable):
         this.setup_texture()
 
     def drop(this):
-        print(9*5*this.x*this.parent.scale.x*this.parent.ratio)
-        print(3*5*this.y*this.parent.ratio)
+        pass
+        # print(9*5*this.x*this.parent.scale.x*this.parent.ratio)
+        # print(3*5*this.y*this.parent.ratio)
+        # this.x =
 
     def setup_texture(this):
         uu=minerals[this.blockType][0]
@@ -79,6 +81,7 @@ class item_icon(Draggable):
         basemod=load_model('block.obj')
         cb=copy(basemod.uvs)
         # print(len(cb.uvs))
+        # OK this isn't right -- but gives ok texture.
         del cb[:-33]
         this.model.uvs = [Vec2(uu,uv) + u for u in cb]
         this.model.generate()
@@ -90,7 +93,7 @@ class item_icon(Draggable):
             # Yes! Set color :)
             this.color=minerals[this.blockType][2]
 
-test_item = item_icon()
+test_item=item_icon()
 
 # Test hotspots.
 # hs=[]
