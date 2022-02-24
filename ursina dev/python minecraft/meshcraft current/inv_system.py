@@ -30,7 +30,7 @@ class item_panel(Entity):
         this.rows=rows 
         # NB y is 1/3 of x. I.e. rows v cols.
         this.scale=0.8
-        this.scale_y*=this.ratio
+        this.scale_y=this.ratio*0.8
         this.parent=camera.ui
         this.trays=[Vec2(x,y) for x in range(this.cols) for y in range(this.rows)]
         this.texture='white_box.png'
@@ -59,21 +59,24 @@ class item_icon(Draggable):
         this.blockType=blockType
 
         this.color=color.white
-        # And why 10 instead of 9?
-        this.scale_x=this.parent.scale_x/9
-        this.scale_y=this.parent.scale_y
-        # Why 0.54?
-        # this.y=-0.5+(hotbar.scale_y*0.5)
+        this.scale_x=(this.parent.scale_x)/9
+        this.scale_y=(this.parent.scale_y)
+        this.origin=(   -5,
+                        0.8*this.parent.ratio*5)
+        # this.origin=(   -this.parent.scale_x*6.25,
+        #                 this.parent.scale_y*4.7)
         this.texture='texture_atlas_3.png'
         this.texture_scale*=64/this.texture.width
         # (32/(this.texture.width))  
         this.setup_texture()
 
     def drop(this):
-        pass
-        # print(9*5*this.x*this.parent.scale.x*this.parent.ratio)
-        # print(3*5*this.y*this.parent.ratio)
-        # this.x =
+        # print(this.x)
+        sv = str(this.x)[:3]
+        this.x = 0.11*float(sv)*10
+        sv = str(this.y/3)[:4]
+        this.y = 0.33*float(sv)*10
+        print(this.y)
 
     def setup_texture(this):
         uu=minerals[this.blockType][0]

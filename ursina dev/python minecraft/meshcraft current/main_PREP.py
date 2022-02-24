@@ -90,7 +90,7 @@ def update():
                     scale=4,
                     duration=0.1)
 
-    # Handle mob ai.
+    # Handle mobQ ai.
     mob_movement(grey, subject.position, terrain.td)
     mob_movement(lewlin, subject.position, terrain.td,False)
     # ***
