@@ -50,7 +50,7 @@ class item_icon(Draggable):
         this.parent=ite # Let's try this...
         this.scale_x=1/(this.parent.texture_scale[0]*1.2)
         this.scale_y=1/(this.parent.texture_scale[1]*1.2)
-        this.origin=(0.6,-0.6)
+        this.origin=(-0.5*1.2,0.5*1.2)
         
         this.blockType=blockType
         this.color=color.white
@@ -83,15 +83,17 @@ class item_icon(Draggable):
     def setup_texture(this):
         uu=minerals[this.blockType][0]
         uv=minerals[this.blockType][1]
-        basemod=load_model('block.obj')
+        # basemod=load_model('block.obj')
+        basemod=load_model('quad')
         cb=copy(basemod.uvs)
-        # print(len(cb.uvs))
+        # for v in cb:
+        #     v=(v[0]*0.25,v[1]*0.25)
         # OK this isn't right -- but gives ok texture.
-        del cb[:-33]
+        # del cb[:-33]
         print(cb)
         this.model.uvs = [Vec2(uu,uv) + u for u in cb]
         this.model.generate()
-        this.rotation_z=180
+        # this.rotation_z=180
     
     def setup_color(this):
         # Do we have a color element on the list?
