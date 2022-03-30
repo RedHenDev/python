@@ -3,7 +3,9 @@ Our building system :) 2022
 Happy New Year!
 """
 from ursina import Vec3, floor
-# ***
+# *** Place this here, to avoid lazy import. 
+from config import six_cube_dirs
+
 def checkBuild(_bsite,_td,_camF,_pos,_bp):
 # def checkBuild(_td,_bp):
     # Adjust build site, since build-tool-entity (bte) offset.
@@ -39,7 +41,7 @@ def checkBuild(_bsite,_td,_camF,_pos,_bp):
     return Vec3(x,y,z)
 
 def gapShell(_td,_bsite):
-    from config import six_cube_dirs
+    # from config import six_cube_dirs
     for i in range(6):
         p = _bsite + six_cube_dirs[i]
         if _td.get((floor(p.x),floor(p.y),floor(p.z))) is None:

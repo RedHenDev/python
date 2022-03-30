@@ -47,7 +47,7 @@ def mine(td,vd,subsets):
     # del subsets[wv[0]].model.colors[wv[1]+1:wv[1]+37]
     for i in range(wv[1]+1,wv[1]+37):
         # Make invisible?
-        subsets[wv[0]].model.colors[i][3]=0.5
+        subsets[wv[0]].model.colors[i][3]=0.0
         # subsets[wv[0]].model.vertices[i][1]+=999
     
     # This is called outside, so redundant here.
