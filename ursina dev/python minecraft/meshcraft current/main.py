@@ -9,7 +9,9 @@ from flake import SnowFall
 import random as ra
 from bump_system import *
 from save_load_system import saveMap, loadMap
-from inventory_system import *
+# from inventory_system import *
+# ***
+from new_inv import *
 
 window.color = color.rgb(0,200,255)
 indra = Sky()
