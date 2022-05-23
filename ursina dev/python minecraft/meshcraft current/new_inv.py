@@ -2,8 +2,10 @@
 New attempt at inventory system.
 May 22nd 2022.
 """
+from operator import index
 from ursina import *
 import random as ra
+import numpy as np 
 
 # Inventory hotbar.
 hotbar = Entity(model='quad',parent=camera.ui)
@@ -29,6 +31,7 @@ inv_panel.scale=hotbar.scale
 inv_panel.color=color.light_gray
 inv_panel.y=-0.1
 inv_panel.render_queue=0
+inv_panel.visible=False
 
 test_spots=[]
 test_items=[]
@@ -46,6 +49,7 @@ class Hotspot(Entity):
 
         this.onHotBar=False
         this.visible=False
+        this.occupied=False
         
         this.scale_y=Hotspot.scalar
         # Make sure is a square.
@@ -79,6 +83,9 @@ class Item(Draggable):
         this.x = ra.random()-0.5
         this.y = (ra.random()-0.5)/1.6
         this.render_queue=2
+
+        this.iHotspot=None
+
         # Fix to designated interval spot.
         this.fix_pos()
     
@@ -90,9 +97,32 @@ class Item(Draggable):
         # to very different system where items
         # determine the position of the droppped item.
         # I.e. this is just the position of the hotspot.
+        """
         scalar=16 # Because 16 is 2 * 10 * 0.8 (scale).
         this.x=round(this.x*scalar)/scalar
         this.y=round(this.y*scalar)/scalar
+        """
+
+        # Look through hotspots. Keep closest.
+        # Move to that pos.
+        closest=None
+        whichSpot=0
+        i=-1
+        if type(this.iHotspot) is int:
+            test_spots[this.iHotspot].occupied=False
+        for h in test_spots:
+            i+=0
+            if not h.visible: continue
+            dist=h.position-this.position
+            np.linalg.norm(dist)
+            if closest == None or dist < closest:
+                if h.occupied: continue
+                closest=dist
+                whichSpot=h
+                this.iHotspot=i
+        if whichSpot:
+            this.position=whichSpot.position
+            whichSpot.occupied=True
 
 for i in range(10):
     test_items.append(Item())
