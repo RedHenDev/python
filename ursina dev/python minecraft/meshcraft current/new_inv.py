@@ -26,8 +26,10 @@ hotbar.y=-0.45 + (hotbar.scale_y*0.5)
 hotbar.color=color.dark_gray
 
 # For some reason this appears on top of draggable items?
+# Sorted this with render queue.
 inv_panel = Entity(model='quad',parent=camera.ui)
 inv_panel.scale=hotbar.scale
+inv_panel.scale_y*=2
 inv_panel.color=color.light_gray
 inv_panel.y=-0.1
 inv_panel.render_queue=0
@@ -84,11 +86,25 @@ class Item(Draggable):
         this.y = (ra.random()-0.5)/1.6
         this.render_queue=2
 
-        this.iHotspot=None
+        # Record of which hotSpot this is anchored to.
+        # Harmless to set to 0. See fixpos().Lol --
+        # well that did't work out.
+        # So, set to -1 as default, then checked b4 use.
+        this.iHotspot=-1
+        this.onHotBar=False
+        this.visible=False
 
         # Fix to designated interval spot.
         this.fix_pos()
-    
+    @staticmethod
+    def set_visibility():
+        for i in test_items:
+            if i.onHotBar:
+                i.visibile=True
+            else:
+                i.visibile=False
+                print('anyone?')
+
     def drop(this):
         this.fix_pos() 
 
@@ -105,27 +121,44 @@ class Item(Draggable):
 
         # Look through hotspots. Keep closest.
         # Move to that pos.
-        closest=None
-        whichSpot=0
-        i=-1
-        if type(this.iHotspot) is int:
-            test_spots[this.iHotspot].occupied=False
+        closest=9999
+        whichSpot=None
+        count=-1
+        whatCount=-1
         for h in test_spots:
-            i+=0
+            count+=1
             if not h.visible: continue
             dist=h.position-this.position
-            np.linalg.norm(dist)
-            if closest == None or dist < closest:
+            dist=np.linalg.norm(dist)
+            #print(dist)
+            if dist < closest:
                 if h.occupied: continue
                 closest=dist
                 whichSpot=h
-                this.iHotspot=i
+                whatCount=count
+        # If we found an available closest spot...
         if whichSpot:
             this.position=whichSpot.position
+            if this.iHotspot != -1:
+                test_spots[this.iHotspot].occupied=False
             whichSpot.occupied=True
+            this.iHotspot=whatCount
+            if whichSpot.onHotBar:
+                this.onHotBar=True
+                this.visible=True
+            else: 
+                this.onHotBar=False
+                print('Hey cool kids!')
 
+# Instantiate hotspots for hotbar and panel.
 for i in range(10):
-    test_items.append(Item())
+    bud = Hotspot()
+    test_spots.append(bud)
+    # -0.5 is left side of hotbar. Scale this to hotbar.
+    # Then, adjust right according to hotSPOT scale.
+    padding=(hotbar.scale_x-bud.scale_x*10)*0.5
+    bud.x=-0.5*hotbar.scale_x+(padding)+(hotbar.scale_x/10)*i
+    bud.y=inv_panel.y
 
     # These are the hotbar's hotspots!
     bud = Hotspot()
@@ -138,19 +171,9 @@ for i in range(10):
     bud.x=-0.5*hotbar.scale_x+(padding)+(hotbar.scale_x/10)*i
     bud.y=hotbar.y
 
-# More hotspots. On the panel...
+# Instantiate our items.
 for i in range(10):
-    bud = Hotspot()
-    test_spots.append(bud)
-    # -0.5 is left side of hotbar. Scale this to hotbar.
-    # Then, adjust right according to hotSPOT scale.
-    padding=(hotbar.scale_x-bud.scale_x*10)*0.5
-    bud.x=-0.5*hotbar.scale_x+(padding)+(hotbar.scale_x/10)*i
-    bud.y=inv_panel.y
-
-test_items[0].color=color.red
-test_items[0].x=-0.6
-test_items[0].y=0
+    test_items.append(Item())
 
 def inv_input(key,subject,mouse):
     # Pause and unpause, ready for inventory.
@@ -162,3 +185,4 @@ def inv_input(key,subject,mouse):
         subject.enable()
         mouse.locked=True
         inv_panel.visible=False
+        Item.set_visibility()

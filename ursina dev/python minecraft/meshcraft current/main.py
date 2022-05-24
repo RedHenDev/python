@@ -62,8 +62,10 @@ def input(key):
     inv_input(key,subject,mouse)
 
 count = 0
+# ***
+earthquake=0
 def update():
-    global count, pX, pZ
+    global count, pX, pZ, earthquake
 
     # Highlight terrain block for mining/building...
     terrain.update(subject.position,camera)
@@ -81,7 +83,12 @@ def update():
             # for i in range(1):
                 # terrain.genTerrain()
                 
-        
+    # ***
+    # # Crazy subset wave...
+    if mouse.locked:
+        for s in terrain.subsets:
+            s.y = math.sin(terrain.subsets.index(s) + earthquake*0.5)*0.1
+        earthquake+=1   
 
     # Change subset position based on subject position.
     if abs(subject.x-pX)>1 or abs(subject.z-pZ)>1:
