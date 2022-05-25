@@ -100,7 +100,7 @@ class Item(Draggable):
         this.setup_color()
 
         # Fix to designated interval spot.
-        this.fix_pos()
+        # this.fix_pos()
 
     @staticmethod
     def set_visibility(_on=False):
@@ -128,7 +128,8 @@ class Item(Draggable):
             this.color=minerals[this.blockType][2]
 
     def drop(this):
-        this.fix_pos() 
+        this.fix_pos()
+        print('yep')
 
     def fix_pos(this):
         # Develop (but keep this nice trick)
@@ -153,6 +154,7 @@ class Item(Draggable):
             dist=h.position-this.position
             dist=np.linalg.norm(dist)
             if dist < closest:
+                print('indeed')
                 if h.occupied: continue
                 closest=dist
                 whichSpot=h
@@ -172,30 +174,40 @@ class Item(Draggable):
 
 # Instantiate hotspots for hotbar and panel.
 for i in range(10):
-    bud = Hotspot()
-    test_spots.append(bud)
-    # -0.5 is left side of hotbar. Scale this to hotbar.
-    # Then, adjust right according to hotSPOT scale.
-    padding=(hotbar.scale_x-bud.scale_x*10)*0.5
-    bud.x=-0.5*hotbar.scale_x+(padding)+(hotbar.scale_x/10)*i
-    # Position on 'top row' of panel.
-    bud.y=inv_panel.y+inv_panel.scale_y*0.5-padding
-
     # These are the hotbar's hotspots!
     bud = Hotspot()
     bud.onHotBar=True
     bud.visible=True
-    test_spots.append(bud)
     # -0.5 is left side of hotbar. Scale this to hotbar.
     # Then, adjust right according to hotSPOT scale.
     padding=(hotbar.scale_x-bud.scale_x*10)*0.5
     bud.x=-0.5*hotbar.scale_x+(padding)+(hotbar.scale_x/10)*i
     bud.y=hotbar.y
+    test_spots.append(bud)
+for i in range(10):
+    for j in range(4):
+        bud = Hotspot()
+        # -0.5 is left side of hotbar. Scale this to hotbar.
+        # Then, adjust right according to hotSPOT scale.
+        padding=(hotbar.scale_x-bud.scale_y*10)*0.5
+        bud.x=-0.5*hotbar.scale_x+(padding)+(hotbar.scale_x/10)*i
+        # Position on 'top row' of panel.
+        padding=(inv_panel.scale_y-bud.scale_y*4)*0.1
+        bud.y=inv_panel.y+0.5*inv_panel.scale_y-bud.scale_y*0.5-padding-(inv_panel.scale_y/4)*(j)
+        test_spots.append(bud)
 
 # Instantiate our items.
-for i in range(10):
-    whatBlockType=ra.randint(0,len(mins)-1)
-    test_items.append(Item(mins[whatBlockType]))
+for i in range(40):
+    # whatBlockType=ra.randint(0,len(mins)-1)
+    whatBlockType=int(i%(len(mins)))
+    bud=Item(mins[whatBlockType])
+    bud.position=test_spots[10+i].position
+    bud.iHotspot=10+i
+    test_spots[10+i].occupied=True
+    bud.onHotBar=False
+    bud.visible=test_spots[10+i].visible
+    test_items.append(bud)
+
 
 def inv_input(key,subject,mouse):
     # Pause and unpause, ready for inventory.
