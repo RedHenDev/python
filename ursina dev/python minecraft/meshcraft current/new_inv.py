@@ -2,10 +2,10 @@
 New attempt at inventory system.
 May 22nd 2022.
 """
-from operator import index
 from ursina import *
 import random as ra
 import numpy as np 
+from config import *
 
 # Inventory hotbar.
 hotbar = Entity(model='quad',parent=camera.ui)
@@ -29,8 +29,8 @@ hotbar.color=color.dark_gray
 # Sorted this with render queue.
 inv_panel = Entity(model='quad',parent=camera.ui)
 inv_panel.scale=hotbar.scale
-inv_panel.scale_y*=2
-inv_panel.color=color.light_gray
+inv_panel.scale_y*=4
+inv_panel.color=color.dark_gray
 inv_panel.y=-0.1
 inv_panel.render_queue=0
 inv_panel.visible=False
@@ -67,16 +67,12 @@ class Hotspot(Entity):
         elif key=='e' and this.visible and not this.onHotBar:
             this.visible=False
 
-        # if this.onHotBar==False:
-        #     this.visible=False
-        # else: this.visible=True
-
 class Item(Draggable):
-    def __init__(this):
+    def __init__(this,_blockType='grass'):
         super().__init__()
         this.model='quad'
         this.parent=camera.ui
-        this.color=color.random_color()
+        # this.color=color.random_color()
         # Scale slightly smaller than hotspots.
         this.scale_y=Hotspot.scalar*0.9
         # Make sure is a square.
@@ -94,16 +90,42 @@ class Item(Draggable):
         this.onHotBar=False
         this.visible=False
 
+        this.blockType=_blockType
+        this.texture='texture_atlas_3.png'
+        this.texture_scale*=64/this.texture.width
+        # (32/(this.texture.width))  
+        # Assume default colour. I'll make this explicit.
+        this.color=color.white
+        this.setup_texture()
+        this.setup_color()
+
         # Fix to designated interval spot.
         this.fix_pos()
+
     @staticmethod
-    def set_visibility():
+    def set_visibility(_on=False):
         for i in test_items:
-            if i.onHotBar:
-                i.visibile=True
+            if _on or i.onHotBar:
+                i.visible=True
             else:
-                i.visibile=False
-                print('anyone?')
+                i.visible=False
+
+    def setup_texture(this):
+        # Use dictionary to access uv co-ords.
+        uu=minerals[this.blockType][0]
+        uv=minerals[this.blockType][1]
+        basemod=load_model('block.obj')
+        cb=copy(basemod.uvs)
+        del cb[:-33]
+        this.model.uvs = [Vec2(uu,uv) + u for u in cb]
+        this.model.generate()
+        this.rotation_z=180
+    
+    def setup_color(this):
+        # Do we have a color element on the list?
+        if len(minerals[this.blockType]) > 2:
+            # Yes! Set color :)
+            this.color=minerals[this.blockType][2]
 
     def drop(this):
         this.fix_pos() 
@@ -130,7 +152,6 @@ class Item(Draggable):
             if not h.visible: continue
             dist=h.position-this.position
             dist=np.linalg.norm(dist)
-            #print(dist)
             if dist < closest:
                 if h.occupied: continue
                 closest=dist
@@ -148,7 +169,6 @@ class Item(Draggable):
                 this.visible=True
             else: 
                 this.onHotBar=False
-                print('Hey cool kids!')
 
 # Instantiate hotspots for hotbar and panel.
 for i in range(10):
@@ -158,7 +178,8 @@ for i in range(10):
     # Then, adjust right according to hotSPOT scale.
     padding=(hotbar.scale_x-bud.scale_x*10)*0.5
     bud.x=-0.5*hotbar.scale_x+(padding)+(hotbar.scale_x/10)*i
-    bud.y=inv_panel.y
+    # Position on 'top row' of panel.
+    bud.y=inv_panel.y+inv_panel.scale_y*0.5-padding
 
     # These are the hotbar's hotspots!
     bud = Hotspot()
@@ -173,7 +194,8 @@ for i in range(10):
 
 # Instantiate our items.
 for i in range(10):
-    test_items.append(Item())
+    whatBlockType=ra.randint(0,len(mins)-1)
+    test_items.append(Item(mins[whatBlockType]))
 
 def inv_input(key,subject,mouse):
     # Pause and unpause, ready for inventory.
@@ -181,6 +203,7 @@ def inv_input(key,subject,mouse):
         subject.disable()
         mouse.locked=False
         inv_panel.visible=True
+        Item.set_visibility(True)
     elif key=='e' and not subject.enabled:
         subject.enable()
         mouse.locked=True
