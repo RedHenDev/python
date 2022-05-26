@@ -122,7 +122,7 @@ class Item(Draggable):
         this.rotation_z=180
     
     def setup_color(this):
-        # Do we have a color element on the list?
+        # Do we have a color element on the tuple?
         if len(minerals[this.blockType]) > 2:
             # Yes! Set color :)
             this.color=minerals[this.blockType][2]
