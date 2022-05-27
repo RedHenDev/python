@@ -19,7 +19,7 @@ hotbar = Entity(model='quad',parent=camera.ui)
 # the other. E.g. if hotbar.scale_x = 0.8 then
 #  each hotpot.scale_x must be 0.8/10.
 hotbar.scale_y=0.08
-hotbar.scale_x=0.8
+hotbar.scale_x=0.68
 # Not quite at very bottom (which would be -0.5).
 hotbar.y=-0.45 + (hotbar.scale_y*0.5)
 # Appearance.
@@ -52,6 +52,8 @@ class Hotspot(Entity):
         this.onHotBar=False
         this.visible=False
         this.occupied=False
+        # ***
+        this.blockType=None
         
         this.scale_y=Hotspot.scalar
         # Make sure is a square.
@@ -129,7 +131,6 @@ class Item(Draggable):
 
     def drop(this):
         this.fix_pos()
-        print('yep')
 
     def fix_pos(this):
         # Develop (but keep this nice trick)
@@ -154,7 +155,6 @@ class Item(Draggable):
             dist=h.position-this.position
             dist=np.linalg.norm(dist)
             if dist < closest:
-                print('indeed')
                 if h.occupied: continue
                 closest=dist
                 whichSpot=h
@@ -164,6 +164,8 @@ class Item(Draggable):
             this.position=whichSpot.position
             if this.iHotspot != -1:
                 test_spots[this.iHotspot].occupied=False
+                # ***
+                test_spots[this.iHotspot].blockType=this.blockType
             whichSpot.occupied=True
             this.iHotspot=whatCount
             if whichSpot.onHotBar:
@@ -211,6 +213,17 @@ for i in range(40):
 
 def inv_input(key,subject,mouse):
     # Pause and unpause, ready for inventory.
+    try:
+        wnum=int(key)
+        print_on_screen(wnum)
+        if wnum < 10 and wnum > 0:
+            if test_spots[wnum-1].occupied:
+                subject.blockType=test_spots[wnum-1].blockType
+                print(test_spots[wnum-1].blockType)
+                test_spots[wnum-1].color=color.yellow
+    except:
+        pass
+
     if key=='e' and subject.enabled:
         subject.disable()
         mouse.locked=False

@@ -5,7 +5,7 @@ from ursina import *
 hotbar = Entity(model='quad',parent=camera.ui)
 # Set the size and position.
 hotbar.scale_y=0.08
-hotbar.scale_x=0.8
+hotbar.scale_x=0.68
 hotbar.y=-0.5 + (hotbar.scale_y*0.5)
 # Appearance.
 hotbar.color=color.dark_gray

@@ -4,6 +4,8 @@ from random import random
 from swirl_engine import SwirlEngine
 from mining_system import *
 from building_system import *
+# ***
+from config import six_cube_dirs, minerals, mins
 
 class MeshTerrain:
     def __init__(this,_sub,_cam):
@@ -12,6 +14,8 @@ class MeshTerrain:
         this.camera = _cam
 
         this.block = load_model('block.obj')
+        # ***
+        # this.block = load_model('basic_hex.obj')
         this.textureAtlas = 'texture_atlas_3.png'
         this.numVertices = len(this.block.vertices)
 
@@ -69,13 +73,13 @@ class MeshTerrain:
                                 this.camera.forward,
                                 this.subject.position+Vec3(0,this.subject.height,0))
             if bsite!=None:
-                this.genBlock(floor(bsite.x),floor(bsite.y),floor(bsite.z),subset=0,blockType='grass')
+                this.genBlock(floor(bsite.x),floor(bsite.y),floor(bsite.z),subset=0,blockType=this.subject.blockType)
                 gapShell(this.td,bsite)
                 this.subsets[0].model.generate()
     
     # I.e. after mining, to create illusion of depth.
     def genWalls(this,epi,subset):
-        from config import six_cube_dirs
+        
         if epi==None: return
         # Refactor this -- place in mining_system 
         # except for cal to genBlock?
@@ -105,7 +109,8 @@ class MeshTerrain:
                 this.td[key]='g'
 
         # Record subset index and first vertex of this block.
-        vob = (subset, len(model.vertices)-37)
+        # ***
+        vob = (subset, len(model.vertices)-this.numVertices-1)
         this.vd[(floor(x),
                 floor(y),
                 floor(z))] = vob
@@ -116,17 +121,20 @@ class MeshTerrain:
                                 this.numVertices)
 
         # This is the texture atlas co-ord for grass :)
-        uu = 8
-        uv = 7
-        if blockType=='soil':
-            uu = 10
-            uv = 7
-        elif blockType=='stone':
-            uu = 8
-            uv = 5
-        elif blockType=='ice':
-            uu = 9
-            uv = 7
+        # ***
+        uu=minerals[this.subject.blockType][0]
+        uv=minerals[this.subject.blockType][1]
+        # uu = 8
+        # uv = 7
+        # if blockType=='soil':
+        #     uu = 10
+        #     uv = 7
+        # elif blockType=='stone':
+        #     uu = 8
+        #     uv = 5
+        # elif blockType=='ice':
+        #     uu = 9
+        #     uv = 7
         # Randomly place stone blocks.
         if random() > 0.86:
             uu = 8
@@ -141,7 +149,9 @@ class MeshTerrain:
         # Get current position as we swirl around world.
         x = floor(this.swirlEngine.pos.x)
         z = floor(this.swirlEngine.pos.y)
-
+        # *** for hex
+        # if z % 2 == 0:
+        #     x+=0.5
         d = int(this.subWidth*0.5)
 
         for k in range(-d,d):
