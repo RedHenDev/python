@@ -10,8 +10,9 @@ import random as ra
 from bump_system import *
 from save_load_system import saveMap, loadMap
 # from inventory_system import *
-# ***
 from new_inv import *
+# ***
+from config import mins
 
 window.color = color.rgb(0,0,0)
 indra = Sky()
@@ -24,6 +25,9 @@ subject.height=1.86
 subject.frog=False # For jumping...
 subject.runSpeed=20
 subject.walkSpeed=4
+# ***
+# Inventory setup.
+subject.blockType=mins[0]
 camera.dash=10 # Rate at which fov changes when running.
 window.fullscreen=False
 
@@ -36,7 +40,7 @@ scene.fog_color=color.white
 generatingTerrain=True
 
 # Generate our terrain 'chunks'.
-for i in range(64):
+for i in range(4):
     terrain.genTerrain()
 # For loading in a large terrain at start.
 # loadMap(subject,terrain)

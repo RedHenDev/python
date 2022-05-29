@@ -164,10 +164,10 @@ class Item(Draggable):
             this.position=whichSpot.position
             if this.iHotspot != -1:
                 test_spots[this.iHotspot].occupied=False
-                # ***
-                test_spots[this.iHotspot].blockType=this.blockType
             whichSpot.occupied=True
             this.iHotspot=whatCount
+            # *** - Share block type.
+            test_spots[this.iHotspot].blockType=this.blockType
             if whichSpot.onHotBar:
                 this.onHotBar=True
                 this.visible=True
