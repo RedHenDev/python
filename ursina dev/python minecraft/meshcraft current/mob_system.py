@@ -47,9 +47,12 @@ def terrain_walk(mob, _td):
     x = floor(mob.x+0.5)
     z = floor(mob.z+0.5)
     y = floor(mob.y+0.5)
+    # ***
     for i in range(-step,step):
-        if _td.get((x,y+i,z))=='t':
-            if _td.get((x,y+i+1,z))=='t':
+        whatT=_td.get((x,y+i,z))
+        if whatT!='g'and whatT!=None:
+            whatT2=_td.get((x,y+i+1,z))
+            if whatT2!='g'and whatT2!=None:
                 target = y+i+height+1
                 blockFound=True
                 break

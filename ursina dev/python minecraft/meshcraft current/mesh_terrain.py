@@ -5,6 +5,8 @@ from swirl_engine import SwirlEngine
 from mining_system import *
 from building_system import *
 from config import six_cube_dirs, minerals, mins
+# ***
+import numpy as np
 
 class MeshTerrain:
     def __init__(this,_sub,_cam):
@@ -97,7 +99,9 @@ class MeshTerrain:
         model.vertices.extend([ Vec3(x,y,z) + v for v in 
                                 this.block.vertices])
         # Record terrain in dictionary :)
-        this.td[(floor(x),floor(y),floor(z))] = 't'
+        # ***
+        # this.td[(floor(x),floor(y),floor(z))] = 't'
+        this.td[(floor(x),floor(y),floor(z))] = blockType
         # Also, record gap above this position to
         # correct for spawning walls after mining.
         if gap==True:
@@ -114,11 +118,17 @@ class MeshTerrain:
         # Does the dictionary entry for this blockType
         # hold colour information? If so, use it :)
         if len(minerals[blockType])>2:
-            model.colors.extend( (minerals[blockType][2],)*
+            # ***
+            c=random()-0.5
+            coms=minerals[blockType][2]
+            refCol=Vec4(coms[0]-c,coms[1]-c,coms[2]-c,coms[3])
+            model.colors.extend( (refCol,)*
                                 this.numVertices)
         # Decide random tint for colour of block :)
-        c = random()-0.5
-        model.colors.extend( (Vec4(1-c,1-c,1-c,1),)*
+        # ***
+        else:
+            c = random()-0.5
+            model.colors.extend( (Vec4(1-c,1-c,1-c,1),)*
                                 this.numVertices)
 
         # This is the texture atlas co-ord for grass :)
