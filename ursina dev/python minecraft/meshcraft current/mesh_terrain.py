@@ -4,7 +4,6 @@ from random import random
 from swirl_engine import SwirlEngine
 from mining_system import *
 from building_system import *
-# ***
 from config import six_cube_dirs, minerals, mins
 
 class MeshTerrain:
@@ -14,8 +13,6 @@ class MeshTerrain:
         this.camera = _cam
 
         this.block = load_model('block.obj')
-        # ***
-        # this.block = load_model('basic_hex.obj')
         this.textureAtlas = 'texture_atlas_3.png'
         this.numVertices = len(this.block.vertices)
 
@@ -57,7 +54,7 @@ class MeshTerrain:
     def update(this,pos,cam):
         highlight(pos,cam,this.td)
         # Blister-mining!
-        if bte.visible==True:
+        if bte.visible==True and mouse.locked==True:
             if held_keys['shift'] and held_keys['left mouse']:
                 this.do_mining()
             # for key, value in held_keys.items():
@@ -65,10 +62,10 @@ class MeshTerrain:
             #         this.do_mining()
 
     def input(this,key):
-        if key=='left mouse up' and bte.visible==True:
+        if key=='left mouse up' and bte.visible==True and mouse.locked==True:
             this.do_mining()
         # Building :)
-        if key=='right mouse up' and bte.visible==True:
+        if key=='right mouse up' and bte.visible==True and mouse.locked==True:
             bsite = checkBuild( bte.position,this.td,
                                 this.camera.forward,
                                 this.subject.position+Vec3(0,this.subject.height,0))
@@ -92,7 +89,7 @@ class MeshTerrain:
                 this.genBlock(np.x,np.y,np.z,subset,gap=False,blockType='soil')
 
 
-    def genBlock(this,x,y,z,subset=-1,gap=True,blockType='grass'):
+    def genBlock(this,x,y,z,subset=-1,gap=True,blockType='grass',layingTerrain=False):
         if subset==-1: subset=this.currentSubset
         # Extend or add to the vertices of our model.
         model = this.subsets[subset].model
@@ -109,49 +106,41 @@ class MeshTerrain:
                 this.td[key]='g'
 
         # Record subset index and first vertex of this block.
-        # ***
-        vob = (subset, len(model.vertices)-this.numVertices-1)
+        vob = (subset, len(model.vertices)-37)
         this.vd[(floor(x),
                 floor(y),
                 floor(z))] = vob
 
+        # Does the dictionary entry for this blockType
+        # hold colour information? If so, use it :)
+        if len(minerals[blockType])>2:
+            model.colors.extend( (minerals[blockType][2],)*
+                                this.numVertices)
         # Decide random tint for colour of block :)
         c = random()-0.5
         model.colors.extend( (Vec4(1-c,1-c,1-c,1),)*
                                 this.numVertices)
 
         # This is the texture atlas co-ord for grass :)
-        # ***
-        uu=minerals[this.subject.blockType][0]
-        uv=minerals[this.subject.blockType][1]
-        # uu = 8
-        # uv = 7
-        # if blockType=='soil':
-        #     uu = 10
-        #     uv = 7
-        # elif blockType=='stone':
-        #     uu = 8
-        #     uv = 5
-        # elif blockType=='ice':
-        #     uu = 9
-        #     uv = 7
-        # Randomly place stone blocks.
-        if random() > 0.86:
-            uu = 8
-            uv = 5
-        # If high enough, cap with snow blocks :D
-        if y > 2:
-            uu = 8
-            uv = 6
+        uu=minerals[blockType][0]
+        uv=minerals[blockType][1]
+
+        if layingTerrain:
+            # Randomly place stone blocks.
+            if random() > 0.86:
+                uu = 8
+                uv = 5
+            # If high enough, cap with snow blocks :D
+            if y > 2:
+                uu = 8
+                uv = 6
         model.uvs.extend([Vec2(uu,uv) + u for u in this.block.uvs])
 
     def genTerrain(this):
         # Get current position as we swirl around world.
         x = floor(this.swirlEngine.pos.x)
         z = floor(this.swirlEngine.pos.y)
-        # *** for hex
-        # if z % 2 == 0:
-        #     x+=0.5
+
         d = int(this.subWidth*0.5)
 
         for k in range(-d,d):
@@ -161,7 +150,7 @@ class MeshTerrain:
                 if this.td.get( (floor(x+k),
                                 floor(y),
                                 floor(z+j)))==None:
-                    this.genBlock(x+k,y,z+j,blockType='grass')
+                    this.genBlock(x+k,y,z+j,blockType='grass',layingTerrain=True)
 
         this.subsets[this.currentSubset].model.generate()
         # Current subset hack ;)

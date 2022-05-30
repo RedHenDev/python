@@ -9,12 +9,16 @@ from flake import SnowFall
 import random as ra
 from bump_system import *
 from save_load_system import saveMap, loadMap
-# from inventory_system import *
-from new_inv import *
-# ***
-from config import mins
+from inventory_system import *
 
-window.color = color.rgb(0,0,0)
+"""
+Adventues
+1) 'Snap' behaviour for items. DONE :D
+2) Number keys select building block type.
+3) Make an inventory panel.
+"""
+
+window.color = color.rgb(0,0,225)
 indra = Sky()
 indra.color = window.color
 subject = FirstPersonController()
@@ -23,16 +27,14 @@ subject.cursor.visible=True
 subject.cursor.color=color.white
 subject.height=1.86
 subject.frog=False # For jumping...
-subject.runSpeed=20
+subject.runSpeed=12
 subject.walkSpeed=4
-# ***
-# Inventory setup.
-subject.blockType=mins[0]
+subject.blockType='grass'
 camera.dash=10 # Rate at which fov changes when running.
 window.fullscreen=False
 
 terrain = MeshTerrain(subject,camera)
-# snowfall = SnowFall(subject)
+#snowfall = SnowFall(subject)
 # How do you at atmospheric fog?
 scene.fog_density=(0,75)
 # scene.fog_color=indra.color
@@ -66,10 +68,8 @@ def input(key):
     inv_input(key,subject,mouse)
 
 count = 0
-# ***
-earthquake=0
 def update():
-    global count, pX, pZ, earthquake
+    global count, pX, pZ
 
     # Highlight terrain block for mining/building...
     terrain.update(subject.position,camera)
@@ -78,21 +78,16 @@ def update():
     mob_movement(grey, subject.position, terrain.td)
 
     count+=1
-    if count == 32:
+    if count == 2:
         
         count=0
         # Generate terrain at current swirl position.
         if generatingTerrain:
             terrain.genTerrain()
-            # for i in range(4):
-            #     terrain.genTerrain()
+            # for i in range(1):
+                # terrain.genTerrain()
                 
-    # ***
-    # # Crazy subset wave...
-    # if mouse.locked:
-    #     for s in terrain.subsets:
-    #         s.y = math.sin(terrain.subsets.index(s) + earthquake*0.5)*0.1
-    #     earthquake+=1   
+    
 
     # Change subset position based on subject position.
     if abs(subject.x-pX)>1 or abs(subject.z-pZ)>1:
