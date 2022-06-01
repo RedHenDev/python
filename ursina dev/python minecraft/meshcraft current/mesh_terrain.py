@@ -98,22 +98,6 @@ class MeshTerrain:
 
         model.vertices.extend([ Vec3(x,y,z) + v for v in 
                                 this.block.vertices])
-        # Record terrain in dictionary :)
-        # ***
-        # this.td[(floor(x),floor(y),floor(z))] = 't'
-        this.td[(floor(x),floor(y),floor(z))] = blockType
-        # Also, record gap above this position to
-        # correct for spawning walls after mining.
-        if gap==True:
-            key=((floor(x),floor(y+1),floor(z)))
-            if this.td.get(key)==None:
-                this.td[key]='g'
-
-        # Record subset index and first vertex of this block.
-        vob = (subset, len(model.vertices)-37)
-        this.vd[(floor(x),
-                floor(y),
-                floor(z))] = vob
 
         # Does the dictionary entry for this blockType
         # hold colour information? If so, use it :)
@@ -131,20 +115,39 @@ class MeshTerrain:
             model.colors.extend( (Vec4(1-c,1-c,1-c,1),)*
                                 this.numVertices)
 
-        # This is the texture atlas co-ord for grass :)
-        uu=minerals[blockType][0]
-        uv=minerals[blockType][1]
-
+        # *** Moved here -- so that correct blockType
+        # saved to td (i.e. for saving map).
         if layingTerrain:
             # Randomly place stone blocks.
             if random() > 0.86:
-                uu = 8
-                uv = 5
+                blockType='stone'
             # If high enough, cap with snow blocks :D
             if y > 2:
-                uu = 8
-                uv = 6
+                blockType='snow'
+
+        # These are the texture atlas co-ords.
+        uu=minerals[blockType][0]
+        uv=minerals[blockType][1]
+
         model.uvs.extend([Vec2(uu,uv) + u for u in this.block.uvs])
+
+        # Record terrain in dictionary :)
+        # *** + Moved here, at end of function, to help
+        # sync with saving blockType to td correctly.
+        # this.td[(floor(x),floor(y),floor(z))] = 't'
+        this.td[(floor(x),floor(y),floor(z))] = blockType
+        # Also, record gap above this position to
+        # correct for spawning walls after mining.
+        if gap==True:
+            key=((floor(x),floor(y+1),floor(z)))
+            if this.td.get(key)==None:
+                this.td[key]='g'
+
+        # Record subset index and first vertex of this block.
+        vob = (subset, len(model.vertices)-37)
+        this.vd[(floor(x),
+                floor(y),
+                floor(z))] = vob
 
     def genTerrain(this):
         # Get current position as we swirl around world.

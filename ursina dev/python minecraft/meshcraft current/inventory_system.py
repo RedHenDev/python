@@ -87,7 +87,7 @@ class Item(Draggable):
         closestHotty=None
         for h in hotspots:
             if h.occupied: continue
-            # Found a unoccupied hotspot :)
+            # Found an unoccupied hotspot :)
             # How close is it?
             dist=h.position-this.position
             # Find the magnitude - i.e. distance.
@@ -112,6 +112,7 @@ class Item(Draggable):
             this.currentSpot=closestHotty
         elif this.currentSpot:
             # No hotspot available? Just move back.
+            # *** i.e. if there is a currentSpot recorded.
             this.position=this.currentSpot.position
 
     def drop(this):
@@ -134,12 +135,14 @@ for i in range(Hotspot.rowFit):
             )
     hotspots.append(bud)
 
+# *** Items - now with fixPos() from start.
 for i in range(9):
     bud=Item()
     bud.onHotbar=True
     bud.visible=True
     bud.x=ra.random()-0.5
     bud.y=ra.random()-0.5
+    bud.fixPos()
     items.append(bud)
 
 def inv_input(key,subject,mouse):

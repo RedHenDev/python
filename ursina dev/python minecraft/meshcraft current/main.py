@@ -16,7 +16,17 @@ Adventues
 1) 'Snap' behaviour for items. DONE :D
 2) Number keys select building block type.
 3) Make an inventory panel.
+
+Notes for vid 16
+i) Correcting colour
+ii) Saving blockType correctly
+ii+) from 't' to not None and not 'g' (in bump_system, building, etc.)
+ii+) record blockType in td only at end of genBlock()
+iii) Map-name const at start of save_load_system
+iv) fixPos() at instantiation of hotspots
+v) inventory panel creation; toggle behaviour, static method
 """
+
 
 window.color = color.rgb(0,0,225)
 indra = Sky()
