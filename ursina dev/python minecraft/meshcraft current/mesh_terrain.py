@@ -5,8 +5,6 @@ from swirl_engine import SwirlEngine
 from mining_system import *
 from building_system import *
 from config import six_cube_dirs, minerals, mins
-# ***
-import numpy as np
 
 class MeshTerrain:
     def __init__(this,_sub,_cam):
@@ -99,24 +97,6 @@ class MeshTerrain:
         model.vertices.extend([ Vec3(x,y,z) + v for v in 
                                 this.block.vertices])
 
-        # Does the dictionary entry for this blockType
-        # hold colour information? If so, use it :)
-        if len(minerals[blockType])>2:
-            # ***
-            c=random()-0.5
-            coms=minerals[blockType][2]
-            refCol=Vec4(coms[0]-c,coms[1]-c,coms[2]-c,coms[3])
-            model.colors.extend( (refCol,)*
-                                this.numVertices)
-        # Decide random tint for colour of block :)
-        # ***
-        else:
-            c = random()-0.5
-            model.colors.extend( (Vec4(1-c,1-c,1-c,1),)*
-                                this.numVertices)
-
-        # *** Moved here -- so that correct blockType
-        # saved to td (i.e. for saving map).
         if layingTerrain:
             # Randomly place stone blocks.
             if random() > 0.86:
@@ -125,16 +105,32 @@ class MeshTerrain:
             if y > 2:
                 blockType='snow'
 
-        # These are the texture atlas co-ords.
+        # Does the dictionary entry for this blockType
+        # hold colour information? If so, use it :)
+        if len(minerals[blockType])>2:
+            # model.colors.extend(    (minerals[blockType][2],)*
+            #                         this.numVertices)
+            # Decide random tint for colour of block :)
+            c = random()-0.5
+            # Grab the Vec4 colour data :)
+            ce=minerals[blockType][2]
+            # Adjust each colour channel separately to
+            # ensure that hard-coded RGB combination is maintained.
+            model.colors.extend(    (Vec4(ce[0]-c,ce[1]-c,ce[2]-c,ce[3]),)*
+                                    this.numVertices)
+        else:
+            # Decide random tint for colour of block :)
+            c = random()-0.5
+            model.colors.extend(    (Vec4(1-c,1-c,1-c,1),)*
+                                    this.numVertices)
+
+        # This is the texture atlas co-ord for grass :)
         uu=minerals[blockType][0]
         uv=minerals[blockType][1]
 
         model.uvs.extend([Vec2(uu,uv) + u for u in this.block.uvs])
 
         # Record terrain in dictionary :)
-        # *** + Moved here, at end of function, to help
-        # sync with saving blockType to td correctly.
-        # this.td[(floor(x),floor(y),floor(z))] = 't'
         this.td[(floor(x),floor(y),floor(z))] = blockType
         # Also, record gap above this position to
         # correct for spawning walls after mining.

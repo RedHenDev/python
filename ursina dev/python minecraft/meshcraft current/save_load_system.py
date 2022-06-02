@@ -1,8 +1,8 @@
 """
 Saving and loading a terrain 'map'.
 """
-# ***
-mapName='new_map_test.pc'
+
+mapName='june_test_1.land'
 
 def saveMap(_subPos, _td):
     import os, sys, pickle
@@ -44,17 +44,14 @@ def loadMap(_subject,_terrain):
     # Note this means we'll lose colour info etc.
     i = 0 # Which subset to build block on?
     for key in _terrain.td:
-        # ***
-        # Don't have to check for None, since
-        # wouldn't be a record of terrain ;)
-        if _terrain.td.get(key)!='g':
+        whatT=_terrain.td.get(key)
+        if whatT!=None and whatT!='g':
             x = key[0]
             y = key[1]
             z = key[2]
             if i>=len(_terrain.subsets)-1:
                 i=0
-            # *** -> set terrain type.
-            _terrain.genBlock(x,y,z,subset=i,gap=False,blockType=_terrain.td.get(key))
+            _terrain.genBlock(x,y,z,subset=i,gap=False,blockType=whatT)
             i+=1
 
     # And reposition subject according to saved map.

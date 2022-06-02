@@ -1,6 +1,4 @@
 
-from urllib.request import build_opener
-from xml.dom.minidom import TypeInfo
 from ursina import *
 import random as ra
 from config import mins,minerals
@@ -87,7 +85,7 @@ class Item(Draggable):
         closestHotty=None
         for h in hotspots:
             if h.occupied: continue
-            # Found an unoccupied hotspot :)
+            # Found a unoccupied hotspot :)
             # How close is it?
             dist=h.position-this.position
             # Find the magnitude - i.e. distance.
@@ -112,7 +110,6 @@ class Item(Draggable):
             this.currentSpot=closestHotty
         elif this.currentSpot:
             # No hotspot available? Just move back.
-            # *** i.e. if there is a currentSpot recorded.
             this.position=this.currentSpot.position
 
     def drop(this):
@@ -135,8 +132,7 @@ for i in range(Hotspot.rowFit):
             )
     hotspots.append(bud)
 
-# *** Items - now with fixPos() from start.
-for i in range(9):
+for i in range(8):
     bud=Item()
     bud.onHotbar=True
     bud.visible=True
