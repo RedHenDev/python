@@ -17,10 +17,10 @@ class MeshTerrain:
         this.numVertices = len(this.block.vertices)
 
         this.subsets = []
-        this.numSubsets = 512
+        this.numSubsets = 1024 #***
         
         # Must be even number! See genTerrain()
-        this.subWidth = 10 
+        this.subWidth = 2 #***
         this.swirlEngine = SwirlEngine(this.subWidth)
         this.currentSubset = 0
 
@@ -65,6 +65,7 @@ class MeshTerrain:
         if key=='left mouse up' and bte.visible==True and mouse.locked==True:
             this.do_mining()
         # Building :)
+        if this.subject.blockType==None: return
         if key=='right mouse up' and bte.visible==True and mouse.locked==True:
             bsite = checkBuild( bte.position,this.td,
                                 this.camera.forward,

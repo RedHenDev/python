@@ -34,6 +34,12 @@ ii) ? - Earthquakes :o - DONE :D
 Tut 18 notes
 i) mined block particles - pick-up for inventory
 ii) trees? Rocks?!
+iii) subject.camera_pivot.y=[same as player height]
+iv) menu for map loading and saving...
+v) text on screen (including for stacks of identical items)
+vi) Empty handed behaviour
+vii) Pick-axe model
+viii) Vincent the giant chicken
 """
 
 window.color = color.rgb(0,0,225)
@@ -44,12 +50,16 @@ subject.gravity = 0.0
 subject.cursor.visible=True
 subject.cursor.color=color.white
 subject.height=1.86
+# ***
+subject.camera_pivot.y=subject.height
 subject.frog=False # For jumping...
 subject.runSpeed=12
 subject.walkSpeed=4
 subject.blockType='grass'
 camera.dash=10 # Rate at which fov changes when running.
+# ***
 window.fullscreen=False
+camera.clip_plane_far=100
 
 terrain = MeshTerrain(subject,camera)
 #snowfall = SnowFall(subject)
@@ -98,14 +108,16 @@ def update():
     mob_movement(grey, subject.position, terrain.td)
 
     count+=1
-    if count == 2:
+    # ***
+    if count >= 4:
         
-        count=0
+        count=1
         # Generate terrain at current swirl position.
+        # ***
         if generatingTerrain:
-            terrain.genTerrain()
-            # for i in range(1):
-                # terrain.genTerrain()
+            # terrain.genTerrain()
+            for i in range(12):
+                terrain.genTerrain()
                 
     
 

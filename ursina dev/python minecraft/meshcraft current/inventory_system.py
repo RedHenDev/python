@@ -11,7 +11,8 @@ items=[]
 hotbar = Entity(model='quad',parent=camera.ui)
 # Set the size and position.
 hotbar.scale_y=0.08
-hotbar.scale_x=0.68
+# *** - corrects for fullScreen panel overflow.
+hotbar.scale_x=hotbar.scale_y*9*1.1 # Ought to be rowFit.
 hotbar.y=-0.45 + (hotbar.scale_y*0.5)
 # Appearance.
 hotbar.color=color.dark_gray
@@ -163,11 +164,11 @@ for i in range(Hotspot.rowFit):
     bud.onHotbar=True
     bud.visible=True
     bud.y=hotbar.y
-    padding=(hotbar.scale_x-bud.scale_x*Hotspot.rowFit)*0.5
+    padding=(hotbar.scale_x-Hotspot.scalar*Hotspot.rowFit)*0.5
     bud.x=  (   hotbar.x-hotbar.scale_x*0.5 +
                 Hotspot.scalar*0.5 + 
                 padding +
-                i*bud.scale_x
+                i*Hotspot.scalar
             )
     hotspots.append(bud)
 
@@ -215,7 +216,9 @@ def inv_input(key,subject,mouse):
             if hotspots[wnum].occupied:
                 # Set subject's new blocktype from this item.
                 subject.blockType=hotspots[wnum].item.blockType
-                
+            # ***
+            else:
+                subject.blockType=None
     except:
         pass
     # Pause and unpause, ready for inventory.
