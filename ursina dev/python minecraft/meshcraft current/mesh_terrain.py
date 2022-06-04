@@ -12,8 +12,11 @@ class MeshTerrain:
         this.subject = _sub
         this.camera = _cam
 
-        this.block = load_model('block.obj')
-        this.textureAtlas = 'texture_atlas_3.png'
+        # this.block = load_model('block.obj')
+        
+        this.textureAtlas='grass_64_hex_tex_2.png'
+        this.block = load_model('stretch_hex.obj')
+        # this.textureAtlas = 'texture_atlas_3.png'
         this.numVertices = len(this.block.vertices)
 
         this.subsets = []
@@ -95,6 +98,10 @@ class MeshTerrain:
         # Extend or add to the vertices of our model.
         model = this.subsets[subset].model
 
+        # *** HEX
+        hex_z=z
+        if z % 2 == 0:
+            x+=0.5
         model.vertices.extend([ Vec3(x,y,z) + v for v in 
                                 this.block.vertices])
 
@@ -126,6 +133,11 @@ class MeshTerrain:
         # This is the texture atlas co-ord for grass :)
         uu=minerals[blockType][0]
         uv=minerals[blockType][1]
+        # ***
+        # HEX
+        uu=0
+        uv=0
+        
 
         model.uvs.extend([Vec2(uu,uv) + u for u in this.block.uvs])
 
