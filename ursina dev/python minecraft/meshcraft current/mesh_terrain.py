@@ -12,7 +12,7 @@ class MeshTerrain:
         this.subject = _sub
         this.camera = _cam
 
-        this.block = load_model('block.obj')
+        this.block = load_model('block.obj',use_deepcopy=True)
         
         # this.textureAtlas='grass_64_hex_tex_2.png'
         # this.block = load_model('stretch_hex.obj')
@@ -69,6 +69,7 @@ class MeshTerrain:
         if key=='left mouse up' and bte.visible==True and mouse.locked==True:
             this.do_mining()
         # Building :)
+        # *** - empty-handed?
         if this.subject.blockType==None: return
         if key=='right mouse up' and bte.visible==True and mouse.locked==True:
             bsite = checkBuild( bte.position,this.td,

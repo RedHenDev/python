@@ -79,7 +79,7 @@ class Hotspot(Entity):
 class Item(Draggable):
     def __init__(this):
         super().__init__()
-        this.model='quad'
+        this.model=load_model('quad',use_deepcopy=True)
         this.scale_x=Hotspot.scalar*0.9
         this.scale_y=this.scale_x
         this.color=color.white
@@ -101,8 +101,9 @@ class Item(Draggable):
         # Use dictionary to access uv co-ords.
         uu=minerals[this.blockType][0]
         uv=minerals[this.blockType][1]
-        basemod=load_model('block.obj')
-        cb=copy(basemod.uvs)
+        basemod=load_model('block.obj',use_deepcopy=True)
+        e=Empty(model=basemod)
+        cb=copy(e.model.uvs)
         del cb[:-33]
         this.model.uvs = [Vec2(uu,uv) + u for u in cb]
         this.model.generate()
@@ -201,6 +202,26 @@ for i in range(8):
     bud.y=ra.random()-0.5
     bud.fixPos()
     items.append(bud)
+
+# ***
+# To hide items that are not on hotbar
+# at start. NB needs to happen twice.
+Hotspot.toggle()
+Hotspot.toggle()
+
+# ***
+# Text experiments.
+descr = dedent('''
+    Rainstorm
+    <pink>
+    Summon a rain storm to deal 5 water 
+    damage to everyone, including yourself.
+    1234 1234 1234 1234 1234 1234 2134 1234 1234 
+    1234 1234 1234 2134 2134 1234 1234 1234 1234
+    Lasts for 4 rounds.''').strip()
+
+Text.default_resolution = 1080 * Text.size
+test = Text(text=descr, wordwrap=30)
 
 def inv_input(key,subject,mouse):
     try:

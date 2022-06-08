@@ -72,7 +72,7 @@ scene.fog_density=(0,75) # 75.
 # scene.fog_color=indra.color
 scene.fog_color=window.color # color.white
 # *** False to enable huge terrain at start.
-generatingTerrain=False
+generatingTerrain=True
 
 # Generate our terrain 'chunks'.
 # *** default 4 for debugging. 128 takes 30seconds-ish.
@@ -81,8 +81,6 @@ for i in range(4):
     terrain.genTerrain()
 # For loading in a large terrain at start.
 # loadMap(subject,terrain)
-
-
 
 grass_audio = Audio('step.ogg',autoplay=False,loop=False)
 snow_audio = Audio('snowStep.mp3',autoplay=False,loop=False)
@@ -111,7 +109,9 @@ def update():
     global count, pX, pZ, earthcounter
 
     # Highlight terrain block for mining/building...
-    terrain.update(subject.position,camera)
+    # *** - empty-handed?
+    if subject.blockType!=None:    
+        terrain.update(subject.position,camera)
 
     # Handle mob ai.
     mob_movement(grey, subject.position, terrain.td)
