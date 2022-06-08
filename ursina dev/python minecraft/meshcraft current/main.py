@@ -33,6 +33,7 @@ ii) ? - Earthquakes :o - DONE :D
 
 Tut 18 notes
 i) mined block particles - pick-up for inventory
+i+) cracking over-skin for blocks being mined 
 ii) trees? Rocks?!
 iii) subject.camera_pivot.y=[same as player height]
 iv) menu for map loading and saving...
@@ -42,9 +43,11 @@ vii) Pick-axe model
 viii) Vincent the giant chicken
 """
 
-window.color = color.rgb(0,0,225)
-indra = Sky()
-indra.color = window.color
+# ***
+window.color = color.rgb(0,200,225)
+# *** no sky
+# indra = Sky()
+# indra.color = window.color
 subject = FirstPersonController()
 subject.gravity = 0.0
 subject.cursor.visible=True
@@ -59,21 +62,27 @@ subject.blockType='grass'
 camera.dash=10 # Rate at which fov changes when running.
 # ***
 window.fullscreen=False
-camera.clip_plane_far=100
+# camera.clip_plane_far=900
+# print(camera.clip_plane_far) # 10K!
 
 terrain = MeshTerrain(subject,camera)
 #snowfall = SnowFall(subject)
 # How do you at atmospheric fog?
-scene.fog_density=(0,75)
+scene.fog_density=(0,75) # 75.
 # scene.fog_color=indra.color
-scene.fog_color=color.white
-generatingTerrain=True
+scene.fog_color=window.color # color.white
+# *** False to enable huge terrain at start.
+generatingTerrain=False
 
 # Generate our terrain 'chunks'.
+# *** default 4 for debugging. 128 takes 30seconds-ish.
+# *** 512 took under 3mins.
 for i in range(4):
     terrain.genTerrain()
 # For loading in a large terrain at start.
 # loadMap(subject,terrain)
+
+
 
 grass_audio = Audio('step.ogg',autoplay=False,loop=False)
 snow_audio = Audio('snowStep.mp3',autoplay=False,loop=False)

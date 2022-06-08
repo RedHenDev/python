@@ -12,18 +12,19 @@ class MeshTerrain:
         this.subject = _sub
         this.camera = _cam
 
-        # this.block = load_model('block.obj')
+        this.block = load_model('block.obj')
         
-        this.textureAtlas='grass_64_hex_tex_2.png'
-        this.block = load_model('stretch_hex.obj')
-        # this.textureAtlas = 'texture_atlas_3.png'
+        # this.textureAtlas='grass_64_hex_tex_2.png'
+        # this.block = load_model('stretch_hex.obj')
+        this.textureAtlas = 'texture_atlas_3.png'
         this.numVertices = len(this.block.vertices)
 
         this.subsets = []
-        this.numSubsets = 1024 #***
+        this.numSubsets = 1024 #*** 1024 new default
         
         # Must be even number! See genTerrain()
-        this.subWidth = 2 #***
+        # 20 was experiment.
+        this.subWidth = 2 #*** 2 for new default
         this.swirlEngine = SwirlEngine(this.subWidth)
         this.currentSubset = 0
 
@@ -46,7 +47,7 @@ class MeshTerrain:
             this.subsets.append(e)
 
     def do_mining(this):
-        epi = mine(this.td,this.vd,this.subsets)
+        epi = mine(this.td,this.vd,this.subsets,this.numVertices)
         if epi != None:
             this.genWalls(epi[0],epi[1])
             this.subsets[epi[1]].model.generate()
@@ -99,9 +100,12 @@ class MeshTerrain:
         model = this.subsets[subset].model
 
         # *** HEX
+        """
         hex_z=z
         if z % 2 == 0:
             x+=0.5
+        """
+
         model.vertices.extend([ Vec3(x,y,z) + v for v in 
                                 this.block.vertices])
 
@@ -134,10 +138,11 @@ class MeshTerrain:
         uu=minerals[blockType][0]
         uv=minerals[blockType][1]
         # ***
+        """
         # HEX
         uu=0
         uv=0
-        
+        """
 
         model.uvs.extend([Vec2(uu,uv) + u for u in this.block.uvs])
 
@@ -151,7 +156,8 @@ class MeshTerrain:
                 this.td[key]='g'
 
         # Record subset index and first vertex of this block.
-        vob = (subset, len(model.vertices)-37)
+        # *** HEX
+        vob = (subset, len(model.vertices)-this.numVertices-1)
         this.vd[(floor(x),
                 floor(y),
                 floor(z))] = vob
