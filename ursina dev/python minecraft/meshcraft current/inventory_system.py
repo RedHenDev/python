@@ -211,17 +211,15 @@ Hotspot.toggle()
 
 # ***
 # Text experiments.
-descr = dedent('''
-    Rainstorm
-    <pink>
-    Summon a rain storm to deal 5 water 
-    damage to everyone, including yourself.
-    1234 1234 1234 1234 1234 1234 2134 1234 1234 
-    1234 1234 1234 2134 2134 1234 1234 1234 1234
-    Lasts for 4 rounds.''').strip()
+# descr = dedent('''
+#     Rainstorm
+#     <\n>
+#     <black>
+#     <scale:2>
+# Boop 64''').strip()
 
-Text.default_resolution = 1080 * Text.size
-test = Text(text=descr, wordwrap=30)
+# Text.default_resolution = 1080 * Text.size
+# test = Text(text=descr, wordwrap=44)
 
 def inv_input(key,subject,mouse):
     try:

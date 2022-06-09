@@ -7,13 +7,21 @@ from building_system import *
 from config import six_cube_dirs, minerals, mins
 
 class MeshTerrain:
-    def __init__(this,_sub,_cam):
+    # *** - inventory system
+    def __init__(this,_sub,_cam,_inv_items):
         
         this.subject = _sub
         this.camera = _cam
 
+        # *** deepcopy fix.
         this.block = load_model('block.obj',use_deepcopy=True)
         
+        # *** - text testing.
+        this.items=_inv_items
+        Text.default_resolution = 1080 * Text.size
+        this.mouth = Text(text='<scale:2>hello world', wordwrap=44)
+        
+
         # this.textureAtlas='grass_64_hex_tex_2.png'
         # this.block = load_model('stretch_hex.obj')
         this.textureAtlas = 'texture_atlas_3.png'
@@ -24,7 +32,7 @@ class MeshTerrain:
         
         # Must be even number! See genTerrain()
         # 20 was experiment.
-        this.subWidth = 2 #*** 2 for new default
+        this.subWidth = 20 #*** 2 for new default
         this.swirlEngine = SwirlEngine(this.subWidth)
         this.currentSubset = 0
 
@@ -49,14 +57,22 @@ class MeshTerrain:
     def do_mining(this):
         epi = mine(this.td,this.vd,this.subsets,this.numVertices)
         if epi != None:
+            # Epi[0] is bte position (Vec3).
+            # Epi[1] is subset index.
             this.genWalls(epi[0],epi[1])
             this.subsets[epi[1]].model.generate()
 
     # Highlight looked-at block :)
     # !*!*!*!*!*!*!
     # We don't need to pass in pos and cam anymore?!
-    def update(this,pos,cam):
-        highlight(pos,cam,this.td)
+    def update(this):
+        highlight(  this.subject.position,
+                    this.camera,this.td)
+        # *** text
+        this.mouth.text='<black>'+str(bte.position)
+        this.mouth.position=this.items[0].position
+        this.mouth.always_on_top=True
+        
         # Blister-mining!
         if bte.visible==True and mouse.locked==True:
             if held_keys['shift'] and held_keys['left mouse']:

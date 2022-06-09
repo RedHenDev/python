@@ -65,14 +65,14 @@ window.fullscreen=False
 # camera.clip_plane_far=900
 # print(camera.clip_plane_far) # 10K!
 
-terrain = MeshTerrain(subject,camera)
+terrain = MeshTerrain(subject,camera,items)
 #snowfall = SnowFall(subject)
 # How do you at atmospheric fog?
 scene.fog_density=(0,75) # 75.
 # scene.fog_color=indra.color
 scene.fog_color=window.color # color.white
 # *** False to enable huge terrain at start.
-generatingTerrain=True
+generatingTerrain=False
 
 # Generate our terrain 'chunks'.
 # *** default 4 for debugging. 128 takes 30seconds-ish.
@@ -110,23 +110,25 @@ def update():
 
     # Highlight terrain block for mining/building...
     # *** - empty-handed?
-    if subject.blockType!=None:    
-        terrain.update(subject.position,camera)
+    if subject.blockType!=None: 
+        # *** no need to pass in subject.position and cam.   
+        terrain.update()
 
     # Handle mob ai.
     mob_movement(grey, subject.position, terrain.td)
 
     count+=1
     # ***
-    if count >= 4:
+    if count >= 1:
         
         count=1
         # Generate terrain at current swirl position.
         # ***
         if generatingTerrain:
-            # terrain.genTerrain()
-            for i in range(12):
-                terrain.genTerrain()
+            terrain.genTerrain()
+            # 12
+            # for i in range(4):
+            #     terrain.genTerrain()
                 
     
 
