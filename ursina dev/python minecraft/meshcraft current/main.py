@@ -32,6 +32,7 @@ ii+) Solve colour staining - DONE :D
 ii) ? - Earthquakes :o - DONE :D
 
 Tut 18 notes
+0) Bug fix for ursina update - use_deepcopy=True
 i) mined block particles - pick-up for inventory
 i+) cracking over-skin for blocks being mined 
 ii) trees? Rocks?!
