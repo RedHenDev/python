@@ -12,10 +12,10 @@ class MeshTerrain:
         this.subject = _sub
         this.camera = _cam
 
-        # this.block = load_model('block.obj')
+        # this.block = load_model('block.obj',use_deepcopy=True)
         
         this.textureAtlas='grass_64_hex_tex_2.png'
-        this.block = load_model('stretch_hex.obj')
+        this.block = load_model('stretch_hex.obj',use_deepcopy=True)
         # this.textureAtlas = 'texture_atlas_3.png'
         this.numVertices = len(this.block.vertices)
 
