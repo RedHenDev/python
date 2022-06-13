@@ -66,6 +66,7 @@ window.fullscreen=False
 # camera.clip_plane_far=900
 # print(camera.clip_plane_far) # 10K!
 
+# *** inv items passed in here!
 terrain = MeshTerrain(subject,camera,items)
 #snowfall = SnowFall(subject)
 # How do you at atmospheric fog?

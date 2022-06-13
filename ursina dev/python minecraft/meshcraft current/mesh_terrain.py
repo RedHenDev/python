@@ -16,7 +16,7 @@ class MeshTerrain:
         # *** deepcopy fix.
         this.block = load_model('block.obj',use_deepcopy=True)
         
-        # *** - text testing.
+        # *** - text testing. - and pick-ups
         this.items=_inv_items
         Text.default_resolution = 1080 * Text.size
         this.mouth = Text(text='<scale:2>hello world', wordwrap=44)
@@ -55,7 +55,7 @@ class MeshTerrain:
             this.subsets.append(e)
 
     def do_mining(this):
-        epi = mine(this.td,this.vd,this.subsets,this.numVertices)
+        epi = mine(this.td,this.vd,this.subsets,this.numVertices,this.textureAtlas,this.block)
         if epi != None:
             # Epi[0] is bte position (Vec3).
             # Epi[1] is subset index.
@@ -101,7 +101,7 @@ class MeshTerrain:
         
         if epi==None: return
         # Refactor this -- place in mining_system 
-        # except for cal to genBlock?
+        # except for call to genBlock?
         
         for i in range(0,6):
             np = epi + six_cube_dirs[i]
