@@ -55,9 +55,9 @@ def drop_collectible(_texture,_blockType,_position):
 # this itself called in an update().
 # Return's blockType of collectible.
 def collectible_pickup(s_pos):
-    x=floor(s_pos[0])
+    x=round(s_pos[0])
     y=floor(s_pos[1])
-    z=floor(s_pos[2])
+    z=round(s_pos[2])
     b = cd.get((x,y,z))
     if b is not None:
         print(f"Oooo what's this? {b[1]}")

@@ -73,7 +73,7 @@ class MeshTerrain:
                         this.camera,this.td)
         for i in this.items:
             if i.blockType is b:
-                this.mouth.text='<white>'+str(bte.position)
+                this.mouth.text='<white>'+str(b)
                 this.mouth.always_on_top=True
 
         # *** text
