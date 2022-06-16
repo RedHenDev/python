@@ -32,7 +32,7 @@ ii+) Solve colour staining - DONE :D
 ii) ? - Earthquakes :o - DONE :D
 
 Tut 18 notes
-0) Bug fix for ursina update - use_deepcopy=True
+0) Bug fix for ursina update - use_deepcopy=True - DONE
 i) mined block particles - pick-up for inventory
 i+) cracking over-skin for blocks being mined 
 ii) trees? Rocks?!
@@ -53,7 +53,7 @@ subject = FirstPersonController()
 subject.gravity = 0.0
 subject.cursor.visible=True
 subject.cursor.color=color.white
-subject.height=1.86
+subject.height=1.55
 # ***
 subject.camera_pivot.y=subject.height
 subject.frog=False # For jumping...
@@ -74,7 +74,7 @@ scene.fog_density=(0,75) # 75.
 # scene.fog_color=indra.color
 scene.fog_color=window.color # color.white
 # *** False to enable huge terrain at start.
-generatingTerrain=False
+generatingTerrain=True
 
 # Generate our terrain 'chunks'.
 # *** default 4 for debugging. 128 takes 30seconds-ish.
@@ -123,7 +123,7 @@ def update():
     # ***
     if count >= 1:
         
-        count=1
+        count=4
         # Generate terrain at current swirl position.
         # ***
         if generatingTerrain:

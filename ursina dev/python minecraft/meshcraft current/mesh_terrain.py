@@ -32,7 +32,7 @@ class MeshTerrain:
         
         # Must be even number! See genTerrain()
         # 20 was experiment.
-        this.subWidth = 20 #*** 2 for new default
+        this.subWidth = 6 #*** 2 for new default
         this.swirlEngine = SwirlEngine(this.subWidth)
         this.currentSubset = 0
 
@@ -55,7 +55,8 @@ class MeshTerrain:
             this.subsets.append(e)
 
     def do_mining(this):
-        epi = mine(this.td,this.vd,this.subsets,this.numVertices,this.textureAtlas,this.block)
+        epi = mine( this.td,this.vd,this.subsets,
+                    this.numVertices,this.textureAtlas)
         if epi != None:
             # Epi[0] is bte position (Vec3).
             # Epi[1] is subset index.
@@ -66,12 +67,19 @@ class MeshTerrain:
     # !*!*!*!*!*!*!
     # We don't need to pass in pos and cam anymore?!
     def update(this):
-        highlight(  this.subject.position,
-                    this.camera,this.td)
+        # *** pass subject height :)
+        b = highlight(  this.subject.position,
+                        this.subject.height,
+                        this.camera,this.td)
+        for i in this.items:
+            if i.blockType is b:
+                this.mouth.text='<white>'+str(bte.position)
+                this.mouth.always_on_top=True
+
         # *** text
-        this.mouth.text='<black>'+str(bte.position)
-        this.mouth.position=this.items[0].position
-        this.mouth.always_on_top=True
+        # this.mouth.text='<black>'+str(bte.position)
+        # this.mouth.position=this.items[0].position
+        # this.mouth.always_on_top=True
         
         # Blister-mining!
         if bte.visible==True and mouse.locked==True:

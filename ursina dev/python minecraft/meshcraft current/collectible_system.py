@@ -15,21 +15,32 @@ In Minecraft, stacking behaviour would kick in here:
 if an item of same type that is not fully stacked,
 i.e., is less than 64 items high, then add to this stack.
 """
-from ursina import Entity, Vec2, load_model
+from ursina import Entity, Vec2, load_model, time, destroy
 from config import minerals
+# ***
+from math import sin, floor
 
-pickups=[]
-pickup_spin=0
+collectibles=[]
+cd={}
 
-def new_pickable(_model,_texture,_blockType,_position):
-    global pickup_spin
+def drop_collectible(_texture,_blockType,_position):
     e=Entity(   model=load_model('block.obj',use_deepcopy=True),
                 texture=_texture,
                 position=_position,
                 )
     e.scale=0.33
-    e.y+=0.5
+    # *** - and as tuple
+    # record collectible presence on collectible dic.
+    # NB BEFORE we move to central pos.
+    x=floor(e.x)
+    y=floor(e.y)
+    z=floor(e.z)
+    # ***
+    cd[(x,y,z)]=(_blockType,e)
+    e.y+=0.5-(e.scale_y*0.5)
     e.original_y=e.y
+    
+    # print(cd.get(e.position))
     e.texture_scale*=64/e.texture.width
     # This is the texture atlas co-ords.
     uu=minerals[_blockType][0]
@@ -37,6 +48,30 @@ def new_pickable(_model,_texture,_blockType,_position):
     e.model.uvs=([Vec2(uu,uv) + u for u in e.model.uvs])
     e.model.generate()
 
-    pickups.append(e)
+    # collectibles.append(e)
 
+# ***
+# Called from mining_system's highlight -- since 
+# this itself called in an update().
+# Return's blockType of collectible.
+def collectible_pickup(s_pos):
+    x=floor(s_pos[0])
+    y=floor(s_pos[1])
+    z=floor(s_pos[2])
+    b = cd.get((x,y,z))
+    if b is not None:
+        print(f"Oooo what's this? {b[1]}")
+        destroy(b[1])
+        cd.pop((x,y,z))
+        return b[0]
+    else: return None
 
+# Called from mining_system's highlight -- since 
+# itself called in an update().
+def collectible_bounce():
+    for key in cd:
+        cd[key][1].rotation_y+=2
+        # Add a little bounce ;)
+        cd[key][1].y = ( cd[key][1].original_y + 
+                sin(cd[key][1].rotation_y/50)*
+                cd[key][1].scale_y)
