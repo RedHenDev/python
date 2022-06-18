@@ -44,9 +44,8 @@ vii) Pick-axe model
 viii) Vincent the giant chicken
 """
 
-# ***
 window.color = color.rgb(0,200,225)
-# *** no sky
+# no sky
 # indra = Sky()
 # indra.color = window.color
 subject = FirstPersonController()
