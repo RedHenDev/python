@@ -15,12 +15,14 @@ In Minecraft, stacking behaviour would kick in here:
 if an item of same type that is not fully stacked,
 i.e., is less than 64 items high, then add to this stack.
 """
-from ursina import Entity, Vec2, load_model, time, destroy
+from ursina import Entity, Vec2, load_model, destroy
 from config import minerals
 # ***
 from math import sin, floor
 
-collectibles=[]
+# *** - handling collectibles via dictionary
+# *** [0]blockType, [1]entity_itself
+# collectibles=[] - no longer used
 cd={}
 
 def drop_collectible(_texture,_blockType,_position):
@@ -70,8 +72,10 @@ def collectible_pickup(s_pos):
 # itself called in an update().
 def collectible_bounce():
     for key in cd:
-        cd[key][1].rotation_y+=2
+        # NB cd[key][1] is entity itself. [0] is blockType.
+        c = cd[key][1]
+        c.rotation_y+=2
         # Add a little bounce ;)
-        cd[key][1].y = ( cd[key][1].original_y + 
-                sin(cd[key][1].rotation_y/50)*
-                cd[key][1].scale_y)
+        c.y = ( c.original_y + 
+                sin(c.rotation_y/50)*
+                c.scale_y)

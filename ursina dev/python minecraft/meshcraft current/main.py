@@ -53,7 +53,8 @@ subject = FirstPersonController()
 subject.gravity = 0.0
 subject.cursor.visible=True
 subject.cursor.color=color.white
-subject.height=1.55
+# *** closer to Minecraft height of subject?
+subject.height=1.62
 # ***
 subject.camera_pivot.y=subject.height
 subject.frog=False # For jumping...
