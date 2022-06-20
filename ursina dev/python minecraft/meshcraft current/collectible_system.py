@@ -15,15 +15,20 @@ In Minecraft, stacking behaviour would kick in here:
 if an item of same type that is not fully stacked,
 i.e., is less than 64 items high, then add to this stack.
 """
-from ursina import Entity, Vec2, load_model, destroy
+# *** - Audio
+from ursina import Entity, Vec2, load_model, destroy, Audio
 from config import minerals
 # ***
 from math import sin, floor
+import random as ra
 
 # *** - handling collectibles via dictionary
 # *** [0]blockType, [1]entity_itself
 # collectibles=[] - no longer used
 cd={}
+
+# ***
+pickup_audio = Audio('Hit_01.mp3',autoplay=False,loop=False)
 
 def drop_collectible(_texture,_blockType,_position):
     e=Entity(   model=load_model('block.obj',use_deepcopy=True),
@@ -65,6 +70,10 @@ def collectible_pickup(s_pos):
         print(f"Oooo what's this? {b[1]}")
         destroy(b[1])
         cd.pop((x,y,z))
+        # Sound!
+        if pickup_audio.playing==False:
+            pickup_audio.pitch=ra.random()+0.7
+            pickup_audio.play()
         return b[0]
     else: return None
 
