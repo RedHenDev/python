@@ -7,13 +7,12 @@ from building_system import *
 from config import six_cube_dirs, minerals, mins
 
 class MeshTerrain:
-    # *** - inventory system
+    # *** - inventory system items passed in here?
     def __init__(this,_sub,_cam,_inv_items):
         
         this.subject = _sub
         this.camera = _cam
 
-        # *** deepcopy fix.
         this.block = load_model('block.obj',use_deepcopy=True)
         
         # *** - text testing. - and pick-ups
@@ -56,7 +55,8 @@ class MeshTerrain:
 
     def do_mining(this):
         epi = mine( this.td,this.vd,this.subsets,
-                    this.numVertices,this.textureAtlas)
+                    this.numVertices,this.textureAtlas,
+                    this.subject)
         if epi != None:
             # Epi[0] is bte position (Vec3).
             # Epi[1] is subset index.
@@ -64,8 +64,6 @@ class MeshTerrain:
             this.subsets[epi[1]].model.generate()
 
     # Highlight looked-at block :)
-    # !*!*!*!*!*!*!
-    # We don't need to pass in pos and cam anymore?!
     def update(this):
         # *** pass subject height :)
         b = highlight(  this.subject.position,

@@ -11,12 +11,6 @@ bte.scale=1.1
 bte.origin_y+=0.05
 
 def highlight(pos,_subjectHeight,cam,td):
-    # *** - since called in update()
-    collectible_bounce()
-    b = collectible_pickup(pos)
-    if b is not None:
-        return b
-
     for i in range(1,132):
         # Adjust for player's height!
         # ***
@@ -36,7 +30,7 @@ def highlight(pos,_subjectHeight,cam,td):
         else:
             bte.visible = False
 
-def mine(td,vd,subsets,_numVertices,_texture):
+def mine(td,vd,subsets,_numVertices,_texture,_sub):
     if not bte.visible: return
 
     # ***
@@ -60,7 +54,7 @@ def mine(td,vd,subsets,_numVertices,_texture):
     # What blockType are we mining?
     blockType=td.get((floor(bte.x),floor(bte.y),floor(bte.z)))
     print(blockType)
-    drop_collectible(_texture,blockType,bte.position)
+    Collectible(blockType,bte.position,_texture,_sub)
     # ***
 
     # Generate model so that changes actually visible.

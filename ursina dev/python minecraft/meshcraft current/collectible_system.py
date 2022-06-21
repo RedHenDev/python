@@ -1,90 +1,94 @@
 """
-June 11 2022
-Collectible pick-ups system (CPS).
-
-We'll pass the subject, or rather, the inventory
-through to this system?
-
-Well, it makes sense to have the inventory system
-speak to this system.
-
-We'll want to add an inventory item to hotbar
-when picked up by subject. That means
-instantiating a new item and placing it near hotbar.
-In Minecraft, stacking behaviour would kick in here:
-if an item of same type that is not fully stacked,
-i.e., is less than 64 items high, then add to this stack.
+Hello. This is our system for mined blocks
+dropping collectable materials.
 """
-# *** - Audio
-from ursina import Entity, Vec2, load_model, destroy, Audio
+
+# Collectible dictionary. Similar to td{}.
+# It will store terrain position of a collectible :)
+from ursina import Entity, Vec2, Vec4, load_model, Audio
 from config import minerals
-# ***
 from math import sin, floor
-import random as ra
+from random import random
 
-# *** - handling collectibles via dictionary
-# *** [0]blockType, [1]entity_itself
-# collectibles=[] - no longer used
-cd={}
+pop_audio = Audio('hit_01.mp3',autoplay=False,loop=False)
+pickup_audio = Audio('pop.mp3',autoplay=False,loop=False)
 
-# ***
-pickup_audio = Audio('Hit_01.mp3',autoplay=False,loop=False)
+class Collectible(Entity):
 
-def drop_collectible(_texture,_blockType,_position):
-    e=Entity(   model=load_model('block.obj',use_deepcopy=True),
-                texture=_texture,
-                position=_position,
-                )
-    e.scale=0.33
-    # *** - and as tuple
-    # record collectible presence on collectible dic.
-    # NB BEFORE we move to central pos.
-    x=floor(e.x)
-    y=floor(e.y)
-    z=floor(e.z)
-    # ***
-    cd[(x,y,z)]=(_blockType,e)
-    e.y+=0.5-(e.scale_y*0.5)
-    e.original_y=e.y
-    
-    # print(cd.get(e.position))
-    e.texture_scale*=64/e.texture.width
-    # This is the texture atlas co-ords.
-    uu=minerals[_blockType][0]
-    uv=minerals[_blockType][1]
-    e.model.uvs=([Vec2(uu,uv) + u for u in e.model.uvs])
-    e.model.generate()
+    # cd = {}
 
-    # collectibles.append(e)
+    def __init__(this,_blockType,_pos,_tex,_sub):
+        super().__init__()
+        this.model=load_model('block.obj',use_deepcopy=True)
+        this.texture=_tex
+        this.scale=0.33
+        this.position=_pos
 
-# ***
-# Called from mining_system's highlight -- since 
-# this itself called in an update().
-# Return's blockType of collectible.
-def collectible_pickup(s_pos):
-    x=round(s_pos[0])
-    y=floor(s_pos[1])
-    z=round(s_pos[2])
-    b = cd.get((x,y,z))
-    if b is not None:
-        print(f"Oooo what's this? {b[1]}")
-        destroy(b[1])
-        cd.pop((x,y,z))
-        # Sound!
-        if pickup_audio.playing==False:
-            pickup_audio.pitch=ra.random()+0.7
+        this.numVertices=len(this.model.vertices)
+        this.blockType=_blockType
+        this.subject=_sub
+        # Record me on the collectibles dictionary.
+        # Key is my position.
+        # Collectible.cd[this.position]=this
+        # Original position for checking pick up by 
+        # subject.
+        this.o_position=this.position
+
+        # Central position of mining site.
+        this.y+=0.5-(this.scale_y*0.5)
+        # Orig pos needed for sine bounce!
+        this.original_y=this.y
+
+        # Wrap texture from texture atlas.
+        this.texture_scale*=64/this.texture.width
+
+        # Does the dictionary entry for this blockType
+        # hold colour information? If so, use it :)
+        if len(minerals[this.blockType])>2:
+            # Decide random tint for colour of block :)
+            c = random()-0.5
+            # Grab the Vec4 colour data :)
+            ce=minerals[this.blockType][2]
+            # Adjust each colour channel separately to
+            # ensure that hard-coded RGB combination is maintained.
+            this.model.colors = ( (Vec4(ce[0]-c,ce[1]-c,ce[2]-c,ce[3]),)*
+                                  this.numVertices)
+        else:
+            # Decide random tint for colour of block :)
+            c = random()-0.5
+            # *** - colour bug Xextend
+            this.model.colors = ( (Vec4(1-c,1-c,1-c,1),)*
+                                   this.numVertices)
+
+        # UV information for texture wrap.
+        uu=minerals.get(_blockType)[0]
+        uv=minerals.get(_blockType)[1]
+        this.model.uvs=([Vec2(uu,uv) + u for u in this.model.uvs])
+        # Done!
+        # Make sound!
+        pop_audio.play()
+        this.model.generate()
+
+    def update(this):
+        this.checkPickUp()
+        this.bounce()
+
+    def checkPickUp(this):
+        x=round(this.subject.position.x)
+        y=floor(this.subject.position.y)
+        z=round(this.subject.position.z)
+        if ((x,y,z)==this.o_position):
+            # pick me up!
+            # Remove me from the dictionary.
+            # Collectible.cd.pop(this.o_position)
+            # Send signal to delete me!
+            # this.timeToRest=True
             pickup_audio.play()
-        return b[0]
-    else: return None
+            this.disable()
 
-# Called from mining_system's highlight -- since 
-# itself called in an update().
-def collectible_bounce():
-    for key in cd:
-        # NB cd[key][1] is entity itself. [0] is blockType.
-        c = cd[key][1]
-        c.rotation_y+=2
+
+    def bounce(this):
+        this.rotation_y+=2
         # Add a little bounce ;)
-        c.y = ( c.original_y + 
-                sin(c.rotation_y/50)*
-                c.scale_y)
+        this.y = ( this.original_y + 
+                sin(this.rotation_y*0.05)*this.scale_y)
