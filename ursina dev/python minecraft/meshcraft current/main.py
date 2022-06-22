@@ -58,10 +58,11 @@ subject.camera_pivot.y=subject.height
 subject.frog=False # For jumping...
 subject.runSpeed=12
 subject.walkSpeed=4
-subject.blockType='grass'
+subject.blockType=None
 camera.dash=10 # Rate at which fov changes when running.
 # ***
 window.fullscreen=False
+camera.fov=70 # 63 is 'correct' Minecraft? 70 default.
 # camera.clip_plane_far=900
 # print(camera.clip_plane_far) # 10K!
 
@@ -109,11 +110,8 @@ earthquake_ON=False
 def update():
     global count, pX, pZ, earthcounter
 
-    # Highlight terrain block for mining/building...
-    # *** - empty-handed?
-    if subject.blockType!=None: 
-        # *** no need to pass in subject.position and cam.   
-        terrain.update()
+    # Highlight terrain block for mining/building...  
+    terrain.update()
 
     # Handle mob ai.
     mob_movement(grey, subject.position, terrain.td)

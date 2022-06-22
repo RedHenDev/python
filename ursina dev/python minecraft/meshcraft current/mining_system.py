@@ -9,11 +9,11 @@ bte = Entity(model='block.obj',color=color.rgba(1,1,0,0.4))
 # bte = Entity(model='stretch_hex.obj',color=color.rgba(1,1,0,0.4))
 bte.scale=1.1
 bte.origin_y+=0.05
+bte.visible=True
 
 def highlight(pos,_subjectHeight,cam,td):
     for i in range(1,132):
         # Adjust for player's height!
-        # ***
         wp=pos+Vec3(0,_subjectHeight,0)+cam.forward*(i*0.5)
         # This trajectory is close to perfect!
         # If we can hit perfection...one day...?
@@ -26,6 +26,8 @@ def highlight(pos,_subjectHeight,cam,td):
         whatT=td.get((x,y,z))
         if whatT!=None and whatT!='g':
             bte.visible = True
+            # ***
+            return whatT
             break
         else:
             bte.visible = False

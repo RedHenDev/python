@@ -17,8 +17,8 @@ class MeshTerrain:
         
         # *** - text testing. - and pick-ups
         this.items=_inv_items
-        Text.default_resolution = 1080 * Text.size
-        this.mouth = Text(text='<scale:2>hello world', wordwrap=44)
+        Text.default_resolution = 1080 * Text.size * 4
+        this.mouth = Text(text='<scale:4>hello world', wordwrap=44)
         
 
         # this.textureAtlas='grass_64_hex_tex_2.png'
@@ -65,14 +65,16 @@ class MeshTerrain:
 
     # Highlight looked-at block :)
     def update(this):
-        # *** pass subject height :)
+        # *** return blockTpe! see end of highlight()!
         b = highlight(  this.subject.position,
                         this.subject.height,
                         this.camera,this.td)
-        for i in this.items:
-            if i.blockType is b:
-                this.mouth.text='<white>'+str(b)
-                this.mouth.always_on_top=True
+        
+        try:
+            this.mouth.text='<white>'+str(b)
+            this.mouth.render_queue=3
+            this.mouth.position.y=6
+        except: pass
 
         # *** text
         # this.mouth.text='<black>'+str(bte.position)

@@ -10,8 +10,9 @@ from config import minerals
 from math import sin, floor
 from random import random
 
-pop_audio = Audio('hit_01.mp3',autoplay=False,loop=False)
-pickup_audio = Audio('pop.mp3',autoplay=False,loop=False)
+# *** - no longer needed. Data included in object.
+# pop_audio = Audio('pop.mp3',autoplay=False,loop=False)
+# pickup_audio = Audio('pickup.mp3',autoplay=False,loop=False)
 
 class Collectible(Entity):
 
@@ -27,6 +28,9 @@ class Collectible(Entity):
         this.numVertices=len(this.model.vertices)
         this.blockType=_blockType
         this.subject=_sub
+        # *** - pick-up sound
+        this.pu_sound=Audio('pop.mp3',autoplay=False,loop=False)
+        this.pu_sound.pitch=1+random()
         # Record me on the collectibles dictionary.
         # Key is my position.
         # Collectible.cd[this.position]=this
@@ -66,7 +70,10 @@ class Collectible(Entity):
         this.model.uvs=([Vec2(uu,uv) + u for u in this.model.uvs])
         # Done!
         # Make sound!
-        pop_audio.play()
+        # ***
+        e=Audio('pickup.mp3',autoplay=False,loop=False)
+        e.pitch=1+random()
+        e.play()
         this.model.generate()
 
     def update(this):
@@ -83,7 +90,7 @@ class Collectible(Entity):
             # Collectible.cd.pop(this.o_position)
             # Send signal to delete me!
             # this.timeToRest=True
-            pickup_audio.play()
+            this.pu_sound.play()
             this.disable()
 
 
