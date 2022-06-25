@@ -9,6 +9,7 @@ from ursina import Entity, Vec2, Vec4, load_model, Audio
 from config import minerals
 from math import sin, floor
 from random import random
+from inventory_system import Item
 
 # *** - no longer needed. Data included in object.
 # pop_audio = Audio('pop.mp3',autoplay=False,loop=False)
@@ -91,8 +92,9 @@ class Collectible(Entity):
             # Send signal to delete me!
             # this.timeToRest=True
             this.pu_sound.play()
+            # *** - drop item to inventory
+            Item.gen_item_pickup(this.blockType)
             this.disable()
-
 
     def bounce(this):
         this.rotation_y+=2

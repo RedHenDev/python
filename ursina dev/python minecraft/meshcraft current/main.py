@@ -66,8 +66,8 @@ camera.fov=70 # 63 is 'correct' Minecraft? 70 default.
 # camera.clip_plane_far=900
 # print(camera.clip_plane_far) # 10K!
 
-# *** inv items passed in here!
-terrain = MeshTerrain(subject,camera,items)
+# *** inv items passed in here?
+terrain = MeshTerrain(subject,camera)
 #snowfall = SnowFall(subject)
 # How do you at atmospheric fog?
 scene.fog_density=(0,75) # 75.

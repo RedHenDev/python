@@ -8,7 +8,7 @@ from config import six_cube_dirs, minerals, mins
 
 class MeshTerrain:
     # *** - inventory system items passed in here?
-    def __init__(this,_sub,_cam,_inv_items):
+    def __init__(this,_sub,_cam):
         
         this.subject = _sub
         this.camera = _cam
@@ -16,9 +16,9 @@ class MeshTerrain:
         this.block = load_model('block.obj',use_deepcopy=True)
         
         # *** - text testing. - and pick-ups
-        this.items=_inv_items
-        Text.default_resolution = 1080 * Text.size * 4
-        this.mouth = Text(text='<scale:4>hello world', wordwrap=44)
+        # this.items=_inv_items
+        # Text.default_resolution = 1080 * Text.size * 4
+        # this.mouth = Text(text='<scale:4>hello world', wordwrap=44)
         
 
         # this.textureAtlas='grass_64_hex_tex_2.png'
@@ -70,11 +70,11 @@ class MeshTerrain:
                         this.subject.height,
                         this.camera,this.td)
         
-        try:
-            this.mouth.text='<white>'+str(b)
-            this.mouth.render_queue=3
-            this.mouth.position.y=6
-        except: pass
+        # try:
+        #     this.mouth.text='<white>'+str(b)
+        #     this.mouth.render_queue=3
+        #     this.mouth.position.y=6
+        # except: pass
 
         # *** text
         # this.mouth.text='<black>'+str(bte.position)

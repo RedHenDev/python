@@ -77,7 +77,17 @@ class Hotspot(Entity):
 
 
 class Item(Draggable):
-    def __init__(this):
+
+    # ***
+    @staticmethod
+    def gen_item_pickup(_blockType):
+        """Generates an item"""
+        e=Item(_blockType)
+        items.append(e)
+        print("new item added")
+
+
+    def __init__(this,_blockType):
         super().__init__()
         this.model=load_model('quad',use_deepcopy=True)
         this.scale_x=Hotspot.scalar*0.9
@@ -87,8 +97,12 @@ class Item(Draggable):
         this.texture_scale*=64/this.texture.width
         this.render_queue=2
 
-        # Pick a random block type.
-        this.blockType=mins[ra.randint(0,len(mins)-1)]
+        # ***
+        if _blockType is not None:
+            this.blockType=_blockType
+        else:
+            # Pick a random block type.
+            this.blockType=mins[ra.randint(0,len(mins)-1)]
 
         this.onHotbar=False
         this.visible=False
@@ -96,6 +110,11 @@ class Item(Draggable):
 
         this.set_texture()
         this.set_colour()
+
+        # ***
+        this.stack_text = Text()
+        # this.stack_text.parent=this
+        this.stack_text.text="<white>9"
     
     def set_texture(this):
         # Use dictionary to access uv co-ords.
@@ -195,9 +214,9 @@ for i in range(Hotspot.rowFit):
         hotspots.append(bud)
 # Main inventory panel items. 
 for i in range(8):
-    bud=Item()
-    bud.onHotbar=True
-    bud.visible=True
+    bud=Item(None)
+    bud.onHotbar=False
+    bud.visible=False
     bud.x=ra.random()-0.5
     bud.y=ra.random()-0.5
     bud.fixPos()
