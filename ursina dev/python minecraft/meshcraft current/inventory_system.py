@@ -83,8 +83,11 @@ class Item(Draggable):
     def gen_item_pickup(_blockType):
         """Generates an item"""
         e=Item(_blockType)
+        e.onHotbar=True
+        e.visible=True
+        e.fixPos()
         items.append(e)
-        print("new item added")
+        print("new item added: " + str(items[-1].blockType))
 
 
     def __init__(this,_blockType):
@@ -213,14 +216,14 @@ for i in range(Hotspot.rowFit):
                 )
         hotspots.append(bud)
 # Main inventory panel items. 
-for i in range(8):
-    bud=Item(None)
-    bud.onHotbar=False
-    bud.visible=False
-    bud.x=ra.random()-0.5
-    bud.y=ra.random()-0.5
-    bud.fixPos()
-    items.append(bud)
+# for i in range(8):
+#     bud=Item(None)
+#     bud.onHotbar=False
+#     bud.visible=False
+#     bud.x=ra.random()-0.5
+#     bud.y=ra.random()-0.5
+#     bud.fixPos()
+#     items.append(bud)
 
 # ***
 # To hide items that are not on hotbar
