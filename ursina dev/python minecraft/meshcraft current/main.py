@@ -12,6 +12,8 @@ from save_load_system import saveMap, loadMap
 from inventory_system import *
 
 """
+NB - RED workspace is private PREP.
+NB - BLUE is TUTORIAL code!
 Adventures
 1) 'Snap' behaviour for items. DONE :D
 2) Number keys select building block type. DONE :)
