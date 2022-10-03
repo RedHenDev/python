@@ -12,7 +12,7 @@ me.y = 100
 me.x = me.z = 16
 me.cursor.visible=False
 
-mod = load_model('cube')
+mod = load_model('cube',use_deepcopy=True)
 terrain = Entity(model=Mesh(), texture='grey_noise.png')
 model = terrain.model
 # terrain.color=color.green
