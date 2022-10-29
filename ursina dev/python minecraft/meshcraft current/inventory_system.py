@@ -7,16 +7,20 @@ import numpy as np
 hotspots=[]
 items=[]
 
+
+
 # Inventory hotbar.
 hotbar = Entity(model=None)
 hotbar.parent=camera.ui
 hotbar.model=load_model('quad',use_deepcopy=True)
 # Set the size and position.
-print('hotbar.scale is ', hotbar.scale, 'a_r ', camera.aspect_ratio)
+print(hotbar.position)
 ui_scalar=0.05
 aspect_ratio=1/1.6
-ui_rows=9
-hotbar.scale=Vec3(0.6*aspect_ratio,0.08,0)*ui_scalar
+hot_cols=9
+hotbar.scale=Vec3((1/10)*hot_cols*aspect_ratio,1/10,0)*ui_scalar
+ui_cols=hotbar.scale[0]/9
+hotbar.y=(-0.45 + (hotbar.scale_y*0.5))*ui_scalar
 # *** - corrects for fullScreen panel overflow.
 # hotbar.scale_x=hotbar.scale_y*9*1.1 # Ought to be rowFit.
 # hotbar.y=-0.45 + (hotbar.scale_y*0.5)
@@ -30,11 +34,10 @@ iPan.parent=camera.ui
 iPan.model=load_model('quad',use_deepcopy=True)
 # Set the size and position.
 iPan.rows=3
-# iPan.scale_y=hotbar.scale_y * iPan.rows
-# iPan.scale_x=hotbar.scale_x
-iPan.scale*=ui_scalar
-iPan.basePosY=hotbar.y+(hotbar.scale_y*0.5)+(iPan.scale_y*0.5)
-iPan.gap=hotbar.scale_y
+iPan.scale_y=hotbar.scale_y * iPan.rows
+iPan.scale_x=hotbar.scale_x
+# iPan.basePosY=hotbar.y+(hotbar.scale_y*0.5)+(iPan.scale_y*0.5)
+# iPan.gap=hotbar.scale_y
 # iPan.y=iPan.basePosY+iPan.gap
 # Appearance.
 iPan.color=color.light_gray
@@ -95,12 +98,12 @@ class Item(Draggable):
         this.model=load_model('quad',use_deepcopy=True)
         # ***
         # this.scale_x=Hotspot.scalar*0.9*0.08
-        this.scale_x=Hotspot.scalar
+        this.scale_x=Hotspot.scalar*aspect_ratio*0.8
         this.scale_y=this.scale_x*camera.aspect_ratio
         this.color=color.white
         this.texture='texture_atlas_3.png'
         this.texture_scale*=64/this.texture.width
-        this.render_queue=2
+        this.render_queue=4
 
         # ***
         if _blockType is not None:
@@ -217,13 +220,15 @@ for i in range(Hotspot.rowFit):
     bud.visible=True
     bud.y=hotbar.y
     padding=(hotbar.scale_x-Hotspot.scalar*Hotspot.rowFit)*0.5
-    # *** *0.6 at end...?
-    bud.x=  (   hotbar.x-hotbar.scale_x*0.5 +
-                Hotspot.scalar*0.5 + 
+    # *** *1.8 and aspect_ratio*0.9 at end...?
+    bud.x=  (   hotbar.x-hotbar.scale_x*0.5*aspect_ratio +
+                Hotspot.scalar*0.5*1.15 + 
                 padding +
-                i*Hotspot.scalar*0.6
+                i*Hotspot.scalar*aspect_ratio*1.1
             )
     hotspots.append(bud)
+    # ***
+    bud.render_queue=3
 
 # Hotspots for the main inventory panel.
 for i in range(Hotspot.rowFit):
@@ -232,28 +237,32 @@ for i in range(Hotspot.rowFit):
         bud.onHotbar=False
         bud.visible=False
         # Position.
-        padding_x=(iPan.scale_x-Hotspot.scalar*Hotspot.rowFit)*0.5
+        # *** *aspect_ratio*0.8
+        padding_x=(iPan.scale_x-Hotspot.scalar*Hotspot.rowFit*aspect_ratio*0.8)*0.5
         padding_y=(iPan.scale_y-Hotspot.scalar*iPan.rows)*0.5
         bud.y=  (   iPan.y+iPan.scale_y*0.5 -
                     Hotspot.scalar*0.5 -
                     padding_y -
                     Hotspot.scalar * j
                 )
+        # *** aspect_ratio
         bud.x=  (   iPan.x-iPan.scale_x*0.5 +
                     Hotspot.scalar*0.5 +
                     padding_x +
-                    i*Hotspot.scalar
+                    i*Hotspot.scalar**aspect_ratio
                 )
         hotspots.append(bud)
+        # ***
+        bud.render_queue=3
 # Main inventory panel items. 
-for i in range(8):
-    bud=Item(None)
-    bud.onHotbar=False
-    bud.visible=False
-    bud.x=ra.random()-0.5
-    bud.y=ra.random()-0.5
-    bud.fixPos()
-    items.append(bud)
+# for i in range(8):
+#     bud=Item(None)
+#     bud.onHotbar=False
+#     bud.visible=False
+#     bud.x=ra.random()-0.5
+#     bud.y=ra.random()-0.5
+#     bud.fixPos()
+#     items.append(bud)
 
 # ***
 # To hide items that are not on hotbar
