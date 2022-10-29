@@ -6,6 +6,7 @@
 	],
 	"settings": {
 		"workbench.colorTheme": "Red",
-		"workbench.preferredHighContrastColorTheme": "Quiet Light"
+		"workbench.preferredHighContrastColorTheme": "Quiet Light",
+		"git.ignoreLimitWarning": true
 	}
 }

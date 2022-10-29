@@ -1,13 +1,22 @@
-# Insertion sort.
-# Would be cool to map index to position in a line
-# and value to size, e.g. of a line of pumpkins.
+"""
+Insertion sort
+Oct 2022
+"""
+import time
+from random import randint
 
-li = [2,1,3,5,4,0,2,7,5,3,0]
+my_list = []
 
-print(li)
+# NB list of 10K takes 65-74 seconds by bubble sort.
+# NB list of 10K takes 4.5 seconds by insertion sort.
+# n=10
+# for i in range(n):
+#     my_list.append(randint(0,9))
+my_list=['a','b','x','r']
+
+print(my_list)
 from copy import copy
 def insSort(_list):
-
     ol=copy([_list[0]])
     ul=copy(_list[1:])
     print(ol," ",ul)
@@ -15,15 +24,19 @@ def insSort(_list):
     for iU in range(len(ul)):
         for iO in range(len(ol)):
             if ul[iU] <= ol[iO]:
-                print('Inserting ', ul[iU])
+                # print('Inserting ', ul[iU])
                 ol.insert(iO,ul[iU])
                 inserted=True
-                break 
+                break
         if not inserted:
             ol.append(ul[iU])
-            print('Appending ', ul[iU])
+            # print('Appending ', ul[iU])
         inserted=False
     
     return ol
 
-print("Ordered list, ",insSort(li))
+t0=time.process_time()
+print("Ordered list, ",insSort(my_list))
+t1=time.process_time()
+r=(t1-t0)
+print("Insertion Sort algorithm took " + str(r) + "seconds.")

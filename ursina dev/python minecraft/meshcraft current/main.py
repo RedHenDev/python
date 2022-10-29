@@ -52,6 +52,8 @@ window.color = color.rgb(0,200,225)
 # indra.color = window.color
 subject = FirstPersonController()
 subject.gravity = 0.0
+# ***
+subject.cursor.scale*=0.01
 subject.cursor.visible=True
 subject.cursor.color=color.white
 # closer to Minecraft height of subject?
@@ -64,7 +66,7 @@ subject.blockType=None
 camera.dash=10 # Rate at which fov changes when running.
 # ***
 window.fullscreen=False
-camera.fov=70 # 63 is 'correct' Minecraft? 70 default.
+camera.fov=63 # 63 is 'correct' Minecraft? 70 default.
 # camera.clip_plane_far=900
 # print(camera.clip_plane_far) # 10K!
 

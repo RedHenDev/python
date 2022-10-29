@@ -8,18 +8,23 @@ hotspots=[]
 items=[]
 
 # Inventory hotbar.
-hotbar = Entity(model='quad',parent=camera.ui)
+hotbar = Entity(model=None)
+hotbar.parent=camera.ui
+hotbar.model=load_model('quad',use_deepcopy=True)
 # Set the size and position.
-hotbar.scale_y=0.08
+print('hotbar.scale is ', hotbar.scale, 'a_r ', camera.aspect_ratio)
+hotbar.scale=Vec3(0.8/1.6,0.8,0)*0.05
 # *** - corrects for fullScreen panel overflow.
-hotbar.scale_x=hotbar.scale_y*9*1.1 # Ought to be rowFit.
-hotbar.y=-0.45 + (hotbar.scale_y*0.5)
+# hotbar.scale_x=hotbar.scale_y*9*1.1 # Ought to be rowFit.
+# hotbar.y=-0.45 + (hotbar.scale_y*0.5)
 # Appearance.
 hotbar.color=color.dark_gray
 hotbar.render_queue=0
 
 # Inventory main panel.
-iPan = Entity(model='quad',parent=camera.ui)
+iPan = Entity()
+iPan.parent=camera.ui
+iPan.model=load_model('quad',use_deepcopy=True)
 # Set the size and position.
 iPan.rows=3
 iPan.scale_y=hotbar.scale_y * iPan.rows
@@ -39,8 +44,9 @@ class Hotspot(Entity):
     rowFit=9
     def __init__(this):
         super().__init__()
-        this.model='quad'
         this.parent=camera.ui
+        this.model=load_model('quad',use_deepcopy=True)
+        # this.parent=camera.ui_camera
         this.scale_y=Hotspot.scalar
         this.scale_x=this.scale_y
         this.color=color.white
@@ -78,23 +84,14 @@ class Hotspot(Entity):
 
 class Item(Draggable):
 
-    # ***
-    @staticmethod
-    def gen_item_pickup(_blockType):
-        """Generates an item"""
-        e=Item(_blockType)
-        e.onHotbar=True
-        e.visible=True
-        e.fixPos()
-        items.append(e)
-        print("new item added: " + str(items[-1].blockType))
-
-
     def __init__(this,_blockType):
         super().__init__()
+        this.parent=camera.ui
         this.model=load_model('quad',use_deepcopy=True)
-        this.scale_x=Hotspot.scalar*0.9
-        this.scale_y=this.scale_x
+        # ***
+        # this.scale_x=Hotspot.scalar*0.9*0.08
+        this.scale_x=Hotspot.scalar
+        this.scale_y=this.scale_x*camera.aspect_ratio
         this.color=color.white
         this.texture='texture_atlas_3.png'
         this.texture_scale*=64/this.texture.width
@@ -113,12 +110,24 @@ class Item(Draggable):
 
         this.set_texture()
         this.set_colour()
+        
 
         # ***
         this.stack_text = Text()
         # this.stack_text.parent=this
-        this.stack_text.text="<white>9"
+        this.stack_text.text="<white><scale:0.1>"+str(this.blockType)
     
+    # ***
+    @staticmethod
+    def gen_item_pickup(_blockType):
+        """Generates an item"""
+        e=Item(_blockType)
+        e.onHotbar=True
+        e.visible=False
+        e.fixPos()
+        items.append(e)
+        print("new item added: " + str(items[-1].blockType))
+
     def set_texture(this):
         # Use dictionary to access uv co-ords.
         uu=minerals[this.blockType][0]
