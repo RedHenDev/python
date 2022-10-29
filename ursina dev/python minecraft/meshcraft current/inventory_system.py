@@ -13,13 +13,16 @@ hotbar.parent=camera.ui
 hotbar.model=load_model('quad',use_deepcopy=True)
 # Set the size and position.
 print('hotbar.scale is ', hotbar.scale, 'a_r ', camera.aspect_ratio)
-hotbar.scale=Vec3(0.8/1.6,0.8,0)*0.05
+ui_scalar=0.05
+aspect_ratio=1/1.6
+ui_rows=9
+hotbar.scale=Vec3(0.6*aspect_ratio,0.08,0)*ui_scalar
 # *** - corrects for fullScreen panel overflow.
 # hotbar.scale_x=hotbar.scale_y*9*1.1 # Ought to be rowFit.
 # hotbar.y=-0.45 + (hotbar.scale_y*0.5)
 # Appearance.
 hotbar.color=color.dark_gray
-hotbar.render_queue=0
+hotbar.render_queue=2
 
 # Inventory main panel.
 iPan = Entity()
@@ -27,11 +30,12 @@ iPan.parent=camera.ui
 iPan.model=load_model('quad',use_deepcopy=True)
 # Set the size and position.
 iPan.rows=3
-iPan.scale_y=hotbar.scale_y * iPan.rows
-iPan.scale_x=hotbar.scale_x
+# iPan.scale_y=hotbar.scale_y * iPan.rows
+# iPan.scale_x=hotbar.scale_x
+iPan.scale*=ui_scalar
 iPan.basePosY=hotbar.y+(hotbar.scale_y*0.5)+(iPan.scale_y*0.5)
 iPan.gap=hotbar.scale_y
-iPan.y=iPan.basePosY+iPan.gap
+# iPan.y=iPan.basePosY+iPan.gap
 # Appearance.
 iPan.color=color.light_gray
 iPan.render_queue=0
@@ -43,21 +47,22 @@ class Hotspot(Entity):
     # How many hotspots to fit across hotbar?
     rowFit=9
     def __init__(this):
-        super().__init__()
-        this.parent=camera.ui
+        super().__init__(
+        parent=camera.ui,
+        model=None,
+        scale_y=Hotspot.scalar,
+        scale_x=Hotspot.scalar*aspect_ratio,
+        color=color.white,
+        render_queue=-1
+        )
         this.model=load_model('quad',use_deepcopy=True)
-        # this.parent=camera.ui_camera
-        this.scale_y=Hotspot.scalar
-        this.scale_x=this.scale_y
-        this.color=color.white
         this.texture='white_box'
-        this.render_queue=1
-
         this.onHotbar=False
         this.visible=False
         this.occupied=False
         # What item are we hosting?
         this.item=None
+        
     
     @staticmethod
     def toggle():
@@ -111,12 +116,27 @@ class Item(Draggable):
         this.set_texture()
         this.set_colour()
         
-
+        Item.text_pickup(this.blockType)
         # ***
-        this.stack_text = Text()
-        # this.stack_text.parent=this
-        this.stack_text.text="<white><scale:0.1>"+str(this.blockType)
+        # if this.stack_text is not None:
+        #     destroy(this.stack_text)
+        # this.stack_text = Text()
+        # # this.stack_text.parent=this
+        # this.stack_text.text="<white><scale:0.1>"+str(this.blockType)
     
+    # ***
+    stack_text=None
+    @staticmethod
+    def text_pickup(_blockType):
+        try:
+            destroy(Item.stack_text)
+        except:
+            pass
+        Item.stack_text = Text()
+        # this.stack_text.parent=this
+        Item.stack_text.text="<white><scale:0.1>"+str(_blockType)
+        destroy(Item.stack_text,5)
+
     # ***
     @staticmethod
     def gen_item_pickup(_blockType):
@@ -197,10 +217,11 @@ for i in range(Hotspot.rowFit):
     bud.visible=True
     bud.y=hotbar.y
     padding=(hotbar.scale_x-Hotspot.scalar*Hotspot.rowFit)*0.5
+    # *** *0.6 at end...?
     bud.x=  (   hotbar.x-hotbar.scale_x*0.5 +
                 Hotspot.scalar*0.5 + 
                 padding +
-                i*Hotspot.scalar
+                i*Hotspot.scalar*0.6
             )
     hotspots.append(bud)
 
@@ -225,14 +246,14 @@ for i in range(Hotspot.rowFit):
                 )
         hotspots.append(bud)
 # Main inventory panel items. 
-# for i in range(8):
-#     bud=Item(None)
-#     bud.onHotbar=False
-#     bud.visible=False
-#     bud.x=ra.random()-0.5
-#     bud.y=ra.random()-0.5
-#     bud.fixPos()
-#     items.append(bud)
+for i in range(8):
+    bud=Item(None)
+    bud.onHotbar=False
+    bud.visible=False
+    bud.x=ra.random()-0.5
+    bud.y=ra.random()-0.5
+    bud.fixPos()
+    items.append(bud)
 
 # ***
 # To hide items that are not on hotbar
