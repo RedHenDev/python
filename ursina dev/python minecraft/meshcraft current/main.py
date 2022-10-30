@@ -43,6 +43,22 @@ v) text on screen (including for stacks of identical items)
 vi) Empty handed behaviour
 vii) Pick-axe model
 viii) Vincent the giant chicken
+
+Tut 19 adventure plans!
+0) eye-level correction - DONE
+0.1) more efficient highlight call - DONE
+0.2) empty-subject hands, then no build - DONE
+i) colour bug for e.g. ruby collectible - DONE - UNDONE?!
+ii) picking up behaviour  - DONE
+iii) sounds for picking up item
+iv) text for stacking info on inventory
+iv+) stacking behaviour on inventory
+v) disable collectibles if far from subject
+vi) destroy collectibles if lifespan expires
+
+PREP tut 20
+i) BUG pick-ups not populating hotbar visibly etc.
+ii) BUG pick-ups can fill up and overflow? panel
 """
 
 window.color = color.rgb(0,200,225)
@@ -51,8 +67,6 @@ window.color = color.rgb(0,200,225)
 # indra.color = window.color
 subject = FirstPersonController()
 subject.gravity = 0.0
-# ***
-# subject.cursor.scale*=0.05
 subject.cursor.visible=True
 subject.cursor.color=color.white
 # closer to Minecraft height of subject?
@@ -63,7 +77,7 @@ subject.runSpeed=12
 subject.walkSpeed=4
 subject.blockType=None
 camera.dash=10 # Rate at which fov changes when running.
-# ***
+# *** - set in inventory.
 # window.fullscreen=True
 camera.fov=70 # 63 is 'correct' Minecraft? 70 default.
 # camera.clip_plane_far=900

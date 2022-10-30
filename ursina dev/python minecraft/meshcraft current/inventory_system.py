@@ -14,12 +14,11 @@ hotbar.model=load_model('quad',use_deepcopy=True)
 # Set the size and position.
 print(hotbar.position)
 # ***
-window.fullscreen=True
+window.fullscreen=False
 if window.fullscreen==False:
     camera.ui.scale_x*=0.05*1/window.aspect_ratio
     camera.ui.scale_y*=0.05
 # ui_scalar + use of 1/aspect_ratio.
-aspect_ratio=1/1.6
 hot_cols=9
 hot_wid=1/16 # Width of hotspot is 1 tenth of window height.
 hb_wid=hot_wid*hot_cols # Hotbar width no. of cols times this.
@@ -31,7 +30,7 @@ hotbar.y=(-0.45 + (hotbar.scale_y*0.5))
 # hotbar.y=-0.45 + (hotbar.scale_y*0.5)
 # Appearance.
 hotbar.color=color.dark_gray
-hotbar.render_queue=2
+hotbar.render_queue=0
 
 # Inventory main panel.
 iPan = Entity()
@@ -98,17 +97,17 @@ class Hotspot(Entity):
 class Item(Draggable):
 
     def __init__(this,_blockType):
-        super().__init__()
-        this.parent=camera.ui
+        super().__init__(
+        parent=camera.ui
+        )
         this.model=load_model('quad',use_deepcopy=True)
-        # ***
-        # this.scale_x=Hotspot.scalar*0.9*0.08
-        this.scale_x=Hotspot.scalar
+        # *** 0.8 to fit in white lines.
+        this.scale_x=Hotspot.scalar*0.8
         this.scale_y=this.scale_x
         this.color=color.white
         this.texture='texture_atlas_3.png'
         this.texture_scale*=64/this.texture.width
-        this.render_queue=4
+        this.render_queue=2
 
         # ***
         if _blockType is not None:
@@ -124,7 +123,7 @@ class Item(Draggable):
         this.set_texture()
         this.set_colour()
         
-        Item.text_pickup(this.blockType)
+        # Item.text_pickup(this.blockType)
         # ***
         # if this.stack_text is not None:
         #     destroy(this.stack_text)
@@ -154,6 +153,8 @@ class Item(Draggable):
         e.visible=False
         e.fixPos()
         items.append(e)
+        # *** text on screen
+        # Item.text_pickup(_blockType)
         print("new item added: " + str(items[-1].blockType))
 
     def set_texture(this):
@@ -209,14 +210,53 @@ class Item(Draggable):
             if this.currentSpot:
                 this.currentSpot.occupied=False
                 this.currentSpot.item=None
+                # ***
+                try:
+                    destroy(this.currentSpot.t)
+                except:
+                    pass
+                try: destroy(this.currentSpot.tt)
+                except: pass
             # Finally, update current host spot.
             this.currentSpot=closestHotty
+            # ***
+            try: destroy(this.currentSpot.tt)
+            except: pass
         elif this.currentSpot:
             # No hotspot available? Just move back.
             this.position=this.currentSpot.position
 
     def drop(this):
+        if toggledOFF:
+            return
+        print('drop fired!')
         this.fixPos()
+        # ***
+        # Can we display stack value here?
+        # First, we'll just try to display blockType.
+        this.currentSpot.t=Text(parent=camera.ui_camera,
+                                scale=2)
+        this.currentSpot.t.origin=(0,0)
+        this.currentSpot.t.bg=Entity(   model='quad',
+                                        color=color.white,
+                                        scale=0.1)
+        this.currentSpot.t.bg.parent=camera.ui
+        this.currentSpot.t.bg.render_queue=3
+        this.currentSpot.t.render_queue=3
+        this.currentSpot.t.text=("<black><bold>"+
+                                str(this.blockType))
+        this.currentSpot.t.position=this.currentSpot.position
+        destroy(this.currentSpot.t,5)
+        destroy(this.currentSpot.t.bg,5)
+        # * tooltip version
+        # try: destroy(this.currentSpot.tt)
+        # except: pass
+        # this.currentSpot.tt=Tooltip("<black><bold>"
+        # +str(this.blockType)+': '+str(3),scale=1)
+        # this.currentSpot.tt.background.color=color.white
+        # this.currentSpot.tt.enabled=True
+        # destroy(this.currentSpot.tt,5)
+        
 
 # Hotspots for the hotbar.
 for i in range(Hotspot.rowFit):
@@ -225,7 +265,7 @@ for i in range(Hotspot.rowFit):
     bud.visible=True
     bud.y=hotbar.y
     padding=(hotbar.scale_x-Hotspot.scalar*Hotspot.rowFit)*0.5
-    # *** *1.8 and aspect_ratio*0.9 at end...?
+    # *** *1.1 and 1.2 in order to space out...
     bud.x=  (   hotbar.x-hotbar.scale_x*0.5*1.1 +
                 Hotspot.scalar*0.5 *1.2+ 
                 padding +
@@ -233,7 +273,7 @@ for i in range(Hotspot.rowFit):
             )
     hotspots.append(bud)
     # ***
-    bud.render_queue=3
+    bud.render_queue=1
 
 # Hotspots for the main inventory panel.
 for i in range(Hotspot.rowFit):
@@ -242,7 +282,7 @@ for i in range(Hotspot.rowFit):
         bud.onHotbar=False
         bud.visible=False
         # Position.
-        # *** *aspect_ratio*0.8
+        # *** 
         padding_x=(iPan.scale_x-Hotspot.scalar*Hotspot.rowFit)*0.5
         padding_y=(iPan.scale_y-Hotspot.scalar*iPan.rows)*0.5
         bud.y=  (   iPan.y+iPan.scale_y*0.5 -
@@ -250,7 +290,7 @@ for i in range(Hotspot.rowFit):
                     padding_y -
                     Hotspot.scalar * j
                 )
-        # *** aspect_ratio
+        # *** 
         bud.x=  (   iPan.x-iPan.scale_x*0.5 +
                     Hotspot.scalar*0.5 +
                     padding_x +
@@ -258,7 +298,7 @@ for i in range(Hotspot.rowFit):
                 )
         hotspots.append(bud)
         # ***
-        bud.render_queue=3
+        bud.render_queue=1
 # Main inventory panel items. 
 # for i in range(8):
 #     bud=Item(None)
@@ -286,8 +326,10 @@ Hotspot.toggle()
 
 # Text.default_resolution = 1080 * Text.size
 # test = Text(text=descr, wordwrap=44)
-
+# *** - to stop drop behaviour if in play mode.
+toggledOFF=True
 def inv_input(key,subject,mouse):
+    global toggledOFF
     try:
         wnum = int(key)
         if wnum > 0 and wnum < 10:
@@ -312,8 +354,10 @@ def inv_input(key,subject,mouse):
         Hotspot.toggle()
         subject.disable()
         mouse.locked=False
+        toggledOFF=False
     elif key=='e' and not subject.enabled:
         # Gameplay mode.
         Hotspot.toggle()
         subject.enable()
         mouse.locked=True
+        toggledOFF=True
