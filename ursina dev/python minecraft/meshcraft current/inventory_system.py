@@ -7,20 +7,27 @@ import numpy as np
 hotspots=[]
 items=[]
 
-
-
 # Inventory hotbar.
 hotbar = Entity(model=None)
 hotbar.parent=camera.ui
 hotbar.model=load_model('quad',use_deepcopy=True)
 # Set the size and position.
 print(hotbar.position)
-ui_scalar=0.05
+# ***
+window.fullscreen=True
+if window.fullscreen==True:
+    ui_scalar=1
+else:
+    camera.ui.scale_x*=0.05*1/window.aspect_ratio
+    camera.ui.scale_y*=0.05
+# ui_scalar + use of 1/aspect_ratio.
 aspect_ratio=1/1.6
 hot_cols=9
-hotbar.scale=Vec3((1/10)*hot_cols*aspect_ratio,1/10,0)*ui_scalar
-ui_cols=hotbar.scale[0]/9
-hotbar.y=(-0.45 + (hotbar.scale_y*0.5))*ui_scalar
+hot_wid=1/16 # Width of hotspot is 1 tenth of window height.
+hb_wid=hot_wid*hot_cols # Hotbar width no. of cols times this.
+hotbar.scale=Vec3(hb_wid,hot_wid,0)
+# ui_cols=hotbar.scale[0]/9
+hotbar.y=(-0.45 + (hotbar.scale_y*0.5))
 # *** - corrects for fullScreen panel overflow.
 # hotbar.scale_x=hotbar.scale_y*9*1.1 # Ought to be rowFit.
 # hotbar.y=-0.45 + (hotbar.scale_y*0.5)
@@ -45,7 +52,7 @@ iPan.render_queue=0
 iPan.visible=False
 
 class Hotspot(Entity):
-    # Fix size of hospot to height of hotbar.
+    # Fix width of hospot to height of hotbar.
     scalar=hotbar.scale_y*0.9
     # How many hotspots to fit across hotbar?
     rowFit=9
@@ -54,12 +61,12 @@ class Hotspot(Entity):
         parent=camera.ui,
         model=None,
         scale_y=Hotspot.scalar,
-        scale_x=Hotspot.scalar*aspect_ratio,
+        scale_x=Hotspot.scalar,
         color=color.white,
-        render_queue=-1
         )
         this.model=load_model('quad',use_deepcopy=True)
         this.texture='white_box'
+        this.render_queue=3
         this.onHotbar=False
         this.visible=False
         this.occupied=False
@@ -98,8 +105,8 @@ class Item(Draggable):
         this.model=load_model('quad',use_deepcopy=True)
         # ***
         # this.scale_x=Hotspot.scalar*0.9*0.08
-        this.scale_x=Hotspot.scalar*aspect_ratio*0.8
-        this.scale_y=this.scale_x*camera.aspect_ratio
+        this.scale_x=Hotspot.scalar
+        this.scale_y=this.scale_x
         this.color=color.white
         this.texture='texture_atlas_3.png'
         this.texture_scale*=64/this.texture.width
@@ -137,7 +144,7 @@ class Item(Draggable):
             pass
         Item.stack_text = Text()
         # this.stack_text.parent=this
-        Item.stack_text.text="<white><scale:0.1>"+str(_blockType)
+        Item.stack_text.text="<white><scale:1>"+str(_blockType)
         destroy(Item.stack_text,5)
 
     # ***
@@ -221,10 +228,10 @@ for i in range(Hotspot.rowFit):
     bud.y=hotbar.y
     padding=(hotbar.scale_x-Hotspot.scalar*Hotspot.rowFit)*0.5
     # *** *1.8 and aspect_ratio*0.9 at end...?
-    bud.x=  (   hotbar.x-hotbar.scale_x*0.5*aspect_ratio +
-                Hotspot.scalar*0.5*1.15 + 
+    bud.x=  (   hotbar.x-hotbar.scale_x*0.5*1.1 +
+                Hotspot.scalar*0.5 *1.2+ 
                 padding +
-                i*Hotspot.scalar*aspect_ratio*1.1
+                i*Hotspot.scalar*1.1
             )
     hotspots.append(bud)
     # ***
@@ -238,7 +245,7 @@ for i in range(Hotspot.rowFit):
         bud.visible=False
         # Position.
         # *** *aspect_ratio*0.8
-        padding_x=(iPan.scale_x-Hotspot.scalar*Hotspot.rowFit*aspect_ratio*0.8)*0.5
+        padding_x=(iPan.scale_x-Hotspot.scalar*Hotspot.rowFit)*0.5
         padding_y=(iPan.scale_y-Hotspot.scalar*iPan.rows)*0.5
         bud.y=  (   iPan.y+iPan.scale_y*0.5 -
                     Hotspot.scalar*0.5 -
@@ -249,7 +256,7 @@ for i in range(Hotspot.rowFit):
         bud.x=  (   iPan.x-iPan.scale_x*0.5 +
                     Hotspot.scalar*0.5 +
                     padding_x +
-                    i*Hotspot.scalar**aspect_ratio
+                    i*Hotspot.scalar
                 )
         hotspots.append(bud)
         # ***
