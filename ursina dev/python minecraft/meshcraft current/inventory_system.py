@@ -15,9 +15,7 @@ hotbar.model=load_model('quad',use_deepcopy=True)
 print(hotbar.position)
 # ***
 window.fullscreen=True
-if window.fullscreen==True:
-    ui_scalar=1
-else:
+if window.fullscreen==False:
     camera.ui.scale_x*=0.05*1/window.aspect_ratio
     camera.ui.scale_y*=0.05
 # ui_scalar + use of 1/aspect_ratio.
