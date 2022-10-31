@@ -14,20 +14,18 @@ hotbar.model=load_model('quad',use_deepcopy=True)
 # Set the size and position.
 print(hotbar.position)
 # ***
-window.fullscreen=False
-if window.fullscreen==False:
+import sys
+window.fullscreen=True
+if window.fullscreen==False and sys.platform.lower()=='darwin':
     camera.ui.scale_x*=0.05*1/window.aspect_ratio
     camera.ui.scale_y*=0.05
 # ui_scalar + use of 1/aspect_ratio.
 hot_cols=9
-hot_wid=1/16 # Width of hotspot is 1 tenth of window height.
+hot_wid=1/16 # Width of hotspot is 1/16 of window height.
 hb_wid=hot_wid*hot_cols # Hotbar width no. of cols times this.
 hotbar.scale=Vec3(hb_wid,hot_wid,0)
-# ui_cols=hotbar.scale[0]/9
 hotbar.y=(-0.45 + (hotbar.scale_y*0.5))
-# *** - corrects for fullScreen panel overflow.
-# hotbar.scale_x=hotbar.scale_y*9*1.1 # Ought to be rowFit.
-# hotbar.y=-0.45 + (hotbar.scale_y*0.5)
+
 # Appearance.
 hotbar.color=color.dark_gray
 hotbar.render_queue=0
@@ -40,9 +38,7 @@ iPan.model=load_model('quad',use_deepcopy=True)
 iPan.rows=3
 iPan.scale_y=hotbar.scale_y * iPan.rows
 iPan.scale_x=hotbar.scale_x
-# iPan.basePosY=hotbar.y+(hotbar.scale_y*0.5)+(iPan.scale_y*0.5)
-# iPan.gap=hotbar.scale_y
-# iPan.y=iPan.basePosY+iPan.gap
+
 # Appearance.
 iPan.color=color.light_gray
 iPan.render_queue=0
@@ -63,7 +59,7 @@ class Hotspot(Entity):
         )
         this.model=load_model('quad',use_deepcopy=True)
         this.texture='white_box'
-        this.render_queue=3
+        this.render_queue=1
         this.onHotbar=False
         this.visible=False
         this.occupied=False
@@ -227,27 +223,33 @@ class Item(Draggable):
             this.position=this.currentSpot.position
 
     def drop(this):
+        # ***
         if toggledOFF:
             return
-        print('drop fired!')
         this.fixPos()
         # ***
         # Can we display stack value here?
         # First, we'll just try to display blockType.
-        this.currentSpot.t=Text(parent=camera.ui_camera,
+        # this.currentSpot.bg=Entity(   model='quad',
+        #                                 color=color.white)
+        
+        # this.currentSpot.bg.parent=camera.ui
+        # this.currentSpot.bg.render_queue=2
+        this.currentSpot.t=Text(parent=camera.ui,
                                 scale=2)
         this.currentSpot.t.origin=(0,0)
-        this.currentSpot.t.bg=Entity(   model='quad',
-                                        color=color.white,
-                                        scale=0.1)
-        this.currentSpot.t.bg.parent=camera.ui
-        this.currentSpot.t.bg.render_queue=3
-        this.currentSpot.t.render_queue=3
         this.currentSpot.t.text=("<black><bold>"+
                                 str(this.blockType))
         this.currentSpot.t.position=this.currentSpot.position
+        this.currentSpot.t.always_on_top=True
+        this.currentSpot.t.render_queue=4
+        # this.currentSpot.bg.position=this.currentSpot.t.position
+        # this.currentSpot.bg.scale=this.currentSpot.t.scale
+        # this.currentSpot.bg.scale_x*=0.05+0.02
+        # this.currentSpot.bg.scale_y*=0.05*1/window.aspect_ratio
+        
         destroy(this.currentSpot.t,5)
-        destroy(this.currentSpot.t.bg,5)
+        # destroy(this.currentSpot.bg,5)
         # * tooltip version
         # try: destroy(this.currentSpot.tt)
         # except: pass
@@ -300,14 +302,14 @@ for i in range(Hotspot.rowFit):
         # ***
         bud.render_queue=1
 # Main inventory panel items. 
-# for i in range(8):
-#     bud=Item(None)
-#     bud.onHotbar=False
-#     bud.visible=False
-#     bud.x=ra.random()-0.5
-#     bud.y=ra.random()-0.5
-#     bud.fixPos()
-#     items.append(bud)
+for i in range(8):
+    bud=Item(None)
+    bud.onHotbar=False
+    bud.visible=False
+    bud.x=ra.random()-0.5
+    bud.y=ra.random()-0.5
+    bud.fixPos()
+    items.append(bud)
 
 # ***
 # To hide items that are not on hotbar
