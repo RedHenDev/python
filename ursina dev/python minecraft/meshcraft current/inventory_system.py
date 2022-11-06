@@ -65,6 +65,9 @@ class Hotspot(Entity):
         this.occupied=False
         # What item are we hosting?
         this.item=None
+        # *** - stack amount.
+        # NB. this needs to be bound to the item(s).
+        this.stack=0
         
     
     @staticmethod
@@ -145,7 +148,7 @@ class Item(Draggable):
     def gen_item_pickup(_blockType):
         """Generates an item"""
         e=Item(_blockType)
-        e.onHotbar=True
+        e.onHotbar=False
         e.visible=False
         e.fixPos()
         items.append(e)
