@@ -15,7 +15,7 @@ hotbar.model=load_model('quad',use_deepcopy=True)
 print(hotbar.position)
 # ***
 import sys
-window.fullscreen=True
+window.fullscreen=False
 if window.fullscreen==False and sys.platform.lower()=='darwin':
     camera.ui.scale_x*=0.05*1/window.aspect_ratio
     camera.ui.scale_y*=0.05
@@ -185,7 +185,7 @@ class Item(Draggable):
         closestHotty=None
         for h in hotspots:
             if h.occupied: continue
-            # Found a unoccupied hotspot :)
+            # Found an unoccupied hotspot :)
             # How close is it?
             dist=h.position-this.position
             # Find the magnitude - i.e. distance.
@@ -235,14 +235,13 @@ class Item(Draggable):
         
         # this.currentSpot.bg.parent=camera.ui
         # this.currentSpot.bg.render_queue=2
-        this.currentSpot.t=Text(parent=camera.ui,
-                                scale=2)
+        this.currentSpot.t=Text(scale=2,z=-999)
         this.currentSpot.t.origin=(0,0)
         this.currentSpot.t.text=("<black><bold>"+
                                 str(this.blockType))
         this.currentSpot.t.position=this.currentSpot.position
         this.currentSpot.t.always_on_top=True
-        this.currentSpot.t.render_queue=4
+        # this.currentSpot.t.render_queue=4
         # this.currentSpot.bg.position=this.currentSpot.t.position
         # this.currentSpot.bg.scale=this.currentSpot.t.scale
         # this.currentSpot.bg.scale_x*=0.05+0.02
