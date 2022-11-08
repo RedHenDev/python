@@ -234,7 +234,8 @@ class Item(Draggable):
         closest=-1
         closestHotty=None
         for h in hotspots:
-            if h.occupied: continue
+            # ***
+            if h.occupied and h is not this.currentSpot: continue
             # Found an unoccupied hotspot :)
             # How close is it?
             dist=h.position-this.position
@@ -249,6 +250,8 @@ class Item(Draggable):
         if closestHotty is not None:
             # We've found an available closest :)
             this.position=closestHotty.position
+            # ***
+            this.onHotbar=closestHotty.onHotbar
             # Update new host's information about item.
             closestHotty.occupied=True
             closestHotty.item=this
@@ -259,7 +262,8 @@ class Item(Draggable):
                 this.currentSpot.occupied=False
                 this.currentSpot.item=None
                 # ***
-                this.currentSpot.stack=0
+                if closestHotty!=this.currentSpot:
+                    this.currentSpot.stack=0
                 # ***
                 try:
                     destroy(this.currentSpot.t)
