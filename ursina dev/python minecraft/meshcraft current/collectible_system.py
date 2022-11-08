@@ -5,7 +5,7 @@ dropping collectable materials.
 
 # Collectible dictionary. Similar to td{}.
 # It will store terrain position of a collectible :)
-from ursina import Entity, Vec2, Vec4, load_model, Audio
+from ursina import Entity, Vec2, Vec4, load_model, Audio, time
 from config import minerals
 from math import sin, floor
 from random import random

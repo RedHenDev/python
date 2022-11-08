@@ -15,7 +15,7 @@ hotbar.model=load_model('quad',use_deepcopy=True)
 print(hotbar.position)
 # ***
 import sys
-window.fullscreen=False
+window.fullscreen=True
 if window.fullscreen==False and sys.platform.lower()=='darwin':
     camera.ui.scale_x*=0.05*1/window.aspect_ratio
     camera.ui.scale_y*=0.05
@@ -68,8 +68,24 @@ class Hotspot(Entity):
         # *** - stack amount.
         # NB. this needs to be bound to the item(s).
         this.stack=0
-        
-    
+
+    @staticmethod
+    def matchPos(_blockType,_onHotbar=False):
+        """
+        Find matching stack among populated hotspots.
+        """
+        # First, iterate over non-hotbar hotspots.
+        # Next, I have to add in check whether
+        # we found a matching stack, else,
+        # find empty spot.
+        for h in hotspots:
+            if not h.occupied: continue
+            if h.onHotbar != _onHotbar: continue
+            if h.item.blockType==_blockType:
+                h.stack+=1
+                return True
+        return False
+
     @staticmethod
     def toggle():
         if iPan.visible:
@@ -147,14 +163,45 @@ class Item(Draggable):
     @staticmethod
     def gen_item_pickup(_blockType):
         """Generates an item"""
-        e=Item(_blockType)
-        e.onHotbar=False
-        e.visible=False
-        e.fixPos()
-        items.append(e)
+        print("new item added: " + _blockType)
+        # Find hotbar stack to join?
+        if not Hotspot.matchPos(_blockType,True):
+        # P.s. fixPos() ought to have a match-stack feature.
+            # Nope. So start new stack on hotbar...
+            foundSpot=False
+            for h in hotspots:
+                if h.onHotbar and not h.occupied:
+                    e=Item(_blockType)
+                    items.append(e)
+                    e.onHotbar=True
+                    e.visible=True
+                    h.occupied=True
+                    h.item=e
+                    e.currentSpot=h
+                    e.position=h.position
+                    h.stack=1
+                    print("New hot stack!")
+                    foundSpot=True
+                    break
+            if not foundSpot:
+                if not Hotspot.matchPos(_blockType,False):
+                    for h in hotspots:
+                        if not h.onHotbar and not h.occupied:
+                            e=Item(_blockType)
+                            items.append(e)
+                            h.occupied=True
+                            h.item=e
+                            e.currentSpot=h
+                            e.position=h.position
+                            h.stack=1
+                            print("New panel stack!")
+                            break
+
+        
         # *** text on screen
         # Item.text_pickup(_blockType)
-        print("new item added: " + str(items[-1].blockType))
+        
+
 
     def set_texture(this):
         # Use dictionary to access uv co-ords.
@@ -173,7 +220,7 @@ class Item(Draggable):
         if len(minerals[this.blockType]) > 2:
             # Yes! Set color :)
             this.color=minerals[this.blockType][2]
-    
+
     def fixPos(this):
         # Look through all the hotspots.
         # Find the unoccupied hotspot that is closest.
@@ -205,22 +252,21 @@ class Item(Draggable):
             # Update new host's information about item.
             closestHotty.occupied=True
             closestHotty.item=this
+            # ***
+            closestHotty.stack=this.currentSpot.stack
             # Update previous host-spot's status.
             if this.currentSpot:
                 this.currentSpot.occupied=False
                 this.currentSpot.item=None
                 # ***
+                this.currentSpot.stack=0
+                # ***
                 try:
                     destroy(this.currentSpot.t)
                 except:
                     pass
-                try: destroy(this.currentSpot.tt)
-                except: pass
             # Finally, update current host spot.
             this.currentSpot=closestHotty
-            # ***
-            try: destroy(this.currentSpot.tt)
-            except: pass
         elif this.currentSpot:
             # No hotspot available? Just move back.
             this.position=this.currentSpot.position
@@ -238,10 +284,11 @@ class Item(Draggable):
         
         # this.currentSpot.bg.parent=camera.ui
         # this.currentSpot.bg.render_queue=2
-        this.currentSpot.t=Text(scale=2,z=-999)
+        this.currentSpot.t=Text(scale=2,z=9)
         this.currentSpot.t.origin=(0,0)
         this.currentSpot.t.text=("<black><bold>"+
-                                str(this.blockType))
+                                str(this.blockType)+' '+
+                                str(this.currentSpot.stack))
         this.currentSpot.t.position=this.currentSpot.position
         this.currentSpot.t.always_on_top=True
         # this.currentSpot.t.render_queue=4
@@ -304,14 +351,14 @@ for i in range(Hotspot.rowFit):
         # ***
         bud.render_queue=1
 # Main inventory panel items. 
-for i in range(8):
-    bud=Item(None)
-    bud.onHotbar=False
-    bud.visible=False
-    bud.x=ra.random()-0.5
-    bud.y=ra.random()-0.5
-    bud.fixPos()
-    items.append(bud)
+# for i in range(8):
+#     bud=Item(None)
+#     bud.onHotbar=False
+#     bud.visible=False
+#     bud.x=ra.random()-0.5
+#     bud.y=ra.random()-0.5
+#     bud.fixPos()
+#     items.append(bud)
 
 # ***
 # To hide items that are not on hotbar
