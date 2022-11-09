@@ -28,7 +28,6 @@ hotbar.y=(-0.45 + (hotbar.scale_y*0.5))
 
 # Appearance.
 hotbar.color=color.dark_gray
-# hotbar.render_queue=0
 
 # Inventory main panel.
 iPan = Entity()
@@ -50,16 +49,17 @@ class Hotspot(Entity):
     # How many hotspots to fit across hotbar?
     rowFit=9
     def __init__(this):
+        # ***
         super().__init__(
         parent=camera.ui,
         model=None,
         scale_y=Hotspot.scalar,
         scale_x=Hotspot.scalar,
         color=color.white,
+        z=-1
         )
         this.model=load_model('quad',use_deepcopy=True)
         this.texture='white_box'
-        # this.render_queue=1
         this.onHotbar=False
         this.visible=False
         this.occupied=False
@@ -112,7 +112,8 @@ class Item(Draggable):
 
     def __init__(this,_blockType):
         super().__init__(
-        parent=camera.ui
+        parent=camera.ui,
+        z=-2
         )
         this.model=load_model('quad',use_deepcopy=True)
         # *** 0.8 to fit in white lines.
@@ -135,33 +136,11 @@ class Item(Draggable):
 
         this.set_texture()
         this.set_colour()
-        
-        # Item.text_pickup(this.blockType)
-        # ***
-        # if this.stack_text is not None:
-        #     destroy(this.stack_text)
-        # this.stack_text = Text()
-        # # this.stack_text.parent=this
-        # this.stack_text.text="<white><scale:0.1>"+str(this.blockType)
-    
-    # ***
-    # stack_text=None
-    # @staticmethod
-    # def text_pickup(_blockType):
-    #     try:
-    #         destroy(Item.stack_text)
-    #     except:
-    #         pass
-    #     Item.stack_text = Text()
-    #     # this.stack_text.parent=this
-    #     Item.stack_text.text="<white><scale:1>"+str(_blockType)
-    #     destroy(Item.stack_text,5)
 
     # ***
     @staticmethod
     def gen_item_pickup(_blockType):
         """Generates an item"""
-        print("new item added: " + _blockType)
         # Find hotbar stack to join?
         if not Hotspot.matchPos(_blockType,True):
         # P.s. fixPos() ought to have a match-stack feature.
@@ -171,7 +150,6 @@ class Item(Draggable):
                 if h.onHotbar and not h.occupied:
                     e=Item(_blockType)
                     items.append(e)
-                    # e.render_queue=2
                     e.onHotbar=True
                     e.visible=True
                     h.occupied=True
@@ -179,7 +157,6 @@ class Item(Draggable):
                     e.currentSpot=h
                     e.position=h.position
                     h.stack=1
-                    print("New hot stack!")
                     foundSpot=True
                     break
             if not foundSpot:
@@ -188,20 +165,12 @@ class Item(Draggable):
                         if not h.onHotbar and not h.occupied:
                             e=Item(_blockType)
                             items.append(e)
-                            # e.render_queue=2
                             h.occupied=True
                             h.item=e
                             e.currentSpot=h
                             e.position=h.position
                             h.stack=1
-                            print("New panel stack!")
                             break
-
-        
-        # *** text on screen
-        # Item.text_pickup(_blockType)
-        
-
 
     def set_texture(this):
         # Use dictionary to access uv co-ords.
@@ -283,35 +252,17 @@ class Item(Draggable):
         # ***
         # Can we display stack value here?
         # First, we'll just try to display blockType.
-        # this.currentSpot.bg=Entity(   model='quad',
-        #                                 color=color.white)
-        
-        # this.currentSpot.bg.parent=camera.ui
-        # this.currentSpot.bg.render_queue=2
-        t=Text(scale=2,z=-3)
-        t.origin=(0,0)
-        t.text=("<black><bold>"+
-                                str(this.blockType)+' '+
+        this.currentSpot.t=Text(scale=1.2,z=-3)
+        this.currentSpot.t.origin=(0,0)
+        this.currentSpot.t.text=("<white><bold>"+
                                 str(this.currentSpot.stack))
-        t.x=this.currentSpot.x
-        t.y=this.currentSpot.y
-        # t.always_on_top=True
-        # this.currentSpot.bg.position=this.currentSpot.t.position
-        # this.currentSpot.bg.scale=this.currentSpot.t.scale
-        # this.currentSpot.bg.scale_x*=0.05+0.02
-        # this.currentSpot.bg.scale_y*=0.05*1/window.aspect_ratio
-        destroy(t,5)
-        # destroy(this.currentSpot.bg,5)
-        # * tooltip version
-        # try: destroy(this.currentSpot.tt)
-        # except: pass
-        # this.currentSpot.tt=Tooltip("<black><bold>"
-        # +str(this.blockType)+': '+str(3),scale=1)
-        # this.currentSpot.tt.background.color=color.white
-        # this.currentSpot.tt.enabled=True
-        # destroy(this.currentSpot.tt,5)
+        this.currentSpot.t.x=this.currentSpot.x
+        this.currentSpot.t.y=this.currentSpot.y
+        # this.currentSpot.t.background=True
+        # this.currentSpot.t.background.scale*=0.6
+        # this.currentSpot.t.background.color=color.rgb(0,0,0)
+        destroy(this.currentSpot.t,2.1)
         
-
 # Hotspots for the hotbar.
 for i in range(Hotspot.rowFit):
     bud=Hotspot()
@@ -326,9 +277,6 @@ for i in range(Hotspot.rowFit):
                 i*Hotspot.scalar*1.1
             )
     hotspots.append(bud)
-    # ***
-    # bud.render_queue=1
-    bud.z=-1
 
 # Hotspots for the main inventory panel.
 for i in range(Hotspot.rowFit):
@@ -352,9 +300,7 @@ for i in range(Hotspot.rowFit):
                     i*Hotspot.scalar
                 )
         hotspots.append(bud)
-        # ***
-        bud.z=-1
-        # bud.render_queue=1
+
 # Main inventory panel items. 
 # for i in range(8):
 #     bud=Item(None)
@@ -372,17 +318,6 @@ Hotspot.toggle()
 Hotspot.toggle()
 
 # ***
-# Text experiments.
-# descr = dedent('''
-#     Rainstorm
-#     <\n>
-#     <black>
-#     <scale:2>
-# Boop 64''').strip()
-
-# Text.default_resolution = 1080 * Text.size
-# test = Text(text=descr, wordwrap=44)
-# *** - to stop drop behaviour if in play mode.
 toggledOFF=True
 def inv_input(key,subject,mouse):
     global toggledOFF
