@@ -28,7 +28,7 @@ hotbar.y=(-0.45 + (hotbar.scale_y*0.5))
 
 # Appearance.
 hotbar.color=color.dark_gray
-hotbar.render_queue=0
+# hotbar.render_queue=0
 
 # Inventory main panel.
 iPan = Entity()
@@ -41,7 +41,7 @@ iPan.scale_x=hotbar.scale_x
 
 # Appearance.
 iPan.color=color.light_gray
-iPan.render_queue=0
+# iPan.render_queue=0
 iPan.visible=False
 
 class Hotspot(Entity):
@@ -66,7 +66,6 @@ class Hotspot(Entity):
         # What item are we hosting?
         this.item=None
         # *** - stack amount.
-        # NB. this needs to be bound to the item(s).
         this.stack=0
 
     @staticmethod
@@ -122,7 +121,6 @@ class Item(Draggable):
         this.color=color.white
         this.texture='texture_atlas_3.png'
         this.texture_scale*=64/this.texture.width
-        # this.render_queue=0
 
         # ***
         if _blockType is not None:
@@ -147,17 +145,17 @@ class Item(Draggable):
         # this.stack_text.text="<white><scale:0.1>"+str(this.blockType)
     
     # ***
-    stack_text=None
-    @staticmethod
-    def text_pickup(_blockType):
-        try:
-            destroy(Item.stack_text)
-        except:
-            pass
-        Item.stack_text = Text()
-        # this.stack_text.parent=this
-        Item.stack_text.text="<white><scale:1>"+str(_blockType)
-        destroy(Item.stack_text,5)
+    # stack_text=None
+    # @staticmethod
+    # def text_pickup(_blockType):
+    #     try:
+    #         destroy(Item.stack_text)
+    #     except:
+    #         pass
+    #     Item.stack_text = Text()
+    #     # this.stack_text.parent=this
+    #     Item.stack_text.text="<white><scale:1>"+str(_blockType)
+    #     destroy(Item.stack_text,5)
 
     # ***
     @staticmethod
@@ -173,7 +171,7 @@ class Item(Draggable):
                 if h.onHotbar and not h.occupied:
                     e=Item(_blockType)
                     items.append(e)
-                    e.render_queue=2
+                    # e.render_queue=2
                     e.onHotbar=True
                     e.visible=True
                     h.occupied=True
@@ -190,7 +188,7 @@ class Item(Draggable):
                         if not h.onHotbar and not h.occupied:
                             e=Item(_blockType)
                             items.append(e)
-                            e.render_queue=2
+                            # e.render_queue=2
                             h.occupied=True
                             h.item=e
                             e.currentSpot=h
@@ -290,19 +288,18 @@ class Item(Draggable):
         
         # this.currentSpot.bg.parent=camera.ui
         # this.currentSpot.bg.render_queue=2
-        t=Text(parent=camera.ui,render_queue=3,scale=2)
+        t=Text(scale=2,z=-3)
         t.origin=(0,0)
         t.text=("<black><bold>"+
                                 str(this.blockType)+' '+
                                 str(this.currentSpot.stack))
-        t.position=this.currentSpot.position
-        # this.currentSpot.t.always_on_top=True
-        
+        t.x=this.currentSpot.x
+        t.y=this.currentSpot.y
+        # t.always_on_top=True
         # this.currentSpot.bg.position=this.currentSpot.t.position
         # this.currentSpot.bg.scale=this.currentSpot.t.scale
         # this.currentSpot.bg.scale_x*=0.05+0.02
         # this.currentSpot.bg.scale_y*=0.05*1/window.aspect_ratio
-        
         destroy(t,5)
         # destroy(this.currentSpot.bg,5)
         # * tooltip version
@@ -330,7 +327,8 @@ for i in range(Hotspot.rowFit):
             )
     hotspots.append(bud)
     # ***
-    bud.render_queue=1
+    # bud.render_queue=1
+    bud.z=-1
 
 # Hotspots for the main inventory panel.
 for i in range(Hotspot.rowFit):
@@ -355,7 +353,8 @@ for i in range(Hotspot.rowFit):
                 )
         hotspots.append(bud)
         # ***
-        bud.render_queue=1
+        bud.z=-1
+        # bud.render_queue=1
 # Main inventory panel items. 
 # for i in range(8):
 #     bud=Item(None)
