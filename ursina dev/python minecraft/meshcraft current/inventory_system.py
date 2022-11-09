@@ -59,7 +59,7 @@ class Hotspot(Entity):
         )
         this.model=load_model('quad',use_deepcopy=True)
         this.texture='white_box'
-        this.render_queue=1
+        # this.render_queue=1
         this.onHotbar=False
         this.visible=False
         this.occupied=False
@@ -122,7 +122,7 @@ class Item(Draggable):
         this.color=color.white
         this.texture='texture_atlas_3.png'
         this.texture_scale*=64/this.texture.width
-        this.render_queue=2
+        # this.render_queue=0
 
         # ***
         if _blockType is not None:
@@ -173,6 +173,7 @@ class Item(Draggable):
                 if h.onHotbar and not h.occupied:
                     e=Item(_blockType)
                     items.append(e)
+                    e.render_queue=2
                     e.onHotbar=True
                     e.visible=True
                     h.occupied=True
@@ -189,6 +190,7 @@ class Item(Draggable):
                         if not h.onHotbar and not h.occupied:
                             e=Item(_blockType)
                             items.append(e)
+                            e.render_queue=2
                             h.occupied=True
                             h.item=e
                             e.currentSpot=h
@@ -288,20 +290,20 @@ class Item(Draggable):
         
         # this.currentSpot.bg.parent=camera.ui
         # this.currentSpot.bg.render_queue=2
-        this.currentSpot.t=Text(scale=2,z=9)
-        this.currentSpot.t.origin=(0,0)
-        this.currentSpot.t.text=("<black><bold>"+
+        t=Text(parent=camera.ui,render_queue=3,scale=2)
+        t.origin=(0,0)
+        t.text=("<black><bold>"+
                                 str(this.blockType)+' '+
                                 str(this.currentSpot.stack))
-        this.currentSpot.t.position=this.currentSpot.position
-        this.currentSpot.t.always_on_top=True
-        # this.currentSpot.t.render_queue=4
+        t.position=this.currentSpot.position
+        # this.currentSpot.t.always_on_top=True
+        
         # this.currentSpot.bg.position=this.currentSpot.t.position
         # this.currentSpot.bg.scale=this.currentSpot.t.scale
         # this.currentSpot.bg.scale_x*=0.05+0.02
         # this.currentSpot.bg.scale_y*=0.05*1/window.aspect_ratio
         
-        destroy(this.currentSpot.t,5)
+        destroy(t,5)
         # destroy(this.currentSpot.bg,5)
         # * tooltip version
         # try: destroy(this.currentSpot.tt)
