@@ -76,6 +76,17 @@ subject.frog=False # For jumping...
 subject.runSpeed=12
 subject.walkSpeed=4
 subject.blockType=None
+# ***
+tool=Entity(model='Diamond-Pickaxe.obj',
+            texture='diamond_axe_tex.png',
+            parent=camera,
+            always_on_top=True)
+tool.z = 3
+tool.x=1.6
+tool.rotation_x = 90
+tool.rotation_z = 90
+tool.scale=0.1
+
 camera.dash=10 # Rate at which fov changes when running.
 # *** - set in inventory.
 # window.fullscreen=True
