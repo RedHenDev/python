@@ -85,7 +85,9 @@ tool.z = 3
 tool.x=1.6
 tool.rotation_x = 90
 tool.rotation_z = 90
-tool.scale=0.1
+tool.rotation_y=-33
+tool.y=-0.6
+tool.scale=0.07
 
 camera.dash=10 # Rate at which fov changes when running.
 # *** - set in inventory.
