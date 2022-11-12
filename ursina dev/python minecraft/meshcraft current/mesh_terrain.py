@@ -194,11 +194,11 @@ class MeshTerrain:
                                 floor(z+j)))==None:
                     this.genBlock(x+k,y,z+j,blockType='grass',layingTerrain=True)
                     # ***
-                    if TreeSystem().growTree() == 1:
-                        this.genBlock(x+k,y+1,z+j,blockType='wood',layingTerrain=False)
-                        this.genBlock(x+k,y+2,z+j,blockType='wood',layingTerrain=False)
-                        this.genBlock(x+k,y+3,z+j,blockType='emerald',layingTerrain=False)
-
+                    # """
+                    if TreeSystem.growTree(x,z) == 1:
+                        for i in range(1,randint(4,42)):
+                            this.genBlock(x+k,y+i,z+j,blockType='wood',layingTerrain=False)
+                    # """       
         this.subsets[this.currentSubset].model.generate()
         # Current subset hack ;)
         if this.currentSubset<this.numSubsets-1:
