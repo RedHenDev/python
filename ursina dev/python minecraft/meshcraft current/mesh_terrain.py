@@ -5,6 +5,8 @@ from swirl_engine import SwirlEngine
 from mining_system import *
 from building_system import *
 from config import six_cube_dirs, minerals, mins
+# ***
+from tree_system import *
 
 class MeshTerrain:
     # *** - inventory system items passed in here?
@@ -70,17 +72,6 @@ class MeshTerrain:
                         this.subject.height,
                         this.camera,this.td)
         
-        # try:
-        #     this.mouth.text='<white>'+str(b)
-        #     this.mouth.render_queue=3
-        #     this.mouth.position.y=6
-        # except: pass
-
-        # *** text
-        # this.mouth.text='<black>'+str(bte.position)
-        # this.mouth.position=this.items[0].position
-        # this.mouth.always_on_top=True
-        
         # Blister-mining!
         if bte.visible==True and mouse.locked==True:
             if held_keys['shift'] and held_keys['left mouse']:
@@ -124,7 +115,7 @@ class MeshTerrain:
         # Extend or add to the vertices of our model.
         model = this.subsets[subset].model
 
-        # *** HEX
+        # ****** HEX
         """
         hex_z=z
         if z % 2 == 0:
@@ -181,7 +172,7 @@ class MeshTerrain:
                 this.td[key]='g'
 
         # Record subset index and first vertex of this block.
-        # *** HEX
+        # ****** HEX
         vob = (subset, len(model.vertices)-this.numVertices-1)
         this.vd[(floor(x),
                 floor(y),
@@ -202,6 +193,11 @@ class MeshTerrain:
                                 floor(y),
                                 floor(z+j)))==None:
                     this.genBlock(x+k,y,z+j,blockType='grass',layingTerrain=True)
+                    # ***
+                    if TreeSystem().growTree() == 1:
+                        this.genBlock(x+k,y+1,z+j,blockType='wood',layingTerrain=False)
+                        this.genBlock(x+k,y+2,z+j,blockType='wood',layingTerrain=False)
+                        this.genBlock(x+k,y+3,z+j,blockType='emerald',layingTerrain=False)
 
         this.subsets[this.currentSubset].model.generate()
         # Current subset hack ;)

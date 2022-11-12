@@ -93,12 +93,12 @@ camera.dash=10 # Rate at which fov changes when running.
 # *** - set in inventory.
 # window.fullscreen=True
 camera.fov=70 # 63 is 'correct' Minecraft? 70 default.
-# camera.clip_plane_far=900
+# camera.clip_plane_far=60
 # print(camera.clip_plane_far) # 10K!
 
 # *** inv items passed in here?
 terrain = MeshTerrain(subject,camera)
-#snowfall = SnowFall(subject)
+# snowfall = SnowFall(subject)
 # How do you at atmospheric fog?
 scene.fog_density=(0,75) # 75.
 # scene.fog_color=indra.color
@@ -150,7 +150,7 @@ def update():
     # ***
     if count >= 1:
         
-        count=4
+        # count=4
         # Generate terrain at current swirl position.
         # ***
         if generatingTerrain:

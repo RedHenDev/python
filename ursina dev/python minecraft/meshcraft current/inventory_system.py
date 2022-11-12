@@ -296,7 +296,7 @@ for i in range(Hotspot.rowFit):
         # *** 
         bud.x=  (   iPan.x-iPan.scale_x*0.5 +
                     Hotspot.scalar*0.5 +
-                    padding_x +
+                    padding_x *1.2 +
                     i*Hotspot.scalar
                 )
         hotspots.append(bud)

@@ -5,7 +5,7 @@ from math import sin
 
 # Build Tool Entity (aka 'bte').
 bte = Entity(model='block.obj',color=color.rgba(1,1,0,0.4))
-# *** HEX
+# ******* HEX
 # bte = Entity(model='stretch_hex.obj',color=color.rgba(1,1,0,0.4))
 bte.scale=1.1
 bte.origin_y+=0.05
