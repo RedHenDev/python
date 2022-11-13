@@ -21,7 +21,7 @@ minerals =  {   'grass' : (8,7),
                 'snow' : (8,6),
                 'ruby' : (9,6,Vec4(1,0,0,1)),
                 'emerald': (9,6,Vec4(0,0.8,0.1,0.8)),
-                'wood': (9,6,Vec4(0.8,0.8,0.2,1))
+                'wood': (9,6,Vec4(0.8,0.3,0.05,1))
             }
 # Create iterable list from dictionary keys (not values).
 mins = list(minerals.keys())

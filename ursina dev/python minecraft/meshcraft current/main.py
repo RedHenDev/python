@@ -10,6 +10,7 @@ import random as ra
 from bump_system import *
 from save_load_system import saveMap, loadMap
 from inventory_system import *
+
 """
 NB - RED workspace is private PREP.
 NB - BLUE is TUTORIAL code!
@@ -60,7 +61,6 @@ PREP tut 20
 i) BUG pick-ups not populating hotbar visibly etc.
 ii) BUG pick-ups can fill up and overflow? panel
 """
-
 window.color = color.rgb(0,200,225)
 # no sky
 # indra = Sky()

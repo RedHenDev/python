@@ -55,7 +55,7 @@ def mine(td,vd,subsets,_numVertices,_texture,_sub):
     # ***
     # What blockType are we mining?
     blockType=td.get((floor(bte.x),floor(bte.y),floor(bte.z)))
-    print(blockType)
+    # print(blockType)
     Collectible(blockType,bte.position,_texture,_sub)
     # ***
 

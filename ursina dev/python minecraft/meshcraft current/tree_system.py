@@ -6,10 +6,12 @@ class TreeSystem:
     @staticmethod
     def setup():
 
-        TreeSystem.noisyEnt=PerlinNoise(seed=2020)
-        TreeSystem.octaves = 1.0
-        TreeSystem.freq = 320
-        TreeSystem.amp = 18
+        Toctaves = 32
+        TreeSystem.noisyEnt=PerlinNoise(octaves=Toctaves,
+                                        seed=2020)
+        
+        TreeSystem.freq = 64
+        # TreeSystem.amp = 100
         print("Tree system set up.")
 
     @staticmethod
@@ -19,11 +21,11 @@ class TreeSystem:
         w=1+TreeSystem.noisyEnt(([x/TreeSystem.freq,
                                  z/TreeSystem.freq]))
         # w*=TreeSystem.amp                       
-        print(w)
+        # print(w)
     
-        if w>1.1:    
+        if w>1.42:    
             # print("Ent not! ", w)
-            return 0
+            return w
         else:
             # 1 bark. 2 could be crown. Etc.
             # Would be cool to use an L-sytem, however.
