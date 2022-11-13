@@ -195,16 +195,20 @@ class MeshTerrain:
                     this.genBlock(x+k,y,z+j,blockType='grass',layingTerrain=True)
                     # ***
                     # """
-                    th= TreeSystem.growTree(x+k,z+j)
+                    th=TreeSystem.growTree(x+k,z+j)
                     if th != 0:
+                        # Trunk.
                         for i in range(1,int(th*5)):
                             this.genBlock(x+k,y+i,z+j,
                             blockType='wood',tree=True)
+                            gapShell(this.td,Vec3(x+k,y+i,z+j))
+                        # Crown.
                         for t in range(-2,3):
                             for tt in range(4):
                                 for ttt in range(-2,3):
                                     this.genBlock(x+k+t,y+i+tt,z+j+ttt,
                                     blockType='emerald',tree=True)
+                                    gapShell(this.td,Vec3(x+k+t,y+i+tt,z+j+ttt))
                     # """
                        
         this.subsets[this.currentSubset].model.generate()

@@ -90,7 +90,7 @@ tool.y=-0.6
 tool.scale=0.07
 
 camera.dash=10 # Rate at which fov changes when running.
-# *** - set in inventory.
+# *** - set in inventory.py
 # window.fullscreen=True
 camera.fov=70 # 63 is 'correct' Minecraft? 70 default.
 # camera.clip_plane_far=60
