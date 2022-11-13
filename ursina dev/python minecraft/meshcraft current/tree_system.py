@@ -22,8 +22,8 @@ class TreeSystem:
                                  z/TreeSystem.freq]))
         # w*=TreeSystem.amp                       
         # print(w)
-    
-        if w>1.42:    
+        # 1.42
+        if w>1.435:    
             # print("Ent not! ", w)
             return w
         else:
