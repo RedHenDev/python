@@ -137,10 +137,7 @@ class MeshTerrain:
         # hold colour information? If so, use it :)
         if len(minerals[blockType])>2:
             # Decide random tint for colour of block :)
-            # ***
-            if tree:
-                c=0
-            else: c = random()-0.5
+            c = random()-0.5
             # Grab the Vec4 colour data :)
             ce=minerals[blockType][2]
             # Adjust each colour channel separately to
@@ -200,9 +197,16 @@ class MeshTerrain:
                     # """
                     th= TreeSystem.growTree(x+k,z+j)
                     if th != 0:
-                        for i in range(1,randint(1,int(th*16))):
-                            this.genBlock(x+k,y+i,z+j,blockType='wood',tree=True)
-                    # """       
+                        for i in range(1,int(th*5)):
+                            this.genBlock(x+k,y+i,z+j,
+                            blockType='wood',tree=True)
+                        for t in range(-2,3):
+                            for tt in range(4):
+                                for ttt in range(-2,3):
+                                    this.genBlock(x+k+t,y+i+tt,z+j+ttt,
+                                    blockType='emerald',tree=True)
+                    # """
+                       
         this.subsets[this.currentSubset].model.generate()
         # Current subset hack ;)
         if this.currentSubset<this.numSubsets-1:
