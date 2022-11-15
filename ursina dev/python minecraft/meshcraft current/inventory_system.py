@@ -65,8 +65,11 @@ class Hotspot(Entity):
         this.occupied=False
         # What item are we hosting?
         this.item=None
-        # *** - stack amount.
+        # New stack system :)
+        # Start with no items as default.
         this.stack=0
+        # Text for number of blocks in stack.
+        this.t = Text("",scale=1.2)
 
     @staticmethod
     def matchPos(_blockType,_onHotbar=False):
@@ -123,7 +126,6 @@ class Item(Draggable):
         this.texture='texture_atlas_3.png'
         this.texture_scale*=64/this.texture.width
 
-        # ***
         if _blockType is not None:
             this.blockType=_blockType
         else:
@@ -136,41 +138,6 @@ class Item(Draggable):
 
         this.set_texture()
         this.set_colour()
-
-    # ***
-    @staticmethod
-    def gen_item_pickup(_blockType):
-        """Generates an item"""
-        # Find hotbar stack to join?
-        if not Hotspot.matchPos(_blockType,True):
-        # P.s. fixPos() ought to have a match-stack feature.
-            # Nope. So start new stack on hotbar...
-            foundSpot=False
-            for h in hotspots:
-                if h.onHotbar and not h.occupied:
-                    e=Item(_blockType)
-                    items.append(e)
-                    e.onHotbar=True
-                    e.visible=True
-                    h.occupied=True
-                    h.item=e
-                    e.currentSpot=h
-                    e.position=h.position
-                    h.stack=1
-                    foundSpot=True
-                    break
-            if not foundSpot:
-                if not Hotspot.matchPos(_blockType,False):
-                    for h in hotspots:
-                        if not h.onHotbar and not h.occupied:
-                            e=Item(_blockType)
-                            items.append(e)
-                            h.occupied=True
-                            h.item=e
-                            e.currentSpot=h
-                            e.position=h.position
-                            h.stack=1
-                            break
 
     def set_texture(this):
         # Use dictionary to access uv co-ords.
@@ -199,13 +166,12 @@ class Item(Draggable):
         # host hotspot -- so that subject can use item.
         # !?! Can't find an available hotspot?
         # Return to current host position.
-
+        
         closest=-1
         closestHotty=None
         for h in hotspots:
-            # ***
-            if h.occupied and h is not this.currentSpot: continue
-            # Found an unoccupied hotspot :)
+            if h.occupied and h.item!=this: continue
+            # Found a unoccupied hotspot :)
             # How close is it?
             dist=h.position-this.position
             # Find the magnitude - i.e. distance.
@@ -219,27 +185,19 @@ class Item(Draggable):
         if closestHotty is not None:
             # We've found an available closest :)
             this.position=closestHotty.position
-            # ***
-            this.onHotbar=closestHotty.onHotbar
             # Update new host's information about item.
             closestHotty.occupied=True
             closestHotty.item=this
-            # ***
             closestHotty.stack=this.currentSpot.stack
             # Update previous host-spot's status.
-            if this.currentSpot:
+            # *** - tut21
+            # Finally, update current host spot.
+            if this.currentSpot!=closestHotty:
+                this.currentSpot.stack=0
+                this.currentSpot.t.text = "     "
                 this.currentSpot.occupied=False
                 this.currentSpot.item=None
-                # ***
-                if closestHotty!=this.currentSpot:
-                    this.currentSpot.stack=0
-                # ***
-                try:
-                    destroy(this.currentSpot.t)
-                except:
-                    pass
-            # Finally, update current host spot.
-            this.currentSpot=closestHotty
+                this.currentSpot=closestHotty
         elif this.currentSpot:
             # No hotspot available? Just move back.
             this.position=this.currentSpot.position
@@ -249,19 +207,56 @@ class Item(Draggable):
         if toggledOFF:
             return
         this.fixPos()
-        # ***
-        # Can we display stack value here?
-        # First, we'll just try to display blockType.
-        this.currentSpot.t=Text(scale=1.2,z=-3)
+        # Display how many blocks in this hotspot's stack.
+        stackNum = this.currentSpot.stack
+        myText="<white><bold>"+str(stackNum)
+        # *** - tut21
+        this.currentSpot.t.text=(myText)
         this.currentSpot.t.origin=(0,0)
-        this.currentSpot.t.text=("<white><bold>"+
-                                str(this.currentSpot.stack))
+        this.currentSpot.t.z=-3
         this.currentSpot.t.x=this.currentSpot.x
         this.currentSpot.t.y=this.currentSpot.y
-        # this.currentSpot.t.background=True
-        # this.currentSpot.t.background.scale*=0.6
-        # this.currentSpot.t.background.color=color.rgb(0,0,0)
-        destroy(this.currentSpot.t,2.1)
+        
+
+    @staticmethod
+    def stack_check(_blockType):
+        for h in hotspots:
+            if h.onHotbar==False: continue
+            if h.occupied==False: continue
+            # OK -- found an occupied hotbar hotspot.
+            if h.item.blockType==_blockType:
+                h.stack+=1
+                return True
+        # No matching stacks.
+        return False
+
+    @staticmethod
+    def new_item(_blockType):
+        # First, check whether there is already
+        # a stack of this blockType on the hotbar.
+        # If yes, increment hotspot's stack.
+        # If no, and space available on hotbar,
+        # create a new stack of 1 of that item -
+        # which means, creating a new Item.
+        aStack = Item.stack_check(_blockType)
+        if aStack==False:
+            # Space available on hotbar?
+            for h in hotspots:
+                if not h.onHotbar or h.occupied: continue
+                else:
+                    h.stack=1
+                    b=Item(_blockType)
+                    b.currentSpot=h
+                    items.append(b)
+                    # Refactor this later!
+                    # Dedicated function please :)
+                    h.item=b
+                    h.occupied=True
+                    b.onHotbar=True
+                    b.visible=True
+                    b.x = h.x
+                    b.y = h.y
+                    break
         
 # Hotspots for the hotbar.
 for i in range(Hotspot.rowFit):
@@ -294,10 +289,10 @@ for i in range(Hotspot.rowFit):
                     Hotspot.scalar * j
                 )
         # *** 
-        bud.x=  (   iPan.x-iPan.scale_x*0.5 +
-                    Hotspot.scalar*0.5 +
-                    padding_x *1.2 +
-                    i*Hotspot.scalar
+        bud.x=  (   iPan.x-iPan.scale_x*0.5*1.1 +
+                    Hotspot.scalar*0.5*1.2 +
+                    padding_x +
+                    i*Hotspot.scalar*1.1
                 )
         hotspots.append(bud)
 
