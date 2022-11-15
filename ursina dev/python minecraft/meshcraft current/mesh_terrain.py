@@ -1,15 +1,16 @@
 from perlin import Perlin
 from ursina import *
-from random import random
+import random as raa
 from swirl_engine import SwirlEngine
 from mining_system import *
 from building_system import *
 from config import six_cube_dirs, minerals, mins
-# ***
 from tree_system import *
+from inventory_system import *
+
 
 class MeshTerrain:
-    # *** - inventory system items passed in here?
+    # * - inventory system items passed in here?
     def __init__(this,_sub,_cam):
         
         this.subject = _sub
@@ -54,6 +55,24 @@ class MeshTerrain:
                         texture=this.textureAtlas)
             e.texture_scale*=64/e.texture.width
             this.subsets.append(e)
+    
+    def plantTree(this,_x,_y,_z):
+        if this.td[_x,_y,_z]!=None and this.td[_x,_y,_z]!='g': return 
+        ent=TreeSystem.genTree(_x,_z)
+        if ent==0: return
+        # Trunk.
+        for i in range(int(ent*6)):
+            this.genBlock(_x,_y+i,_z,
+                blockType='wood')
+            gapShell(this.td,Vec3(_x,_y+i,_z))
+                
+        # Crown.
+        for t in range(-2,3):
+            for tt in range(4):
+                for ttt in range(-2,3):
+                    this.genBlock(_x+t,_y+int(ent*6)+tt,_z+ttt,
+                    blockType='concrete')
+                    gapShell(this.td,Vec3(_x+t,_y+int(ent*6)+tt,_z+ttt))
 
     def do_mining(this):
         epi = mine( this.td,this.vd,this.subsets,
@@ -91,9 +110,22 @@ class MeshTerrain:
                                 this.camera.forward,
                                 this.subject.position+Vec3(0,this.subject.height,0))
             if bsite!=None:
+                # *** - tut22
+                # *** do this beforehand, to avoid
+                # Nonetype error with subject.blockType.
                 this.genBlock(floor(bsite.x),floor(bsite.y),floor(bsite.z),subset=0,blockType=this.subject.blockType)
                 gapShell(this.td,bsite)
                 this.subsets[0].model.generate()
+                for h in hotspots:
+                    if h.color==color.black:
+                        h.stack-=1
+                        h.item.update_stack_text()
+                        if h.stack<=0:
+                            destroy(h.item)
+                            h.occupied=False
+                            h.stack=0
+                            h.t.text=""
+                            this.subject.blockType=None
     
     # I.e. after mining, to create illusion of depth.
     def genWalls(this,epi,subset):
@@ -110,7 +142,7 @@ class MeshTerrain:
                 this.genBlock(np.x,np.y,np.z,subset,gap=False,blockType='soil')
 
     # ***
-    def genBlock(this,x,y,z,subset=-1,gap=True,blockType='grass',layingTerrain=False,tree=False):
+    def genBlock(this,x,y,z,subset=-1,gap=True,blockType='grass',layingTerrain=False):
         if subset==-1: subset=this.currentSubset
         # Extend or add to the vertices of our model.
         model = this.subsets[subset].model
@@ -127,7 +159,7 @@ class MeshTerrain:
 
         if layingTerrain:
             # Randomly place stone blocks.
-            if random() > 0.86:
+            if raa.random() > 0.86:
                 blockType='stone'
             # If high enough, cap with snow blocks :D
             if y > 2:
@@ -137,7 +169,7 @@ class MeshTerrain:
         # hold colour information? If so, use it :)
         if len(minerals[blockType])>2:
             # Decide random tint for colour of block :)
-            c = random()-0.5
+            c = raa.random()-0.5
             # Grab the Vec4 colour data :)
             ce=minerals[blockType][2]
             # Adjust each colour channel separately to
@@ -146,7 +178,7 @@ class MeshTerrain:
                                     this.numVertices)
         else:
             # Decide random tint for colour of block :)
-            c = random()-0.5
+            c = raa.random()-0.5
             model.colors.extend(    (Vec4(1-c,1-c,1-c,1),)*
                                     this.numVertices)
 
@@ -192,23 +224,26 @@ class MeshTerrain:
                 if this.td.get( (floor(x+k),
                                 floor(y),
                                 floor(z+j)))==None:
-                    this.genBlock(x+k,y,z+j,blockType='grass',layingTerrain=True)
+                    this.genBlock(x+k,y,z+j,blockType='grass',
+                                            layingTerrain=True)
+                    # Plant a tree?
+                    this.plantTree(x+k,y+1,z+j)
                     # ***
                     # """
-                    th=TreeSystem.growTree(x+k,z+j)
-                    if th != 0:
-                        # Trunk.
-                        for i in range(1,int(th*5)):
-                            this.genBlock(x+k,y+i,z+j,
-                            blockType='wood',tree=True)
-                            gapShell(this.td,Vec3(x+k,y+i,z+j))
-                        # Crown.
-                        for t in range(-2,3):
-                            for tt in range(4):
-                                for ttt in range(-2,3):
-                                    this.genBlock(x+k+t,y+i+tt,z+j+ttt,
-                                    blockType='emerald',tree=True)
-                                    gapShell(this.td,Vec3(x+k+t,y+i+tt,z+j+ttt))
+                    # th=TreeSystem.growTree(x+k,z+j)
+                    # if th != 0:
+                    #     # Trunk.
+                    #     for i in range(1,int(th*5)):
+                    #         this.genBlock(x+k,y+i,z+j,
+                    #         blockType='wood',tree=True)
+                    #         gapShell(this.td,Vec3(x+k,y+i,z+j))
+                    #     # Crown.
+                    #     for t in range(-2,3):
+                    #         for tt in range(4):
+                    #             for ttt in range(-2,3):
+                    #                 this.genBlock(x+k+t,y+i+tt,z+j+ttt,
+                    #                 blockType='emerald',tree=True)
+                    #                 gapShell(this.td,Vec3(x+k+t,y+i+tt,z+j+ttt))
                     # """
                        
         this.subsets[this.currentSubset].model.generate()

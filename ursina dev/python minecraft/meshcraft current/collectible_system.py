@@ -61,7 +61,6 @@ class Collectible(Entity):
         else:
             # Decide random tint for colour of block :)
             c = random()-0.5
-            # *** - colour bug Xextend
             this.model.colors = ( (Vec4(1-c,1-c,1-c,1),)*
                                    this.numVertices)
 
