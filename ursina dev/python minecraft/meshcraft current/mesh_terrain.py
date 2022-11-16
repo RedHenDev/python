@@ -57,11 +57,17 @@ class MeshTerrain:
             this.subsets.append(e)
     
     def plantTree(this,_x,_y,_z):
-        if this.td[_x,_y,_z]!=None and this.td[_x,_y,_z]!='g': return 
+        # ***
+        k=((floor(_x),floor(_y),floor(_z)))
+        wb=this.td.get(k)
+        if wb!=None and wb!='g': return
+
         ent=TreeSystem.genTree(_x,_z)
         if ent==0: return
         # Trunk.
-        for i in range(int(ent*6)):
+        # ***
+        treeH=int(ent*18)
+        for i in range(treeH):
             this.genBlock(_x,_y+i,_z,
                 blockType='wood')
             gapShell(this.td,Vec3(_x,_y+i,_z))
@@ -70,9 +76,9 @@ class MeshTerrain:
         for t in range(-2,3):
             for tt in range(4):
                 for ttt in range(-2,3):
-                    this.genBlock(_x+t,_y+int(ent*6)+tt,_z+ttt,
+                    this.genBlock(_x+t,_y+treeH+tt,_z+ttt,
                     blockType='concrete')
-                    gapShell(this.td,Vec3(_x+t,_y+int(ent*6)+tt,_z+ttt))
+                    gapShell(this.td,Vec3(_x+t,_y+treeH+tt,_z+ttt))
 
     def do_mining(this):
         epi = mine( this.td,this.vd,this.subsets,
@@ -143,8 +149,15 @@ class MeshTerrain:
                             floor(np.z)))==None:
                 this.genBlock(np.x,np.y,np.z,subset,gap=False,blockType='soil')
 
-    # ***
     def genBlock(this,x,y,z,subset=-1,gap=True,blockType='grass',layingTerrain=False):
+        # ***
+        # Gatekeep placement of block.
+        # Stops blocks spawning inside blocks.
+        k=((floor(x),floor(y),floor(z)))
+        wb=this.td.get(k)
+        if wb!=None and wb!="g":
+            return
+        
         if subset==-1: subset=this.currentSubset
         # Extend or add to the vertices of our model.
         model = this.subsets[subset].model
