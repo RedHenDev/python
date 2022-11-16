@@ -88,7 +88,7 @@ class MeshTerrain:
                 for ttt in range(-2,3):
                     # ***-1 on y to adjust for wiggle.
                     this.genBlock(_x+t,_y+treeH+tt,_z+ttt,
-                    blockType='grass')
+                    blockType='foliage')
                     gapShell(this.td,Vec3(_x+t,_y+treeH+tt,_z+ttt))
 
     def do_mining(this):
@@ -247,15 +247,15 @@ class MeshTerrain:
             for j in range(-d,d):
 
                 y = floor(this.perlin.getHeight(x+k,z+j))
-                if (this.td.get( (floor(x+k),
-                                floor(y),
-                                floor(z+j)))==None or
-                    this.td.get( (floor(x+k),
-                                floor(y),
-                                floor(z+j)))=='g'):
                 # if (this.td.get( (floor(x+k),
                 #                 floor(y),
-                #                 floor(z+j)))==None):
+                #                 floor(z+j)))==None or
+                #     this.td.get( (floor(x+k),
+                #                 floor(y),
+                #                 floor(z+j)))=='g'):
+                if (this.td.get( (floor(x+k),
+                                floor(y),
+                                floor(z+j)))==None):
                     this.genBlock(x+k,y,z+j,blockType='grass',
                                             layingTerrain=True)
                     # Plant a tree?
