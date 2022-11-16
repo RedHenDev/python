@@ -10,7 +10,8 @@ import random as ra
 from bump_system import *
 from save_load_system import saveMap, loadMap
 from inventory_system import *
-
+# *** - move from bottom of module.
+from mob_system import *
 """
 NB - RED workspace is private PREP.
 NB - BLUE is TUTORIAL code!
@@ -34,16 +35,9 @@ ii+) Solve colour staining - DONE :D
 ii) ? - Earthquakes :o - DONE :D
 
 Tut 18 notes
-0) Bug fix for ursina update - use_deepcopy=True - DONE
-i) mined block particles - pick-up for inventory
-i+) cracking over-skin for blocks being mined 
-ii) trees? Rocks?!
-iii) subject.camera_pivot.y=[same as player height]
-iv) menu for map loading and saving...
-v) text on screen (including for stacks of identical items)
-vi) Empty handed behaviour
-vii) Pick-axe model
-viii) Vincent the giant chicken
+i) mined block particles - pick-up for inventory - DONE
+ii) trees? Rocks?! (VID 20?)
+iii) Note on ursina update and fix! 4.1.1 - DONE
 
 Tut 19 adventure plans!
 0) eye-level correction - DONE
@@ -51,15 +45,31 @@ Tut 19 adventure plans!
 0.2) empty-subject hands, then no build - DONE
 i) colour bug for e.g. ruby collectible - DONE - UNDONE?!
 ii) picking up behaviour  - DONE
-iii) sounds for picking up item
-iv) text for stacking info on inventory
-iv+) stacking behaviour on inventory
-v) disable collectibles if far from subject
-vi) destroy collectibles if lifespan expires
+iii) sounds for picking up item - DONE
+iv) text for stacking info on inventory DONE
+iv+) stacking behaviour on inventory DONE
+v) destroy collectibles if lifespan expires - DONE
 
-PREP tut 20
-i) BUG pick-ups not populating hotbar visibly etc.
-ii) BUG pick-ups can fill up and overflow? panel
+Tut 20
+i) ui aspect ratio bug DONE
+ii) collectible colour bug DONE
+iii) inventory items stay put when clicked DONE
+iv) saw a panda -- DONE
+v) created simple stack system DONE 
+
+Tut 21
+i) BUG item text remaining when it shouldn't - DONE
+i.i) BUG items of different kinds overlapping... DONE
+i.ii) Item stack text update upon collection. - DONE
+iii) TREES :) - DONE
+
+Tut 22
+i) deplete stack number when building :)
+ii) BUG (in prep code) current blocktype building -
+    when selected item is moved to elsewhere and then
+    we carry on building. Need better system for
+    blocktype selection.
+iii) gapShell for trees, so that we can mine them.
 """
 window.color = color.rgb(0,200,225)
 # no sky
@@ -116,13 +126,17 @@ for i in range(4):
 
 grass_audio = Audio('step.ogg',autoplay=False,loop=False)
 snow_audio = Audio('snowStep.mp3',autoplay=False,loop=False)
+sound_ON = True
 
 pX = subject.x
 pZ = subject.z
 
 def input(key):
-    global generatingTerrain
+    # *** earthquake and sound
+    global generatingTerrain, earthquake_ON, sound_ON
     terrain.input(key)
+    if key=='q': earthquake_ON = not earthquake_ON
+    if key=='o': sound_ON = not sound_ON
     if key=='g':
         generatingTerrain = not generatingTerrain
     # Jumping...
@@ -167,13 +181,14 @@ def update():
         pZ=subject.z 
         terrain.swirlEngine.reset(pX,pZ)
         # Sound :)
-        if subject.y > 4:
-            if snow_audio.playing==False:
-                snow_audio.pitch=ra.random()+0.25
-                snow_audio.play()
-        elif grass_audio.playing==False:
-            grass_audio.pitch=ra.random()+0.7
-            grass_audio.play()
+        if sound_ON:
+            if subject.y > 4:
+                if snow_audio.playing==False:
+                    snow_audio.pitch=ra.random()+0.25
+                    snow_audio.play()
+            elif grass_audio.playing==False:
+                grass_audio.pitch=ra.random()+0.7
+                grass_audio.play()
     
     # *******
     #  Earthquake experiment!
@@ -195,10 +210,9 @@ def update():
             camera.fov+=camera.dash*time.dt
     else:
         subject.speed=subject.walkSpeed
-        if camera.fov>90:
+        # *** - default fov
+        if camera.fov>70:
             camera.fov-=camera.dash*4*time.dt
-            if camera.fov<90:camera.fov=90
-
-from mob_system import *
+            if camera.fov<70:camera.fov=70
 
 app.run()

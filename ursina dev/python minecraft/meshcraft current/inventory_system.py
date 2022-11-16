@@ -195,7 +195,8 @@ class Item(Draggable):
             # Finally, update current host spot.
             if this.currentSpot!=closestHotty:
                 this.currentSpot.stack=0
-                this.currentSpot.t.text = "     "
+                # *** No need for spaces in string.
+                this.currentSpot.t.text = ""
                 this.currentSpot.occupied=False
                 this.currentSpot.item=None
                 this.currentSpot=closestHotty

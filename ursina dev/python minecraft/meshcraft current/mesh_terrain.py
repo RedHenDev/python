@@ -111,12 +111,14 @@ class MeshTerrain:
                                 this.subject.position+Vec3(0,this.subject.height,0))
             if bsite!=None:
                 # *** - tut22
-                # *** do this beforehand, to avoid
+                # *** do genBlock beforehand, to avoid
                 # Nonetype error with subject.blockType.
-                this.genBlock(floor(bsite.x),floor(bsite.y),floor(bsite.z),subset=0,blockType=this.subject.blockType)
+                this.genBlock(floor(bsite.x),floor(bsite.y),floor(bsite.z),
+                    subset=0,blockType=this.subject.blockType)
                 gapShell(this.td,bsite)
                 this.subsets[0].model.generate()
                 for h in hotspots:
+                    # Am I highlighted? I.e. my colour black?
                     if h.color==color.black:
                         h.stack-=1
                         h.item.update_stack_text()
