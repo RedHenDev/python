@@ -64,20 +64,31 @@ class MeshTerrain:
 
         ent=TreeSystem.genTree(_x,_z)
         if ent==0: return
+        # *** - disrupt grid.
+        # wiggle=sin(_z*2)
+        # if wiggle>0:
+        #     _z+=2
+        # wiggle=cos(_x*2)
+        # if wiggle>0:
+        #     _x+=2
         # Trunk.
         # ***
-        treeH=int(ent*18)
+        treeH=int(ent*42)
         for i in range(treeH):
+            # *** -1 on y for wiggle adjust.
             this.genBlock(_x,_y+i,_z,
                 blockType='wood')
+            # *** prevent terrain holes. Nope...
+            # if i>0:
             gapShell(this.td,Vec3(_x,_y+i,_z))
                 
         # Crown.
         for t in range(-2,3):
             for tt in range(4):
                 for ttt in range(-2,3):
+                    # ***-1 on y to adjust for wiggle.
                     this.genBlock(_x+t,_y+treeH+tt,_z+ttt,
-                    blockType='concrete')
+                    blockType='grass')
                     gapShell(this.td,Vec3(_x+t,_y+treeH+tt,_z+ttt))
 
     def do_mining(this):
@@ -236,9 +247,15 @@ class MeshTerrain:
             for j in range(-d,d):
 
                 y = floor(this.perlin.getHeight(x+k,z+j))
-                if this.td.get( (floor(x+k),
+                if (this.td.get( (floor(x+k),
                                 floor(y),
-                                floor(z+j)))==None:
+                                floor(z+j)))==None or
+                    this.td.get( (floor(x+k),
+                                floor(y),
+                                floor(z+j)))=='g'):
+                # if (this.td.get( (floor(x+k),
+                #                 floor(y),
+                #                 floor(z+j)))==None):
                     this.genBlock(x+k,y,z+j,blockType='grass',
                                             layingTerrain=True)
                     # Plant a tree?
