@@ -105,6 +105,7 @@ camera.dash=10 # Rate at which fov changes when running.
 camera.fov=70 # 63 is 'correct' Minecraft? 70 default.
 # camera.clip_plane_far=60
 # print(camera.clip_plane_far) # 10K!
+# window.vsync=False
 
 # *** inv items passed in here?
 terrain = MeshTerrain(subject,camera)
