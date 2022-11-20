@@ -2,7 +2,7 @@
 Saving and loading a terrain 'map'.
 """
 
-mapName='june_test_1.land'
+mapName='november_test_1.land'
 
 def saveMap(_subPos, _td):
     import os, sys, pickle
@@ -36,11 +36,12 @@ def loadMap(_subject,_terrain):
     _terrain.vd={}
     _terrain.subsets=[]
     _terrain.setup_subsets()
-    _terrain.currentSubset=1
+    # *** from 1 to 0
+    _terrain.currentSubset=0
     # Without copy?
     _terrain.td=map_data[1]
     # Iterate over terrain dictionary and
-    # if we find 't' then generate a block.
+    # if we find blockType then generate a block.
     # Note this means we'll lose colour info etc.
     i = 0 # Which subset to build block on?
     for key in _terrain.td:

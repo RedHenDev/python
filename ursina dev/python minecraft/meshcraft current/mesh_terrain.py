@@ -23,7 +23,7 @@ class MeshTerrain:
         # Text.default_resolution = 1080 * Text.size * 4
         # this.mouth = Text(text='<scale:4>hello world', wordwrap=44)
         
-
+        # * HEX ******
         # this.textureAtlas='grass_64_hex_tex_2.png'
         # this.block = load_model('stretch_hex.obj')
         this.textureAtlas = 'texture_atlas_3.png'
@@ -163,11 +163,12 @@ class MeshTerrain:
     def genBlock(this,x,y,z,subset=-1,gap=True,blockType='grass',layingTerrain=False):
         # ***
         # Gatekeep placement of block.
-        # Stops blocks spawning inside blocks.
-        k=((floor(x),floor(y),floor(z)))
-        wb=this.td.get(k)
-        if wb!=None and wb!="g":
-            return
+        # Stops blocks spawning inside blocks. 
+        # BUG prevents loading map.
+        # k=((floor(x),floor(y),floor(z)))
+        # wb=this.td.get(k)
+        # if wb!=None and wb!='g':
+        #     return
         
         if subset==-1: subset=this.currentSubset
         # Extend or add to the vertices of our model.
@@ -230,7 +231,6 @@ class MeshTerrain:
                 this.td[key]='g'
 
         # Record subset index and first vertex of this block.
-        # ****** HEX
         vob = (subset, len(model.vertices)-this.numVertices-1)
         this.vd[(floor(x),
                 floor(y),
@@ -247,12 +247,6 @@ class MeshTerrain:
             for j in range(-d,d):
 
                 y = floor(this.perlin.getHeight(x+k,z+j))
-                # if (this.td.get( (floor(x+k),
-                #                 floor(y),
-                #                 floor(z+j)))==None or
-                #     this.td.get( (floor(x+k),
-                #                 floor(y),
-                #                 floor(z+j)))=='g'):
                 if (this.td.get( (floor(x+k),
                                 floor(y),
                                 floor(z+j)))==None):
@@ -260,23 +254,6 @@ class MeshTerrain:
                                             layingTerrain=True)
                     # Plant a tree?
                     this.plantTree(x+k,y+1,z+j)
-                    # ***
-                    # """
-                    # th=TreeSystem.growTree(x+k,z+j)
-                    # if th != 0:
-                    #     # Trunk.
-                    #     for i in range(1,int(th*5)):
-                    #         this.genBlock(x+k,y+i,z+j,
-                    #         blockType='wood',tree=True)
-                    #         gapShell(this.td,Vec3(x+k,y+i,z+j))
-                    #     # Crown.
-                    #     for t in range(-2,3):
-                    #         for tt in range(4):
-                    #             for ttt in range(-2,3):
-                    #                 this.genBlock(x+k+t,y+i+tt,z+j+ttt,
-                    #                 blockType='emerald',tree=True)
-                    #                 gapShell(this.td,Vec3(x+k+t,y+i+tt,z+j+ttt))
-                    # """
                        
         this.subsets[this.currentSubset].model.generate()
         # Current subset hack ;)
