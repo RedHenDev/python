@@ -15,7 +15,7 @@ hotbar.model=load_model('quad',use_deepcopy=True)
 print(hotbar.position)
 # ***
 import sys
-window.fullscreen=True
+window.fullscreen=False
 if window.fullscreen==False and sys.platform.lower()=='darwin':
     camera.ui.scale_x*=0.05*1/window.aspect_ratio
     camera.ui.scale_y*=0.05

@@ -134,6 +134,7 @@ class MeshTerrain:
                     subset=0,blockType=this.subject.blockType)
                 gapShell(this.td,bsite)
                 this.subsets[0].model.generate()
+                # ***
                 for h in hotspots:
                     # Am I highlighted? I.e. my colour black?
                     if h.color==color.black:

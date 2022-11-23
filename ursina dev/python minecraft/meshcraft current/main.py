@@ -73,8 +73,8 @@ iii) gapShell for trees, so that we can mine them.
 """
 window.color = color.rgb(0,200,225)
 # no sky
-# indra = Sky()
-# indra.color = window.color
+indra = Sky()
+indra.color = window.color
 subject = FirstPersonController()
 subject.gravity = 0.0
 subject.cursor.visible=True

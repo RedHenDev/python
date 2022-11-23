@@ -5,11 +5,11 @@ dropping collectable materials.
 
 # Collectible dictionary. Similar to td{}.
 # It will store terrain position of a collectible :)
-from ursina import Entity, Vec2, Vec4, load_model, Audio, time, destroy
+from ursina import Entity, Vec2, Vec4, load_model, Audio, time, destroy, color
 from config import minerals
 from math import sin, floor
 from random import random
-from inventory_system import Item
+from inventory_system import Item, hotspots
 
 # *** - no longer needed. Data included in object.
 # pop_audio = Audio('pop.mp3',autoplay=False,loop=False)
@@ -94,6 +94,14 @@ class Collectible(Entity):
             # this.timeToRest=True
             this.pu_sound.play()
             Item.new_item(this.blockType)
+            # Is this hotspot highlighted? If so,
+            # Subject can build with new stack :)
+            for h in hotspots:
+                if h.color==color.black:
+                        if h.stack >= 1:
+                            if h.item.blockType==this.blockType:
+                                this.subject.blockType=this.blockType
+                                break
             this.disable()
 
     def bounce(this):

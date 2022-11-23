@@ -3,7 +3,12 @@ from perlin_module import PerlinNoise
 class Perlin:
     def __init__(this):
         
-        this.seed = ord('y')+ord('o')
+        # this.seed = ord('y')+ord('o')
+        from random import randint
+        from ursina import Text, destroy
+        this.seed=randint(0,1000000)
+        world=Text(str(this.seed),scale=3)
+        destroy(world,10)
         # Original values.
         this.octaves = 8
         this.freq = 256
