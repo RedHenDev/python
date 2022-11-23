@@ -35,7 +35,6 @@ def highlight(pos,_subjectHeight,cam,td):
 def mine(td,vd,subsets,_numVertices,_texture,_sub):
     if not bte.visible: return
 
-    # ***
     # Reference vertices dictionary
     # and see if there is a highlighted block here.
     wv=vd.get((floor(bte.x),floor(bte.y),floor(bte.z)))
@@ -67,4 +66,4 @@ def mine(td,vd,subsets,_numVertices,_texture,_sub):
     vd[ (floor(bte.x),floor(bte.y),floor(bte.z))] = None
     
     # NB. wv[0] is the subset index.
-    return (bte.position, wv[0])
+    return (bte.position, wv[0], blockType)

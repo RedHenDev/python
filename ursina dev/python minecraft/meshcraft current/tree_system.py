@@ -2,7 +2,7 @@
 Our Tree system :)
 """
 from perlin_module import PerlinNoise
-from ursina import Text
+from ursina import Text, random
 from math import sin,cos
 
 entText=Text('',scale=4)
@@ -11,9 +11,9 @@ class TreeSystem:
     def setup():
         # Create our Perlin noise object.
         treeOctaves=8
-        treeSeed=2022
+        treeSeed=random.randint(10000)
         TreeSystem.freq=256
-        # TreeSystem.amp=10
+        TreeSystem.amp=10
         TreeSystem.noise=PerlinNoise(
                 octaves=treeOctaves,
                 seed=treeSeed)
@@ -27,18 +27,12 @@ class TreeSystem:
         if _x % 5==0: return 0
         if _z % 5==0:return 0
 
-        wiggle=sin(_z)
-        if wiggle>0.8:
-            _z+=1
-        wiggle=cos(_x)
-        if wiggle>0.8:
-            _x+=1
-
         ent=TreeSystem.noise(([  _x/TreeSystem.freq,
                                 _z/TreeSystem.freq]))
+        ent*=TreeSystem.amp
         # entText.text='ent= ' + str(ent)
         # if ent>1.435:
-        if ent>0.1: 
+        if ent>1: 
             return ent
         else:
             return 0

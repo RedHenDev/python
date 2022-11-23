@@ -78,9 +78,6 @@ class MeshTerrain:
             # *** -1 on y for wiggle adjust.
             this.genBlock(_x,_y+i,_z,
                 blockType='wood')
-            # *** prevent terrain holes. Nope...
-            # if i>0:
-            gapShell(this.td,Vec3(_x,_y+i,_z))
                 
         # Crown.
         for t in range(-2,3):
@@ -89,15 +86,16 @@ class MeshTerrain:
                     # ***-1 on y to adjust for wiggle.
                     this.genBlock(_x+t,_y+treeH+tt,_z+ttt,
                     blockType='foliage')
-                    gapShell(this.td,Vec3(_x+t,_y+treeH+tt,_z+ttt))
-
+                    
     def do_mining(this):
         epi = mine( this.td,this.vd,this.subsets,
                     this.numVertices,this.textureAtlas,
                     this.subject)
-        if epi != None:
+        if epi!=None and epi[2]!='wood':
+            # Don't generate walls around trees!
             # Epi[0] is bte position (Vec3).
             # Epi[1] is subset index.
+            # Epi[2] is blockType.
             this.genWalls(epi[0],epi[1])
             this.subsets[epi[1]].model.generate()
 
