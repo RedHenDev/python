@@ -36,5 +36,4 @@ class TreeSystem:
         else:
             return 0
 
-
 TreeSystem.setup()

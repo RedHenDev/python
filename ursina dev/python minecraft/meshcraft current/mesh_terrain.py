@@ -60,6 +60,22 @@ class MeshTerrain:
         # if y_interp > 1:
         #     # Laying terrain will change blockType to 'stone'.
         #     return True
+        noise=PerlinNoise(
+                octaves=32,
+                seed=2022)
+        freq=64
+        amp=128
+        y=noise(([_x/freq,_z/freq]))*amp
+        # print(y)
+        if y > 64:
+            this.genBlock(_x,_y+1,_z,
+                blockType='ruby')
+            # for i in range(int(y/28)):
+            #     this.genBlock(_x,_y+1+i,_z,
+            #     blockType='ruby')
+            return False
+        if y > 34:
+            return True
 
         # Laying terrain will assume grass, not stone.
         return False
@@ -81,12 +97,28 @@ class MeshTerrain:
         _y = 1+floor(this.perlin.getHeight(_x+wiggle,_z+wiggle))
         # Trunk.
         # ***
-        treeH=int(ent*3)
+        treeH=int(ent*7)
+        noise=PerlinNoise(
+                octaves=32,
+                seed=2022)
+        freq=64
+        amp=128
+        
+        # print(y)
+        
         for i in range(treeH):
-            # *** -1 on y for wiggle adjust.
             this.genBlock(_x+wiggle,_y+i,_z+wiggle,
                 blockType='wood')
-                
+            by=noise(([_x/freq,_z/freq,_y+i]))*amp
+            if by > 34:
+                this.genBlock(_x+wiggle+1,_y+i,_z+wiggle,
+                blockType='foliage')
+                this.genBlock(_x+wiggle,_y+i,_z+wiggle-1,
+                blockType='foliage')
+                this.genBlock(_x+wiggle-1,_y+i,_z+wiggle,
+                blockType='foliage')
+                this.genBlock(_x+wiggle,_y+i,_z+wiggle+1,
+                blockType='foliage')
         # Crown.
         for t in range(-2,3):
             for tt in range(4):
