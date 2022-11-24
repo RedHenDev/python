@@ -8,7 +8,6 @@ from config import six_cube_dirs, minerals, mins
 from tree_system import *
 from inventory_system import *
 
-
 class MeshTerrain:
     # * - inventory system items passed in here?
     def __init__(this,_sub,_cam):
@@ -56,12 +55,16 @@ class MeshTerrain:
         # to determine how much stone to lay.
         # Let's try linear interpolation?
         
+        # y_interp = lerp(_z,10,0.5)
+        # print(y_interp)
+        # if y_interp > 1:
+        #     # Laying terrain will change blockType to 'stone'.
+        #     return True
 
         # Laying terrain will assume grass, not stone.
         return False
 
-        # Laying terrain will change blockType to 'stone'.
-        return True
+        
 
     def plantTree(this,_x,_y,_z):
         # ***
@@ -72,26 +75,23 @@ class MeshTerrain:
         ent=TreeSystem.genTree(_x,_z)
         if ent==0: return
         # *** - disrupt grid.
-        # wiggle=sin(_z*2)
-        # if wiggle>0:
-        #     _z+=2
-        # wiggle=cos(_x*2)
-        # if wiggle>0:
-        #     _x+=2
+        wiggle=floor(sin(_z*_x)*3)
+        # print(wiggle)
+        # Adjust to wiggled position height.
+        _y = 1+floor(this.perlin.getHeight(_x+wiggle,_z+wiggle))
         # Trunk.
         # ***
         treeH=int(ent*3)
         for i in range(treeH):
             # *** -1 on y for wiggle adjust.
-            this.genBlock(_x,_y+i,_z,
+            this.genBlock(_x+wiggle,_y+i,_z+wiggle,
                 blockType='wood')
                 
         # Crown.
         for t in range(-2,3):
             for tt in range(4):
                 for ttt in range(-2,3):
-                    # ***-1 on y to adjust for wiggle.
-                    this.genBlock(_x+t,_y+treeH+tt,_z+ttt,
+                    this.genBlock(_x+t+wiggle,_y+treeH+tt,_z+ttt+wiggle,
                     blockType='foliage')
                     
     def do_mining(this):

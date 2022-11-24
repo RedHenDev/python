@@ -12,6 +12,7 @@ class TreeSystem:
         # Create our Perlin noise object.
         treeOctaves=8
         treeSeed=random.randint(1,10000)
+        treeSeed=2022
         TreeSystem.freq=256
         TreeSystem.amp=10
         TreeSystem.noise=PerlinNoise(
@@ -30,8 +31,6 @@ class TreeSystem:
         ent=TreeSystem.noise(([  _x/TreeSystem.freq,
                                 _z/TreeSystem.freq]))
         ent*=TreeSystem.amp
-        # entText.text='ent= ' + str(ent)
-        # if ent>1.435:
         if ent>1: 
             return ent
         else:

@@ -119,7 +119,7 @@ tool.scale=0.07
 camera.dash=10 # Rate at which fov changes when running.
 # *** - set in inventory.py
 # window.fullscreen=True
-camera.fov=70 # 63 is 'correct' Minecraft? 70 default.
+origFOV=camera.fov=63 # 70 is 'correct' Minecraft? 70 default.
 # camera.clip_plane_far=60
 # print(camera.clip_plane_far) # 10K!
 # window.vsync=False
@@ -170,7 +170,7 @@ count=0
 earthcounter=0
 earthquake_ON=False
 def update():
-    global count, pX, pZ, earthcounter
+    global count, pX, pZ, earthcounter, origFOV
 
     # Highlight terrain block for mining/building...  
     terrain.update()
@@ -229,8 +229,8 @@ def update():
     else:
         subject.speed=subject.walkSpeed
         # *** - default fov
-        if camera.fov>70:
+        if camera.fov>origFOV:
             camera.fov-=camera.dash*4*time.dt
-            if camera.fov<70:camera.fov=70
+            if camera.fov<origFOV:camera.fov=origFOV
 
 app.run()
