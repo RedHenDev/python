@@ -319,10 +319,17 @@ for i in range(Hotspot.rowFit):
 Hotspot.toggle()
 Hotspot.toggle()
 
+# Where am I?
+wai=Text(   '<black><bold>Nowhere',
+            scale=2.4,position=(-.8,.5))
+
 # ***
 toggledOFF=True
 def inv_input(key,subject,mouse):
     global toggledOFF
+    # Since we may have moved, update location text.
+    wai.text=f'<black><bold>east:{floor(subject.x)}, north:{floor(subject.z)}'
+    
     try:
         wnum = int(key)
         if wnum > 0 and wnum < 10:

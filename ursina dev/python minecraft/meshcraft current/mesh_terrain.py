@@ -18,11 +18,6 @@ class MeshTerrain:
 
         this.block = load_model('block.obj',use_deepcopy=True)
         
-        # *** - text testing. - and pick-ups
-        # this.items=_inv_items
-        # Text.default_resolution = 1080 * Text.size * 4
-        # this.mouth = Text(text='<scale:4>hello world', wordwrap=44)
-        
         # * HEX ******
         # this.textureAtlas='grass_64_hex_tex_2.png'
         # this.block = load_model('stretch_hex.obj')
@@ -34,7 +29,7 @@ class MeshTerrain:
         
         # Must be even number! See genTerrain()
         # 20 was experiment.
-        this.subWidth = 6 #*** 2 for new default
+        this.subWidth = 6 # *** 2 for new default
         this.swirlEngine = SwirlEngine(this.subWidth)
         this.currentSubset = 0
 
@@ -56,11 +51,23 @@ class MeshTerrain:
             e.texture_scale*=64/e.texture.width
             this.subsets.append(e)
     
+    def plantStone(this,_x,_y,_z):
+        # We want to use perlin and perhaps co-ordinates
+        # to determine how much stone to lay.
+        # Let's try linear interpolation?
+        
+
+        # Laying terrain will assume grass, not stone.
+        return False
+
+        # Laying terrain will change blockType to 'stone'.
+        return True
+
     def plantTree(this,_x,_y,_z):
         # ***
-        k=((floor(_x),floor(_y),floor(_z)))
-        wb=this.td.get(k)
-        if wb!=None and wb!='g': return
+        # k=((floor(_x),floor(_y),floor(_z)))
+        # wb=this.td.get(k)
+        # if wb!=None and wb!='g': return
 
         ent=TreeSystem.genTree(_x,_z)
         if ent==0: return
@@ -175,14 +182,6 @@ class MeshTerrain:
         model.vertices.extend([ Vec3(x,y,z) + v for v in 
                                 this.block.vertices])
 
-        if layingTerrain:
-            # Randomly place stone blocks.
-            if raa.random() > 0.86:
-                blockType='stone'
-            # If high enough, cap with snow blocks :D
-            if y > 2:
-                blockType='snow'
-
         # Does the dictionary entry for this blockType
         # hold colour information? If so, use it :)
         if len(minerals[blockType])>2:
@@ -241,7 +240,14 @@ class MeshTerrain:
                 if (this.td.get( (floor(x+k),
                                 floor(y),
                                 floor(z+j)))==None):
-                    this.genBlock(x+k,y,z+j,blockType='grass',
+                    # Decide whether to plant tree, rock, etc.
+                    bType='grass' # Assume placing grass.
+                    if this.plantStone(x+k,y,z+j):
+                        bType='stone'
+                    # If high enough, cap with snow blocks :D
+                    if y > 2:
+                        bType='snow'
+                    this.genBlock(x+k,y,z+j,blockType=bType,
                                             layingTerrain=True)
                     # Plant a tree?
                     this.plantTree(x+k,y+1,z+j)
