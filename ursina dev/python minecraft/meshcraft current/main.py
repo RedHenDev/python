@@ -88,7 +88,8 @@ ii) Rocks -> replace random stone placements
 ) minimap?
 ) BUG glitching through terrain bc trees
 """
-window.color = color.rgb(0,200,225)
+# window.color = color.rgb(0,200,225)
+window.color=color.black
 # no sky
 indra = Sky()
 indra.color = window.color
@@ -165,6 +166,10 @@ def input(key):
 
     # Inventory access.
     inv_input(key,subject,mouse)
+
+    scene.fog_density=(0,75-subject.z)
+    scene.fog_color=window.color # color.white
+    
 
 count=0
 earthcounter=0
