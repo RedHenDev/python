@@ -73,14 +73,20 @@ ii.i) Tree texture(s) - DONE -> DONE grass transparency :) 'BUG'
 ii.ii) Tree perlin distribution - DONE
 iii) FOV to 63 - DONE (corrected for dash effect)
 iv) location co-ords as Text on screen (future: minimap?)
-v) audio as member property of collectible class
-vi) Refactor the current-blockType (building) mechanism.
-vii) Write an 'empty' function to empty a hotspot.
-viii) Giant rocky outcrops?!
-ix) Text background (e.g. for location text)
-x) Ui hotspot spacing (refactor)
-xi) Bump system - sticking to trees, and climbing them...
-xii) BUG glitching through terrain bc trees
+Tut 24
+i) audio - pickups as member property
+ii) Rocks -> replace random stone placements
+
+**To Do List**
+) audio as member property of collectible class
+) Refactor the current-blockType (building) mechanism.
+) Write an 'empty' function to empty a hotspot.
+) Giant rocky outcrops?!
+) Text background (e.g. for location text)
+) Ui hotspot spacing (refactor)
+) Bump system - sticking to trees, and climbing them...
+) minimap?
+) BUG glitching through terrain bc trees
 """
 window.color = color.rgb(0,200,225)
 # no sky
@@ -113,7 +119,7 @@ tool.scale=0.07
 camera.dash=10 # Rate at which fov changes when running.
 # *** - set in inventory.py
 # window.fullscreen=True
-camera.fov=70 # 63 is 'correct' Minecraft? 70 default.
+origFOV=camera.fov=63 # 70 is 'correct' Minecraft? 70 default.
 # camera.clip_plane_far=60
 # print(camera.clip_plane_far) # 10K!
 # window.vsync=False
@@ -164,7 +170,7 @@ count=0
 earthcounter=0
 earthquake_ON=False
 def update():
-    global count, pX, pZ, earthcounter
+    global count, pX, pZ, earthcounter, origFOV
 
     # Highlight terrain block for mining/building...  
     terrain.update()
@@ -223,8 +229,8 @@ def update():
     else:
         subject.speed=subject.walkSpeed
         # *** - default fov
-        if camera.fov>70:
+        if camera.fov>origFOV:
             camera.fov-=camera.dash*4*time.dt
-            if camera.fov<70:camera.fov=70
+            if camera.fov<origFOV:camera.fov=origFOV
 
 app.run()
