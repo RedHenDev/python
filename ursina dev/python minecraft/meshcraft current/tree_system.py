@@ -11,7 +11,7 @@ class TreeSystem:
     def setup():
         # Create our Perlin noise object.
         treeOctaves=8
-        treeSeed=random.randint(10000)
+        treeSeed=random.randint(1,10000)
         TreeSystem.freq=256
         TreeSystem.amp=10
         TreeSystem.noise=PerlinNoise(

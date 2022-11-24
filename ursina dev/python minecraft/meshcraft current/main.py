@@ -64,12 +64,23 @@ i.ii) Item stack text update upon collection. - DONE
 iii) TREES :) - DONE
 
 Tut 22
-i) deplete stack number when building :)
-ii) BUG (in prep code) current blocktype building -
-    when selected item is moved to elsewhere and then
-    we carry on building. Need better system for
-    blocktype selection.
-iii) gapShell for trees, so that we can mine them.
+i) deplete stack number when building :) - DONE
+
+Tut 23 * TREE SPECIAL *
+0.i) refactor rara (random module clash) - DONE
+ii) Trees minable - DONE
+ii.i) Tree texture(s) - DONE -> DONE grass transparency :) 'BUG'
+ii.ii) Tree perlin distribution - DONE
+iii) FOV to 63 - DONE (corrected for dash effect)
+iv) location co-ords as Text on screen (future: minimap?)
+v) audio as member property of collectible class
+vi) Refactor the current-blockType (building) mechanism.
+vii) Write an 'empty' function to empty a hotspot.
+viii) Giant rocky outcrops?!
+ix) Text background (e.g. for location text)
+x) Ui hotspot spacing (refactor)
+xi) Bump system - sticking to trees, and climbing them...
+xii) BUG glitching through terrain bc trees
 """
 window.color = color.rgb(0,200,225)
 # no sky

@@ -73,7 +73,7 @@ class MeshTerrain:
         #     _x+=2
         # Trunk.
         # ***
-        treeH=int(ent*42)
+        treeH=int(ent*3)
         for i in range(treeH):
             # *** -1 on y for wiggle adjust.
             this.genBlock(_x,_y+i,_z,
@@ -91,7 +91,8 @@ class MeshTerrain:
         epi = mine( this.td,this.vd,this.subsets,
                     this.numVertices,this.textureAtlas,
                     this.subject)
-        if epi!=None and epi[2]!='wood':
+        if (epi!=None and epi[2]!='wood' and
+            epi[2]!='foliage'):
             # Don't generate walls around trees!
             # Epi[0] is bte position (Vec3).
             # Epi[1] is subset index.
@@ -160,15 +161,6 @@ class MeshTerrain:
                 this.genBlock(np.x,np.y,np.z,subset,gap=False,blockType='soil')
 
     def genBlock(this,x,y,z,subset=-1,gap=True,blockType='grass',layingTerrain=False):
-        # ***
-        # Gatekeep placement of block.
-        # Stops blocks spawning inside blocks. 
-        # BUG prevents loading map.
-        # k=((floor(x),floor(y),floor(z)))
-        # wb=this.td.get(k)
-        # if wb!=None and wb!='g':
-        #     return
-        
         if subset==-1: subset=this.currentSubset
         # Extend or add to the vertices of our model.
         model = this.subsets[subset].model
