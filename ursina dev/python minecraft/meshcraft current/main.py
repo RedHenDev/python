@@ -88,11 +88,11 @@ ii) Rocks -> replace random stone placements
 ) minimap?
 ) BUG glitching through terrain bc trees
 """
-# window.color = color.rgb(0,200,225)
-window.color=color.black
+window.color = color.rgb(0,200,225)
+
 # no sky
-indra = Sky()
-indra.color = window.color
+# indra = Sky()
+# indra.color = window.color
 subject = FirstPersonController()
 subject.gravity = 0.0
 subject.cursor.visible=True
@@ -129,8 +129,10 @@ origFOV=camera.fov=70 # 63 is 'correct' Minecraft? 70 default.
 terrain = MeshTerrain(subject,camera)
 # snowfall = SnowFall(subject)
 # How do you at atmospheric fog?
-scene.fog_density=(0,75) # 75.
+scene.fog_density=(-1,75) # 75.
 # scene.fog_color=indra.color
+scene.fog_color=window.color # color.white
+scene.fog_density=(-1,99)
 scene.fog_color=window.color # color.white
 # *** False to enable huge terrain at start.
 generatingTerrain=True
@@ -166,9 +168,10 @@ def input(key):
 
     # Inventory access.
     inv_input(key,subject,mouse)
-
-    scene.fog_density=(0,75-subject.z)
-    scene.fog_color=window.color # color.white
+    
+    # ***
+    # scene.fog_density=(-1,99)
+    # scene.fog_color=window.color # color.white
     
 
 count=0
