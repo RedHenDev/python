@@ -47,7 +47,7 @@ def mine(td,vd,subsets,_numVertices,_texture,_sub):
     # highlighted block's vertices high into the air
     # and thus 'vanishing' them. Also, record 'gap' on
     # terrain dictionary (td) and update vd.
-    # *** - _numVertices used instead of magic number 37.
+    # _numVertices used instead of magic number 37.
     for i in range(wv[1]+1,wv[1]+(_numVertices+1)):
         subsets[wv[0]].model.vertices[i][1]+=999
     
