@@ -69,13 +69,16 @@ i) deplete stack number when building :) - DONE
 Tut 23 * TREE SPECIAL *
 0.i) refactor rara (random module clash) - DONE
 ii) Trees minable - DONE
-ii.i) Tree texture(s) - DONE -> DONE grass transparency :) 'BUG'
+ii.i) Tree texture(s) - DONE -> grass transparency :) 'BUG'
 ii.ii) Tree perlin distribution - DONE
 iii) FOV to 63 - DONE (corrected for dash effect)
-iv) location co-ords as Text on screen (future: minimap?)
+iv) location co-ords as Text on screen DONE 
+
 Tut 24
 i) audio - pickups as member property
 ii) Rocks -> replace random stone placements
+iii) tree placement wiggle
+iv) prevent tree crown clash
 
 **To Do List**
 ) audio as member property of collectible class

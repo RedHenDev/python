@@ -6,9 +6,6 @@ from ursina import Vec3, floor
 from config import six_cube_dirs
 
 def checkBuild(_bsite,_td,_camF,_pos): 
-    # Store in convenient variables and floor.
-    # Also -- increment y by 1 - since building above!
-
     #  OK - we want to decide where to build a new block
     # based on where we're looking.
     # _camF is camera's forward.
@@ -25,10 +22,6 @@ def checkBuild(_bsite,_td,_camF,_pos):
     # Build 1 above current block!
     if _bsite == Vec3(x,y,z):
         y+=1
-
-    # x = floor(_bsite.x)
-    # y = floor(_bsite.y+1)
-    # z = floor(_bsite.z)
 
     # Make sure no block here already...
     if _td.get((x,y,z))!='g' and _td.get((x,y,z))!=None:

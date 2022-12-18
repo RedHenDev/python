@@ -1,0 +1,3 @@
+vectorization in python -- improving on the speed of loops
+
+https://medium.com/codex/say-goodbye-to-loops-in-python-and-welcome-vectorization-e4df66615a52

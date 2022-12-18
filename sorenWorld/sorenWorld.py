@@ -5,7 +5,7 @@ from random import random
 app = Ursina()
 
 Sky(color=color.rgb(0,200,255))
-window.fullscreen=True
+window.fullscreen=False
 
 me = FirstPersonController()
 me.y = 100
