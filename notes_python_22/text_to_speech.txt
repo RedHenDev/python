@@ -1,0 +1,48 @@
+python text to speech etc.
+
+***
+https://realpython.com/python-speech-recognition/
+
+macOS
+install PortAudio with Homebrew
+then install PyAudio with pip:
+
+$ brew install portaudio
+$ pip install pyaudio
+[NB I had to use following: python3 -m pip install pyaudio]
+
+You can install SpeechRecognition from a terminal with pip:
+
+$ pip install SpeechRecognition
+Once installed, you should verify the installation by opening an interpreter session and typing:
+
+>>>
+>>> import speech_recognition as sr
+>>> sr.__version__
+'3.8.1'
+
+***
+
+(GPT-3 suggestions)
+There are several Python modules that you can use to recognize speech and generate spoken speech. Some popular options include:
+
+SpeechRecognition: This is a Python library that allows you to perform speech recognition with support for several engines and APIs, such as Google Speech Recognition, Wit.ai, and more. It is easy to use and provides a simple interface for working with speech recognition.
+
+PyAudio: This is a Python library that provides support for PortAudio, a cross-platform audio I/O library. PyAudio can be used to record audio from microphone input and recognize speech using a speech recognition engine.
+
+gTTS (Google Text-to-Speech): This is a Python library that allows you to generate spoken speech from text using the Google Text-to-Speech API. It is easy to use and provides high-quality speech synthesis.
+
+pyttsx3: This is a Python library that allows you to generate spoken speech from text using Microsoft Text-to-Speech engines. It is easy to use and supports multiple languages.
+These are just a few examples of the many Python libraries available for speech recognition and speech synthesis. You can choose the one that best fits your needs and use it in your Python project.
+
+*** The Harvard Sentences (1965) ***
+[https://realpython.com/python-speech-recognition/]
+
+If you’re wondering where the phrases in the “harvard.wav” file come from, they are examples of Harvard Sentences. These phrases were published by the IEEE in 1965 for use in speech intelligibility testing of telephone lines. They are still used in VoIP and cellular testing today.
+
+The Harvard Sentences are comprised of 72 lists of ten phrases. You can find freely available recordings of these phrases on the Open Speech Repository website. Recordings are available in English, Mandarin Chinese, French, and Hindi. They provide an excellent source of free material for testing your code.
+
+*** ***
+
+
+

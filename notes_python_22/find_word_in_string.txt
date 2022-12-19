@@ -1,0 +1,11 @@
+if 'seek' in 'those who seek shall find':
+    print('Success!')
+but keep in mind that this matches a sequence of characters, not necessarily a whole word - for example, 'word' in 'swordsmith' is True. If you only want to match whole words, you ought to use regular expressions:
+
+import re
+
+def findWholeWord(w):
+    return re.compile(r'\b({0})\b'.format(w), flags=re.IGNORECASE).search
+
+findWholeWord('seek')('those who seek shall find')    # -> <match object>
+findWholeWord('word')('swordsmith')                   # -> None
