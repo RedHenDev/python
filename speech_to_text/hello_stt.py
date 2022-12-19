@@ -67,10 +67,14 @@ def robot_listen(_message):
         print(_message)
         print('But no robot connected.')
         return
-        
+
     print(_message)
     if findWholeWord('light')(_message):
         arm.move(usb_arm.LedOn)
+    if findWholeWord('up')(_message):
+        arm.move(usb_arm.WristUp)
+    if findWholeWord('down')(_message):
+        arm.move(usb_arm.WristDown)
     if findWholeWord('yes')(_message):
         for i in range(3):
             arm.move(usb_arm.WristDown,0.4)
@@ -90,4 +94,9 @@ def robot_listen(_message):
 
 # Procedure: listen to mic. Then, pass result to
 # robot listen.
-robot_listen(mic_listen())
+while True:
+    if input("Enter to continue>")=='':
+        robot_listen(mic_listen())
+    else: break
+
+print('-session complete-')
