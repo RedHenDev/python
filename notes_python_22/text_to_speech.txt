@@ -22,6 +22,10 @@ Once installed, you should verify the installation by opening an interpreter ses
 '3.8.1'
 
 ***
+PocketSphinx
+https://pocketsphinx.readthedocs.io/en/latest/
+
+***
 
 (GPT-3 suggestions)
 There are several Python modules that you can use to recognize speech and generate spoken speech. Some popular options include:

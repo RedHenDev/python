@@ -1,0 +1,23 @@
+Virtual environment
+
+A virtual environment in Python is a tool used to isolate specific Python environments on a single machine, allowing you to work with different versions of packages and libraries without affecting the packages and libraries installed in other virtual environments.
+
+To create a virtual environment in Python, you can use the venv module. For example, to create a virtual environment called myenv, you can use the following command:
+
+Copy code
+python3 -m venv myenv
+This will create a directory called myenv that contains a copy of the Python executable, as well as a copy of the pip package manager and the standard library.
+
+To activate the virtual environment, you can use the following command:
+
+Copy code
+source myenv/bin/activate
+This will update your shell's PATH environment variable to point to the myenv virtual environment, so that when you run Python or pip, it will use the packages and libraries installed in the virtual environment.
+
+To deactivate the virtual environment, you can use the following command:
+
+Copy code
+deactivate
+This will restore the original PATH environment variable and allow you to switch between different virtual environments or work with the packages and libraries installed in the global Python environment.
+
+I hope this helps clarify the concept of virtual environments in Python. Do you have any other questions, Neo?

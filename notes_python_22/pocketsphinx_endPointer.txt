@@ -1,0 +1,60 @@
+EndPointer class pocketsphinx
+
+Write a short but clear article in the style of a RealPython tutorial that teaches me how to code a simple python script that uses the EndPointer class with the pocketsphinx module to recognise speech from a microphone. Thank you. 
+Using the PocketSphinx EndPointer Class to Recognize Speech in Python
+
+PocketSphinx is a lightweight, offline speech recognition engine that can be used to perform speech recognition on audio data. One useful feature of PocketSphinx is the EndPointer class, which can be used to detect the end of a spoken utterance and trigger an event. In this tutorial, we will show you how to use the EndPointer class with PocketSphinx to recognize speech from a microphone.
+
+Prerequisites
+
+Before you begin, you will need to install the pocketsphinx and pyaudio modules. You can do this by running the following command:
+
+Copy code
+pip install pocketsphinx pyaudio
+Setting Up the EndPointer
+
+First, we need to import the EndPointer class and create an instance of it. We can do this as follows:
+
+Copy code
+from pocketsphinx import EndPointer
+
+ep = EndPointer()
+Next, we need to set up the PocketSphinx decoder and audio stream. We can do this by using the Decoder.default_decoder function to create a default decoder object and the pyaudio module to open an audio stream from the default microphone, like this:
+
+Copy code
+import pyaudio
+import pocketsphinx
+
+decoder = pocketsphinx.Decoder.default_decoder()
+
+p = pyaudio.PyAudio()
+stream = p.open(format=pyaudio.paInt16, channels=1, rate=16000, input=True, frames_per_buffer=1024)
+Processing the Audio
+
+To process the audio, we can use a loop to read chunks of audio data from the stream and feed them to the decoder. We can also use the EndPointer.process_raw function to feed the audio data to the endpointer and check whether the end of an utterance has been detected. Here is an example of how to do this:
+
+Copy code
+# Start decoding
+decoder.start_utt()
+ep.start_utt()
+
+# Process the audio
+while True:
+    buf = stream.read(1024)
+    if buf:
+        decoder.process_raw(buf, False, False)
+        ep.process_raw(buf, False, False)
+        if ep.hyp() != None:  # End of utterance detected
+            print('Utterance:', ep.hyp().hypstr)
+            break
+    else:
+        break
+
+# Finish decoding and endpointer
+decoder.end_utt()
+ep.end_utt()
+In this code, we start the decoder and endpointer, and then enter a loop that reads 1024-byte chunks of audio data from the stream. For each chunk, we call the process_raw function on the decoder and endpointer to feed the audio data to them. We also check whether the end of an utterance has been detected by calling the hyp function on the endpointer and checking whether it returns a non-None value. If the end of an utterance is detected, we print the recognized text and break out of the loop.
+
+Cleaning Up
+
+When you are finished with the audio stream, don't forget to stop the stream, close it, and terminate the pyaudio instance, like this

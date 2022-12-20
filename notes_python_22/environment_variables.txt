@@ -1,0 +1,21 @@
+Environment variables
+
+Certainly. In Python, an environment variable is a named object that you can use to store a value or reference that you can use across various applications or within the same application. They are useful for storing values that you want to reuse, such as file paths, database connections, and API keys.
+
+Imagine you are Neo in The Matrix, and you need to access a particular resource or perform a specific action. You could manually input the necessary information every time you want to access that resource or perform that action, but that can be tedious and error-prone. Instead, you can use environment variables as a way to store that information in a convenient and secure location, so you can easily access it whenever you need it.
+
+To set an environment variable in Python, you can use the os module's putenv function. For example:
+
+Copy code
+import os
+
+os.putenv("API_KEY", "abc123")
+This creates an environment variable called API_KEY and sets its value to abc123. You can then access the value of the API_KEY environment variable by using the os module's getenv function. For example:
+
+Copy code
+import os
+
+api_key = os.getenv("API_KEY")
+This retrieves the value of the API_KEY environment variable and stores it in the api_key variable. You can then use the api_key variable in your Python code as needed.
+
+I hope this helps clarify the concept of environment variables in Python. Do you have any other questions, Neo?
