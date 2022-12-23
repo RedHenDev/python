@@ -38,7 +38,14 @@ class MeshTerrain:
         # Our vertex dictionary -- for mining.
         this.vd = {}
 
+        # For the main terrain?
         this.perlin = Perlin()
+        # And for our new terrain features :)
+        this.tree_noise=PerlinNoise(
+                octaves=32,
+                seed=2022)
+        this.tree_freq=64
+        this.tree_amp=128
 
         # Instantiate our subset Entities.
         this.setup_subsets()
@@ -60,12 +67,13 @@ class MeshTerrain:
         # if y_interp > 1:
         #     # Laying terrain will change blockType to 'stone'.
         #     return True
-        noise=PerlinNoise(
-                octaves=32,
-                seed=2022)
-        freq=64
-        amp=128
-        y=noise(([_x/freq,_z/freq]))*amp
+
+        # noise=PerlinNoise(
+        #         octaves=32,
+        #         seed=2022)
+        # freq=64
+        # amp=128
+        y=this.tree_noise(([_x/this.tree_freq,_z/this.tree_freq]))*this.tree_amp
         # print(y)
         if y > 64:
             this.genBlock(_x,_y+1,_z,
@@ -79,8 +87,6 @@ class MeshTerrain:
 
         # Laying terrain will assume grass, not stone.
         return False
-
-        
 
     def plantTree(this,_x,_y,_z):
         # ***
@@ -98,18 +104,20 @@ class MeshTerrain:
         # Trunk.
         # ***
         treeH=int(ent*7)
-        noise=PerlinNoise(
-                octaves=32,
-                seed=2022)
-        freq=64
-        amp=128
+        # **** Surely I ought to define this at 
+        # Initilization?
+        # noise=PerlinNoise(
+        #         octaves=32,
+        #         seed=2022)
+        # freq=64
+        # amp=128
         
         # print(y)
         
         for i in range(treeH):
             this.genBlock(_x+wiggle,_y+i,_z+wiggle,
                 blockType='wood')
-            by=noise(([_x/freq,_z/freq,_y+i]))*amp
+            by=this.tree_noise(([_x/this.tree_freq,_z/this.tree_freq,_y+i]))*this.tree_amp
             if by > 34:
                 this.genBlock(_x+wiggle+1,_y+i,_z+wiggle,
                 blockType='foliage')
@@ -200,6 +208,11 @@ class MeshTerrain:
                 this.genBlock(np.x,np.y,np.z,subset,gap=False,blockType='soil')
 
     def genBlock(this,x,y,z,subset=-1,gap=True,blockType='grass',layingTerrain=False):
+        # Clash protection.
+        key=((floor(x),floor(y),floor(z)))
+        if (this.td.get(key)!=None and 
+            this.td.get(key)!='g'): return
+
         if subset==-1: subset=this.currentSubset
         # Extend or add to the vertices of our model.
         model = this.subsets[subset].model

@@ -1,0 +1,13 @@
+
+
+Here is an example of how the if __name__ == "__main__" block might be used in a Python module:
+
+def main():
+    # Code to be executed when the module is run directly
+    print("Hello, World!")
+
+if __name__ == "__main__":
+    main()
+In this example, the main() function would only be called if the module was run directly. If the module was imported by another script, the main() function would not be executed. This allows the module to be used as a library of functions by other code, while still providing a way to run the module as a standalone script.
+
+I hope this helps! Let me know if you have any questions.
