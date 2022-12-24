@@ -73,7 +73,8 @@ def robot_listen(_message):
         return False
 
     print(_message)
-    if findWholeWord('light')(_message):
+    if findWholeWord('light')(_message) or \
+        findWholeWord('lights')(_message):
         arm.move(usb_arm.LedOn)
     if findWholeWord('up')(_message):
         arm.move(usb_arm.WristUp)
@@ -86,9 +87,9 @@ def robot_listen(_message):
     if findWholeWord('right')(_message):
         arm.move(usb_arm.BaseClockWise,2)
     if findWholeWord('close')(_message):
-        arm.move(usb_arm.CloseGrips,1)
+        arm.move(usb_arm.CloseGrips,0.25)
     if findWholeWord('open')(_message):
-        arm.move(usb_arm.OpenGrips,1)
+        arm.move(usb_arm.OpenGrips,0.25)
     if findWholeWord('left')(_message):
         arm.move(usb_arm.BaseCtrClockWise,2)
     if findWholeWord('bye-bye')(_message) or \
