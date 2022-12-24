@@ -28,9 +28,9 @@ def hark(_duration):
     for i in range(0,int(RATE/FRAMES_PER_BUFFER*seconds)):
         data=stream.read(FRAMES_PER_BUFFER)
         frames.append(data)
-    return frames
     stream.stop_stream()
     stream.close()
     p.terminate()
+    return frames
 
 print(hark(5))
