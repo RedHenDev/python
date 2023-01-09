@@ -74,6 +74,7 @@ def robot_listen(_message):
 # Procedure: listen to mic. Then, pass result to
 # robot listen.
 os.system("say 'Im a robot, and my name is Pink.'")
+os.system("say 'Hello Jojo!'")
 while True:
     # if input("Enter to continue>")=='':
         robot_listen(mic_listen())
