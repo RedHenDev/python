@@ -6,7 +6,7 @@ class Perlin:
         # this.seed = ord('y')+ord('o')
         from random import randint
         from ursina import Text, destroy
-        this.seed=randint(0,1000000)
+        # this.seed=randint(0,1000000)
         this.seed=2022
         world=Text(str(this.seed),scale=3)
         destroy(world,10)
