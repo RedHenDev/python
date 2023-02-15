@@ -10,12 +10,12 @@ items=[]
 # Inventory hotbar.
 hotbar = Entity(model=None)
 hotbar.parent=camera.ui
-hotbar.model=load_model('quad',use_deepcopy=True)
+hotbar.model=load_model('quad')
 # Set the size and position.
 print(hotbar.position)
 # ***
 import sys
-window.fullscreen=False
+window.fullscreen=True
 if window.fullscreen==False and sys.platform.lower()=='darwin':
     camera.ui.scale_x*=0.05*1/window.aspect_ratio
     camera.ui.scale_y*=0.05
@@ -32,7 +32,7 @@ hotbar.color=color.dark_gray
 # Inventory main panel.
 iPan = Entity()
 iPan.parent=camera.ui
-iPan.model=load_model('quad',use_deepcopy=True)
+iPan.model=load_model('quad')
 # Set the size and position.
 iPan.rows=3
 iPan.scale_y=hotbar.scale_y * iPan.rows
@@ -58,7 +58,7 @@ class Hotspot(Entity):
         color=color.white,
         z=-1
         )
-        this.model=load_model('quad',use_deepcopy=True)
+        this.model=load_model('quad')
         this.texture='white_box'
         this.onHotbar=False
         this.visible=False
@@ -120,7 +120,7 @@ class Item(Draggable):
         parent=camera.ui,
         z=-2
         )
-        this.model=load_model('quad',use_deepcopy=True)
+        this.model=load_model('quad')
         # *** 0.8 to fit in white lines.
         this.scale_x=Hotspot.scalar*0.8
         this.scale_y=this.scale_x
@@ -145,7 +145,7 @@ class Item(Draggable):
         # Use dictionary to access uv co-ords.
         uu=minerals[this.blockType][0]
         uv=minerals[this.blockType][1]
-        basemod=load_model('block.obj',use_deepcopy=True)
+        basemod=load_model('block.obj')
         e=Empty(model=basemod)
         cb=copy(e.model.uvs)
         del cb[:-33]

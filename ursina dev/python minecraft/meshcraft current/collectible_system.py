@@ -21,7 +21,7 @@ class Collectible(Entity):
 
     def __init__(this,_blockType,_pos,_tex,_sub):
         super().__init__()
-        this.model=load_model('block.obj',use_deepcopy=True)
+        this.model=load_model('block.obj')
         this.texture=_tex
         this.scale=0.33
         this.position=_pos

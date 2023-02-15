@@ -15,7 +15,7 @@ class MeshTerrain:
         this.subject = _sub
         this.camera = _cam
 
-        this.block = load_model('block.obj',use_deepcopy=True)
+        this.block = load_model('block.obj')
         
         # * HEX ******
         # this.textureAtlas='grass_64_hex_tex_2.png'
