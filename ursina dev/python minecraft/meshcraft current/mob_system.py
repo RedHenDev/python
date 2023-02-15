@@ -8,19 +8,27 @@ grey.texture='panda_texture'
 grey.position = Vec3(0,-2.9,10)
 grey.turnSpeed = 1
 grey.speed = 1
+grey.a=True
 
 # Can we find Vincent?!
-vincent = Entity(model='vincent.obj',scale=10)
-vincent.texture='chick_tex.png'
-vincent.z = -16
-vincent.y = 10
+vincent = Entity(model='chicken.obj',scale=1)
+vincent.texture='chicken.png'
+vincent.z = 16
+vincent.y = 8
+vincent.rotation_y=180
+vincent.turnSpeed = 0.1
+vincent.speed = 0.1
+vincent.a=False
 
 def mob_movement(mob, subPos, _td):
     # First, turn towards target...
     # BUG wiggle walk when aligned with subject?
     tempOR = mob.rotation_y
     mob.lookAt(subPos)
-    mob.rotation = Vec3(0,mob.rotation.y+180,0)
+    #***
+    if mob.a:
+        mob.rotation = Vec3(0,mob.rotation.y+180,0)
+    else: mob.rotation = Vec3(0,mob.rotation.y,0)
     mob.rotation_y = lerp(tempOR,mob.rotation_y,mob.turnSpeed*time.dt)
 
     # Now move mob towards target...
@@ -30,13 +38,19 @@ def mob_movement(mob, subPos, _td):
     dist = subPos-mob.position
     # Magnitude of distance from target examined...
     if dist.length() > intimacyDist:
-        # Approach target...
-        mob.position -= mob.forward * mob.speed * time.dt
-        mob.resume() # Animation.
-        mob.is_playing=True
+        # ***
+        if mob.a:
+            # Approach target...
+            mob.position -= mob.forward * mob.speed * time.dt
+            mob.resume() # Animation.
+            mob.is_playing=True
+        else:
+            # Approach target...
+            mob.position += mob.forward * mob.speed * time.dt
     else:
-        mob.pause() # Animation.
-        mob.is_playing=False
+        if mob.a:
+            mob.pause() # Animation.
+            mob.is_playing=False
 
     terrain_walk(mob, _td)
 

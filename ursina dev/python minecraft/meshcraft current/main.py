@@ -189,6 +189,7 @@ def update():
 
     # Handle mob ai.
     mob_movement(grey, subject.position, terrain.td)
+    mob_movement(vincent, subject.position, terrain.td)
 
     count+=1
     # ***
