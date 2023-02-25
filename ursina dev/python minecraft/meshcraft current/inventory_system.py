@@ -15,10 +15,11 @@ hotbar.model=load_model('quad')
 print(hotbar.position)
 # ***
 import sys
-window.fullscreen=True
+window.fullscreen=False
 if window.fullscreen==False and sys.platform.lower()=='darwin':
-    camera.ui.scale_x*=0.05*1/window.aspect_ratio
-    camera.ui.scale_y*=0.05
+    pass
+    # camera.ui.scale_x*=0.05*1/window.aspect_ratio
+    # camera.ui.scale_y*=0.05
 # ui_scalar + use of 1/aspect_ratio.
 hot_cols=9
 hot_wid=1/16 # Width of hotspot is 1/16 of window height.
