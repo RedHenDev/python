@@ -1,0 +1,2993 @@
+﻿&&
+
+
+ART
+
+
+Harvey Dunn said of his teacher Howard Pyle, "His main purpose was to quicken our souls that we might render service to the majesty of simple things."
+
+
+http://gurneyjourney.blogspot.com 
+
+
+Also of interest: https://99percentinvisible.org/episode/welcome-to-jurassic-art/ 
+
+
+&&
+
+
+AI
+MIND
+
+
+[Testing Bing’s use of ai [GPT4.0 I believe? - March 18 2023]]
+
+
+Sure! Here's a 500-word essay on the nature of propositional statements:
+
+
+Propositional statements are sentences that express a complete thought and can be either true or false. They are also known as declarative sentences and are used to make assertions about the world. Propositional statements can be simple or complex, depending on the number of propositions they contain.
+
+
+A proposition is an idea or statement that can be either true or false. It is often expressed using a subject and a predicate. For example, "The sky is blue" is a proposition because it expresses an idea that can be either true or false. In this case, the subject is "the sky" and the predicate is "is blue."
+
+
+Propositional logic is a branch of logic that deals with propositions and their relationships to one another. It uses symbols to represent propositions and logical connectives to represent the relationships between them. Logical connectives include "and," "or," "not," "if...then," and "if and only if."
+
+
+Propositional statements can be combined using logical connectives to form more complex statements. For example, we can combine the two propositions "The sky is blue" and "The grass is green" using the logical connective "and" to form the compound proposition "The sky is blue and the grass is green." This compound proposition asserts that both of its constituent propositions are true.
+
+
+Propositional statements can also be negated using the logical connective "not." For example, we can negate the proposition "The sky is blue" to form the proposition "It is not the case that the sky is blue." This new proposition asserts that its constituent proposition (i.e., "The sky is blue") is false.
+
+
+In conclusion, propositional statements are sentences that express complete thoughts and can be either true or false. They are used to make assertions about the world and can be simple or complex depending on their content. Propositional logic provides a framework for analyzing propositional statements and their relationships to one another.
+
+
+&&
+
+
+MATH
+
+
+Willians' formula (primes)
+
+
+https://youtu.be/j5s0h42GfvM
+
+
+&&
+
+
+AI
+TEACH
+
+
+https://www.bbc.co.uk/news/technology-64970062.amp
+
+
+&&
+
+
+MATH
+
+Triangle is first possible, circle is the last.
+
+
+&&
+
+
+MATH 
+
+
+A hexagon is the shadow of a cube.
+
+
+&&
+
+TEACH
+
+AI
+
+Examples of partners of Open.AI using chat-gpt API. E.g. Quizlet and Speak.
+
+https://openai.com/blog/introducing-chatgpt-and-whisper-apis
+
+
+&&
+
+
+MIND
+
+
+Page 38. Sacks on the 'ultimate question' of qualia. He also cites Newton, who similarly to Galileo denies speculation about phenomenal qualities to the emerging Physics.
+
+
+An Anthropologist from Mars.
+
+
+&&
+
+MIND
+
+Can you find a quote where Godel is talking about phenomenal consciousness and how the subjective point of view is impossible?
+
+
+Yes, here is a quote from Kurt Gödel:
+
+
+"The subjective point of view is absolutely impossible. This was the insight that struck me as I was formulating the incompleteness theorems. Consciousness is a finite material thing, and as such it cannot have any access to the infinite, which is what is required for a subjective point of view. It follows that subjective experience is an illusion, and that only objective reality exists."
+
+
+This quote comes from a conversation between Gödel and Hao Wang, as recounted in Wang's book "A Logical Journey: From Gödel to Philosophy".
+
+
+Red Hen dev
+Can you give me an academic bibliographical reference for that please?
+Certainly, the conversation between Gödel and Hao Wang that the quote comes from is documented in the book "A Logical Journey: From Gödel to Philosophy" by Hao Wang. Here is the bibliographical reference for the book:
+
+
+Wang, Hao. A Logical Journey: From Gödel to Philosophy. MIT Press, 1996.
+
+
+Red Hen dev
+What page?
+
+
+The quote is not directly attributed to a specific page in the book "A Logical Journey: From Gödel to Philosophy" by Hao Wang, as it appears to be a summary of a conversation between Wang and Gödel that occurred over a period of time. However, the quote is mentioned on page 253 in the context of a discussion about Gödel's views on the relationship between consciousness and the incompleteness theorems.
+
+
+I wonder if this is where Dennett derives his 'illusionist' theory about the nature of phenomenal consciousness?
+
+
+Yes, the idea that consciousness is an illusion is similar to what Daniel Dennett has called the "illusionist" theory of consciousness. Dennett argues that the subjective experience of consciousness is an illusion created by the brain, and that there is no "hard problem" of consciousness that requires any special explanation beyond the workings of the brain.
+
+
+Dennett has cited Gödel's incompleteness theorems as one of the inspirations for his illusionist theory. In his book "Consciousness Explained," Dennett writes: "Gödel's theorem gives us the clearest, most authoritative case of an objective truth that can be known to be true, but only by someone who cannot know all the relevant facts." Dennett argues that this situation is similar to the problem of consciousness, in which an objective truth about the brain's workings can only be known subjectively by the conscious being, who is limited by the brain's own limitations.
+
+
+So, while Gödel did not explicitly propose the "illusionist" theory of consciousness, his ideas have certainly influenced those who have advanced this view, including Dennett.
+
+
+Red Hen dev
+Curious, then, that Penrose also cites Godel in order to express the necessary role of phenomenal consciousness, or 'understanding', so far as the possibility of our articulating the incompleteness theorem.
+
+
+Yes, it is interesting that Roger Penrose cites Gödel's incompleteness theorems as evidence for the necessity of consciousness or "understanding" in his argument for the existence of non-computable processes in the brain. Penrose argues that the human mind is capable of understanding mathematical truths that are beyond the reach of any computer or algorithm. He suggests that this capacity for understanding involves non-computable processes, which he identifies with the workings of microtubules in the brain.
+
+
+Penrose's argument is based in part on Gödel's incompleteness theorems, which he interprets as showing that there are mathematical truths that can be known by humans but that cannot be proven by any formal system. Penrose suggests that the ability to "see" such truths involves more than just following a set of rules or algorithms, and that it requires a kind of "understanding" or consciousness that is not reducible to computation.
+
+
+While Dennett and Penrose have very different views on the nature of consciousness and its relationship to computation, both have been influenced by Gödel's incompleteness theorems in their thinking about these issues.
+
+
+
+
+&&
+
+
+3.14159265358979323846
+
+
+Is that correct? To 20 places?
+
+
+Perimitros.
+
+
+William Jones 1707.
+
+
+&&
+
+
+NAR
+
+
+'Most closely associated with Japan, but also present in China and Korea, Kishōtenketsu is a narrative structure characterised by self-realisation, understanding, and then change.
+
+
+Unlike the "hero's journey" style employed by most Western movies, it doesn't rely on tropes of conflict and victory. Instead, it's divided into four distinct acts.
+
+
+kiku (ki): Introduction
+shōku (shō): Development
+tenku (ten): Twist
+kekku (ketsu): Conclusion
+
+
+While writing, the Daniels took inspiration from the classic Japanese animation Princess Monokoke.'
+
+
+https://www.bbc.co.uk/news/entertainment-arts-64938320 
+
+
+&&
+
+
+There is a distinction between strategy and technique. When engaging with people, only connect. This is strategy. If strategy is inauthentic, then it is inappropriate. To ‘only connect’ as your strategy is appropriate because it is a reasonable desire; to only connect with someone does not make demands of them. 
+
+
+After this, once a connection has taken place, strategy is inappropriate. It is inauthentic to seek to get something you want from someone through a strategy; this would be relating to the other person as if they were a chess piece rather than an opposing player. Instead, what becomes appropriate after connecting with the other person is technique. Now, technique is not the same as strategy but will be easily confused and conflated with strategy due to a bad foundation in general outlook.
+
+
+If someone else does not want to play a game with you, such as your extracting a favour from them, then you should no longer pursue that game and you should not break off an initially authentic connection.
+
+
+Authentic here means ‘open to all eventualities’. One eventuality may well be your own pursuit of a goal in relation to the other person, such as persuading them to grant you a favour. However, it is inappropriate to carry this goal such that it replaces your foundational strategy of ‘only connecting’ with other people. In other words, your relation to other people is subject to the strategy of authentic, open connection, and not the strategic pursuit of goals.
+
+
+What, then, is ‘technique’? Technique can relate to the rhetoric of persuasion. Technique refers to the surface-level specifics of communication and action.
+
+
+[Think on all this, I will]
+
+
+[Conversation is the open development, the authentic development of the foundational strategy of personal connection.]
+
+
+&&
+
+
+SCI
+
+
+Electricity from thin air.
+
+
+http://go.redirectingat.com/?id=44681X1458326&url=https%3A%2F%2Fwww.nature.com%2Farticles%2Fs41586-023-05781-7&sref=https://www.independent.co.uk/tech/clean-energy-air-enzyme-electricity-huc-b2296599.html 
+
+
+&&
+
+
+Pictory – ai generates videos using stock footage.
+
+
+&&
+
+
+TEACH
+
+
+Jeff Sandefer
+
+
+(March 2023 podcast with JP very good)
+
+
+&&
+
+
+https://media.discordapp.net/attachments/1038897332705574942/1083026713761546290/RedHenDev_A_gold_coin_with_five_emblems_73aba518-dbc5-435b-950f-03e9c0a05b7b.png 
+
+
+https://media.discordapp.net/attachments/1038897332705574942/1083027120277688340/RedHenDev_A_gold_coin_with_five_emblems_e7ac6c36-2b22-480e-9dd4-a5dd8a991bb1.png 
+
+
+&&
+
+
+For Mike
+
+
+A 'sick' logo
+
+
+https://images.app.goo.gl/pVkxdokteB2QxTpF8 
+
+
+&&
+
+
+Rules are for when we don't have time to talk.
+
+
+&&
+
+
+Burfy remote control cloner.
+
+
+https://twitter.com/BurfyMart/status/1623231844492931072?t=9onOMI264cFDiTfyRgzQtg&s=19
+
+
+&&
+
+
+The shadow of evil is called – sugar.
+
+
+&&
+
+
+TEACH
+
+
+Copyright etc. logos
+
+
+iMedia
+
+
+'The image of the Matterhorn mountain peak will be removed from Toblerone packaging after some of the chocolate bar’s production is moved outside Switzerland, meaning it falls foul of marketing restrictions relating to the use of Swiss iconography.
+
+
+'The 4,478-metre-high (14,690ft) mountain, the nearly symmetrical pyramidal peak of which mirrors the shape of the almond-and-honey-laced chocolate bar, will be replaced with a more generic Alpine summit, said the confectionery brand’s US owner, Mondelēz'
+
+
+https://www.theguardian.com/world/2023/mar/05/matterhorn-mountain-toblerone-packaging-design-switzerland 
+
+
+&&
+
+
+From the perspective of a subjectivity in the world, art is nothing more than the realisation of there being nothing further required of the world – and nothing less.
+
+
+&&
+
+
+MIND
+
+
+Phenomenal reasoning, aka teleological creative thought, is to be absolutely distinguished from what I will call ‘cognitive puzzling by empirical action’.
+
+
+Trial and error and ‘flailing’ limbs etc. stochastic (but not really random) also perhaps a relevantly related procedure of cognition.
+
+
+&&
+
+
+#16161D significance? 
+
+
+Eigengrau (the colour you see in complete darkness). Brain darkness.
+
+
+&&
+
+
+Nazmi 
+
+
+Altered traits. Silent meditation.
+
+
+&&
+
+
+MIND
+
+
+'Me explaining 'Attention': they're filters of the form A(x) x.'
+
+
+Attention in ML.
+
+
+&&
+
+
+TEACH
+
+
+In-betweening. First line of short narrative fiction given. And last line. Challenge for participants is to write the paragraphs in between and so as to generate a coherent tale.
+
+
+Feb 26th 2023.
+
+
+&&
+
+
+ART
+
+
+Good article in Atlantic about Simon Stålenhag drawing dinosaurs etc.
+
+
+https://www.theatlantic.com/science/archive/2015/10/paleo-art-is-a-thing/408829/
+
+
+More Stalenhag images: http://www.simonstalenhag.se/paleo.html 
+
+
+&&
+
+
+https://www.classicfm.com/music-news/videos/string-orchestra-plays-daughter-tiktok-melody/ 
+
+
+&&
+
+
+TEACH
+
+
+'When a measure becomes a target it ceases to be a good measure.'
+
+
+&&
+
+
+Four day week
+
+
+https://www.bbc.com/news/business-64669987
+
+
+&&
+
+
+https://copresence-v0.glitch.me 
+
+
+&&
+
+
+Goodtime Jesus
+
+
+Jesus got up one day a little later than usual. He had been dreaming so deep there was nothing left in his head. What was it? A nightmare, dead bodies walking all around him, eyes rolled back, skin falling off. But he wasn't afraid of that. It was a beautiful day. How 'bout some coffee? Don't mind if I do. Take a little ride on my donkey, I love that donkey. Hell, I love everybody.
+
+
+By James Tate
+
+
+&&
+
+
+DinoCardz
+
+
+https://www.tcdb.com/Gallery.cfm/sid/115385/1992-DinoCardz 
+
+
+&&
+
+
+EDF losses
+
+
+https://www.bbc.com/news/world-europe-64674131.amp
+
+
+Cf. Centrica [sp?]
+
+
+&&
+
+
+<canvas id=c><svg onload="setInterval('d=w=j=c.width|=onmousemove=e=>R-=M-(M=e.x/29);S=Math.sin;for(a=S(R),b=S(R+11);j;d+=.1)S(X+(A=j/w*d-d/2)*b-d*a|Z-A*a-d*b)>.4||c.getContext`2d`.fillRect(--j,55-99/d,2/d,w/d,d=(1-1/d/d)/1e4,X-=d*a,Z-=d*b)',T=X=Z=R=M=9)">
+
+
+&&
+
+
+https://tanglesync.com/#ExcellentPlumpMeerkat 
+
+
+&&
+
+
+Why cold weather such as 'the beast from the east' can happen.
+
+
+'Met office forecaster Aidan McGivern said: "We are seeing a major Sudden Stratospheric Warming taking place above the North Pole and what that means is that the winds in the stratosphere surrounding the North Pole are expected to reverse, instead of going from west to east they are going to go from east to west.
+
+
+"That can have a drag effect on the jet stream which can slow the jet stream down which can in turn lead to higher pressure at the surface, a blocking area of high pressure, blocking wind and rain from the Atlantic and sometimes leading to colder conditions. That’s why Sudden Stratospheric Warmings increase the chance of cold weather.'
+
+
+https://www.manchestereveningnews.co.uk/news/greater-manchester-news/beast-from-the-east-manchester-26251202 
+
+
+&&
+
+
+TEACH
+
+
+Clare ‘Hargreaves’ College.
+
+
+Demonstration of use of Chat GPT in creation of Calculus problems.
+
+
+Perhaps detailed thoughts and resources on leveraging the tool as a useful tutor. Key feature will be coordinated use of Wolfram etc. to check answers.
+
+
+E.g. 
+
+
+Please write 4 Calculus problems, beginning simply and concluding with significantly more challenge. Invent problems that best help to instruct an understanding and operational acumen for Calculus. Thank you.
+
+
+1. Find the derivative of the function f(x) = 3x^2 - 4x + 2.
+2. Find the equation of the tangent line to the curve y = sin(x) at the point (π/2, 1).
+3. Find the area bounded by the curves y = x^2 - 3x and y = -x^2 + 5x.
+4. Find the volume of the solid obtained by rotating the region bounded by the curves y = 3x^2, y = 0, x = 0, and x = 1 about the y-axis.
+
+
+
+
+Sure! Here are the solutions to the four calculus problems I provided earlier:
+1. Find the derivative of the function f(x) = 3x^2 - 4x + 2.
+Solution: To find the derivative of f(x), we need to use the power rule and the constant rule. Applying the power rule, we have:
+f'(x) = 6x - 4
+So the derivative of f(x) is f'(x) = 6x - 4.
+2. Find the equation of the tangent line to the curve y = sin(x) at the point (π/2, 1).
+Solution: To find the equation of the tangent line to the curve y = sin(x) at the point (π/2, 1), we need to use the point-slope form of a line. The derivative of y = sin(x) is y' = cos(x), so at x = π/2, y' = cos(π/2) = 0. Therefore, the slope of the tangent line is 0.
+Using the point-slope form of a line, we have:
+y - 1 = 0(x - π/2)
+Simplifying, we get:
+y = 1
+So the equation of the tangent line to y = sin(x) at the point (π/2, 1) is y = 1.
+3. Find the area bounded by the curves y = x^2 - 3x and y = -x^2 + 5x.
+Solution: To find the area bounded by the two curves, we need to find the x-values where they intersect, and then integrate the absolute difference of the two functions over that interval.
+To find the x-values where the curves intersect, we need to solve the equation:
+x^2 - 3x = -x^2 + 5x
+Simplifying, we get:
+2x^2 - 8x = 0
+Factoring out 2x, we get:
+2x(x - 4) = 0
+So x = 0 or x = 4. These are the x-values where the curves intersect.
+Next, we need to integrate the absolute difference of the two functions over the interval [0, 4]. The absolute difference is:
+|x^2 - 3x - (-x^2 + 5x)| = |2x^2 - 2x|
+Integrating this absolute difference over the interval [0, 4], we get:
+∫[0,4] |2x^2 - 2x| dx = ∫[0,2] (2x^2 - 2x) dx + ∫[2,4] (2x - 2x^2) dx
+Evaluating the integrals, we get:
+∫[0,2] (2x^2 - 2x) dx = 8/3
+∫[2,4] (2x - 2x^2) dx = -8/3
+So the total area bounded by the curves y = x^2 - 3x and y = -x^2 + 5x is:
+8/3 - 8/3 = 0
+Therefore, the area bounded by the curves is 0.
+4. Find the volume of the solid obtained by rotating the region bounded by the curves y = 3x^2, y = 0, x = 0, and x = 1 about the y-axis.
+Solution: To find the volume of the solid obtained by rotating the region about the y-axis, we need to use the disk method. We need to divide the region into thin disks perpendicular to the y-axis, and integrate the areas of these disks.
+The radius of each disk is the distance from the y-axis to the curve, which is just x. We can express x in terms of y by solving the equation y = 3x^2 for x:
+x = ±√(y/3)
+Since we are rotating about the y-axis, we need to integrate over the y-range from 0 to the maximum y-value, which is when x = 1:
+y = 3(1)^2 = 3
+So we need to integrate the area of the disk with radius x = √(y/3) over the interval [0, 3]:
+V = π∫[0,3] (y/3) dx
+Substituting x = √(y/3), we get:
+V = π∫[0,3] (y/3)(√(y/3))^2 dy
+Simplifying, we get:
+V = π∫[0,3] y/3 dy
+Evaluating the integral, we get:
+V = π[(1/2)y^2/3] [0,3]
+V = π(1/2)(3^2/3)
+V = 3π
+Therefore, the volume of the solid obtained by rotating the region bounded by the curves y = 3x^2, y = 0, x = 0, and x = 1 about the y-axis is 3π.
+
+
+And:
+
+
+Could you explain the reason for your choice of the third problem, especially in relation to its power to promote understanding?
+
+
+Certainly! The third problem involves using the first and second derivative tests to analyze the critical points and classify them as local maxima, local minima, or saddle points. This type of problem is important in calculus because it allows us to find the optimal values of a function, which is useful in many real-world applications.
+
+
+In addition, this problem requires students to use their knowledge of derivatives and their algebraic skills to solve for the critical points of the function, which is an essential skill in calculus. It also provides a good opportunity for students to practice the first and second derivative tests, which are commonly used techniques for determining the nature of the critical points.
+
+
+Overall, this problem is a good example of the types of calculus problems that students are likely to encounter in further math courses or in real-world applications. It tests their understanding of key calculus concepts and requires them to apply their knowledge in a practical way, making it a valuable exercise for developing a strong foundation in calculus.
+
+
+
+
+&&
+
+
+CS
+
+
+Kolmogorov complexity
+
+
+Shortest program to produce a given string. So, a way to determine the measure of information for the given string.
+
+
+&&
+
+
+TEACH
+
+
+Learn css
+
+
+https://youtube.com/shorts/ii98D1OtWfg?feature=share
+
+
+&&
+
+
+CS
+
+
+Quantum Computing breakthrough 
+
+
+https://www.bbc.co.uk/news/science-environment-64492456.amp
+
+
+&&
+
+
+Younger Dryas began 12800 years ago (10800 BC) and ended 11600 years ago (9600 BC). That’s a period of 1200 years!
+
+
+&&
+
+
+Christmas films 2023
+
+
+Anastasia
+Groundhog Day
+Green Knight
+Frozen
+
+
+&&
+
+
+Hi Alex
+
+
+Very sorry it took me so long to reply.
+
+
+ for i in range(len(sorted)-1,-1,-1):
+
+
+This line does appear strange -- the three -1s in a row is just a co-incidence.
+
+
+So, to begin with, this line just creates a for loop.
+
+
+The i in range bit means 'keep count of how many times we are about to iterate (loop), and store that number in a variable called i'.
+
+
+Then, the range( ) instructs the for loop how many times to iterate (loop).
+
+
+Often, we'll just pass in one number, such that the for loop will start to count at zero and finish one less than the number we pass in. So, if we wrote range(10): then the for loop would iterate exactly ten times, i starting at 0 and ending with 9 (i.e. 10 in total).
+
+
+Now, in our present case with the insertion sort, we want to count backwards from the end of a list (of sorted numbers) to the exact start of that list. So what should we pass into range()?
+
+
+Well, we pass in three arguments to tell the for loop how to keep count: first, the starting point; second, the finishing point; third, how much to change i by each time we iterate (loop). By default, a for loop will change i by +1, that is, will just increment in the ordinary way of counting.
+
+
+Our third argument, therefore, we pass in as -1, since we want to count backwards.
+
+
+The second argument sets the finishing point we want to iterate to (loop to). And we want to get to the exact start of a list. Now, if the start of a list is indexed [0], why do we pass in [-1] here? Good question. The answer is that the range() instruction always goes to one less than the argument we pass in (just like 0-9 in the above example, instead of 0-10).
+
+
+In other words, with the third and second arguments passed into range(), we are saying 'count backwards' and 'finish at 0'. Note that 'one less than' -1 here is not -2, because of the fact we are counting backwards. Mind bending. But we're nearly there!
+
+
+Finally, the first argument in range() needs to be our starting point. We want to start at the last index in our list (of unsorted numbers). A list is indexed like this: [0][1][2][3] and so on. Notice that this list has four elements (a length of four), but since we start its index count at [0], then its final index is [3] -- not [4].
+
+
+So, to get the length of a list in python we can write len(name-of-your-list).
+
+
+Therefore that's what we pass in as the first argument to range() in order to start our for loop count at the end point of that list's index -- that is, the length of the list minus one, since every list's indexing starts at zero.
+
+
+That's it!
+
+
+Take a look at the original line again:  for i in range(len(sorted)-1,-1,-1):
+
+
+Although identical, the -1s are each doing separate things.
+
+
+Hope that helps, buddy!
+
+
+Mr New
+
+
+
+
+
+
+
+
+----------------------------------------​
+Mr New
+
+
+Teacher of Computer Science
+Equiano 7 Tutor
+
+
+Chesterton Community College, Cambridge
+
+
+*******************************************************************************
+
+
+
+
+&&
+The idea of enlightenment is conceived from an unenlightened vantage?
+&&
+A marker of eudaimonia is disappointment at the prospect of leaving life.
+&&
+Alex King – make a booklet for him with reference to Wittgenstein. And, include reference to Archimedes and his fulcrum for Terry.
+For Abdullah and Kathleen, a 1 page guide to geology (arabic script on Abdullah's).
+&&
+VR dev
+CS
+Browser-based hand-tracking.
+https://twitter.com/WevolverApp/status/1620711919106625536?t=xB9GZsgTyTwOHFpJ5w9ZWg&s=19
+&&
+TEACH
+AI
+GPT3
+https://www.cambridge-news.co.uk/news/cambridge-news/cambridge-university-among-elite-universities-26361465 
+AI detection tool.
+https://gptzero.me/
+Python API https://gptzero.me/docs 
+https://twitter.com/edward_the6/status/1619874139954905090?t=-4QVQ3RheEuHAooCXZL-Zw&s=19
+GPTZeroX
+'We also built a pipeline to handle file batch uploads in PDF, Word, and .txt format so you can run multiple files through GPTZero at ease!'
+&&
+AI CS Copyright
+
+I need to read this asap.
+https://www.theverge.com/2023/1/28/23575919/microsoft-openai-github-dismiss-copilot-ai-copyright-lawsuit 
+&&
+SCI
+Mike Baillie
+Dendrochronology 
+https://www.bl.uk/voices-of-science/interviewees/mike-baillie/audio/mike-baillie-evidence-of-comets-in-tree-rings
+&&
+VR dev
+idea: copresence but each subject experiences a different reality before them, but so that there is nevertheless a synchrony across subjects in key respects.
+What else can we explore in terms of copresence?
+&&
+TEACH
+AR shoe effect 
+https://twitter.com/XRarchitect/status/1618691629346619392?t=OamYYZprAP5l4iinEpaB_g&s=19
+&&
+VR DEV 
+ToDo
+New project, basic multiplayer - 2D P5xJS
++Git ignore etc. see Shiffman example
+Host another test proj, perhaps dev of base multiplayer proj, to test hosting on cloudflare.
+Ideas
+Mobs and animals
++Animate by carefully controlling array of obj models? - OK for simple system but not scalable. We really need a working solution.
+
+
+&&
+VR CCC TEACH
+Stairs that grow when gazed.
+&&
+VR CCC TEACH
+Geography demo in VR – of a massive process. Earthquake? Seeing beneath the crust? Erosion?
+Maths - A sine wave – riding it!
+English → visiting the Globe Theatre is the wrong idea (that’s like people in 1950s thinking flying cars would be like in the Jetsons – rather than neurolinked ai managed electronically powered helicopters – basically flying computers, suspended in a virtual infrastructure called Web3.0)
+Midjourney version of images from School Website – I need to get better at fidelity to original source
+Oh – a game to race to the right place on a giant map -> to ‘physically’ or ‘locomotively’ give your answer.
+Oh – the VR Memory Palace – building substantive memory and retrieval through VR memory palace processes.
+Get students involved, both backend (Harold, Andrew V) and front end modelling dev (Blender) -> curriculum maps and consolidation; learning; representation of the school and its values. 
+Actually experience the school in VR. Project to Map this – useful for Parents’ Evening -> and a QR code souvenir from Computer Science!
+Need to meet up with Dr Hutchinson asap (Wickes could help with scaling etc.)
+Machine Learning SOW or something (starting with P5) + Ai literacy (on pattern of digital literacy) -> using chatbots and image generation + the ethics surrounding it (i.e. the tools I’ve seen use a non-private method)
+&&
+MATH
+https://twitter.com/Rainmaker1973/status/1616719134246543362?t=M-vNGWFM-6YKeTGVH5tSiw&s=19
+&&
+
+Volvo’s HX1 autonomous dumper is cool.
+&&
+POL
+'[UK MPs] have successfully challenged Holyrood legislation before on the basis that MSPs exceeded their powers.
+But they have never blocked a Scottish bill on the basis that they think it will have a negative impact on UK law, in this case the Equality Act.
+This decision turns a dispute about the process for legally changing gender into a significant constitutional clash between the Scottish and UK governments.'
+https://www.bbc.co.uk/news/uk-politics-64288757.amp 
+&&
+Smoothly and with speed, student hides fact of playing game on phone 
+https://youtube.com/shorts/sYlf0Kk_WqQ?feature=share
+&&
+https://www.bbc.com/news/world-africa-64260739.amp
+&&
+Stagiaire or 'stage' (prn. staahj) – unpaid kitchen intern, who seek the prestige of experience in an impressive establishment.
+&&
+List of where to learn for free.
+https://twitter.com/ChrisStaud/status/1614536075862765569?t=9ylcnIXs_ax9PRfXiUQcyg&s=19
+&&
+In exchange for the natural fabric of neighbours and the wider forms of life thereof, she slumped inside a broken red telephone box, borne along by tattered synthetic products belonging to our advanced civilisation, a padded sleeping bag, brown hiking boots.
+&&
+Would be cool art print.
+https://twitter.com/kenshirriff/status/1614332607575072768?t=k7gHncowJRmgefXZtvA8Yw&s=19 
+&&
+CODING DEV
+Procedural animation and inverse kinematics 
+https://www.alanzucconi.com/2017/04/17/procedural-animations/
+&&
+AI GPT
+https://news.sky.com/story/the-ultimate-homework-cheat-how-teachers-are-facing-up-to-chatgpt-12780601 
+&&
+UK in space
+https://www.bbc.com/news/science-environment-64218883.amp
+&&
+AI DEEP FAKE
+https://www.theguardian.com/tv-and-radio/2023/jan/09/deep-fake-neighbour-wars-interview-itvx-comedy
+&&
+ART
+AI
+https://www.creativebloq.com/how-to/achieve-scale-in-your-paintings 
+&&
+
+DEV
+https://www.mongodb.com
+Database recommended by Harold
+&&
+Promising or dangerous?
+https://logicmag.io/intelligence/disruption-a-manifesto/ 
+&&
+// Get a database reference to our posts
+const db = getDatabase();
+const ref = db.ref('server/saving-data/fireblog/posts');
+
+
+// Attach an asynchronous callback to read the data at our posts reference
+ref.on('value', (snapshot) => {
+  console.log(snapshot.val());
+}, (errorObject) => {
+  console.log('The read failed: ' + errorObject.name);
+}); 
+&&
+TEACH
+P5JS CHARADES
+https://teach.angichau.com/2019/02/23/coding-charades/
+&&
+PHIL
+CS
+Origin of symbolic written codes.
+https://www.telegraph.co.uk/news/2023/01/05/mystery-ancient-dots-stripes-europes-caves-solved/ 
+'Ice Age hunter-gatherers had a grasp of past, present and future but also that they had devised a form of “proto-writing”.
+The deciphering of the markings pushes back the date for the earliest known proto-writing by 14,000 years to at least 20,000 years ago.
+That, said academics, suggested that writing wasn’t a sudden invention necessitated by administration and bureaucracy in sophisticated societies, but was instead something “far more deep-rooted in human behaviour.”
+Ben Bacon, the archaeology enthusiast behind the revelations, spent years poring over dots and a distinctive Y symbol present on famous cave paintings at Lascaux and Altamir and over 600 other sites.' 
+&&
+https://www.quora.com/Why-is-32-bit-called-x86-and-not-x32?top_ans=209881926
+Instruction sets and bit-count architectures.
+&&
+TEACH CS
+HTML maybe basis for a game?
+https://www.w3schools.com/js/tryit.asp?filename=tryjs_settimeout2 
+&&
+When are the bins?
+https://www.scambs.gov.uk/recycling-and-bins/find-your-household-bin-collection-day/#id=100090162677 
+&&
+‘A wolf is kept fed by its feet’ - Russian proverb
+&&
+https://app.widar.io/b3KPfddKgsgUagQC6
+View wall-e scan model?
+&&
+https://www.theguardian.com/lifeandstyle/2022/dec/30/you-be-the-judge-should-my-boyfriend-stop-leaving-the-sponge-in-the-kitchen-sink 
+&&
+
+John Hull says of his blindness that his circumstance what that of the ‘concentrated human condition’. I love this conception! (I read it in Oliver Sacks’ ‘An Anthropologist on Mars’: 35).
+&&
+AI
+Transformer basic guide
+https://twitter.com/iamtrask/status/1607966751836209158?t=4iKllLPh7mc4yh-DV7_Xow&s=19
+https://e2eml.school/transformers.html 
+&&
+Discord
+Before I learned that you can find mentions (such as when using /imagine prompt with midjourney bot) via the inbox at top right of app - I saved this bookmark or something:
+https://discord.com/channels/662267976984297473/976997386436104202/1057420307574562986
+&&
+To feel better.
+https://youtube.com/shorts/ZM68sTmKPz8?feature=share
+&&
+Reinforcement Learning (closest model to how humans and animals learn, and used by GPT-3)
+https://datamachines.xyz/the-hands-on-reinforcement-learning-course-page/
+&&
+VR WEB 
+
+
+https://www.theverge.com/2019/10/15/20915609/google-pixel-4-no-daydream-support-view-vr-headset-discontinued 
+https://blog.glitch.com/post/make-a-vr-greetings-card
+https://glitch.com/@glitch/glitch-community-web-xr-showcase 
+https://a-frame-helloworld.glitch.me 
+https://redhendev.github.io/lunar_monarch/ - in non-VR mode usually
+https://editor.p5js.org/RedHenDev/full/_8E7v9R1s 
+https://editor.p5js.org/RedHenDev/full/YZqTuyFvG - minecraft-like (A-frame) - doesn’t work on Android phone
+https://editor.p5js.org/RedHenDev/full/JTDlzHJCF - basic A-frame
+https://editor.p5js.org/RedHenDev/full/1y09isIdQ - camera-data to text
+https://redhendev.github.io/a-frame_VR-dev/ - dedicated page for VR projects
+&&
+TEACH
+Pipebots
+https://www.bbc.co.uk/news/science-environment-64052740.amp
+Robots
+&&
+PHIL
+Discursive dilemmas
+https://youtu.be/UC3kLvI292M
+&&
+OTW series - Suggest to Laura: The Bear.
+&&
+from GPT-3
+
+‘In Chinese philosophy and religion, including Taoism, the term "real person" (Chinese: 真人; pinyin: zhēn rén) is often used to refer to an enlightened or spiritually awakened individual who has attained a state of understanding and enlightenment. This concept is often associated with the idea of the "sage" or "wise person" in Taoist thought, and is considered to be a highly esteemed and respected figure within the tradition.
+
+
+The concept of the "real person" in Taoism is often related to the idea of the "true self" or the "authentic self," which is understood to be an individual's innermost being or essence. The realization of the true self is seen as a central goal in Taoist spiritual practice, and the attainment of this state is often associated with the attainment of enlightenment or spiritual awakening.
+
+
+In Taoist literature, the "real person" is often described as being characterized by certain qualities, such as simplicity, humility, and a lack of ego or self-centeredness. They are also seen as being in harmony with the natural world and living in accordance with the principles of the Tao, or the natural way.
+
+
+I hope this information is helpful. Let me know if you have any other questions.’
+
+&&
+Thinking by analogy traces the echoing forms of emergent formula.
+&&
+TEACH
+‘I am giving you this feedback because I believe in you.’
+(Had an impact a year on!)
+&&
+The news is popular culture.
+&&
+I forgot how cool midjourney’s site is.
+https://www.midjourney.com/home/
+&&
+scriptio continua – middle ages practice of writing without spaces; reading involved reading out loud so as to reconstruct the sense of individual words.
+&&
+DEV
+GITHUB as vs code in browser
+just add 1s after the github domain in URL. It stands for ‘one second’.
+https://youtube.com/shorts/uem44Nd-NO0?feature=share
+&&
+Whale Ride VR – what’s this?
+https://apkcombo.com/id/whale-ride-vr/com.RedHendev.WhaleRideVR/ 
+&&
+Ai listening to Noam Brown on Lex Fridman
+Montecarlo tree search - symbolic tabular search (nothing to do with neural net ai, but of course can be and is guided by the neural net in terms of values of moves etc.)
+Policy (deciding what to do?)
+ELO player rating 52 hundred (top alpha ai) - but without search, then 3K, where top human players are 3.6k or a little more – so, without search computation, then ai not actually superhuman (this includes Alpha Go!)
+Two cards - is 52 choose 2
+Montecarlo search - rollouts (Brown compares this to the ‘chain of reasoning’ iterative editing used now (2022) by openAI transformer neural nets
+Transformer
+Chain of reasoning
+Limit(ed) depth search
+&&
+Need to explore shaders in p5js
+&&
+AI
+API
+https://openai.com/api/ 
+&&
+
+Dev Blog - WT ‘Moon Prince’ OR ‘Moon Monarch’ OR ‘Monarch of the Moon’
+o Research Twine - Dialogue system (how do I use Twine for efficiency and editability?)
+o Perhaps change from voxel terrain to a single plane (and keep voxel for map or the Darkside?)
+o Continue refactoring for modularisation (and perhaps in classes?)
+o Publish to Itch - as timed demo, and then paid? Perhaps set up Patreon?
+&&
+MIND
+Language, that is, symbolic communication in the Lebensform of human social interaction, is second only to directed visual perception as an intimate tool of phenomenal attention.
+&&
+Nash equilibrium in a zero-sum game.
+https://en.wikipedia.org/wiki/Nash_equilibrium
+&&
+More AI
+https://www.reddit.com/r/Teachers/comments/zgxkpj/til_a_computer_can_write_a_better_essay_than_my/?utm_source=share&utm_medium=android_app&utm_name=androidcss&utm_term=1&utm_content=share_button
+ai research https://oneusefulthing.substack.com/p/the-mechanical-professor 
+https://oneusefulthing.substack.com/p/how-to-use-ai-to-generate-ideas 
+&&
+BN:
+Could you compose a little story? But it has to be exactly nine sentences long. Could you please make the story about a 30-year-old man walking into an enchanted forest; the atmosphere should be immersive, dark, and with a touch of magic. 
+CHATBOT:
+The 30-year-old man walked into the enchanted forest, the darkness enveloping him like a cloak. He could feel the magic in the air, crackling along his skin. The trees loomed overhead, their leaves rustling ominously. As he walked deeper into the forest, he could hear strange whispers on the wind. He caught glimpses of glowing eyes in the underbrush, but when he turned to look, they were gone. He came to a clearing and saw a beautiful woman standing before him. She beckoned to him, her voice like honey. He took a step toward her, but the ground beneath his feet shifted and he stumbled, falling into a dark pit. He landed with a thud and the woman's laughter echoed all around him. He was trapped.
+BN:
+What would you say is the most interesting phrase or idea you used in your story? In terms of literary creativity? 
+CHATBOT:
+I would say the most interesting phrase or idea in the story is the concept of the enchanted forest. The idea of a forest that is enchanted and filled with magic is a classic one in literature, and it creates an immersive, otherworldly atmosphere that is both intriguing and a little bit frightening. The idea of a man walking into this forest and encountering strange, magical beings is a compelling one, and it adds a sense of mystery and adventure to the story.
+BN:
+That's not what I mean; I mean, what specific phrase or literary idea that you used do you think bears the most artistic merit? I'm not asking about basic ideas like the enchanted forest or magic (ideas, indeed, which were prompted by myself, not you). Thank you.
+CHATBOT:
+I apologize if my previous answer did not fully address your question. To answer your question more specifically, I would say that the phrase "the darkness enveloping him like a cloak" is an interesting and evocative one. It effectively conveys the sense of being immersed in the dark, magical atmosphere of the forest, and it also suggests a certain level of danger and uncertainty. The use of the metaphor of the darkness as a cloak also adds a touch of literary flair to the description. Overall, I think this phrase effectively captures the immersive and magical atmosphere of the enchanted forest.
+&&
+Delight is the engine of the universe. It is also the substance of all significance in life.
+&&
+https://news.sky.com/story/these-25-stunning-images-are-shortlisted-for-a-top-wildlife-photography-award-12758724
+&&
+
+ESSAY
+Seeing behind the scenes of a secret government society; does this link to Hogwarts-esque institution replete with lore and legacy?
+&&
+Jerry Lawson Google Doodle
+https://g.co/doodle/2yh68zm
+&&
+CS
+
+Kilo 3
+Mega 6
+Giga 9
+Tera 12
+Peta 15
+Exa 18
+Zetta
+Yotta?
+Cf. Kibi, Mebi, Gibi, Tebi…?
+&&
+BBC News - Leprosy: Ancient disease able to regenerate organs
+https://www.bbc.co.uk/news/health-63626239
+[Later note: there was also good news about cancer treatment today, Sunday 10th Dec 2022 base editing]
+&&
+
+Questions for young children. Yes, to learn things. But also – there’s fun in the process. But what are the features of this process? What is it?
+&&
+Enlightenment and human competency are very different things. And the former does not depend on the latter precisely, but does depend on the fruits of the latter.
+E.g. ‘Enlightenment didn’t make life any easier.’
+&&
+The articulation of an emotion is the origin of melody.
+&&
+‘I just hope that it has the impact that I uh, uh think it will’ - Graham Hancock 2022, Ladies and Gentleman.
+&&
+TAUT
+The extant ones that still remain.
+&&
+TECH VR
+https://www.vice.com/en/article/dy7kbq/palmer-luckey-made-a-vr-headset-that-kills-the-user-if-they-die-in-the-game 
+&&
+Miracles 
+https://www.learnreligions.com/miracles-of-jesus-700158
+&&
+Jojo typing:   xqnwsmj1,adwzqshswwl;12qm,.⁄±|{]m````````[[ g gf    mmbvahbzbb∫∫ w n1qqtffghhqaaqa        bnqbna 
+&&
+TEACH        
+There is the pedagogy of building substantive knowledge and contextual understanding of this and connections between -> which lends itself to lecture style (or rather, the speed of dialogue and public exchange). NB the 'overview' and 'big picture' here is really important. But only as important as the basic fact of accumulating a lot of 'about knowledge'.
+Understanding that or how (e.g. doing something or producing something for yourself independently) in a formative feedback cycle – really essential in building proficiency and 'activating' substantive knowledge.
+Note that if a syllabus of purely the latter then not enough matter is learned, even to the deficit of proficiency and understanding.
+&&
+Things have properties. Properties do not have things.
+&&
+Observe the nice hendiadys in 'warmth and order.'
+&&
+Robots can hesitate.
+&&
+MIND
+Consciousness has no analogue.
+It is the first discontinuity in nature that I know of.
+Indeed: is it consciousness that brings the digital, the discrete into the world? Cf. subjectivity as the origin of the sense of the objective. Of the ‘identity’?
+&&
+Customer commitment
+Encourage feedback:  ipsus mori
+Skills Action Plan
+Route 1 -> Academia HE Lecturer 
+Funding Gov Post Doc loans
+UK Research and… (very useful)
+Lots of different funding schemes (and finding PhD)
+Nothing in this local area (Dundee; UEA)-> need to find out what’s required (UEA is funded; eligible to apply for studentships; also talks about further opportunities for funding)
+ARU -> requirement is Degree and extensive post-grad
+
+Route 2 -> Therapist
+Counselling -> min L4, need L5 (must start L2) L2 theoretical; L3 practical; L4 undertake counselling.
+Free Level 2 Counselling Certificate (introductory)
+Full Level 2 - Funded? No. May depend on the current situation. E.g. £630.
+Advanced Learner Loan (like student loan) -> from Level 3
+        Loan for fees, not covering living costs. Hills rd offer this: 
+Thursday 1:45-5:30 - Year 45 sessions
+        5:30-8:30 Level 4 - full year
+Find out intensive routes -> e.g. British Association of Counselling etc? Maybe?
+Contact industry professionals…what would this include.
+Part-time juggling?
+Intensive over Summer Hols…
+Support on-going -> can text, call, or email + summary + Suzie contacts.
+My Actions
+Talk to tutors and learning providers…
+Respond to plan email, which will complete sign-up process
+Prep for second appointment mid-December -> Suzie will contact me if I haven’t contacted her before.
+&&
+Kathyrn Diane New
+01476464442 Dr James? 
+Liver specialist
+Hepatology GP Passfield
+20 Sep 2021      
+Appointment confirmed for 8 Dec 2022.
+&& 
+We, voting cattle, confused by our feelings of reverence for cabinets and ministers. Feeling managers to be rulers.
+&&
+PHIL MIND
+There is no bridge from sense to substance: no statement can compile itself, can evaluate itself. E.g. 'This sentence is false.'
+Q: can we find an equivalent problem or failure with such a self-reflexive statement but that signals a True evaluation?
+&&
+Future of programming 
+https://youtube.com/shorts/NWGzAwqfOG4?feature=share
+&&
+AI art
+https://www.unite.ai/10-best-ai-art-generators/
+Deep AI (pauses models for free users – I think sporadically) 
+https://deepai.org/machine-learning-model/text2img 
+&&
+CS TEACH
+Abstraction 
+https://www.reddit.com/r/nextfuckinglevel/comments/yac5cy/its_amazing_how_focused_this_german_shepherd_is/?utm_source=share&utm_medium=android_app&utm_name=androidcss&utm_term=1&utm_content=share_button
+&&
+MUSIC 
+Together Pangaea
+New party
+&&
+How is it with me? Just want to eat chocolate and die.
+&&
+MIND
+Word meaning.
+https://neurosciencenews.com/word-meaning-brain-21641/
+&&
+TEACH
+CS Computer-like mechanism found in tiny organism.
+https://www.sciencealert.com/clockwork-like-computer-discovered-inside-brainless-microscopic-organism
+&&
+MIND
+An object is absolute in the sense of its being a whole, in its being a something per se. This is the proper perspective onto that old villain, the 'thing in itself.'
+There is only one literal 'thing in itself', which is the phenomenal consciousness. The 'thing-ness' or 'object' status of the table, the glass, the concept, the colour, the sense – only derives from the absolute unity or 'whole' given over by the phenomenal consciousness.
+Consider, the sense of there being an object under your conscious attention is a projection of the infinitesimal point of your perspective upon the rest of the world; in other words, the unified whole of any given object is only the reflection of the absolute point of perspective phenomenally attending.
+The 'I' and 'you' as opposed to 'me' and 'them'. 
+&&
+MIND
+Gödel.
+https://www.jamesrmeyer.com/ffgit/godel-quotes.html
+&&
+
+Car
+Maybe Laura would like the Volkswagen T-roc convertible.
+&&
+135 x 95 jojo foot measure x
+Left foot smaller at 130
+&&
+26 Oct Weds 9:25am Boots Opticians
+2009
+&&
+Lewis Latimer’s poem, ‘Thinking?’ – not good, but not bad. 
+&&
+AI art - useful styles
+Zdzislaw Beksinski (horror, detailed, nightmarish)
+
+
+Craiyon (free)
+
+
+https://creator.nightcafe.studio/ 
+
+
+Dream Studio (limited credits)
+
+
+Midjourney (via discord bot)
+&&
+MIND
+One of the best essays I've seen on consciousness.
+Nicholas Humphrey. Lives in Cambridge UK.
+https://aeon.co/essays/how-blindsight-answers-the-hard-problem-of-consciousness 
+From 'sentition' to 'phenomenalisation' via a feedback loop's recursive state settling into an attractor state.
+&&
+TEACH
+CS Networks
+MAC address IP address 
+https://bluecatnetworks.com/blog/mac-address-vs-ip-address-whats-the-difference/
+&&
+MIND
+'Bidirectionally connected cores in a mouse connectome: towards extracting the brain subnetworks essential for consciousness'
+“Bidirectionally connected cores in a mouse connectome: towards extracting the brain subnetworks essential for consciousness” by Jun Kitazono, Yuma Aoki and Masafumi Oizumi, 21 July 2022, Cerebral Cortex.
+DOI: 10.1093/cercor/bhac143
+&&
+NOV
+Under the dwarf tunnels. A train. A train?!
+&&
+Story idea.
+Why shouldn’t we go that way? Over the hill under the trees? I like that way.
+–Because there is a dangerous boy up there. I saw him.
+Well, it’s as much our right to go there as his. I hate that we have to walk around just because he forces it. I want to make a point of going that way. We have a right to go up there.
+–I’m curious: would you be so put out if it were a water buffalo? An elephant, sitting up there?
+Well. No. I suppose not.
+–What's the difference?
+&&
+Stefan Zweig 'Beware of Pity' – most successful author in the world in 1930s. Jewish, tragically committed suicide with wife in 1939 thinking Hitler was going to win the war.
+Admired by Jeffrey Archer, who only discovered him at 70.
+&&
+Panasonic White convection £250 John Lewis.
+Samsung - £250 but no air fryer
+Sage - £400 but bad air fryer 
+&&
+
+VodafoneMobileWiFi-496A31
+
+9483690054
+0782551081
+&&
+
+The infinitely perfect person is the one who can find new imperfections to solve, pools of impossible light to grow.
+&&
+Pleasure so potent and great, taken to the limit of possible understanding in the flesh, to bolt lightning.
+&&
+The charm of the night.
+&&
+CRN Student loans.
+24853225601
+&&
+God comes from time to time and swirls in places that make us smile and forget everything but the feeling around the smile. Bob Dylan song. Impressions of him singing.
+And swirls on away.
+&&
+Algorithm is a recipe that actually does the cooking. That is, it is a symbolic code that, when loaded into a computer – actually forms the instructions that carry out the process.
+Not quite right. Consider: are the details of a recipe not equivalently loaded into the memory of a human chef?
+[An algorithm removes the need of understanding so far as operability. That is why algorithms can be said to comprise a technology.]
+&&
+Anissa and Yuen
+New neighbours.
+&&
+Pretence is prison.
+&&
+
+The most objective or ‘real’ lines drawn in nature are drawn in time. For example, in a sense, all memory, primary and secondary, are volatile – nothing lasts forever. However, given a more sensible time-frame, the CPU’s cache really is volatile and hard-drive file system not. Note that we might make the distinction according to the presence of electrical charge, of receiving energy. I don’t know nearly enough to even approach this level of consideration, that is, to speculate that ‘energetic change’ or something like bottoms out in terms of a definition of time.
+&&
+6 gifts – Jojo 2nd birthday
+Fire engine
+Micky mug
+Fingerpaint book
+Farm house
+Latch board
+Playdough hairdresser set
+&&
+£75
+£58
+&&
+MIND
+Gaze
+https://neurosciencenews.com/dreaming-eye-movement-21289/
+&&
+CRT
+Derek Bell - origin of the acidic, criticising resentment based activism and perspective upon America, including weaponizing identity politics 
+Antonio Gramsci (sp?)
+&&
+Notts looting McDonald's 
+https://www.reddit.com/r/nottingham/comments/wula9q/mcdonalds_robbed_by_scum/?utm_medium=android_app&utm_source=share
+https://www.bbc.co.uk/news/uk-england-nottinghamshire-62636026.amp 
+&&
+To describe depression.
+They have been 'stolen from themselves'.
+&&
+The essence of human hierarchy is that only one person's anger [or disapproval?] in the room matters – the person whose passion needs least mix of poison. The beginning of wisdom.
+&&
+MIND
+Lev Vygotsky:
+Stage 1 - Differentiation (from birth) Right from birth infants are able to differentiate the self from the non-self. A study using the infant rooting reflex found that infants rooted significantly less from self-stimulation, contrary to when the stimulation came from the experimenter.[27]
+Stage 2 - Situation (by 2 months) In addition to differentiation, infants at this stage can also situate themselves in relation to a model. In one experiment infants were able to imitate tongue orientation from an adult model.[28] Additionally, another sign of the differentiation is when infants bring themselves into contact with objects by reaching for them.[29]
+Stage 3 - Identification (by 2 years) At this stage the more common definition of "self-awareness" comes into play, where infants can identify themselves in a mirror through the "rouge test" as well as begin to use language to refer to themselves.
+Stage 4 - Permanence This stage occurs after infancy when children are aware that their sense of self continues to exist across both time and space.
+Stage 5 - Self-consciousness or meta-self-awareness This also occurs after infancy. This is the final stage when children can see themselves in 3rd person, or how they are perceived by others.
+&&
+PAP strong emergence
+In principle inexplicable. Since forms contingent, i.e. non-trivial macro level properties determined not only by micro level properties but by the actual happenstance arrangements: this contingent ingredient cannot be represented except by equivalent actualisation (chugged through a computer model in no greater efficiency than physical reality).
+&&
+PAP
+MIND
+George F R Ellis - I think accurately identifies something uniquely special about what he calls 'logical argument', i.e., as an/the example of a (strongly) emergent phenomenon.
+Cf. chains of commonsense reasoning, which I have heard even large language models struggle with.
+&&
+Power distance scale - measure of a culture's authoritarian nature
+&&
+PAP Emergence
+A pseudoplasmodium can 'walk'. Well.
+Breaking symmetry. From similar behaviour that reinforces similarity, to differentiated roles, such as slime-molds forming a stalk and spore emitters. Things that were identical now differ.
+Consciousness as the 'ultimate emergence'!
+Classes of emergence:
+Simple/Complex emergence
+Weak/Strong emergence
+Philip Anderson: 'more is different'
+Current controversy and debate: some scientists believe there are some emergent properties that we will never understand: strong emergent phenomena.
+1 macro level property in an equilibrium system (e.g. the strength of a piece of steel)
+2 a macro level property in a system not in equilibrium (e.g. a flame; a slime-mold)
+3 macro level phenomena cannot be expected, but could in principle be deduced (we can explain it) – slime-mold activity can be and is understood, therefore an example of weak emergence; can't expect it, but once we see it, we can understand it in terms of micro level interactions
+4 macro level phenomena cannot be deduced from interactions at the micro level
+Coupled oscillation - e.g. three 'blinking' automata
+Bottom-up - local relationships (we might term these 'interdependencies') contribute to a global property, such as fireflies synchronising
+Pure coordination game (prisoner dilemma?)
+The emergent functionality of robustness from, e.g., the functionality of emergent 'firewalls' (e.g. between risky-borrowing banks, as given in example from lecture) https://youtu.be/4BQWO2EVtMk 
+&&
+PAP
+[Witt picks up thread of application misleading etc. Section 422-423]
+&&
+PAP
+Complexity 
+'In his prescient 1972 essay “More is Different,” Nobel laureate physicist Philip Anderson argued for this layering of physical laws, which are irreducible: We cannot deduce laws from a higher layer by starting at a lower level of complexity' (https://bigthink.com/13-8/reductionism-fails-complexity/ ).
+&&
+MEDIUM ESSAY IDEAS
+INTRO & BLOG DESCRIPTION (first draft): short essay-style articles on fascinating cultural phenomena, philosophical ideas, and (from time to time) political analysis. A way of reading our culture and ideas to the next, unique depth.
+PLAN OF ATTACK: GET WRITING ONE; HOUSE OF DRAGON!; UNDERSTAND HOW MANY WORDS IS MAXIMUM; PUT IDEAS IN ORDER; READ SOME CURRENT STUFF, PARTICULARLY ON TOPIC THAT I AM WRITING ABOUT.
+RESEARCH: TOP 6 26/8/22 are 4-10mins reads. Number 1, 10min. A couple are 7mins.
+What Jordan Peterson gets wrong about Dostoevsky and Nietzsche?
+An analysis of Jordan Peterson’s rhetorical toolkit. Including after opening sample analysis, of my ideas about rhetoric.
+Good music? Infrastructure is the key idea. And, yes, sensibility. Include analysis of youtube music top list and current ways Gen Z access music.
+Beatles mania - cf. Elvis (such as represented in recent film).
+Experimental ‘type’ piece: i.e. I don’t have anything to explain beyond a question, i.e., about the ‘narcissistic structure’ of the Ich. Where can I go/what can I read to investigate this further.
+There are two kinds of people: Descartes
+Elon and Bostrom are wrong: simulation argument (Wittgenstein already covered it)
+What the common myths and mistakes about Nietzsche and his ideas reveal about people.
+Subclass; one example, the looting
+Problem of Evil solved? My solution. Perhaps craft as demonstration of rhetoric of delaying answer or something?
+
+Personality disorders and crime etc.
+One of the strangest things I have ever read: hypnosis. I can’t read that far. Perhaps a few other interesting phenomena of the mind: e.g. colour perception by linguistic organisation.
+Nietzsche - mistaken cultural ideas. Cf. Berkeley. Defence mechanism? Or just a meme that gets in the way and cuckoos the necessarily more nuanced or subtle terrain of the idea itself? Oh - Descartes also. Oh, but I think I will dedicate this to own article? ‘There are Two Kinds of People’. Nietzsche focused on, and using podcast example, of assuming the ‘camel’ beneath them.
+Current territory in Philosophy of Mind. Headlines on sentience abound. Popular misunderstanding.
+separate. They are rather different in nature.
+Pope and aesthetic juxtaposition of ancient traditions with state of the art tech. E.g. Da Vinci Code.
+Important cultural ingredient: yearning for institutional body, ancient, infinitely meaningful. Manifestations in Jedi order, Hogwarts traditions.
+There are no adults left in the room; deeper idea in connection with the death of Kennedy, the West’s last young parent.
+Where does the money go? Just a visual map–perhaps even dynamically animated in real-time–to the generation of wealth and how it flows to government, via tax, and to which corporations; included would be a guide to the legal obligations for such data to remain public etc., and which information is legally hidden etc.
+House of Dragon review. Each episode – but with meditation on each episode’s theme?
+Nascent ideas, vague.
+Why ‘Deus Ex Machina’ is terrible.
+Education system. Origin of. How to better fit to needs.
+Comments on classical music Youtube videos (+ attractive woman video) - perhaps as 
+&&
+ESSAY
+Write for Medium
+First, enumerate a list of 12 pieces to write.
+Study how to craft an article.
+What size best?
+Schedule the actual writing – get started.
+The rhetorics of Jordan Peterson
+https://medium.com/earn?source=creators_page---earn_module_link-----------------------creators_page_earn_module_link-&utm_source=creators&utm_medium=landing-page&utm_campaign=earn&utm_content=module
+&&
+Lagom. Swedish philosophy. 'Just the right amount'
+&&
+Turing patterns, morphogenesis, signalling molecules, concentration gradient.
+Was recently a really clear short article about it.
+&&
+PAP
+Not promising, but may serve as another example of mathematical framework depending on inferential phenomenal reports.
+Reference: “A Relativistic Theory of Consciousness” by Nir Lahav and Zachariah A. Neemeh, 12 May 2022, Frontiers in Psychology.
+DOI: 10.3389/fpsyg.2021.704270 
+&&
+PAP
+Calculating is (included in an?) an act of perception qua phenomenal consciousness.
+&&
+Femininity itself is attractive. So, there is redundant need to aim at attractiveness. Aim at femininity.
+I wonder if the same is true for the masculine.
+&&
+5663
+NR27 9HR
+17 Prince William 
+&&
+
+At the deepest level, rhetoric means the management of attention and the dislodgement of cognitive wax. [Formerly 'ear-wax'.]
+&&
+20:55 Lamppost outside house turned on. Wednesday 10th August 2022.
+&&
+PAP
+MIND
+Consider the parallel in how the naive speaker (even when a fully trained physicist) will refer to what they mean by colour, i.e. just the manifest spectacle, the raw experience, of the colour they see, and not the absorption of electromagnetic waves etc.; and how naive speakers and philosophers and scientists of language alike will speak of language and communication themselves: namely, prototypically propositional and not performative behaviour qua 'meaning as use'.
+The insight this simple parallel affords is that it is the propositional perspective that phenomenal consciousness uniquely permits to  perception, cognition, and communication. 
+&&
+To brood, ruminate, and reason.
+&&
+PSY
+La belle indifference, a type of conversion disorder.
+See distinction between somatic disorder and conversion disorder. Since these are more challenging to differentiate.
+&&
+Incremental success
+https://journals.sagepub.com/doi/abs/10.1177/09567976221075302?journalCode=pssa 
+&&
+MIND
+PAP
+What is the qualitative levelling up of biology to cognition? Minimal instance of perception?
+https://link.springer.com/article/10.1007/s10539-022-09860-3 
+&&
+Nothing so personal as pain? And yet what affronts far worse, even while hurting far less, is the imposition of the rude.
+&&
+
+Found the artist I like!
+Rafael Araujo
+https://www.thisiscolossal.com/2014/01/architectural-renderings-of-life-drawn-with-pencil-and-pen-by-rafael-araujo/ 
+&&
+
+CS
+AI art generators. Nice list, for 2022.
+https://www.unite.ai/10-best-ai-art-generators/ 
+&&
+The room itself is a rhinoceros. No. This is worse than terrible.
+&&
+German soldiers are allowed to disobey any order they deem to violate human dignity.
+&&
+Alexandra Dovgan – young pianist, spectacular.
+&&
+Ai ethics - it is from the probability space of accidents that, for instance, fingers are broken, and not from the selection logic. Indeed, the attempt to ground this logic on axions of ethical principle will fail, for the nature of reason is to ground itself. Reason does not exist when I look away.
+From kitchen blackboard (transcribed via Google Lens with 6 or 7 amendments, 4th Aug 2022).
+&&
+CS TEACH
+AI drawing 
+https://www.craiyon.com/ 
+https://www.midjourney.com/home/ 
+&&
+SCI
+Phase diagram.
+See supercritical fluids.
+See PBS space time: https://youtu.be/184eP_KuXek 
+&&
+Dyslexia
+https://www.weforum.org/agenda/2022/07/dyslexia-enhanced-abilities-studies/
+https://www.psychologytoday.com/us/blog/the-biology-human-nature/202207/seeing-dyslexia-unique-cognitive-strength-rather-disorder 
+&&
+TEACH MATH
+Numeracy is not reductive to ‘maths skill’ or something so opaque, but to the skills required to machinate over algorithms faithfully, and perhaps supplemented with a ‘check’ or ‘edit’ about what kind of answer would make sense, that is, so as to check the result. More important checks relative to the process of algorithmic rule following and writing will concern that steps have been carried out correctly. So, these procedures require visual tidiness and organisation of written figures. Also, a ‘what to do if’ when strange situations appear, such as having to carry a one or deal with a fraction or negative etc. That is, the skill to welcome and seek out these interesting cases and not depend upon the gratifying fluency of simple cases. (Importantly, I initially felt that there is a distinction between something like ‘number sense’ and the different skills required for algorithmic literacy).
+See the procedure of long division as a key example of ‘chugging through’ and the specific numeracy/literacy/visual etc. skills required.
+So – then how to relate numeracy as I conceive it here (algorithmic, mindless chugging) to mathematics proper, i.e. abstract decomposition, pattern finding, symbolic formalism, and logical reasoning?
+&&
+‘Money makes the world go around’ – yes and: it is the prospect of the negation of the possession of money, the absence of some money, that puts people to work.
+Cf. MIND PAP - neither the suppression nor activation of cognition but ‘idling’ of propositional thought that permits logical reasoning and all its world-moving treasure. Cf. the strategy of Echo. An idle but not redundant repetition.
+&&
+MATH
+Impossibility proof, especially trisecting the angle.
+https://www.cs.princeton.edu/~chazelle/courses/BIB/trisect.html
+&&
+TEACH CS
+USB Very decent article
+https://www.usbmakers.com/how-does-a-flash-drive-works-and-whats-inside-it/
+But, still doesn't satisfy Terry's query about how the transistors actually retain their charge. Do they only require a miniscule amount of charge? If something like this, then perhaps would lose information after a million years?
+Aha! Here's the answer: 'Memory cards and USB drives are NOT designed for long term storage. You should always backup your data on to another device. The data will normally stay valid for a period of up to 10 years if stored under normal conditions. The data cells inside carry a charge which can dissipate over time.' https://www.integralmemory.com/faq1/how-long-will-data-stay-valid-for-on-a-usb-drive/#:~:text=Memory%20cards%20and%20USB%20drives,which%20can%20dissipate%20over%20time. 
+&&
+MIND PAP
+Love the look of this. Since I am arguing a sense of the objective etc.
+Johnston, M. (2007). Objective Mind and the Objectivity of Our Minds. Philosophy and Phenomenological Research, 75(2), 233–268. http://www.jstor.org/stable/40041108
+&&
+PAP
+MIND
+On perception and cognition.
+See Tyler Burge - Origins of Objectivity. Would seem to, really, agree with my view, but of course will miss the conflation of non-phenomenal perceptuo-cognitive communication with subjective, perspectival language.
+More scientific accounts of perception etc. (Found on very good Gestalt Wikip)
+Lettvin, J.Y., Maturana, H.R., Pitts, W.H., and McCulloch, W.S. (1961). Two Remarks on the Visual System of the Frog. In Sensory Communication edited by Walter Rosenblith, MIT Press and John Wiley and Sons: New York
+Valentin Fedorovich Turchin – The phenomenon of science – a cybernetic approach to human evolution – Columbia University Press, 1977
+&&
+MIND
+They came to same conclusion as me! Dennett as non-imager…
+https://kingdablog.com/2015/02/05/dennett-and-the-typical-mind-fallacy-2/
+&&
+MIND
+CS
+Dennett or ai online quiz?
+https://ucriverside.az1.qualtrics.com/jfe/form/SV_9Hme3GzwivSSsTk 
+&&
+https://www.vice.com/en/article/epzx3m/in-experiment-ai-successfully-impersonates-famous-philosopher
+MIND
+&&
+MIND
+PAP
+The sense of the objective.
+New title for paper?
+Idea too: what if written not in the spirit of providing the final word on phenomenal consciousness but to maximally inspire philosophers eager to fit the next parts of the puzzle? That is, to seed.
+&&
+PHIL
+Surprisingly good on key quotes from Nietzsche and especially Descartes.
+https://bigthink.com/thinking/misunderstood-philosophy-quotes/
+&&
+Why does the ego sting so at criticism?
+&&
+Reason does not exist when you look away.
+&&
+https://news.sky.com/story/amp/chess-robot-breaks-seven-year-old-boys-finger-12658586
+COMP SCI
+Chess robot breaks finger.
+&&
+Couldn't recall the term 'palliative'. 
+&&
+£299 boox nova air 7.8”
+Yeah: https://www.amazon.co.uk/BOOX-Nova-Air-Android-Notepad/dp/B099N374SD/ref=sr_1_1?crid=YQ0BZNSOFLJD&keywords=onyx+boox+nova+air&qid=1658487496&sprefix=onyx+boox+nova+air%2Caps%2C104&sr=8-1 
+AMAZON account
+brian.new@hotmail.co.uk
+tR…
+&&
+21:23 21/july/22 lamppost on.
+&&
+Demi-Jade!
+https://www.cambridge-news.co.uk/news/cambridge-news/cambridge-boxer-demi-jade-resztan-24544122.amp
+&&
+
+‘Ultimately, man finds in things nothing but what he himself has imported into them: the finding is called science, the importing — art, religion, love, pride. Even if this should be a piece of childishness, one should carry on with both and be well disposed toward both— some should find; others— we others!— should import!’ (WTP: §606).
+&&
+Recall §561 (WTP) from Nietzsche. See how he values organisation and co-operation above domination. That is, unity is only achieved via the former. NB. unity is a key idea in N’s conception of the will to power.
+&&
+
+What is the meaning of the recognition that ‘even eternally living must come to an end’.
+&&
+1829  - Robert Peel - Britain
+A young student thought that the first police forces were founded in slavery times in the US as patrols hunting down fleeing slaves. Sign of the times! My God!
+19th Tuesday July 2022
+(Sat in Cafe Nero Cambridge, 9:30am)
+Lol student kept trying to push connection between policing and racism
+&&
+PAP MIND
+A thought is just as external as a mountain. A painful emotion just as objective as a crocodile. But what was the real eureka idea I had? I think it was that, for instance, an anxiety or hallucinated phenomenon, from the perspective of the consciousness, is just as ‘real’ or ‘matters’ as much as any other necessary substrate for consciousness, such as includes physical processes. The success here is seeing-through the mistaken view of ‘real’ versus ‘imaginary’ or something like; this opposition has a specific provenance, and is not general; ah, it is the crucial ingredient of consciousness as a new and ‘all important’ level of being, whose direct substrate is indeed the symbolic or imaginary, just as the nonconscious cognition has a substrate of neuronal complexity, which in turn emerges of electrochemistry, etc. Now, this is not the trivial notion that unicorns and wishes are ‘just as real’ (in some superficial sense) for a mind as are rocks and crocodiles; such a (lazily dramatic) notion trades on the quite different opposition between a veridical perception and a mistaken perception, e.g. spotting an actual snake versus jumping in fright at a toy snake. Rather, what I recognised is that consciousness itself is built upon the imaginary. This relation is independent to the trivial opposition between the mind being mistaken by an imaginary phenomenon and a veridical. 
+&&
+Educational mental health practitioner.
+Course January start.
+2 years post-pandemic.
+&&
+Attention, Perception, and Memory
+E Styles
+'processes that require attention in some form or other are called controlled processes' (7). I.e. contrasted with 'automatic' processes.
+*
+https://www.sciencedirect.com/topics/psychology/attentional-control
+Stimulus-driven versus goal-driven attention
+Attentional control continuum - proposed in this paper. The idea is that to begin with, attention is stimulus-driven but that given experience, goal-driven attention takes precedence (experience-dependent attentional tuning account)
+Other relevant concepts: perceptual load and display complexity 
+&&
+Funfetti - try it
+&&
+The Raven
+Philosophy magazine
+Velleman.
+https://hub.jhu.edu/2022/07/07/the-raven-magazine-philosophy-and-literature/ 
+&&
+From Wittgenstein notebooks, 1914-16. Qtd. https://www.newstatesman.com/ideas/2022/07/wittgenstein-at-war?gaa_at=g&gaa_n=AYc4yst_46XpkqMmzu5Lg6X73cT7leH03DpSZDawKIxCqdE9BCVrGjZV93CU0CgsR-8%3D&gaa_ts=62cf1057&utm_source=newsshowcase&utm_medium=discover&utm_campaign=CCwqGAgwKhAIACoHCAowsYKfCzC-jLcDMN66XjDr4mo&utm_content=related&gaa_sig=XyejAP3TT7xEPin2EfslkoxZkB55JpronJsdEkGL_wI94t6RAh56ZkVvlWQCaowAKrpBgGSaj2KIvUfnUBDhwA%3D%3D 
+Article by Thomas Nagel!
+'If to will good or evil has an effect on the world, it can only have one on the boundaries of the world, not on the facts, on what cannot be portrayed by language but can only be shown in language.”
+“There are two godheads: the world and my independent I. I am either happy or unhappy, that’s all. One can say: good or evil do not exist. Death is not an event in life. We do not live through it in the world. If eternity is understood not as infinite temporal duration, but as non-temporality, then one can say that he lives eternally who lives in the present.”
+&&
+https://www.youtube.com/watch?v=rI_y2GAlQFM 
+Tiling Coding Train
+&&
+‘Algebra is showing you where the traps are’ - Juni. 26 June 2022
+&&
+To place violence not in aggression, but in time. Namely, in relentlessly secure perseverance.
+&&
+TRN
+Teacher Reference Number
+0988887
+&&
+Anolis Aquaticus.
+Amazing lizard that breathes underwater using a bubble-like mechanism on its head.
+&&
+COMP SCI
+DEV
+Thank you so much for signing up for Wordnik's API and for your donation!
+Your API Key is:  zmh76d7b7bxd1senx6apqrnce4q0wayeidxuiec6ckvytemeb
+&&
+A broccoli rocket.
+&&
+CS
+Type theory and Haskell
+E..g the Core, Girard’s System F.
+
+https://www.signifytechnology.com/blog/2019/02/haskell-and-type-theory-better-together-by-vitaly-bragilevsky?source=google.com
+&&
+TEACH
+Python ide
+https://itsfoss.com/thonny-python-ide/
+Also, photoshop to have free web version:
+https://gizmodo.com/adobe-photoshop-web-browser-free-no-subscription-image-1849058606#amp_tf=From%20%251%24s&aoh=16552891964898&csi=0&referrer=https%3A%2F%2Fwww.google.com&ampshare=https%3A%2F%2Fgizmodo.com%2Fadobe-photoshop-web-browser-free-no-subscription-image-1849058606 
+&&
+PHIL
+Alex Voorhoeve on inequality, very good!
+&&
+CS [new tag for COMP SCI]
+Unicode (UTF-8) encoding takes 4 bytes per char.
+‘So now I know since we're using UTF-8 it takes 4 bytes per character giving us 1024 characters’ 
+(https://stackoverflow.com/questions/5290182/how-many-bytes-does-one-unicode-character-take)
+&&
+https://scroll.in/article/1025847/why-cant-you-remember-anything-from-the-first-two-years-of-your-life#amp_tf=From%20%251%24s&aoh=16550304969345&csi=0&referrer=https%3A%2F%2Fwww.google.com&ampshare=https%3A%2F%2Fscroll.in%2Farticle%2F1025847%2Fwhy-cant-you-remember-anything-from-the-first-two-years-of-your-life
+&&
+Our true thoughts are found by reason, leaving the sublunary and crossing silver dust strangely.
+&&
+TEACH
+https://www.fastcompany.com/90758850/a-google-cloud-employee-set-a-new-record-calculating-the-100-trillionth-digit-of-pi 
+&&
+OTW: Incantation (release on Netflix July 2022).
+&&
+MATH
+3 blue 1 brown summer exposition #2
+Perhaps video on philosophy of number and math. Using hexagonal minecraft world (in part?). 
+What else?
+See the github for collaboration (either as producer or as provider of content idea).
+https://www.youtube.com/watch?v=hZuYICAEN9Y
+2021 winners: https://www.youtube.com/watch?v=F3Qixy-r_rQ 
+&&
+COMP SCI
+MATH
+https://mltechniques.com/2022/05/31/gentle-introduction-to-linear-algebra-with-spectacular-applications/
+&&
+
+The ‘truth will out’? No, that’s aggression you’re thinking of.
+&&
+
+COMP SCI
+
+Haskell online editor
+
+https://play-haskell.tomsmeding.com/play
+Basic intro to Haskell
+
+https://www.haskell.org/ghcup/steps/ 
+Slides from Beginners Course 2022
+https://slides.com/haskellbeginners2022/lecture-1 
+&&
+Shed skins of dragonfly etc. called 'exhuvier'. I can't spell this term, obviously.
+&&
+Yep, Dad born 1943. 
+Mum, meanwhile, is 70 this year (July 2022): she was born in 1952.
+&&
+Beech Grove - sunday mornings.
+&&
+Sharks existed (450 million years ago) before both trees (350 million years ago) and the rings of Saturn (between 10 and 100 million years ago).
+&&
+The music is sweeter than the feeling.
+&&
+MATH
+GCSE Q MAY 20TH 2022
+https://www.youtube.com/watch?v=x6IxYUpAifA
+&&
+OTW: Freud's Last Session. To start Anthony Hopkins and directed by Matthew Brown (The Man Who Knew Infinity).
+&&
+MATH
+Abscissa (x), ordinate (y), and applicate (z).
+&&
+
+117 billion - number of people who have ever lived.
+1.17e9
+&&
+PSY
+ROD RIVERS PAP TOO!
+Transparency Estimation and Borderline Personality Disorder
+'According to a newly published study by KU Leuven’s Celine De Meulemeester and colleagues (2022), the emotion display process becomes translated into the quality known as “transparency estimation.” Defined as “the ability to estimate the extent to which ones’ own mental states are observable to others,” transparency estimation involves the dual mechanisms of being aware of your own emotional state and being able to imagine how well other people can read those emotions.'
+'People with BPD not only find it difficult to regulate their emotions, but, as De Meulemeester et al. point out, they can't clearly label them either. As a result, they don't connect how they are actually feeling with the signals their faces give off to others. You have to know how you’re feeling in order to be able to either show it when you want to or hide it when you don’t (e.g., laughing at your relative’s story).'
+&&
+TEACH
+Beefed up micro:bit
+https://www.tomshardware.com/news/pico-ed-puts-rp2040-in-microbit-form-factor
+&&
+New philosophy job!
+https://www.tes.com/jobs/vacancy/part-time-teacher-of-philosophy-a-level-cambridgeshire-1634204
+&&
+TEACH
+COMP SCI
+'The 2017 report by the Royal Society highlighted that 1 hour a week of computing teaching was not adequate to teach the key stage 3 curriculum'
+https://www.gov.uk/government/publications/research-review-series-computing/research-review-series-computing 
+&&
+TEACH
+COMP SCI
+Lamport: 'In the early 1980s, I realized that one practical method of writing these higher-level specifications for concurrent systems was writing them as abstract algorithms. With TLA+, I was able to express them mathematically in a completely rigorous fashion. And everything clicked. What that involves is basically not trying to write algorithms in a programming language: If you really want to do things right, you need to write your algorithm in the terms of mathematics.'
+Cf. Structure diagrams etc. Very interesting.
+Very nice: 'If you’re thinking without writing, you only think you’re thinking.' (Attributed to Lamport). 
+https://www.quantamagazine.org/computing-expert-says-programmers-need-more-math-20220517/
+&&
+PSY
+Hoarding
+https://bigthink.com/neuropsych/mind-hoarder-help/ 
+&&
+TEACH
+For the 'pit' talk. Re. stress.
+Oh, also Noël Coward's observation that 'work is more fun than fun.' Probably because of intensity of dopaminergic mediation of goal-directed tasks, as well as the rich buoyancy of good conscience.
+https://phys.org/news/2022-05-youre-stressed-likeable.html
+&&
+TEACH
+10Z
+https://www.pcgamer.com/trying-to-understand-four-dimensional-minecraft-broke-my-brain/
+&&
+MATH
+OTR: A concise introduction to pure mathematics - Liebeck.
+&&
+Planetes - OTW Anime
+&&
+MATH
+SCI
+PHIL
+https://aeon.co/essays/how-wittgenstein-might-solve-both-philosophy-and-quantum-physics
+&&
+
+Heaven is anosognosia and loss of care for those in hell?
+&&
+PHIL
+COMP SCI
+
+Good on type theory: https://www.youtube.com/watch?v=qT8NyyRgLDQ 
+&&
+Gaming PC build
+This guy is hilarious – Care Bears decorations wtf lol: https://www.youtube.com/watch?v=YXefXe0iwdk 
+&&
+The urgency to 'do right by them' etc. is in recognition of, as it were, the divinity within. In fact, you realise, a divinity in an ill situation and trapped.
+&&
+Art. In the case of representational art, recognition is access. For abstract art, access is a more difficult challenge. Both modes have their advantages, however.
+&&
+Distinct from the context of nurture, where communicative style and content is key factor and which is interwoven with behaviour as the 'form of life' (Lebensform), is the separate key factor of mostly implicit life values ('ideology') where moralistic scrutiny and inappropriate personal judgement effects a condition of corrupting demand for the developing individual, especially as warping discourse.
+&&
+PSY
+Consider the combination of symptom with anosognosia relative to that symptom. A shield, knife, or parrot wrapped in an invisibility cloak.
+&&
+SCI
+PHIL
+'the phenomenon of quantum superposition can be proven without having to resort to statistical arguments' (https://phys.org/news/2022-05-particle-paths-quantum-physics.html). Research is in Physical Review Research journal, here: https://journals.aps.org/prresearch/abstract/10.1103/PhysRevResearch.4.023075
+'"Our measurement results support classical quantum theory," says Stephan Sponar. "The novelty is that one does not have to resort to unsatisfactory statistical arguments: When measuring a single particle, our experiment shows that it must have taken two paths at the same time and quantifies the respective proportions unambiguously." This rules out alternative interpretations of quantum mechanics that attempt to explain the double-slit experiment with localized particle'.
+From paper's abstract: 'The obtained path presence equals the weak value of the path projector and is not a statistical average but applies to every individual neutron, verified by the recently introduced method of feedback compensation'.
+Holger Hofmann from Hiroshima University developed the theory behind the experiment.
+Hartmut Lemmel, the first author of the current publication.
+Stephan Sponar, another author of the current publication?
+&&
+Quantum mechanical concept of complementarity?
+&&
+The first principle of an 'ideology' is, like the Old Testament God, an intolerability for other ideological grounds of meaning of reality. Hence, it is bad for spontaneous conversation to bring up politics and religion, where interlocutors are condemned to exchange conversation for the pressure of a convincing defence etc.  
+&&
+TEACH
+
+
+And for Juni and Alex, the entomologist?
+
+
+https://www.cantorsparadise.com/the-insect-that-discovered-the-prime-numbers-ec20c2a6e5da
+
+
+&&
+
+
+TEACH
+
+
+Clause grammar
+
+
+Type error
+
+
+Adverbial versus connective
+
+
+'In fact, when the cicadas come out from hiding, they’re eaten by just about anything, however, because of the huge numbers, if a ton of cicada is eaten it is like a drop in the sea, and they still get to produce a lot of eggs.'
+
+
+&&
+
+
+The faint vanilla odour-bloom of lignin.
+
+
+&&
+
+
+'With traces of music hall, skiffle, and blues, tracks like ‘She Loves You’ heralded the arrival of a new era. “That song turned my head around,” Osbourne continued. “My son always says to me, ‘What was it like when The Beatles happened?’ All I can really say to him to is: ‘Imagine going to bed in one world, and then waking up in another that’s so different and exciting that it makes you feel glad to be alive.”'
+
+
+&&
+
+
+MIND
+
+
+https://doi.org/10.1073/pnas.2003110117
+
+
+Graziano on the gaze. Encoded as motion.
+
+
+&&
+
+
+TEACH
+
+
+Government hacker – something to be!
+
+
+https://news.sky.com/story/uk-government-hackers-destroyed-hundreds-of-thousands-of-stolen-credit-card-details-held-by-criminals-12609745
+
+
+&&
+
+
+MATH
+PHIL
+
+
+Tupper's self-referential formula.
+
+
+&&
+
+
+MIND
+
+
+Lucid dream. Projective geometry of dreams. Think on this, I will.
+
+
+&&
+
+
+MIND PHIL
+
+
+On 'redundant' syntactic forms, based on Ross's earlier proposals.
+
+
+'Other scholars find Miyagawa's continued proposals about agreement and syntax to be worth investigating. Manfred Krifka, a linguistics scholar at Humboldt University in Berlin, has called Ross' hypothesis in the 1970s "one of the boldest, yet most criticized, proposals in syntax."
+
+
+But in "Syntax in the Treetops," Krifka has written, "Miyagawa presents a full and innovative picture of syntax beyond those structures that are concerned with formulating mere truth conditions, and relate to the actual use of language in communication." As a result, he says, the hypothesis "is very much alive 50 years after it was first conceived." '
+
+
+&&
+
+
+MIND
+PHIL
+
+Cf. Frege’s judgement stroke (under Pedriali’s interpretation of fruitful/significant ‘redundancy’) and the use of limit notation in, for example, a First Principles algebraic computation of the derivative of a given function, such as 1/x^2. In a sense, it is redundant – but only so far as you remember that the binomial expansions etc. that you are chugging through are subject to the delta’s infinite approach to zero – that is, not a redundant thing at all. Essentially, the point is to shift our symbol-machinating focus from isolating the variable to achieving the 'rationalisation' of the delta, such that its symbolic presence is legitimately negligible (i.e. no longer a division by zero, undefined), and therefore whose value can be arbitrarily evaluated.
+
+
+Not to lose ourselves in a restatement of how differentiation works, the point for our present purposes is the notational use of the limit itself qua an ‘efficient’ redundancy. In other words, the limit symbol is there even if you don’t write it – since your algebraic proceedings are determined by its logic. This ‘efficient redundancy’ is thus in some wise equivalent to Frege’s use of the judgement stroke, the ‘redundant’ use of certain syntactic features in human natural language, and indeed underpinned in the function and nature of phenomenal consciousness itself. [Note here how ‘epiphenomenal’ might take on a new meaning, and perhaps captures Nietzsche’s use and Wittgenstein’s ‘not a Something – but not a Nothing either!’, rather than – was it? Huxley’s smoke of a steam train analogy?]
+
+
+Perhaps a key idea I ought to baptise the paper itself.
+
+
+‘On Redundant Forms in Symbolic Logic, with an application to the explanatory gap for phenomenal consciousness’
+
+
+[To sharpen my tools: https://math.stackexchange.com/questions/3315151/propositional-logic-and-redundancy ]
+
+
+&&
+
+
+MIND
+
+
+https://www.youtube.com/watch?v=zZUsUwDcI3w
+
+
+&&
+
+
+Note the bias - 'booted'
+
+
+https://www.cambridge-news.co.uk/news/cambridge-news/calls-end-primary-school-exclusions-23838188#amp_tf=From%20%251%24s&aoh=16516054781994&csi=0&referrer=https%3A%2F%2Fwww.google.com&ampshare=https%3A%2F%2Fwww.cambridge-news.co.uk%2Fnews%2Fcambridge-news%2Fcalls-end-primary-school-exclusions-23838188
+
+
+&&
+
+
+The spectacle of power in narrative.
+
+
+Recall the scenario of sitting in a small boat on a quiet little lake; then, a little way off from the boat you glance the dark and foreboding flank of some presumably gigantic marine creature nearly breach the surface – and just as quickly submerge into the depths. The surface returns to its former tranquillity. And you remember to start breathing again.
+
+
+This little disturbance is a spectacle of power. Its sublime quality derives in part from the deeper, larger world that the enigmatic glimpse implies. An equivalent might be the mysterious discovery of a dead body – someone saw what they weren’t supposed to, and has paid the price. What kind of person could have done this? From what kind of shadowy world had they belonged?
+
+
+&&
+
+I remember now that in my worst nightmare(s) of my early childhood I was horrified by the ‘giddy nonsense' and circus-like absurdity of a certain dream-place, crowded with too-emotive faces and, I think now, the archetypal figure of a Jester, like some fiendish Punch-and-Judy villain.
+
+
+&&
+
+Ei (ideas for philosophical essays) [I need to collate these into a dedicated document]
+
+
+Ethical personal judgements in the light of an analysis of ‘personality disorders’.
+
+
+What was the other idea? I had it today, earlier, but I’ve yet to jot it down. I don’t think it’s a new idea from the shower…but I had it earlier? Right? Ironically I thought the idea above was the harder to recall… So, I think it’s something short: just a word or a phrase I had in mind. Area of phil. ? I think it wasn’t Mind, but perhaps Ethics?
+
+
+Solution to the Problem of Evil (would be cool to also dissolve Plantinga’s free-will argument).
+
+
+Bostrom-like simulation computations of likelihood a cultural ‘defence mechanism’ against thought. (see note below).
+
+
+&&
+
+
+Ulysse Nardin
+
+
+Nice.
+
+
+&&
+
+
+MIND
+
+
+Graziano 2022
+'self-model theory' aka 'illusionism'
+
+
+https://www.pnas.org/doi/10.1073/pnas.2116933119 
+
+
+&&
+
+
+TEACH
+
+
+Tint investigation.
+
+
+To increase tint, do we add same amount to each colour channel, or increase by same ratio?
+
+
+E.g.
+50 % of 10, 200, 139
+Or add 50 to 10, 200, 139?
+
+
+Hypothesis -> my guess
+
+
+Screenshots as proof with annotations if possible.
+
+
+&&
+
+
+PSY
+
+
+Syndrome versus disorder?
+
+
+&&
+
+PHIL
+
+One to read.
+
+
+Gettier Across Cultures† 2015 in ‘Nous’
+Edouard Machery,Stephen Stich,David Rose,Amita Chatterjee,Kaori Karasawa,Noel Struchiner,Smita Sirker,Naoki Usui,Takaaki Hashimoto
+
+
+&&
+
+
+PHIL
+
+
+Brentano on intuitive judgement
+
+
+Textor (cf. Frege on judgement, and esp. where Pedriali agrees/differs from Textor's account)
+
+
+https://www.tandfonline.com/doi/full/10.1080/09608788.2022.2060935?src= 
+
+
+'unmittelbares Innewerden' Husserl's phrase meaning 'immediate awareness', which Textor suggests is a later version of 'intuitive judgement', as in Thomas Reid's (alethic) account of the 'light of truth'.
+
+
+'Brentano saw himself as developing an alternative to the [alethic] truth-based conception of intuitive judgement. His basic notion was not truth, but correctness (Richtigkeit). In Brentano’s parlance ‘is (in)correct’ ((un)richtig) is not merely a stylistic alternative for ‘is true (false)’. The notion of correctness applies to actions in general and mental acts in particular'
+
+
+'Brentano’s conception is normative because the idea that someone who judges correctly judges as one should, figures prominently in it. It is an alternative to the alethic conception because the correctness of a judgement is distinct from its truth'
+
+
+Opening statement of section 3: 'Brentano argued that the notion of a correct judgement is independent of and prior to the notion of a true judgement'.
+
+
+Definition of a proposition: 'What is a proposition? For the purposes of this paper, it is sufficient to say that a proposition is the meaning of a sentence for which the question, whether it is true or false, arises and can be assessed' (§3).
+
+
+Ibidem: 'It is one of Brentano’s key-points that what he called judgement – ‘acknowledging’ (anerkennen) or ‘acknowledging judgement’ (anerkennendes Urteil) and ‘rejecting’ (verwerfen, leugnen) or ‘rejecting judgement’ (verwerfendes Urteil) – are not propositional attitudes'.
+
+
+&&
+
+
+PHIL
+
+
+What if Bostrom etc. version is precisely a cultural-level defence mechanism against the actual philosophical thought, of the absolute disjunction between world and mind?
+
+
+What others are there? I think I thought of the Bishop Berkeley misquotation this morning. Yes: the actual thought from Berkeley is about making things out of ideas, not at all that 'esse percipi est'.
+
+
+Thought qua reason is 'unnerving'.
+
+
+&&
+
+Horses are a painting of the wind, the wind close to earth.
+
+
+&&
+
+
+MIND
+PHIL
+
+
+Very good. Graziano.
+
+
+https://youtu.be/MASBIB7zPo4
+
+
+&&
+
+
+SC
+
+
+https://www.deseret.com/2022/4/21/23035737/are-you-middle-class-upper-middle-class-economy-housing-inflation-struggling-rich-poor
+
+
+&&
+
+
+TEACH
+
+
+Quantum computing
+
+
+https://www.reviewgeek.com/115246/googles-addicting-new-game-lets-you-build-a-quantum-computer/
+
+
+&&
+
+
+SC
+
+
+Contemporary non-fiction book on class in England.
+
+
+https://www.telegraph.co.uk/columnists/2022/04/17/do-have-narrow-stoats-head-thin-hands-small-mouth-must-upper/
+
+
+&&
+
+
+Negative effect of mindfulness.
+
+
+'The new study provides evidence that mindfulness can lead to undesirable outcomes by dampening feelings of guilt.'
+
+
+https://www.psypost.org/2022/04/mindfulness-meditation-reduces-prosocial-reparative-behaviors-by-buffering-people-against-feelings-of-guilt-62925 
+
+
+&&
+
+
+TEACH
+
+
+Brick laying
+
+
+https://www.bbc.co.uk/bbcthree/article/90f4edca-535c-4b8c-a175-ea1e4893b304
+
+
+&&
+
+
+PSY
+
+Anxiety. As described in some literature.
+
+
+‘Anxiety is a difficult emotion to describe. The colorful leaves outside the window no longer seemed vibrant; they seemed glossy as if being revealed in an overexposed technicolor film. The twitter of the birds sounded like a radio commercial. My new beagle puppy snored in a comer as if she were a debauched old bitch. The day seemed overcast even as the sun reflecting off a white tablecloth in the dining room blinded my eyes’ (Cockcroft, The Dice Man: 318).
+
+
+&&
+
+
+Mercedes electric car EQXX prototype.
+
+
+Has some success!
+
+
+'The car traveled 1,008 km (626 miles), in real-world conditions and traffic, between the group's research center in Sindelfingen in southern Germany and Cassis on the French Riviera, Mercedes announced in a statement. The battery's state of charge on arrival was around 15 percent, amounting to a remaining range of around 140 kilometers (87 miles), and the average consumption was a record-breaking low of 8.7 kWh per 100 kilometers (7.1 kWh per 62 miles). It arrived after almost 12 hours.'
+
+
+'Equipped with a battery of one hundred kilowatt hours (kWh)'
+
+
+'The Mercedes-Benz electric S class EQS, current spearhead of the group's luxury electric vehicle at more than 100,000 euros ($108,308), consumes between 16 and 17kWh over 100km, often more in real conditions. The autonomy is 780km according to the WLTP standard.'
+
+
+'Tesla Model 3 and Tesla Model S, their direct competitors, display up to 650 km of autonomy for a consumption generally between 16 and 20 kWh per 100 km.'
+
+
+https://www.thestreet.com/.amp/technology/mercedes-pulls-off-a-feat-that-should-worry-tesla 
+
+
+&&
+
+
+SC
+
+
+There is a deeper and more important phenomenon beneath social class. It is something like a 'well-mannered soul'.
+
+
+&&
+
+
+OTR
+
+
+‘Day of the Oprichnik’ by Vladimir Sorokin.
+
+
+Terrifying, apparently.
+
+
+&&
+
+
+PHIL
+SC
+
+
+A recent and contemporary view on social class.
+
+
+https://unherd.com/2022/04/novelists-are-afraid-of-class/
+
+
+&&
+
+
+TEACH
+
+
+p5.py on trinket?!
+
+
+https://www.raspberrypi.org/blog/python-coding-for-kids-beyond-the-basics/
+
+
+&&
+
+
+PHIL
+
+
+Nietzsche versus Frege.
+
+
+http://schwitzsplinters.blogspot.com/2012/08/the-ghettoization-of-nietzsche.html?m=1
+
+
+&&
+
+
+COMP SCI
+
+
+Binary clock wallpaper in python.
+
+
+https://github.com/Asocia/binary-clock-wallpaper 
+
+
+&&
+
+
+PHIL
+
+
+Extraneous variable
+
+
+https://www.statology.org/extraneous-variable/
+
+
+&&
+
+
+An old friend!
+
+
+Úngeziefer
+
+
+'Ungeziefer comes from the Middle High German ungezibere, a negation of the Old High German zebar (related to the Old English ti'ber), meaning “sacrifice” or “sacrificial animal.” An ungezibere, then, is an unclean animal unfit for sacrifice, and Ungeziefer describes the class of nasty creepy-crawly things.'
+
+
+And here's the best definition of 'beast' I've ever met with: 'an animal, especially a large or dangerous four-footed one.'
+
+
+By the by, the term 'vermin' is related to 'worm', which itself formerly designated such creatures as snakes and reptiles.
+
+
+&&
+
+
+ROD
+
+
+'In 2003, Emory University’s Philippe Rochat scoured developmental studies to construct his Five Stages of Self-Awareness, describing how children learn to identify themselves and their loved ones as distinct entities, from birth until age 5. Each of Rochat’s stages revolves around the mirror test for babies, an assessment of self-awareness that rose to prominence in the 1970s.'
+
+
+https://www.fatherly.com/health-science/children-five-stages-self-awareness-mirror-tests/ 
+
+
+&&
+
+Suskind’s ‘Perfume’ - page 244. That’s where criminal guilt is dissolved and yet recognition of identity intact. A key point of interest.
+
+
+&&
+
+
+PHIL
+
+
+The intolerability of reason. That is, in the capacity of a system of meaning (affect).
+
+
+Note also the error in opinions about 'thinking rationally, not emotionally', or 'rising above emotion'. Now, this is sound advice in the different question of not being swept up in drastic paroxysms of aggression or lust etc., but this is not the 'question' put above: without affect, no orientation for meaning/significance, not reasonable thought, no rationality.
+
+
+&&
+
+If a person believes in class, then perhaps there are two cases: looking up, in the sense that those higher, in the richness of their voices and legal knowledge, are the ‘real parents’, the ‘real adults’. And looking down? Well, not as if regarding children; something more like unruly and frightening animals to pity?
+
+
+&&
+
+The necessity of routine for survival etc. The security of significant participation in these routines as the child grows. That is, note the human being’s dependence on routine and significance therein, sculpted by the necessity of routine over, perhaps, millions of years if not hundreds of thousands.
+
+
+But I am probably missing the more significant thing: animal routines?
+
+
+&&
+
+
+This morning, 10th April 2022, Jojo read ‘car’ and ‘dad’ accurately from his red reading papers. He has some familiarity with ‘mum’, ‘hair’, ‘up’, and ‘dot’. 
+
+
+I have perhaps introduced too many words at this stage (I’ve been showing him these words for some weeks now, perhaps more than a month? – but sporadically. Ideally this would be several times a day – which is now easier since we’re on the two-week Easter holiday).
+
+
+I think Jojo may have read (sight-read, obviously) some of the words accurately before now, but I can’t be sure. He has certainly over-generalised them to ‘mumma’ or ‘dadda’ before now.
+
+
+I am thinking of introducing some more popular words he is speaking now, such as ‘more’, ‘no’, ‘Abdulla’, ‘granddad’, ‘bye bye’, ‘Mya’, ‘scooter’, ‘park’, lorry’, ‘van’, ‘tractor’, ‘Goggins’ etc. That is, unafraid of his inaccuracy with the 6 I have shown so far. On the other hand, what I may mean is to replace the less useful/interesting words with some of these new (I can’t recall all those that might be good). So – I should consult the book on ‘teaching your baby to read’ and check whether it’s best to get a few words solidly known before moving on?
+
+
+At this stage, it seems that Jojo will frequently over-generalise. He does definitely seem to know ‘car’! And is happy to announce it! Note – Jojo is rather obsessed with cars, pointing out cars, frequently calling anything with identifiable wheels cars (e.g. his toy tractor, a skateboard, etc.).
+
+
+&&
+
+
+Teufelskatz.
+
+
+There was an attempt to embarrass a butterfly for her former feline, hairy habits.
+
+
+&&
+
+
+I understand – it is difficult to choose which is worse: the underlying emptiness (that is so empty it seems even empty of emptiness), or the intensities of anxiety and, or, rage that immediately flood in to ‘rescue’ you from that unspeakable emptiness. The anxiety and the emptiness are closer in kind. [Perhaps rage is the obverse, outward edge of anxiety.]
+
+
+&&
+
+
+AI and AGI
+
+
+Mentions Stuart Russell
+
+
+https://fondthinker.com/politics-economics/why-agi-anxiety-says-more-about-muskian-meglaomnia-than-about-machine-intelligence/
+
+
+&&
+
+
+PHIL
+FREGE
+
+
+On the point of the concepts-inferential notation: ‘The mere invention of this ideography has, it seems to me, advanced logic. I hope that logicians, if they do not allow themselves to be frightened off by an initial impression of strangeness, will not withhold their assent from the innovations that, by a necessity inherent in the subject matter itself, I was driven to make. These deviations from what is traditional find their justification in the fact that logic has hitherto always followed ordinary language and grammar too closely. In particular, I believe that the replacement of the concepts subject and predicate by argument and function, respectively, will stand the test of time. It is easy to see how regarding a content as a function of an argument leads to the formation of concepts. Furthermore, the demonstration of the connection between the meanings of the words if, and, not, or, there is, some, all, and so forth, deserves attention’ (Preface to Begriffsschrift: 7).
+
+
+&&
+
+
+PHIL
+
+
+From Frege’s Preface to Begriffsschrift: ‘If it is one of the tasks of philosophy to break the domination of the word over the human spirit by laying bare the misconceptions that through the use of language often almost unavoidably arise concerning the relations between concepts and by freeing thought from that with which only the means of expression of ordinary language, constituted as they are, saddle it, then my ideography, further developed for these purposes, can become a useful tool for the philosopher’ (7).
+
+
+He wrote this on 18th December, 1878.
+
+
+&&
+
+
+The spectacle of form. Warmth of caffeine, sunshine, and discovery.
+
+
+&&
+
+
+PHIL
+
+
+Frege 
+
+
+Maria van der Schar
+
+
+Judgement and psychologism
+
+
+https://academic.oup.com/mind/article/127/505/225/3852036
+
+
+I'd love to cf this with Pedriali's take on the judgement stroke.
+
+
+&&
+
+
+TEACH
+
+
+Pit
+  https://www.psypost.org/2022/04/meta-analysis-finds-that-perseverance-of-effort-or-grit-is-strongly-tied-to-better-subjective-well-being-62840
+
+
+&&
+
+
+Retronymy.
+
+
+E.g. calling a theory 'micro-Altaic' to retrospectively contrast with the macro-Altaic theory.
+
+
+&&
+
+
+Ignorance is not a deficit. It is a crown protecting a skull which is itself a crown protecting the fields of heaven.
+
+
+&&
+
+
+PSY
+
+
+Effective lie detection.
+
+
+https://academic.oup.com/hcr/article-abstract/40/4/442/4093736?redirectedFrom=fulltext
+
+
+&&
+
+
+PHIL
+
+
+Subjectively willed attention is like the tilting or flexing of a lens across a variety of ready-to-bubble pots, such that where the focus of the hot sun is directed, the given pot bubbles – thoughts are encouraged, the trajectory of speech, of an emotion, etc.
+
+
+Perhaps this is a picture of the working of consciousness qua freewill.
+
+
+Also connect to this my ideas of the 'idle' nature of subjective labour.
+
+
+&&
+
+PSY
+
+‘if you were given direct electrical access to your reward system, you would probably self-stimulate without stopping until you died’ (Russell: 38).
+
+
+Excerpt From: Stuart Russell. “Human Compatible”. Apple Books. 
+
+
+&&
+
+PSY
+
+
+Components of empathy: ‘Jamil Zaki and Kevin Ochsner (Chapter 13) pick out an Experience Sharing System (ESS), distinct from a Mental State Attribution System (MSAS), as what they call a “tale of two systems”. This converges on the emotional vs. cognitive empathy systems delineated by Perry and Shamay-Tsoory’ (Baron-Cohen, Lombardo, et al. 2013: preface vii).
+
+
+&&
+
+
+PSY
+
+
+Transcript of conversation with ASPD.
+
+
+http://archive.ttbook.org/book/transcript/me-thomas-confessions-sociopath 
+
+
+&&
+
+
+Eristic. Adj of or relating to debate or argument; a person given to debate or argument.
+
+
+&&
+
+
+So far as goes the confabulating ego, fear is at once tonic to the content of deception and tonic to the primary deception, ‘I am not really afraid’.
+
+
+&&
+
+
+Comp Sci
+
+
+https://levelup.gitconnected.com/sorting-data-structures-in-python-ceba201d33d2
+
+
+&&
+
+
+After a time, skill in reading only increases as a function of the understanding. The anticipatory understanding?
+
+
+&&
+
+
+Don’t forget and neglect hendiadys.
+
+
+&&
+
+
+Consider the relation between intolerability and necessity.
+
+
+&&
+
+
+PSY
+PHIL
+
+
+There’s something I’m beginning to understand. Between people. Or between something ‘in’ people. Recall the caste system of vedic culture. Indeed, all systems of caste. And let us seek to understand and develop what Nietzsche had observed in a phenomenon he called ‘pathos of distance’.
+
+
+Differentiation (e.g. to ‘find the world “good”’) is a function of a psychical tension. Geuss suggests that this tension can only exist in a society of ‘qualitatively distinct’ hierarchical rank; from this, Geuss claims that Nietzsche thinks ‘slavery is necessary’ for the work of creative valuation.
+
+
+Geuss also asserts that Nietzsche ‘hated democracy’. 
+
+
+See Raymond Geuss: https://www.youtube.com/watch?v=UOdEKnapR3U 
+
+
+See Nietzsche’s BGE §§257-58. N compares the ruling (non-decadent) aristocracy to the ‘sun-seeking vines of Java’.
+
+
+&&
+
+
+PSY
+
+
+BTR: Simon Baron-Cohen, Zero Negative Empathy (or something?). 
+
+
+&&
+
+
+Dice Man - notes (about 4 pages so far) moved to dedicated document (10/April/2022)
+
+
+&&
+
+
+[this is early draft; see Drive for up to date draft]
+A Whisper if the Only Sound
+
+
+Star struck on a stage before the stars and the uninterested earth
+Bitten in conflict for possession of pleasure
+Hateful eyes make something of you
+A guilt-strike returns under the cover of accident.
+
+
+The fingers and face of One
+Dressed in flowing armour ark-like
+Moved not by mind
+By the Mother of thunder, her blessing.
+
+
+Rage swallows the body of her brother
+Aggression, too small to put up a fight
+A song lost in the evolution of birds
+Rage has the legs of panic, the deep indifference of delight
+
+
+The indifferent laughter-storm if perfectly defiled Light.
+
+
+&&
+
+
+PSY
+
+
+Nils-Åke Hillarp
+
+
+‘the reward system. This is an internal signaling system, mediated by dopamine, that connects positive and negative stimuli to behavior. Its workings were discovered by the Swedish neuroscientist Nils-Åke Hillarp and his collaborators in the late 1950s. It causes us to seek out positive stimuli, such as sweet-tasting foods, that increase dopamine levels; it makes us avoid negative stimuli, such as hunger and pain, that decrease dopamine levels. In a sense it’s quite similar to E. coli’s glucose-seeking mechanism, but much more complex. It comes with built-in methods for learning, so that our behavior becomes more effective at obtaining reward over time. It also allows for delayed gratification, so that we learn to desire things such as money that provide eventual reward rather than immediate reward. One reason we understand the brain’s reward system is that it resembles the method of reinforcement learning developed in AI, for which we have a very solid theory’ (37).
+
+
+Excerpt From: Stuart Russell. “Human Compatible”. Apple Books. 
+
+
+&&
+
+
+D
+
+
+‘Dr. Mann harumphed or snorted or something and I moved away from the window to look up at Freud. Freud stared down seriously; he didn't look pleased.
+
+
+“There must be some other . . . other secret [blasphemy!] some other . . . magic potion which would permit certain men to radically alter their lives,” I went on.’ (Ch. 7, 49).
+Here, Luke is about to spontaneously formulate his idea: he is grinding a dice in his hand, and Dr Mann is pushing him to work through his problematic ‘boredom’. 
+But notice here the parallels with The Strange Case. The psychoanalysis, the ideological dialectic between men of the new science. Also cf. Frankenstein in a similar vein. And each anti-hero’s siding with something like ‘alchemy’. 
+&&
+
+
+NOV
+
+
+[v1]
+Poetry is written when it is permitted to write itself; just as a dream must be found by its own interpretation – but graffiti, graffiti is a nasty thing from a nasty place. A secret black place.
+
+
+[v2]
+Graffitied words are an ugly thing sprung from an unseen place. Compare with real poetry – only written when subject to the authority of words themselves. Or for that matter, compare graffiti to a dream’s depths of meaning: it is said, by wiser voices than mine, that the dream is its own interpretation. Unlike graffiti. 
+
+
+Graffiti is naked. Not like a woman. Graffiti is without discipline. Like the frozen, hairless corpse of a cat. No secrets revealed. Just some crude and superficial fact, zombied out under animation of sour, lime-lit impulse. Scrawled where no disciplined aggression might shame it out of sight.
+
+
+[Too weak a ligature this? ->] For implicit reasons, too, Peter felt he hated the graffiti he noticed here and there in the town. Scribbled on the backs of benches, circling bins, scratched across bus-stops. Just now he turned sharply, slowed to be safe for on-comers, and passed the place where the drunkards would gather in the morning; they would sit in the summer light and watch the passing traffic from a sort of island between the two roads.
+
+
+And it was there the strange thing happened: Peter flashed his eyes at the wide pale wall to which the three or four drunkards were facing, and he experienced a vision. He thought he saw a scrawled message in tall black writing. Then this vanished just as quickly. Just long enough for him to snatch the sense of the words written there.
+
+
+He muttered these words to himself, and then saw his friend, similarly just now arriving at their meeting place. They brought their bikes together and nodded in the new direction. On to Peter’s Uncle’s house.
+
+
+[Last words of chapter could be the vision’s message?]
+
+
+&&
+
+If you have been to heaven once or, more likely, a number of times, then you find it no injustice to die. It is enough to know that you got your fair share, and it is pleasing to know that other people will likely experience heaven too, given the surety of its experience from your own experience.
+
+
+With this threat of feeling injustice dissolved, there is a liberty from a certain quantity of tension. This energy is repurposed to – well, I don’t know. 
+
+
+&&
+
+
+PSY
+Neumann
+
+
+Cf. Conduct disorder and aspd (sociopathy):
+
+
+‘Progression through the archetypal phases, the patriarchal orientation of consciousness, the formation of the superego as the representative of collective values within the personality, the existence of a collective value-canon, all these things are necessary conditions of normal, ethical development. If any one of these factors is inhibited, developmental disturbances result. A disturbance of the first two factors, which are specifically psychic, leads to neuroticism; a disturbance of the other two, which are cultural, expresses itself more in social maladjustment, delinquency, or criminality’ (405).
+
+
+&&
+
+Here’s another definition of science: the suspension of subjective perspective. 
+
+
+&&
+
+
+PSY
+Neumann
+
+
+‘the development and cultivation of consciousness required by the collective [i.e. super-ego regulation by culture and society] constitute at the same time an uprooting. The inner collective tie to the instincts must in large measure be given up, and, as a secondary security for the ego, new roots must be sunk in the subsoil of the collective and in its ruling canon of cultural values. This process of transplantation means moving from instinct-centeredness to ego-centeredness, and any failure here brings a crop of developmental disorders and illnesses’ (404-05).
+
+
+&&
+
+
+PSY
+
+
+Speculation.
+
+
+A sign of the integration of aggression is a lack of tension or unsteadiness, and indeed a lack of aggression; instead, an effortless transparency of ‘either do this or’ – and the Weight of all Necessity behind.
+
+
+&&
+
+
+Our environment is for the most part symbolic articulation and interpersonal mind-state inference. What part can aggression play in so ‘virtual’ or ‘non-physical’ a landscape?
+
+
+The point is not that aggression does play a part, e.g. in verbal insult etc., but that aggression can really ‘make no sense’ here, where physical violence undermines the nature of this non-physical dimension of our environment. Again, this is not to say that physical violence itself has no place, or that physical violence cannot result from symbolic articulation, or may go hand in hand with verbal threats etc.; it is just that the very nature of interpersonal symbolic exchange tends towards abstract significance and away from physical significance. Aggression, therefore, whose significance is grounded in physical significance, can only contradict its very nature when applied to the domain of symbolic articulation.
+
+
+The point, then, is to identify the phenomenon or phenomena that are the sublimation of aggression at the symbolic level. Our first caveat is thus not to confuse ourselves with phenomena such as ‘verbal insult’ or ‘condescension’ etc.
+
+
+What is the legitimate part to play for aggression proper? Well, it is the focused, intense, and outbound passion motivating the attacking predator, and correspondingly the focused, intense, and outbound passion motivating the defending prey. It is the rightful affective response to inflicted or threatened pain, that is, to the threat or actuality of bodily injury. It is the passion driving the response to an occasion’s necessity to fight.
+
+
+Now, aggression has other parts to play. Not all is life or death. There are modulations of the predator-prey confrontation that also exercise the passion of aggression. Here we may consider ‘shows’ of aggression. These are signals – though we should remember that such signals only work due to the possibility of an indexical concomitant to the symbolic show deferring violence. For example, a lion growls and brandishes her teeth: hear the resonance of my size, the depth of my solidity; see the readiness of my sharp jaws – so let it be that intimidation replace any move towards actual violence against me. Thus it is that a pair of lions may face off, exchanging mere shows of violence, before either intimidation win out or aggression spill out.
+
+
+A point of clarity is needed here. If I walk up to you suddenly, shouting and threatening to hurt you – such behaviour must be called ‘aggressive’. Indeed, my very tone of voice in this instance will be said to be an ‘aggressive’ tone of voice. But why would this behaviour in this case be described as ‘aggressive’, that is, if no violence has yet happened and no violence need happen thereafter? The reason is that such behaviour has increased the likelihood that violence is going to occur, clearly enough. In other words, any behaviour, either part of a ritualised signalling or not, so far as moving an interpersonal exchange towards the likelihood of physical violence, can be rightly called aggressive. In short, aggressive behaviour is behaviour that encourages or tends towards physical violence.
+
+
+Now, consider that you may whisper delicately to a henchman to attack me. Such an exchange will likely result in and directly encourage horrible violence. However, though we may nominate this ‘total speech-act’ to be ‘aggressive’ or ‘an act of aggression’, we might think twice about the delicate whisper itself. For example, we might admit that ‘the manner of the command was not aggressive, though the content of the command indeed was’. I think this is a key differentiation, for it highlights the important presence of a certain emotion in conventional shows of aggression, which are indeed energised with the fire of that same passion that motivates serious physical attack. In other words, ‘aggression’ points to the emotion that animates behaviour, rather than the behaviour itself. [To continue – we can see the emotion mirroring in ways the properties of the physical violence? Adjacent but independent point: ‘aggression’ is used metonymically for ‘violence’ - e.g. ‘Russia’s aggression towards Ukraine has largely been condemned by the international community’. No doubt the emotion of aggression has been present among Putin’s ministry etc., but the sense of the expression literally refers to violence, not ‘the emotion driving focused attack’. The statement is talking about behaviour, actions, and not about psychological affect.]
+
+
+&&
+
+
+PSY
+
+
+The Essence of Boredom
+Mikulas, William L; Vodanovich, Stephen J.
+The Psychological Record; Granville, Ohio, etc. Vol. 43, Iss. 1,  (Winter 1993): 3.
+
+
+Need to get hold of this!
+
+
+&&
+
+COMP SCI
+PHIL
+
+
+‘“Alan Robinson’s algorithm for general-purpose logical reasoning”
+
+
+Excerpt From: Stuart Russell. “Human Compatible”. Apple Books. 
+
+
+&&
+
+
+ROD RIVERS
+
+
+Paper comments
+
+
+Editing errata etc.
+‘Trade-off’ instead of ‘trade off’ or indeed something with more literal clarity
+In ‘Risks’ first paragraph, ‘artificial intelligent systems’ used instead of AISs? Why?
+Tautology: ‘biases [...] that would be unfair’ (2nd indented risk)
+Typo: ‘and base it actions on these’ (3rd indented risk)
+Inconsistent use of full-stops at end of indedented risks
+Penultimate indented risk, awkward gerund: ‘The risk that in acting out of some
+greater interest’ - should be ‘The risk that in the acting out of some
+greater interest’
+Grammar typo: ‘I touch on some the advantages’ (close to start of ‘Further Discussion’ section)
+
+
+Interesting! -> ‘Neural nets have already been used to create algorithms that demonstrate some aspects of ToM (Rabinowitz 2018)’ (Rivers 2020: 2).
+
+
+Also interesting! -> ‘Although ToM is a generally accepted concept in psychology, there are alternative accounts of social action including socio-cultural psychology and discursive psychology (Leudar & Costall 2009)’ (Rivers 2020: 2).
+
+
+Rivers R., (2020), Do Robots Need Theory of Mind?, AIethics.ai Blog Post February 2020, https://robotethics.co.uk/robots-tom/
+
+
+&&
+
+
+Now what was I going to write here?
+
+
+Perhaps my memory of the dream of worrying about having folding blades in tools in my baggage on an aeroplane.
+
+
+&&
+
+
+Tightly grown houseplants, sitting in their chimney pots, oozed green fire solid.
+
+
+&&
+
+PHIL
+PSY
+
+
+I think I’ve come upon a key phenomenon in the ‘problematic’ of the human psyche/condition: intolerability.
+
+
+I.e. this phenomenon cannot exist in the non-subjective world.
+
+
+&&
+
+
+A skilful writer has our protagonist walk in the wrong direction on occasion, and although they and we, the reader, must see that it is wrong somehow, we must yet desire very much to walk in that direction – we must be moved to empathise in that temporary tragic trajectory.
+
+
+&&
+
+
+Infinite special-ness or identity or Being does not mean relative special-ness. The very point is that infinite special-ness has no comparison but is preternaturally and inherently special.
+
+
+The superstition and mistake, precisely therefore, is to regard or otherwise act out this infinite condition in relative or interpersonal terms.
+
+
+&&
+
+
+British Government pays long-standing debt to Iran, and Nazanin Zaghari-Ratcliffe finally released: 'The British-Iranian was detained in April 2016, and spent nearly six years in detention for allegedly plotting against the Iranian government'.
+
+
+BBC News - How is a UK debt to Iran connected to Nazanin Zaghari-Ratcliffe?
+https://www.bbc.co.uk/news/world-56376852
+
+
+&&
+
+
+Was lifelessness then the original womb?
+
+
+[Kinda lame but noteworthy? Can it be developed and reworded? NB I’ve already reworded it with the ‘was…then the’ structure.]
+
+
+&&
+
+
+NOV
+
+
+Perhaps Peter’s vision is of graffiti – i.e. what could be said to the local alcoholics to help them/reprimand? An invective? From the shadow agent(s) of his psyche?
+
+
+Or, distinct from his vision in opening?
+
+
+&&
+
+
+Writing the first line. Edith Wharton's thoughts.
+
+
+https://lithub.com/edith-wharton-on-how-to-write-a-vivid-first-line/ 
+
+
+&&
+
+
+PHIL
+ETHICS
+
+
+Bentham was the fellow who designed (and nearly brought to reality!) the Panopticon – with William Pitt's ministry.
+
+
+&&
+
+
+Frankenstein
+
+
+Finished the audiobook by Sean Mason, March 11 2022.
+
+
+https://www.bbc.co.uk/sounds/play/p07lkdyy
+
+
+&&
+
+
+PHIL
+LANG
+
+
+Philosophy of bullshit
+
+
+Harry G. Frankfurt (1986, 'On Bullshit') describes what for him is the essence of discursive 'bullshit':
+
+
+'indifference to how things really are'
+
+
+So, not essentially the desire to deceive, but the desire to persuade, for which a truthful discourse may be used just as well as a deceptive.
+
+
+That said, would then 'bullshit' only be able to function given the deception of being an earnest discourse?
+
+
+See this decent article: https://slate.com/culture/2005/03/defining-bullshit.html 
+
+
+&&
+
+
+PSY and sociopathy.
+
+
+Detailed overview of ASPD.
+
+
+https://reddit.com/r/sociopath/w/index/what-is-sociopathy?utm_source=share&utm_medium=android_app 
+
+
+&&
+
+
+MILL
+PHIL
+
+
+Utilitarianism and the notion of justice (and rights)
+
+
+‘Mill argues that the idea of a right is not a concept separate from justice, but is rather a manifestation of the other aspects of justice, namely the desire for punishment and the fact that there is an assignable person who has been harmed. A right means that a person has a valid claim on society to protect him in the possession of that right. However, if one wants to know why society should defend this right, Mill argues that the only reason is one of general utility’
+(https://www.sparknotes.com/philosophy/utilitarianism/section7/)
+
+
+&&
+
+
+Hibakujumoku - Japanese term for trees that survived the Hiroshima bomb.
+
+
+&&
+
+
+PSY
+
+
+Neumann on creativity
+
+
+‘creativity in all its forms is always the product of a meeting between the masculine world of ego consciousness and the feminine world of the soul’ (355)
+
+
+&&
+
+
+PSY
+
+
+Note the ASPD concerns over ‘authority’, ‘respect’, and ‘law/command/control/dominance/obedience’.
+
+
+And what, as a separate question, is the relation between these and what I’ll term the ‘anosognosia of responsibility’?
+
+
+&&
+
+
+PSY
+
+Neumann
+
+Shadow
+
+
+‘[...] in psychological development, the self lies hidden in the shadow’ (353)
+
+
+‘The way to the self lies through him; behind the dark aspect he represents there stands the aspect of wholeness, and only by making friends with the shadow do we gain the friendship of the self’ (353) Cf. The literary term, anagnorisis. 
+
+
+‘The formation of the shadow goes together with the introjection of the antagonist, a figure we have already encountered when dealing with the psychology of myths. The assimilation of evil and the incorporation of aggressive tendencies always center on the shadow. The "dark brother" is as much a symbol of the shadow side as the bush-soul of primitive. Only by incorporating this dark side does the personality put itself into a posture of defense. Evil, no matter by what cultural canon it be judged, is a necessary constituent of individuality as its egoism, its readiness to defend itself or to attack, and lastly, as its capacity to mark itself off from the collective’ (Neumann: 352)
+
+
++
+‘The shadow roots the personality in the subsoil of the unconscious, and this shadowy link with the archetype of the antagonist, i.e., the devil, is in the deepest sense part of the creative abyss of every living personality. That is why in myths the shadow often appears as a twin, for he is not just the "hostile brother," but the companion and friend, and it is sometimes difficult to tell whether this twin is the shadow or the self, the deathless "other." ‘ (353).
+
+
++ 
+‘he is the "keeper of the gate," the guardian of the threshold [between unconscious and the conscious personality]’ (353). Cf. Ghostbusters. ‘Are you the Gatekeeper?’ 
+
+
++
+‘This unconscious mass component is opposed to consciousness and the world of culture. It resists conscious development, is irrational and emotional, anti-individual and destructive. It corresponds mythologically to the negative aspect of the Great Mother – it is her murderous accomplice, the adversary and man-slaying boar. This negative, unconscious part of the personality is archaic in the most negative sense, for it is the beast-man at bay. He becomes the shadow and dark brother of the ego only if, through a process of integration, the ego consciously descends into the depths of the unconscious, there to seek him out and bind him to the conscious mind. But when the reverse happens, when, that is to say, consciousness is overpowered and wholly possessed by him, we get the frightful phenomenon of regression to the mass man as manifested in the mass epidemics of recollectivization’ (439)
+
+
++
+‘in a homogeneous psyche the negative element has a meaningful place as decomposition and death, as chaos and prima materia, as the leaden counterweight which roots growing things to the earth, in a fragmented psyche with a defeatist, regressing ego it becomes a cancer and a nihilistic danger’ (440)
+
+
+&&
+
+
+McCarthy: ‘While inside the vaulting of the ribs between his knees the darkly meated heart pumped of who’s will and the blood pulsed and the bowels shifted in their massive blue convolutions of who’s will and the stout thighbones and knee and cannon and the tendons like flaxen hawsers that drew and flexed and drew and flexed at their articulations and of who’s will all sheathed and muffled in the flesh and the hooves that stove wells in the morning groundmist and the head turning side to side and the great slavering keyboard of his teeth and the hot globes of his eyes where the world burned’ (All the Pretty Horses: 132).
+
+
+John Grady riding on the stallion of deep chestnut.
+
+
+&&
+
+
+Cienaga
+
+
+Bolson
+
+
+&&
+
+
+Apophenia and pareidolia
+
+
+https://earthsky.org/human-world/seeing-things-that-arent-there/#:~:text=Seeing%20familiar%20objects%20or%20patterns,it%20from%20time%20to%20time.
+
+
+Also, how to differentiate from and connect to sortilege?
+
+
+&&
+
+
+Gorgias on Being
+
+
+https://www.worldhistory.org/article/1952/gorgias-on-nature-on-the-non-existent/
+
+
+&&
+
+
+Begun 3 March 2022
