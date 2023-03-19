@@ -13,16 +13,34 @@ def parse_file(filename):
     for line in range(len(lines)):
       l=lines[line]
       if l.isupper():
-        current_label=l
-        print('found new label!',current_label)
+        print('found new label!',l.strip())
+        # Is it just an additional label, though?
+        # If so, ideally make multiple entries.
+        # However, for now, we'll just keep the
+        # leading label.
+        if current_label is None:
+          current_label=l.strip()
         try:
+          # What list of notes do we already have for
+          # this label?
+          # Try fails if first of its kind.
           notes=data[current_label]
         except:
+          # This means first label of its kind.
           notes=[]
-      if '&&' not in l:
+      if '&&' not in l and current_label is not None:
+        # Note we only append if working under a
+        # current label. To prevent unwanted scoops.
         notes.append(l)
       else:
+        # Dump total list of notes so far into
+        # current label.
         data[current_label]=notes
+        # Remember that current label needs to
+        # be emptied, else we'll scoop unwanted
+        # next lines if they're unlabelled.
+        current_label=None
+
         
           
                 

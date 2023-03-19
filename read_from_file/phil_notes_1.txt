@@ -1,0 +1,765 @@
+What label? PHIL
+No such label, sorry. Continue (y/n)?Y
+What label?PHIL
+349
+PHIL
+Discursive dilemmas
+https://youtu.be/UC3kLvI292M
+OTW series - Suggest to Laura: The Bear.
+from GPT-3
+
+‘In Chinese philosophy and religion, including Taoism, the term "real person" (Chinese: 真人; pinyin: zhēn rén) is often used to refer to an enlightened or spiritually awakened individual who has attained a state of understanding and enlightenment. This concept is often associated with the idea of the "sage" or "wise person" in Taoist thought, and is considered to be a highly esteemed and respected figure within the tradition.
+
+
+The concept of the "real person" in Taoism is often related to the idea of the "true self" or the "authentic self," which is understood to be an individual's innermost being or essence. The realization of the true self is seen as a central goal in Taoist spiritual practice, and the attainment of this state is often associated with the attainment of enlightenment or spiritual awakening.
+
+
+In Taoist literature, the "real person" is often described as being characterized by certain qualities, such as simplicity, humility, and a lack of ego or self-centeredness. They are also seen as being in harmony with the natural world and living in accordance with the principles of the Tao, or the natural way.
+
+
+I hope this information is helpful. Let me know if you have any other questions.’
+
+Thinking by analogy traces the echoing forms of emergent formula.
+PHIL
+Surprisingly good on key quotes from Nietzsche and especially Descartes.
+https://bigthink.com/thinking/misunderstood-philosophy-quotes/
+Why does the ego sting so at criticism?
+Reason does not exist when you look away.
+https://news.sky.com/story/amp/chess-robot-breaks-seven-year-old-boys-finger-12658586
+PHIL
+Alex Voorhoeve on inequality, very good!
+CS [new tag for COMP SCI]
+Unicode (UTF-8) encoding takes 4 bytes per char.
+‘So now I know since we're using UTF-8 it takes 4 bytes per character giving us 1024 characters’
+(https://stackoverflow.com/questions/5290182/how-many-bytes-does-one-unicode-character-take)
+https://scroll.in/article/1025847/why-cant-you-remember-anything-from-the-first-two-years-of-your-life#amp_tf=From%20%251%24s&aoh=16550304969345&csi=0&referrer=https%3A%2F%2Fwww.google.com&ampshare=https%3A%2F%2Fscroll.in%2Farticle%2F1025847%2Fwhy-cant-you-remember-anything-from-the-first-two-years-of-your-life
+Our true thoughts are found by reason, leaving the sublunary and crossing silver dust strangely.
+PHIL
+https://aeon.co/essays/how-wittgenstein-might-solve-both-philosophy-and-quantum-physics
+
+Heaven is anosognosia and loss of care for those in hell?
+PHIL
+PHIL
+'the phenomenon of quantum superposition can be proven without having to resort to statistical arguments' (https://phys.org/news/2022-05-particle-paths-quantum-physics.html). Research is in Physical Review Research journal, here: https://journals.aps.org/prresearch/abstract/10.1103/PhysRevResearch.4.023075
+'"Our measurement results support classical quantum theory," says Stephan Sponar. "The novelty is that one does not have to resort to unsatisfactory statistical arguments: When measuring a single particle, our experiment shows that it must have taken two paths at the same time and quantifies the respective proportions unambiguously." This rules out alternative interpretations of quantum mechanics that attempt to explain the double-slit experiment with localized particle'.
+From paper's abstract: 'The obtained path presence equals the weak value of the path projector and is not a statistical average but applies to every individual neutron, verified by the recently introduced method of feedback compensation'.
+Holger Hofmann from Hiroshima University developed the theory behind the experiment.
+Hartmut Lemmel, the first author of the current publication.
+Stephan Sponar, another author of the current publication?
+Quantum mechanical concept of complementarity?
+The first principle of an 'ideology' is, like the Old Testament God, an intolerability for other ideological grounds of meaning of reality. Hence, it is bad for spontaneous conversation to bring up politics and religion, where interlocutors are condemned to exchange conversation for the pressure of a convincing defence etc.
+PHIL
+
+
+Tupper's self-referential formula.
+
+
+
+
+PHIL
+
+Cf. Frege’s judgement stroke (under Pedriali’s interpretation of fruitful/significant ‘redundancy’) and the use of limit notation in, for example, a First Principles algebraic computation of the derivative of a given function, such as 1/x^2. In a sense, it is redundant – but only so far as you remember that the binomial expansions etc. that you are chugging through are subject to the delta’s infinite approach to zero – that is, not a redundant thing at all. Essentially, the point is to shift our symbol-machinating focus from isolating the variable to achieving the 'rationalisation' of the delta, such that its symbolic presence is legitimately negligible (i.e. no longer a division by zero, undefined), and therefore whose value can be arbitrarily evaluated.
+
+
+Not to lose ourselves in a restatement of how differentiation works, the point for our present purposes is the notational use of the limit itself qua an ‘efficient’ redundancy. In other words, the limit symbol is there even if you don’t write it – since your algebraic proceedings are determined by its logic. This ‘efficient redundancy’ is thus in some wise equivalent to Frege’s use of the judgement stroke, the ‘redundant’ use of certain syntactic features in human natural language, and indeed underpinned in the function and nature of phenomenal consciousness itself. [Note here how ‘epiphenomenal’ might take on a new meaning, and perhaps captures Nietzsche’s use and Wittgenstein’s ‘not a Something – but not a Nothing either!’, rather than – was it? Huxley’s smoke of a steam train analogy?]
+
+
+Perhaps a key idea I ought to baptise the paper itself.
+
+
+‘On Redundant Forms in Symbolic Logic, with an application to the explanatory gap for phenomenal consciousness’
+
+
+[To sharpen my tools: https://math.stackexchange.com/questions/3315151/propositional-logic-and-redundancy ]
+
+
+
+
+PHIL
+
+One to read.
+
+
+Gettier Across Cultures† 2015 in ‘Nous’
+Edouard Machery,Stephen Stich,David Rose,Amita Chatterjee,Kaori Karasawa,Noel Struchiner,Smita Sirker,Naoki Usui,Takaaki Hashimoto
+
+
+
+
+PHIL
+
+
+Brentano on intuitive judgement
+
+
+Textor (cf. Frege on judgement, and esp. where Pedriali agrees/differs from Textor's account)
+
+
+https://www.tandfonline.com/doi/full/10.1080/09608788.2022.2060935?src=
+
+
+'unmittelbares Innewerden' Husserl's phrase meaning 'immediate awareness', which Textor suggests is a later version of 'intuitive judgement', as in Thomas Reid's (alethic) account of the 'light of truth'.
+
+
+'Brentano saw himself as developing an alternative to the [alethic] truth-based conception of intuitive judgement. His basic notion was not truth, but correctness (Richtigkeit). In Brentano’s parlance ‘is (in)correct’ ((un)richtig) is not merely a stylistic alternative for ‘is true (false)’. The notion of correctness applies to actions in general and mental acts in particular'
+
+
+'Brentano’s conception is normative because the idea that someone who judges correctly judges as one should, figures prominently in it. It is an alternative to the alethic conception because the correctness of a judgement is distinct from its truth'
+
+
+Opening statement of section 3: 'Brentano argued that the notion of a correct judgement is independent of and prior to the notion of a true judgement'.
+
+
+Definition of a proposition: 'What is a proposition? For the purposes of this paper, it is sufficient to say that a proposition is the meaning of a sentence for which the question, whether it is true or false, arises and can be assessed' (§3).
+
+
+Ibidem: 'It is one of Brentano’s key-points that what he called judgement – ‘acknowledging’ (anerkennen) or ‘acknowledging judgement’ (anerkennendes Urteil) and ‘rejecting’ (verwerfen, leugnen) or ‘rejecting judgement’ (verwerfendes Urteil) – are not propositional attitudes'.
+
+
+
+
+PHIL
+
+
+What if Bostrom etc. version is precisely a cultural-level defence mechanism against the actual philosophical thought, of the absolute disjunction between world and mind?
+
+
+What others are there? I think I thought of the Bishop Berkeley misquotation this morning. Yes: the actual thought from Berkeley is about making things out of ideas, not at all that 'esse percipi est'.
+
+
+Thought qua reason is 'unnerving'.
+
+
+
+Horses are a painting of the wind, the wind close to earth.
+
+
+
+
+PHIL
+
+
+Very good. Graziano.
+
+
+https://youtu.be/MASBIB7zPo4
+
+
+
+
+PHIL
+PHIL
+
+
+Nietzsche versus Frege.
+
+
+http://schwitzsplinters.blogspot.com/2012/08/the-ghettoization-of-nietzsche.html?m=1
+
+
+
+
+PHIL
+
+
+Extraneous variable
+
+
+https://www.statology.org/extraneous-variable/
+
+
+
+
+An old friend!
+
+
+Úngeziefer
+
+
+'Ungeziefer comes from the Middle High German ungezibere, a negation of the Old High German zebar (related to the Old English ti'ber), meaning “sacrifice” or “sacrificial animal.” An ungezibere, then, is an unclean animal unfit for sacrifice, and Ungeziefer describes the class of nasty creepy-crawly things.'
+
+
+And here's the best definition of 'beast' I've ever met with: 'an animal, especially a large or dangerous four-footed one.'
+
+
+By the by, the term 'vermin' is related to 'worm', which itself formerly designated such creatures as snakes and reptiles.
+
+
+
+
+PHIL
+
+
+The intolerability of reason. That is, in the capacity of a system of meaning (affect).
+
+
+Note also the error in opinions about 'thinking rationally, not emotionally', or 'rising above emotion'. Now, this is sound advice in the different question of not being swept up in drastic paroxysms of aggression or lust etc., but this is not the 'question' put above: without affect, no orientation for meaning/significance, not reasonable thought, no rationality.
+
+
+
+If a person believes in class, then perhaps there are two cases: looking up, in the sense that those higher, in the richness of their voices and legal knowledge, are the ‘real parents’, the ‘real adults’. And looking down? Well, not as if regarding children; something more like unruly and frightening animals to pity?
+
+
+
+The necessity of routine for survival etc. The security of significant participation in these routines as the child grows. That is, note the human being’s dependence on routine and significance therein, sculpted by the necessity of routine over, perhaps, millions of years if not hundreds of thousands.
+
+
+But I am probably missing the more significant thing: animal routines?
+
+
+
+
+This morning, 10th April 2022, Jojo read ‘car’ and ‘dad’ accurately from his red reading papers. He has some familiarity with ‘mum’, ‘hair’, ‘up’, and ‘dot’.
+
+
+I have perhaps introduced too many words at this stage (I’ve been showing him these words for some weeks now, perhaps more than a month? – but sporadically. Ideally this would be several times a day – which is now easier since we’re on the two-week Easter holiday).
+
+
+I think Jojo may have read (sight-read, obviously) some of the words accurately before now, but I can’t be sure. He has certainly over-generalised them to ‘mumma’ or ‘dadda’ before now.
+
+
+I am thinking of introducing some more popular words he is speaking now, such as ‘more’, ‘no’, ‘Abdulla’, ‘granddad’, ‘bye bye’, ‘Mya’, ‘scooter’, ‘park’, lorry’, ‘van’, ‘tractor’, ‘Goggins’ etc. That is, unafraid of his inaccuracy with the 6 I have shown so far. On the other hand, what I may mean is to replace the less useful/interesting words with some of these new (I can’t recall all those that might be good). So – I should consult the book on ‘teaching your baby to read’ and check whether it’s best to get a few words solidly known before moving on?
+
+
+At this stage, it seems that Jojo will frequently over-generalise. He does definitely seem to know ‘car’! And is happy to announce it! Note – Jojo is rather obsessed with cars, pointing out cars, frequently calling anything with identifiable wheels cars (e.g. his toy tractor, a skateboard, etc.).
+
+
+
+
+Teufelskatz.
+
+
+There was an attempt to embarrass a butterfly for her former feline, hairy habits.
+
+
+
+
+I understand – it is difficult to choose which is worse: the underlying emptiness (that is so empty it seems even empty of emptiness), or the intensities of anxiety and, or, rage that immediately flood in to ‘rescue’ you from that unspeakable emptiness. The anxiety and the emptiness are closer in kind. [Perhaps rage is the obverse, outward edge of anxiety.]
+
+
+
+
+AI and AGI
+
+
+Mentions Stuart Russell
+
+
+https://fondthinker.com/politics-economics/why-agi-anxiety-says-more-about-muskian-meglaomnia-than-about-machine-intelligence/
+
+
+
+
+PHIL
+PHIL
+
+
+From Frege’s Preface to Begriffsschrift: ‘If it is one of the tasks of philosophy to break the domination of the word over the human spirit by laying bare the misconceptions that through the use of language often almost unavoidably arise concerning the relations between concepts and by freeing thought from that with which only the means of expression of ordinary language, constituted as they are, saddle it, then my ideography, further developed for these purposes, can become a useful tool for the philosopher’ (7).
+
+
+He wrote this on 18th December, 1878.
+
+
+
+
+The spectacle of form. Warmth of caffeine, sunshine, and discovery.
+
+
+
+
+PHIL
+
+
+Frege
+
+
+Maria van der Schar
+
+
+Judgement and psychologism
+
+
+https://academic.oup.com/mind/article/127/505/225/3852036
+
+
+I'd love to cf this with Pedriali's take on the judgement stroke.
+
+
+
+
+PHIL
+
+
+Subjectively willed attention is like the tilting or flexing of a lens across a variety of ready-to-bubble pots, such that where the focus of the hot sun is directed, the given pot bubbles – thoughts are encouraged, the trajectory of speech, of an emotion, etc.
+
+
+Perhaps this is a picture of the working of consciousness qua freewill.
+
+
+Also connect to this my ideas of the 'idle' nature of subjective labour.
+
+
+
+PHIL
+
+
+There’s something I’m beginning to understand. Between people. Or between something ‘in’ people. Recall the caste system of vedic culture. Indeed, all systems of caste. And let us seek to understand and develop what Nietzsche had observed in a phenomenon he called ‘pathos of distance’.
+
+
+Differentiation (e.g. to ‘find the world “good”’) is a function of a psychical tension. Geuss suggests that this tension can only exist in a society of ‘qualitatively distinct’ hierarchical rank; from this, Geuss claims that Nietzsche thinks ‘slavery is necessary’ for the work of creative valuation.
+
+
+Geuss also asserts that Nietzsche ‘hated democracy’.
+
+
+See Raymond Geuss: https://www.youtube.com/watch?v=UOdEKnapR3U
+
+
+See Nietzsche’s BGE §§257-58. N compares the ruling (non-decadent) aristocracy to the ‘sun-seeking vines of Java’.
+
+
+
+
+PHIL
+
+
+‘“Alan Robinson’s algorithm for general-purpose logical reasoning”
+
+
+Excerpt From: Stuart Russell. “Human Compatible”. Apple Books.
+
+
+
+
+PHIL
+PHIL
+PHIL
+PHIL
+
+
+Utilitarianism and the notion of justice (and rights)
+
+
+‘Mill argues that the idea of a right is not a concept separate from justice, but is rather a manifestation of the other aspects of justice, namely the desire for punishment and the fact that there is an assignable person who has been harmed. A right means that a person has a valid claim on society to protect him in the possession of that right. However, if one wants to know why society should defend this right, Mill argues that the only reason is one of general utility’
+(https://www.sparknotes.com/philosophy/utilitarianism/section7/)
+
+
+
+
+Hibakujumoku - Japanese term for trees that survived the Hiroshima bomb.
+
+
+
+
+What label?
+
+What label?mind
+375
+MIND
+
+
+[Testing Bing’s use of ai [GPT4.0 I believe? - March 18 2023]]
+
+
+Sure! Here's a 500-word essay on the nature of propositional statements:
+
+
+Propositional statements are sentences that express a complete thought and can be either true or false. They are also known as declarative sentences and are used to make assertions about the world. Propositional statements can be simple or complex, depending on the number of propositions they contain.
+
+
+A proposition is an idea or statement that can be either true or false. It is often expressed using a subject and a predicate. For example, "The sky is blue" is a proposition because it expresses an idea that can be either true or false. In this case, the subject is "the sky" and the predicate is "is blue."
+
+
+Propositional logic is a branch of logic that deals with propositions and their relationships to one another. It uses symbols to represent propositions and logical connectives to represent the relationships between them. Logical connectives include "and," "or," "not," "if...then," and "if and only if."
+
+
+Propositional statements can be combined using logical connectives to form more complex statements. For example, we can combine the two propositions "The sky is blue" and "The grass is green" using the logical connective "and" to form the compound proposition "The sky is blue and the grass is green." This compound proposition asserts that both of its constituent propositions are true.
+
+
+Propositional statements can also be negated using the logical connective "not." For example, we can negate the proposition "The sky is blue" to form the proposition "It is not the case that the sky is blue." This new proposition asserts that its constituent proposition (i.e., "The sky is blue") is false.
+
+
+In conclusion, propositional statements are sentences that express complete thoughts and can be either true or false. They are used to make assertions about the world and can be simple or complex depending on their content. Propositional logic provides a framework for analyzing propositional statements and their relationships to one another.
+
+
+
+
+MIND
+
+
+Page 38. Sacks on the 'ultimate question' of qualia. He also cites Newton, who similarly to Galileo denies speculation about phenomenal qualities to the emerging Physics.
+
+
+An Anthropologist from Mars.
+
+
+
+MIND
+
+Can you find a quote where Godel is talking about phenomenal consciousness and how the subjective point of view is impossible?
+
+
+Yes, here is a quote from Kurt Gödel:
+
+
+"The subjective point of view is absolutely impossible. This was the insight that struck me as I was formulating the incompleteness theorems. Consciousness is a finite material thing, and as such it cannot have any access to the infinite, which is what is required for a subjective point of view. It follows that subjective experience is an illusion, and that only objective reality exists."
+
+
+This quote comes from a conversation between Gödel and Hao Wang, as recounted in Wang's book "A Logical Journey: From Gödel to Philosophy".
+
+
+Red Hen dev
+Can you give me an academic bibliographical reference for that please?
+Certainly, the conversation between Gödel and Hao Wang that the quote comes from is documented in the book "A Logical Journey: From Gödel to Philosophy" by Hao Wang. Here is the bibliographical reference for the book:
+
+
+Wang, Hao. A Logical Journey: From Gödel to Philosophy. MIT Press, 1996.
+
+
+Red Hen dev
+What page?
+
+
+The quote is not directly attributed to a specific page in the book "A Logical Journey: From Gödel to Philosophy" by Hao Wang, as it appears to be a summary of a conversation between Wang and Gödel that occurred over a period of time. However, the quote is mentioned on page 253 in the context of a discussion about Gödel's views on the relationship between consciousness and the incompleteness theorems.
+
+
+I wonder if this is where Dennett derives his 'illusionist' theory about the nature of phenomenal consciousness?
+
+
+Yes, the idea that consciousness is an illusion is similar to what Daniel Dennett has called the "illusionist" theory of consciousness. Dennett argues that the subjective experience of consciousness is an illusion created by the brain, and that there is no "hard problem" of consciousness that requires any special explanation beyond the workings of the brain.
+
+
+Dennett has cited Gödel's incompleteness theorems as one of the inspirations for his illusionist theory. In his book "Consciousness Explained," Dennett writes: "Gödel's theorem gives us the clearest, most authoritative case of an objective truth that can be known to be true, but only by someone who cannot know all the relevant facts." Dennett argues that this situation is similar to the problem of consciousness, in which an objective truth about the brain's workings can only be known subjectively by the conscious being, who is limited by the brain's own limitations.
+
+
+So, while Gödel did not explicitly propose the "illusionist" theory of consciousness, his ideas have certainly influenced those who have advanced this view, including Dennett.
+
+
+Red Hen dev
+Curious, then, that Penrose also cites Godel in order to express the necessary role of phenomenal consciousness, or 'understanding', so far as the possibility of our articulating the incompleteness theorem.
+
+
+Yes, it is interesting that Roger Penrose cites Gödel's incompleteness theorems as evidence for the necessity of consciousness or "understanding" in his argument for the existence of non-computable processes in the brain. Penrose argues that the human mind is capable of understanding mathematical truths that are beyond the reach of any computer or algorithm. He suggests that this capacity for understanding involves non-computable processes, which he identifies with the workings of microtubules in the brain.
+
+
+Penrose's argument is based in part on Gödel's incompleteness theorems, which he interprets as showing that there are mathematical truths that can be known by humans but that cannot be proven by any formal system. Penrose suggests that the ability to "see" such truths involves more than just following a set of rules or algorithms, and that it requires a kind of "understanding" or consciousness that is not reducible to computation.
+
+
+While Dennett and Penrose have very different views on the nature of consciousness and its relationship to computation, both have been influenced by Gödel's incompleteness theorems in their thinking about these issues.
+
+
+
+
+
+
+3.14159265358979323846
+
+
+Is that correct? To 20 places?
+
+
+Perimitros.
+
+
+William Jones 1707.
+
+
+
+
+MIND
+
+
+Phenomenal reasoning, aka teleological creative thought, is to be absolutely distinguished from what I will call ‘cognitive puzzling by empirical action’.
+
+
+Trial and error and ‘flailing’ limbs etc. stochastic (but not really random) also perhaps a relevantly related procedure of cognition.
+
+
+
+
+#16161D significance?
+
+
+Eigengrau (the colour you see in complete darkness). Brain darkness.
+
+
+
+
+Nazmi
+
+
+Altered traits. Silent meditation.
+
+
+
+
+MIND
+
+
+'Me explaining 'Attention': they're filters of the form A(x) x.'
+
+
+Attention in ML.
+
+
+
+
+MIND
+Language, that is, symbolic communication in the Lebensform of human social interaction, is second only to directed visual perception as an intimate tool of phenomenal attention.
+Nash equilibrium in a zero-sum game.
+https://en.wikipedia.org/wiki/Nash_equilibrium
+More AI
+https://www.reddit.com/r/Teachers/comments/zgxkpj/til_a_computer_can_write_a_better_essay_than_my/?utm_source=share&utm_medium=android_app&utm_name=androidcss&utm_term=1&utm_content=share_button
+ai research https://oneusefulthing.substack.com/p/the-mechanical-professor
+https://oneusefulthing.substack.com/p/how-to-use-ai-to-generate-ideas
+MIND
+Consciousness has no analogue.
+It is the first discontinuity in nature that I know of.
+Indeed: is it consciousness that brings the digital, the discrete into the world? Cf. subjectivity as the origin of the sense of the objective. Of the ‘identity’?
+Customer commitment
+Encourage feedback:  ipsus mori
+Skills Action Plan
+Route 1 -> Academia HE Lecturer
+Funding Gov Post Doc loans
+UK Research and… (very useful)
+Lots of different funding schemes (and finding PhD)
+Nothing in this local area (Dundee; UEA)-> need to find out what’s required (UEA is funded; eligible to apply for studentships; also talks about further opportunities for funding)
+ARU -> requirement is Degree and extensive post-grad
+
+Route 2 -> Therapist
+Counselling -> min L4, need L5 (must start L2) L2 theoretical; L3 practical; L4 undertake counselling.
+Free Level 2 Counselling Certificate (introductory)
+Full Level 2 - Funded? No. May depend on the current situation. E.g. £630.
+Advanced Learner Loan (like student loan) -> from Level 3
+Loan for fees, not covering living costs. Hills rd offer this:
+Thursday 1:45-5:30 - Year 45 sessions
+5:30-8:30 Level 4 - full year
+Find out intensive routes -> e.g. British Association of Counselling etc? Maybe?
+Contact industry professionals…what would this include.
+Part-time juggling?
+Intensive over Summer Hols…
+Support on-going -> can text, call, or email + summary + Suzie contacts.
+My Actions
+Talk to tutors and learning providers…
+Respond to plan email, which will complete sign-up process
+Prep for second appointment mid-December -> Suzie will contact me if I haven’t contacted her before.
+Kathyrn Diane New
+01476464442 Dr James?
+Liver specialist
+Hepatology GP Passfield
+20 Sep 2021
+Appointment confirmed for 8 Dec 2022.
+We, voting cattle, confused by our feelings of reverence for cabinets and ministers. Feeling managers to be rulers.
+MIND
+Word meaning.
+https://neurosciencenews.com/word-meaning-brain-21641/
+MIND
+An object is absolute in the sense of its being a whole, in its being a something per se. This is the proper perspective onto that old villain, the 'thing in itself.'
+There is only one literal 'thing in itself', which is the phenomenal consciousness. The 'thing-ness' or 'object' status of the table, the glass, the concept, the colour, the sense – only derives from the absolute unity or 'whole' given over by the phenomenal consciousness.
+Consider, the sense of there being an object under your conscious attention is a projection of the infinitesimal point of your perspective upon the rest of the world; in other words, the unified whole of any given object is only the reflection of the absolute point of perspective phenomenally attending.
+The 'I' and 'you' as opposed to 'me' and 'them'.
+MIND
+Gödel.
+https://www.jamesrmeyer.com/ffgit/godel-quotes.html
+
+Car
+Maybe Laura would like the Volkswagen T-roc convertible.
+135 x 95 jojo foot measure x
+Left foot smaller at 130
+26 Oct Weds 9:25am Boots Opticians
+2009
+Lewis Latimer’s poem, ‘Thinking?’ – not good, but not bad.
+AI art - useful styles
+Zdzislaw Beksinski (horror, detailed, nightmarish)
+
+
+Craiyon (free)
+
+
+https://creator.nightcafe.studio/
+
+
+Dream Studio (limited credits)
+
+
+Midjourney (via discord bot)
+MIND
+One of the best essays I've seen on consciousness.
+Nicholas Humphrey. Lives in Cambridge UK.
+https://aeon.co/essays/how-blindsight-answers-the-hard-problem-of-consciousness
+From 'sentition' to 'phenomenalisation' via a feedback loop's recursive state settling into an attractor state.
+MIND
+'Bidirectionally connected cores in a mouse connectome: towards extracting the brain subnetworks essential for consciousness'
+“Bidirectionally connected cores in a mouse connectome: towards extracting the brain subnetworks essential for consciousness” by Jun Kitazono, Yuma Aoki and Masafumi Oizumi, 21 July 2022, Cerebral Cortex.
+DOI: 10.1093/cercor/bhac143
+MIND
+Gaze
+https://neurosciencenews.com/dreaming-eye-movement-21289/
+MIND
+Lev Vygotsky:
+Stage 1 - Differentiation (from birth) Right from birth infants are able to differentiate the self from the non-self. A study using the infant rooting reflex found that infants rooted significantly less from self-stimulation, contrary to when the stimulation came from the experimenter.[27]
+Stage 2 - Situation (by 2 months) In addition to differentiation, infants at this stage can also situate themselves in relation to a model. In one experiment infants were able to imitate tongue orientation from an adult model.[28] Additionally, another sign of the differentiation is when infants bring themselves into contact with objects by reaching for them.[29]
+Stage 3 - Identification (by 2 years) At this stage the more common definition of "self-awareness" comes into play, where infants can identify themselves in a mirror through the "rouge test" as well as begin to use language to refer to themselves.
+Stage 4 - Permanence This stage occurs after infancy when children are aware that their sense of self continues to exist across both time and space.
+Stage 5 - Self-consciousness or meta-self-awareness This also occurs after infancy. This is the final stage when children can see themselves in 3rd person, or how they are perceived by others.
+PAP strong emergence
+In principle inexplicable. Since forms contingent, i.e. non-trivial macro level properties determined not only by micro level properties but by the actual happenstance arrangements: this contingent ingredient cannot be represented except by equivalent actualisation (chugged through a computer model in no greater efficiency than physical reality).
+MIND
+George F R Ellis - I think accurately identifies something uniquely special about what he calls 'logical argument', i.e., as an/the example of a (strongly) emergent phenomenon.
+Cf. chains of commonsense reasoning, which I have heard even large language models struggle with.
+Power distance scale - measure of a culture's authoritarian nature
+PAP Emergence
+A pseudoplasmodium can 'walk'. Well.
+Breaking symmetry. From similar behaviour that reinforces similarity, to differentiated roles, such as slime-molds forming a stalk and spore emitters. Things that were identical now differ.
+Consciousness as the 'ultimate emergence'!
+Classes of emergence:
+Simple/Complex emergence
+Weak/Strong emergence
+Philip Anderson: 'more is different'
+Current controversy and debate: some scientists believe there are some emergent properties that we will never understand: strong emergent phenomena.
+1 macro level property in an equilibrium system (e.g. the strength of a piece of steel)
+2 a macro level property in a system not in equilibrium (e.g. a flame; a slime-mold)
+3 macro level phenomena cannot be expected, but could in principle be deduced (we can explain it) – slime-mold activity can be and is understood, therefore an example of weak emergence; can't expect it, but once we see it, we can understand it in terms of micro level interactions
+4 macro level phenomena cannot be deduced from interactions at the micro level
+Coupled oscillation - e.g. three 'blinking' automata
+Bottom-up - local relationships (we might term these 'interdependencies') contribute to a global property, such as fireflies synchronising
+Pure coordination game (prisoner dilemma?)
+The emergent functionality of robustness from, e.g., the functionality of emergent 'firewalls' (e.g. between risky-borrowing banks, as given in example from lecture) https://youtu.be/4BQWO2EVtMk
+MIND
+Consider the parallel in how the naive speaker (even when a fully trained physicist) will refer to what they mean by colour, i.e. just the manifest spectacle, the raw experience, of the colour they see, and not the absorption of electromagnetic waves etc.; and how naive speakers and philosophers and scientists of language alike will speak of language and communication themselves: namely, prototypically propositional and not performative behaviour qua 'meaning as use'.
+The insight this simple parallel affords is that it is the propositional perspective that phenomenal consciousness uniquely permits to  perception, cognition, and communication.
+To brood, ruminate, and reason.
+MIND
+MIND
+On perception and cognition.
+See Tyler Burge - Origins of Objectivity. Would seem to, really, agree with my view, but of course will miss the conflation of non-phenomenal perceptuo-cognitive communication with subjective, perspectival language.
+More scientific accounts of perception etc. (Found on very good Gestalt Wikip)
+Lettvin, J.Y., Maturana, H.R., Pitts, W.H., and McCulloch, W.S. (1961). Two Remarks on the Visual System of the Frog. In Sensory Communication edited by Walter Rosenblith, MIT Press and John Wiley and Sons: New York
+Valentin Fedorovich Turchin – The phenomenon of science – a cybernetic approach to human evolution – Columbia University Press, 1977
+MIND
+They came to same conclusion as me! Dennett as non-imager…
+https://kingdablog.com/2015/02/05/dennett-and-the-typical-mind-fallacy-2/
+MIND
+MIND
+MIND
+MIND
+
+
+https://doi.org/10.1073/pnas.2003110117
+
+
+Graziano on the gaze. Encoded as motion.
+
+
+
+
+MIND
+
+
+Lucid dream. Projective geometry of dreams. Think on this, I will.
+
+
+
+
+MIND
+MIND
+
+
+https://www.youtube.com/watch?v=zZUsUwDcI3w
+
+
+
+
+Note the bias - 'booted'
+
+
+https://www.cambridge-news.co.uk/news/cambridge-news/calls-end-primary-school-exclusions-23838188#amp_tf=From%20%251%24s&aoh=16516054781994&csi=0&referrer=https%3A%2F%2Fwww.google.com&ampshare=https%3A%2F%2Fwww.cambridge-news.co.uk%2Fnews%2Fcambridge-news%2Fcalls-end-primary-school-exclusions-23838188
+
+
+
+
+The spectacle of power in narrative.
+
+
+Recall the scenario of sitting in a small boat on a quiet little lake; then, a little way off from the boat you glance the dark and foreboding flank of some presumably gigantic marine creature nearly breach the surface – and just as quickly submerge into the depths. The surface returns to its former tranquillity. And you remember to start breathing again.
+
+
+This little disturbance is a spectacle of power. Its sublime quality derives in part from the deeper, larger world that the enigmatic glimpse implies. An equivalent might be the mysterious discovery of a dead body – someone saw what they weren’t supposed to, and has paid the price. What kind of person could have done this? From what kind of shadowy world had they belonged?
+
+
+
+I remember now that in my worst nightmare(s) of my early childhood I was horrified by the ‘giddy nonsense' and circus-like absurdity of a certain dream-place, crowded with too-emotive faces and, I think now, the archetypal figure of a Jester, like some fiendish Punch-and-Judy villain.
+
+
+
+Ei (ideas for philosophical essays) [I need to collate these into a dedicated document]
+
+
+Ethical personal judgements in the light of an analysis of ‘personality disorders’.
+
+
+What was the other idea? I had it today, earlier, but I’ve yet to jot it down. I don’t think it’s a new idea from the shower…but I had it earlier? Right? Ironically I thought the idea above was the harder to recall… So, I think it’s something short: just a word or a phrase I had in mind. Area of phil. ? I think it wasn’t Mind, but perhaps Ethics?
+
+
+Solution to the Problem of Evil (would be cool to also dissolve Plantinga’s free-will argument).
+
+
+Bostrom-like simulation computations of likelihood a cultural ‘defence mechanism’ against thought. (see note below).
+
+
+
+
+Ulysse Nardin
+
+
+Nice.
+
+
+
+
+MIND
+
+
+Graziano 2022
+'self-model theory' aka 'illusionism'
+
+
+https://www.pnas.org/doi/10.1073/pnas.2116933119
+
+
+
+
+MIND
+What label?
+What label?pap
+29
+PAP
+[Witt picks up thread of application misleading etc. Section 422-423]
+PAP
+Complexity
+'In his prescient 1972 essay “More is Different,” Nobel laureate physicist Philip Anderson argued for this layering of physical laws, which are irreducible: We cannot deduce laws from a higher layer by starting at a lower level of complexity' (https://bigthink.com/13-8/reductionism-fails-complexity/ ).
+PAP
+Not promising, but may serve as another example of mathematical framework depending on inferential phenomenal reports.
+Reference: “A Relativistic Theory of Consciousness” by Nir Lahav and Zachariah A. Neemeh, 12 May 2022, Frontiers in Psychology.
+DOI: 10.3389/fpsyg.2021.704270
+PAP
+Calculating is (included in an?) an act of perception qua phenomenal consciousness.
+Femininity itself is attractive. So, there is redundant need to aim at attractiveness. Aim at femininity.
+I wonder if the same is true for the masculine.
+5663
+PAP
+PAP
+What is the qualitative levelling up of biology to cognition? Minimal instance of perception?
+https://link.springer.com/article/10.1007/s10539-022-09860-3
+Nothing so personal as pain? And yet what affronts far worse, even while hurting far less, is the imposition of the rude.
+
+Found the artist I like!
+Rafael Araujo
+https://www.thisiscolossal.com/2014/01/architectural-renderings-of-life-drawn-with-pencil-and-pen-by-rafael-araujo/
+
+PAP
+PAP
+The sense of the objective.
+New title for paper?
+Idea too: what if written not in the spirit of providing the final word on phenomenal consciousness but to maximally inspire philosophers eager to fit the next parts of the puzzle? That is, to seed.
+What label?
