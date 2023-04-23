@@ -41,10 +41,6 @@ def parse_file(filename):
         # next lines if they're unlabelled.
         current_label=None
 
-        
-          
-                
-
     return data
 
 """
