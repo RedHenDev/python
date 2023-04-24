@@ -91,3 +91,114 @@ called the 'context-length'.
 """
 block_size=8
 print(train_data[:block_size+1])
+"""
+We will use parallel processing on the 
+GPU to compute stacks of data through the
+tensor, i.e., through parallel batches.
+The target values are block_size + 1 since
+the last input token in the block will have
+the next token outside this context as its
+target (so, block_size + 1).
+
+Here's a print out of the tensor,
+print(train_data[:block_size+1]),
+tensor([122,7,7,0,0,0,34,51,53]),
+Where even this small block permits
+
+"""
+torch.manual_seed(1337) 
+# seed for reproducible results only
+# i.e. we copy Andrej Karpathy.
+batch_size=4
+# How many independent sequences to
+# process in parallel?
+
+def get_batch(split):
+    # gen a small batch of data of
+    # inputs (x) and targets (y)
+    data = train_data if split=='train' else val_data
+    # Batch_size tuple here gives offsets, so
+    # 4 offset positions each of context length.
+    ix=torch.randint(len(data)-block_size,(batch_size,))
+    # Take 1-dimensional tensors and
+    # stack as rows.
+    x=torch.stack([data[i:i+block_size]for i in ix])
+    y=torch.stack([data[i+1:i+block_size+1]for i in ix])
+    return x,y
+
+xb,yb=get_batch('train')
+print('inputs:')
+print(xb.shape)
+print(xb)
+print('targets:')
+print(yb.shape)
+print(yb)
+print('----')
+
+"""
+Now we can start feeding these batches
+of data into a neural network (transformer).
+"""
+import torch.nn as nn
+from torch.nn import functional as F
+torch.manual_seed(1337)
+
+class BigramLanguageModel(nn.Module):
+    def __init__(this,vocab_size):
+        super().__init__()
+        # Each token directly reads off
+        # the logits for the next token
+        # from a lookup table.
+        this.token_embedding_table=nn.Embedding(vocab_size,vocab_size)
+        
+    def forward(this,idx,targets):
+        # B T C -> batch by time by
+        # channel tensor (4*8*vocab_size).
+        logits=this.token_embedding_table(idx)
+        # We can think of logits as 'scores'
+        # for the next character in the 
+        # sequence.
+
+        # Now we want to evaluate the
+        # loss function (quality of prediction).
+        # Negative log likelihood, which
+        # pytorch evaluates under cross_entropy.
+        # We could like to do this:
+        # loss=F.cross_entropy(logits,targets)
+        # High quality would mean logits
+        # high number, other numbers low.
+        # Logits is our prediction, and
+        # targets the answer.
+        # But! Pytorch wants channels to be
+        # the second dimension (i.e. B C T).
+        # So - to solve, we unpack the 
+        # dimensions and repackage so that we
+        # can return our loss as well as
+        # logits...
+        B,T,C=logits.shape
+        # So, preserve channel as second dimension
+        # but stretch out batch and time as one,
+        # first dimension.
+        logits=logits.view(B*T,C)
+        # Targets, too, needs to be
+        # One-dimensional (B*T).
+        targets=targets.view(B*T)
+        # targets.view(-1) is equivalent -- since pytorch would guess here.
+        loss=F.cross_entropy(logits,targets)
+        return logits,loss
+
+m=BigramLanguageModel(vocab_size)
+logits,loss=m(xb,yb)
+print(logits.shape)
+print(loss)
+# Loss should be -ln(1/vocab_size)
+# i.e. -ln(1/123) == 4.8
+# Since ours is 5.8, we are not yet
+# very diffuse; there is some entropy
+# in the predictions.
+
+"""
+29:17 - ready to write the generate
+function on the Bigram... class :)
+https://youtu.be/kCc8FmEb1nY?t=1758
+"""
