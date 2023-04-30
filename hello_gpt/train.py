@@ -151,41 +151,85 @@ class BigramLanguageModel(nn.Module):
         # from a lookup table.
         this.token_embedding_table=nn.Embedding(vocab_size,vocab_size)
         
-    def forward(this,idx,targets):
-        # B T C -> batch by time by
-        # channel tensor (4*8*vocab_size).
-        logits=this.token_embedding_table(idx)
-        # We can think of logits as 'scores'
-        # for the next character in the 
-        # sequence.
+    def forward(this,idx,targets=None):
+        # NB
+        """
+        [Explanation from chatGPT_3.5]
+        In Python, a forward function is 
+        often used in classes that are 
+        designed to represent neural network 
+        models using a library like PyTorch 
+        or TensorFlow.
+        The forward function is a method of 
+        the class that specifies how the 
+        input to the model should be 
+        processed to produce its output. 
+        Specifically, it takes in the input 
+        data (usually in the form of a tensor) 
+        and returns the output tensor after 
+        it has been processed by the layers of 
+        the network.
+        """
+        if targets is None:
+            loss=None
+        else:
+            # B T C -> batch by time by
+            # channel tensor (4*8*vocab_size).
+            logits=this.token_embedding_table(idx)
+            # We can think of logits as 'scores'
+            # for the next character in the 
+            # sequence.
 
-        # Now we want to evaluate the
-        # loss function (quality of prediction).
-        # Negative log likelihood, which
-        # pytorch evaluates under cross_entropy.
-        # We could like to do this:
-        # loss=F.cross_entropy(logits,targets)
-        # High quality would mean logits
-        # high number, other numbers low.
-        # Logits is our prediction, and
-        # targets the answer.
-        # But! Pytorch wants channels to be
-        # the second dimension (i.e. B C T).
-        # So - to solve, we unpack the 
-        # dimensions and repackage so that we
-        # can return our loss as well as
-        # logits...
-        B,T,C=logits.shape
-        # So, preserve channel as second dimension
-        # but stretch out batch and time as one,
-        # first dimension.
-        logits=logits.view(B*T,C)
-        # Targets, too, needs to be
-        # One-dimensional (B*T).
-        targets=targets.view(B*T)
-        # targets.view(-1) is equivalent -- since pytorch would guess here.
-        loss=F.cross_entropy(logits,targets)
+            # Now we want to evaluate the
+            # loss function (quality of prediction).
+            # Negative log likelihood, which
+            # pytorch evaluates under cross_entropy.
+            # We could like to do this:
+            # loss=F.cross_entropy(logits,targets)
+            # High quality would mean logits
+            # high number, other numbers low.
+            # Logits is our prediction, and
+            # targets the answer.
+            # But! Pytorch wants channels to be
+            # the second dimension (i.e. B C T).
+            # So - to solve, we unpack the 
+            # dimensions and repackage so that we
+            # can return our loss as well as
+            # logits...
+            B,T,C=logits.shape
+            # So, preserve channel as second dimension
+            # but stretch out batch and time as one,
+            # first dimension.
+            logits=logits.view(B*T,C)
+            # Targets, too, needs to be
+            # One-dimensional (B*T).
+            targets=targets.view(B*T)
+            # targets.view(-1) is equivalent -- since pytorch would guess here.
+            loss=F.cross_entropy(logits,targets)
         return logits,loss
+    
+    def generate(this,idx,max_new_tokens):
+        # The job of generators is to take
+        # a (B,T) and turn it into a (B,T+1)
+        # idx is (B,T) array of indices in current context.
+        for _ in range(max_new_tokens):
+            # get the predictions
+            logits,loss=this(idx)
+            # focus on last time step
+            # So, becomes (B,C)
+            # Here we grab the last element
+            # in the time (T) dimension, -1.
+            logits=logits[:,-1,:]
+            # Now apply softmax for probabilities
+            # (i.e. convert predictions to probabilities)
+            probs=F.softmax(logits,dim=-1)
+            # get samples, (B,1)
+            idx_next=torch.multinomial(probs,num_samples=1)
+            # append sampled index to running sequence
+            # (B,T+1)
+            idx=torch.cat((idx,idx_next),dim=1)
+        return idx
+
 
 m=BigramLanguageModel(vocab_size)
 logits,loss=m(xb,yb)
