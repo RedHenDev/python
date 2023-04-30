@@ -170,16 +170,15 @@ class BigramLanguageModel(nn.Module):
         it has been processed by the layers of 
         the network.
         """
+        # B T C -> batch by time by
+        # channel tensor (4*8*vocab_size).
+        logits=this.token_embedding_table(idx)
+        # We can think of logits as 'scores'
+        # for the next character in the 
+        # sequence.
         if targets is None:
             loss=None
         else:
-            # B T C -> batch by time by
-            # channel tensor (4*8*vocab_size).
-            logits=this.token_embedding_table(idx)
-            # We can think of logits as 'scores'
-            # for the next character in the 
-            # sequence.
-
             # Now we want to evaluate the
             # loss function (quality of prediction).
             # Negative log likelihood, which
@@ -230,7 +229,6 @@ class BigramLanguageModel(nn.Module):
             idx=torch.cat((idx,idx_next),dim=1)
         return idx
 
-
 m=BigramLanguageModel(vocab_size)
 logits,loss=m(xb,yb)
 print(logits.shape)
@@ -240,9 +238,15 @@ print(loss)
 # Since ours is 5.8, we are not yet
 # very diffuse; there is some entropy
 # in the predictions.
+"""
+https://youtu.be/kCc8FmEb1nY?t=1758
+"""
+idx=torch.zeros((1,1),dtype=torch.long)
+# Because m.generate() works via batches,
+# we index [0] to get the first row.
+print(decode(m.generate(idx,max_new_tokens=100)[0].tolist()))
 
 """
-29:17 - ready to write the generate
-function on the Bigram... class :)
-https://youtu.be/kCc8FmEb1nY?t=1758
+Next step is to train our model :o
+https://youtu.be/kCc8FmEb1nY?t=2029
 """
