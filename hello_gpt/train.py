@@ -1,6 +1,8 @@
 import os
 
-with open(os.path.dirname(os.path.abspath(__file__))+'/n1.txt', 'r',encoding='utf-8') as f:
+# inputText='/n1.txt'
+inputText='/input.txt'
+with open(os.path.dirname(os.path.abspath(__file__))+inputText, 'r',encoding='utf-8') as f:
     text = f.read()
 
 print(len(text))
@@ -250,3 +252,37 @@ print(decode(m.generate(idx,max_new_tokens=100)[0].tolist()))
 Next step is to train our model :o
 https://youtu.be/kCc8FmEb1nY?t=2029
 """
+# Create a pytorch optimizer.
+# lr is learning rate.
+# AdamW is more advanced than SGD stochastic
+# gradient descent.
+# With smaller datasets we can get away
+# with higher learning rates (lr), such
+# as -3 or higher (probably).
+optimizer=torch.optim.AdamW(m.parameters(),lr=1e-3)
+
+# The optimizer object will take the gradients
+# and update the parameters based on these.
+batch_size=32
+# Now we carry out a basic training loop.
+# Iteration of 100 goes from 5.2 to 5.1.
+# 3000 yields 3.2 by end!
+for steps in range(20000):
+    # Get batch of data.
+    xb, yb = get_batch('train')
+    # Now sample the loss.
+    logits,loss=m(xb,yb)
+    # Zero out gradients from prev. step.
+    optimizer.zero_grad(set_to_none=True)
+    # Get gradients for all the parameters.
+    loss.backward()
+    # Then use gradients to update parameters.
+    optimizer.step()
+
+print('loss is now '+ str(loss.item()))
+
+# Because m.generate() works via batches,
+# we index [0] to get the first row.
+print(decode(m.generate(idx,max_new_tokens=2000)[0].tolist()))
+
+
