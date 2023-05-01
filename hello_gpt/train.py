@@ -284,5 +284,9 @@ print('loss is now '+ str(loss.item()))
 # Because m.generate() works via batches,
 # we index [0] to get the first row.
 print(decode(m.generate(idx,max_new_tokens=2000)[0].tolist()))
-
+"""
+Certainly not Shakespeare :)
+But something! 
+https://youtu.be/kCc8FmEb1nY?t=2243
+"""
 
