@@ -1,4 +1,18 @@
 import os
+import torch
+import torch.nn as nn
+from torch.nn import functional as F
+torch.manual_seed(1337)
+
+"""
+These hyperparameters added 17th May.
+"""
+# Use gpu if available.
+device='cuda' if torch.cuda.is_available() else 'cpu'
+learning_rate = 1e-2
+eval_interval = 200
+max_iters = 3000
+eval_iters = 200
 
 # inputText='/n1.txt'
 inputText='/input.txt'
@@ -68,7 +82,7 @@ To do so, we're going to use pytorch (https://pytorch.org).
 [pip3 install torch torchvision torchaudio]
 """
 
-import torch
+# import torch
 data=torch.tensor(encode(text),dtype=torch.long)
 print(data[:1000])
 # 13:13 on video-https://www.youtube.com/watch?v=kCc8FmEb1nY
@@ -126,6 +140,8 @@ def get_batch(split):
     # stack as rows.
     x=torch.stack([data[i:i+block_size]for i in ix])
     y=torch.stack([data[i+1:i+block_size+1]for i in ix])
+    # GPU cuda, if available.
+    x,y=x.to(device),y.to(device)
     return x,y
 
 xb,yb=get_batch('train')
@@ -141,9 +157,7 @@ print('----')
 Now we can start feeding these batches
 of data into a neural network (transformer).
 """
-import torch.nn as nn
-from torch.nn import functional as F
-torch.manual_seed(1337)
+
 
 class BigramLanguageModel(nn.Module):
     def __init__(this,vocab_size):
@@ -231,7 +245,9 @@ class BigramLanguageModel(nn.Module):
             idx=torch.cat((idx,idx_next),dim=1)
         return idx
 
-m=BigramLanguageModel(vocab_size)
+model=BigramLanguageModel(vocab_size)
+# Move to GPU if cuda available.
+m=model.to(device)
 logits,loss=m(xb,yb)
 print(logits.shape)
 print(loss)
@@ -243,10 +259,13 @@ print(loss)
 """
 https://youtu.be/kCc8FmEb1nY?t=1758
 """
-idx=torch.zeros((1,1),dtype=torch.long)
+# NB last argument, device, added, for
+# computing on GPU, if cuda available.
+# Before this, context known as 'idx'.
+context=torch.zeros((1,1),dtype=torch.long,device=device)
 # Because m.generate() works via batches,
 # we index [0] to get the first row.
-print(decode(m.generate(idx,max_new_tokens=100)[0].tolist()))
+print(decode(m.generate(context,max_new_tokens=100)[0].tolist()))
 
 """
 Next step is to train our model :o
@@ -259,7 +278,7 @@ https://youtu.be/kCc8FmEb1nY?t=2029
 # With smaller datasets we can get away
 # with higher learning rates (lr), such
 # as -3 or higher (probably).
-optimizer=torch.optim.AdamW(m.parameters(),lr=1e-3)
+optimizer=torch.optim.AdamW(m.parameters(),lr=learning_rate)
 
 # The optimizer object will take the gradients
 # and update the parameters based on these.
@@ -267,7 +286,8 @@ batch_size=32
 # Now we carry out a basic training loop.
 # Iteration of 100 goes from 5.2 to 5.1.
 # 3000 yields 3.2 by end!
-for steps in range(20000):
+# 40000 yields 2.6-ish!
+for steps in range(4000):
     # Get batch of data.
     xb, yb = get_batch('train')
     # Now sample the loss.
@@ -283,10 +303,25 @@ print('loss is now '+ str(loss.item()))
 
 # Because m.generate() works via batches,
 # we index [0] to get the first row.
-print(decode(m.generate(idx,max_new_tokens=2000)[0].tolist()))
+# Context formally known as 'idx'.
+print(decode(m.generate(context,max_new_tokens=30)[0].tolist()))
 """
 Certainly not Shakespeare :)
 But something! 
 https://youtu.be/kCc8FmEb1nY?t=2243
+-1st May 2023
+
+Started again on 17th May 2023
+Simplest mode, bigram. Where tokens 
+aren't talking to one another.
+They're only looking at the last letter;
+instead, we want the tokens to be looking
+at one another, which is analogous to 
+figuring out the context.
+OK -- device and other hyperparameters
+added, and working.
+Next to sort out ridding noisy loss:
+https://youtu.be/kCc8FmEb1nY?t=2379
+-17th May 2023
 """
 
