@@ -3,7 +3,7 @@ Control robot with keyboard
 22 Feb 2023
 
 """
-import os
+import os  
 import usb_arm
 from pynput import keyboard
 
@@ -11,7 +11,7 @@ from pynput import keyboard
 try:
     arm = usb_arm.Arm()
 except:
-    print('No robot. Maybe it is talking to GPT-4?')
+    print('No robot. Maybe it is talking to GPT-6?')
     arm = None
 
 def on_press(key):
@@ -28,6 +28,12 @@ def on_press(key):
         elif key == keyboard.Key.right:
             arm.move(usb_arm.BaseClockWise,0.5)
             print('The right arrow key is pressed')
+        elif key == keyboard.Key.enter:
+            arm.move(usb_arm.OpenGrips,0.25)
+            print('The grip opens')
+        elif key == keyboard.Key.backspace:
+            arm.move(usb_arm.CloseGrips,0.25)
+            print('The grip closes')
         elif key==keyboard.Key.space:
             arm.move(usb_arm.LedOn)
     except AttributeError:
