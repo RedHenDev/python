@@ -131,7 +131,7 @@ origFOV=camera.fov=70 # 63 is 'correct' Minecraft? 70 default.
 
 # *** inv items passed in here?
 terrain = MeshTerrain(subject,camera)
-# snowfall = SnowFall(subject)
+#snowfall = SnowFall(subject)
 # How do you at atmospheric fog?
 scene.fog_density=(-1,75) # 75.
 # scene.fog_color=indra.color
