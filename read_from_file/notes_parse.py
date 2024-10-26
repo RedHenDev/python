@@ -58,7 +58,7 @@ def parse_file(filename):
                 newlist.append(line)
           """
 
-n=parse_file('n1.txt')
+n=parse_file(input('txt file name?')+'.txt')
 
 while True:
   ml=[]

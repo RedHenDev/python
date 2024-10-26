@@ -1,0 +1,296 @@
+Examples of partners of Open.AI using chat-gpt API. E.g. Quizlet and Speak.
+
+https://openai.com/blog/introducing-chatgpt-and-whisper-apis
+
+
+TEACH
+
+
+Jeff Sandefer
+
+
+(March 2023 podcast with JP very good)
+
+
+TEACH
+
+
+Copyright etc. logos
+
+
+iMedia
+
+
+'The image of the Matterhorn mountain peak will be removed from Toblerone packaging after some of the chocolate bar’s production is moved outside Switzerland, meaning it falls foul of marketing restrictions relating to the use of Swiss iconography.
+
+
+'The 4,478-metre-high (14,690ft) mountain, the nearly symmetrical pyramidal peak of which mirrors the shape of the almond-and-honey-laced chocolate bar, will be replaced with a more generic Alpine summit, said the confectionery brand’s US owner, Mondelēz'
+
+
+https://www.theguardian.com/world/2023/mar/05/matterhorn-mountain-toblerone-packaging-design-switzerland
+
+
+TEACH
+
+
+In-betweening. First line of short narrative fiction given. And last line. Challenge for participants is to write the paragraphs in between and so as to generate a coherent tale.
+
+
+Feb 26th 2023.
+
+
+TEACH
+
+
+'When a measure becomes a target it ceases to be a good measure.'
+
+
+TEACH
+
+
+Clare ‘Hargreaves’ College.
+
+
+Demonstration of use of Chat GPT in creation of Calculus problems.
+
+
+Perhaps detailed thoughts and resources on leveraging the tool as a useful tutor. Key feature will be coordinated use of Wolfram etc. to check answers.
+
+
+E.g.
+
+
+Please write 4 Calculus problems, beginning simply and concluding with significantly more challenge. Invent problems that best help to instruct an understanding and operational acumen for Calculus. Thank you.
+
+
+1. Find the derivative of the function f(x) = 3x^2 - 4x + 2.
+2. Find the equation of the tangent line to the curve y = sin(x) at the point (π/2, 1).
+3. Find the area bounded by the curves y = x^2 - 3x and y = -x^2 + 5x.
+4. Find the volume of the solid obtained by rotating the region bounded by the curves y = 3x^2, y = 0, x = 0, and x = 1 about the y-axis.
+
+
+
+
+Sure! Here are the solutions to the four calculus problems I provided earlier:
+1. Find the derivative of the function f(x) = 3x^2 - 4x + 2.
+Solution: To find the derivative of f(x), we need to use the power rule and the constant rule. Applying the power rule, we have:
+f'(x) = 6x - 4
+So the derivative of f(x) is f'(x) = 6x - 4.
+2. Find the equation of the tangent line to the curve y = sin(x) at the point (π/2, 1).
+Solution: To find the equation of the tangent line to the curve y = sin(x) at the point (π/2, 1), we need to use the point-slope form of a line. The derivative of y = sin(x) is y' = cos(x), so at x = π/2, y' = cos(π/2) = 0. Therefore, the slope of the tangent line is 0.
+Using the point-slope form of a line, we have:
+y - 1 = 0(x - π/2)
+Simplifying, we get:
+y = 1
+So the equation of the tangent line to y = sin(x) at the point (π/2, 1) is y = 1.
+3. Find the area bounded by the curves y = x^2 - 3x and y = -x^2 + 5x.
+Solution: To find the area bounded by the two curves, we need to find the x-values where they intersect, and then integrate the absolute difference of the two functions over that interval.
+To find the x-values where the curves intersect, we need to solve the equation:
+x^2 - 3x = -x^2 + 5x
+Simplifying, we get:
+2x^2 - 8x = 0
+Factoring out 2x, we get:
+2x(x - 4) = 0
+So x = 0 or x = 4. These are the x-values where the curves intersect.
+Next, we need to integrate the absolute difference of the two functions over the interval [0, 4]. The absolute difference is:
+|x^2 - 3x - (-x^2 + 5x)| = |2x^2 - 2x|
+Integrating this absolute difference over the interval [0, 4], we get:
+∫[0,4] |2x^2 - 2x| dx = ∫[0,2] (2x^2 - 2x) dx + ∫[2,4] (2x - 2x^2) dx
+Evaluating the integrals, we get:
+∫[0,2] (2x^2 - 2x) dx = 8/3
+∫[2,4] (2x - 2x^2) dx = -8/3
+So the total area bounded by the curves y = x^2 - 3x and y = -x^2 + 5x is:
+8/3 - 8/3 = 0
+Therefore, the area bounded by the curves is 0.
+4. Find the volume of the solid obtained by rotating the region bounded by the curves y = 3x^2, y = 0, x = 0, and x = 1 about the y-axis.
+Solution: To find the volume of the solid obtained by rotating the region about the y-axis, we need to use the disk method. We need to divide the region into thin disks perpendicular to the y-axis, and integrate the areas of these disks.
+The radius of each disk is the distance from the y-axis to the curve, which is just x. We can express x in terms of y by solving the equation y = 3x^2 for x:
+x = ±√(y/3)
+Since we are rotating about the y-axis, we need to integrate over the y-range from 0 to the maximum y-value, which is when x = 1:
+y = 3(1)^2 = 3
+So we need to integrate the area of the disk with radius x = √(y/3) over the interval [0, 3]:
+V = π∫[0,3] (y/3) dx
+Substituting x = √(y/3), we get:
+V = π∫[0,3] (y/3)(√(y/3))^2 dy
+Simplifying, we get:
+V = π∫[0,3] y/3 dy
+Evaluating the integral, we get:
+V = π[(1/2)y^2/3] [0,3]
+V = π(1/2)(3^2/3)
+V = 3π
+Therefore, the volume of the solid obtained by rotating the region bounded by the curves y = 3x^2, y = 0, x = 0, and x = 1 about the y-axis is 3π.
+
+
+And:
+
+
+Could you explain the reason for your choice of the third problem, especially in relation to its power to promote understanding?
+
+
+Certainly! The third problem involves using the first and second derivative tests to analyze the critical points and classify them as local maxima, local minima, or saddle points. This type of problem is important in calculus because it allows us to find the optimal values of a function, which is useful in many real-world applications.
+
+
+In addition, this problem requires students to use their knowledge of derivatives and their algebraic skills to solve for the critical points of the function, which is an essential skill in calculus. It also provides a good opportunity for students to practice the first and second derivative tests, which are commonly used techniques for determining the nature of the critical points.
+
+
+Overall, this problem is a good example of the types of calculus problems that students are likely to encounter in further math courses or in real-world applications. It tests their understanding of key calculus concepts and requires them to apply their knowledge in a practical way, making it a valuable exercise for developing a strong foundation in calculus.
+
+
+
+
+TEACH
+
+
+Learn css
+
+
+https://youtube.com/shorts/ii98D1OtWfg?feature=share
+
+
+TEACH
+AI
+GPT3
+https://www.cambridge-news.co.uk/news/cambridge-news/cambridge-university-among-elite-universities-26361465
+AI detection tool.
+https://gptzero.me/
+Python API https://gptzero.me/docs
+https://twitter.com/edward_the6/status/1619874139954905090?t=-4QVQ3RheEuHAooCXZL-Zw&s=19
+GPTZeroX
+'We also built a pipeline to handle file batch uploads in PDF, Word, and .txt format so you can run multiple files through GPTZero at ease!'
+TEACH
+AR shoe effect
+https://twitter.com/XRarchitect/status/1618691629346619392?t=OamYYZprAP5l4iinEpaB_g&s=19
+TEACH
+P5JS CHARADES
+https://teach.angichau.com/2019/02/23/coding-charades/
+TEACH
+Pipebots
+https://www.bbc.co.uk/news/science-environment-64052740.amp
+Robots
+TEACH
+‘I am giving you this feedback because I believe in you.’
+(Had an impact a year on!)
+TEACH
+There is the pedagogy of building substantive knowledge and contextual understanding of this and connections between -> which lends itself to lecture style (or rather, the speed of dialogue and public exchange). NB the 'overview' and 'big picture' here is really important. But only as important as the basic fact of accumulating a lot of 'about knowledge'.
+Understanding that or how (e.g. doing something or producing something for yourself independently) in a formative feedback cycle – really essential in building proficiency and 'activating' substantive knowledge.
+Note that if a syllabus of purely the latter then not enough matter is learned, even to the deficit of proficiency and understanding.
+TEACH
+CS Computer-like mechanism found in tiny organism.
+https://www.sciencealert.com/clockwork-like-computer-discovered-inside-brainless-microscopic-organism
+TEACH
+CS Networks
+MAC address IP address
+https://bluecatnetworks.com/blog/mac-address-vs-ip-address-whats-the-difference/
+TEACH
+Python ide
+https://itsfoss.com/thonny-python-ide/
+Also, photoshop to have free web version:
+https://gizmodo.com/adobe-photoshop-web-browser-free-no-subscription-image-1849058606#amp_tf=From%20%251%24s&aoh=16552891964898&csi=0&referrer=https%3A%2F%2Fwww.google.com&ampshare=https%3A%2F%2Fgizmodo.com%2Fadobe-photoshop-web-browser-free-no-subscription-image-1849058606
+TEACH
+https://www.fastcompany.com/90758850/a-google-cloud-employee-set-a-new-record-calculating-the-100-trillionth-digit-of-pi
+TEACH
+Beefed up micro:bit
+https://www.tomshardware.com/news/pico-ed-puts-rp2040-in-microbit-form-factor
+TEACH
+COMP SCI
+'The 2017 report by the Royal Society highlighted that 1 hour a week of computing teaching was not adequate to teach the key stage 3 curriculum'
+https://www.gov.uk/government/publications/research-review-series-computing/research-review-series-computing
+TEACH
+COMP SCI
+Lamport: 'In the early 1980s, I realized that one practical method of writing these higher-level specifications for concurrent systems was writing them as abstract algorithms. With TLA+, I was able to express them mathematically in a completely rigorous fashion. And everything clicked. What that involves is basically not trying to write algorithms in a programming language: If you really want to do things right, you need to write your algorithm in the terms of mathematics.'
+Cf. Structure diagrams etc. Very interesting.
+Very nice: 'If you’re thinking without writing, you only think you’re thinking.' (Attributed to Lamport).
+https://www.quantamagazine.org/computing-expert-says-programmers-need-more-math-20220517/
+TEACH
+For the 'pit' talk. Re. stress.
+Oh, also Noël Coward's observation that 'work is more fun than fun.' Probably because of intensity of dopaminergic mediation of goal-directed tasks, as well as the rich buoyancy of good conscience.
+https://phys.org/news/2022-05-youre-stressed-likeable.html
+TEACH
+10Z
+https://www.pcgamer.com/trying-to-understand-four-dimensional-minecraft-broke-my-brain/
+TEACH
+
+
+And for Juni and Alex, the entomologist?
+
+
+https://www.cantorsparadise.com/the-insect-that-discovered-the-prime-numbers-ec20c2a6e5da
+
+
+TEACH
+
+
+Clause grammar
+
+
+Type error
+
+
+Adverbial versus connective
+
+
+'In fact, when the cicadas come out from hiding, they’re eaten by just about anything, however, because of the huge numbers, if a ton of cicada is eaten it is like a drop in the sea, and they still get to produce a lot of eggs.'
+
+
+TEACH
+
+
+Government hacker – something to be!
+
+
+https://news.sky.com/story/uk-government-hackers-destroyed-hundreds-of-thousands-of-stolen-credit-card-details-held-by-criminals-12609745
+
+
+TEACH
+
+
+Tint investigation.
+
+
+To increase tint, do we add same amount to each colour channel, or increase by same ratio?
+
+
+E.g.
+50 % of 10, 200, 139
+Or add 50 to 10, 200, 139?
+
+
+Hypothesis -> my guess
+
+
+Screenshots as proof with annotations if possible.
+
+
+TEACH
+
+
+Quantum computing
+
+
+https://www.reviewgeek.com/115246/googles-addicting-new-game-lets-you-build-a-quantum-computer/
+
+
+TEACH
+
+
+Brick laying
+
+
+https://www.bbc.co.uk/bbcthree/article/90f4edca-535c-4b8c-a175-ea1e4893b304
+
+
+TEACH
+
+
+p5.py on trinket?!
+
+
+https://www.raspberrypi.org/blog/python-coding-for-kids-beyond-the-basics/
+
+
+TEACH
+
+
+Pit
+https://www.psypost.org/2022/04/meta-analysis-finds-that-perseverance-of-effort-or-grit-is-strongly-tied-to-better-subjective-well-being-62840
+
